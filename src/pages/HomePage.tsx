@@ -1,0 +1,45 @@
+import { ArrowRight, Flame, Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ActivityCard } from '../components/ActivityCard'
+import { activities, categoryMeta } from '../data/activities'
+import { useApp } from '../hooks/useApp'
+import { calculateAge } from '../utils/age'
+
+export function HomePage() {
+  const { activeChild, data } = useApp()
+  if (!activeChild) return null
+
+  const age = calculateAge(activeChild.birthDate)
+  const suitable = activities.filter((activity) => age.totalMonths >= activity.ageMin && age.totalMonths <= activity.ageMax)
+  const todaysActivities = suitable.filter((activity, index, all) => all.findIndex((item) => item.category === activity.category) === index).slice(0, 4)
+  const completedIds = new Set(data.completions.filter((item) => item.childId === activeChild.id).map((item) => item.activityId))
+  const today = new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })
+
+  return (
+    <div className="page home-page">
+      <section className="home-hero">
+        <div>
+          <span className="date-label">{today}</span>
+          <h1>Günaydın, {activeChild.name}! <span aria-hidden="true">👋</span></h1>
+          <p>Bugün birlikte {todaysActivities.length} küçük aktivite yapabilirsiniz.</p>
+        </div>
+        <div className="streak-pill"><Flame size={22} /><span><strong>{completedIds.size}</strong> keşif tamamlandı</span></div>
+      </section>
+
+      <section className="daily-banner">
+        <div className="daily-illustration">🌤️</div>
+        <div><span className="eyebrow"><Sparkles size={15} /> Bugünün küçük fikri</span><h2>Merakına eşlik et, cevabı birlikte arayın.</h2><p>Bir aktiviteyi tamamlamak kadar birlikte soru sormak da değerlidir.</p></div>
+      </section>
+
+      <section className="section-block">
+        <div className="section-heading"><div><span className="kicker">BUGÜN İÇİN</span><h2>Küçük keşifler</h2></div><Link to="/activities">Tümünü gör <ArrowRight size={17} /></Link></div>
+        <div className="activity-grid">{todaysActivities.map((activity) => <ActivityCard key={activity.id} activity={activity} completed={completedIds.has(activity.id)} />)}</div>
+      </section>
+
+      <section className="category-strip">
+        <div><span className="kicker">KEŞFET</span><h2>Gelişim alanları</h2></div>
+        <div className="category-list">{Object.entries(categoryMeta).map(([key, item]) => <Link to={`/activities?category=${key}`} key={key} className={item.color}><span>{item.icon}</span>{item.label}</Link>)}</div>
+      </section>
+    </div>
+  )
+}

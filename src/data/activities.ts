@@ -12,6 +12,7 @@ const makeActivity = (
   benefits: string[],
   ageMin = 24,
   ageMax = 84,
+  activityType: Activity['activityType'] = 'guided',
 ): Activity => ({
   id,
   title,
@@ -29,6 +30,7 @@ const makeActivity = (
   safetyNotes: [],
   variations: [],
   repeatCooldownDays: 1,
+  activityType,
   completed: false,
   isPremium: false,
 })

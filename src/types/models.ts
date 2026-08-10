@@ -2,6 +2,7 @@ export const activityCategories = ['cognitive', 'language', 'motor', 'social', '
 
 export type ActivityCategory = (typeof activityCategories)[number]
 export type ActivityDifficulty = 'easy' | 'medium'
+export type ActivityType = 'guided' | 'visual' | 'game' | 'quiz' | 'matching' | 'memory' | 'sorting' | 'creative'
 export type ActivitySkill =
   | 'attention'
   | 'memory'
@@ -108,6 +109,7 @@ export interface Activity {
   safetyNotes: string[]
   variations: string[]
   repeatCooldownDays: number
+  activityType?: ActivityType
   completed: boolean
   isPremium: boolean
 }

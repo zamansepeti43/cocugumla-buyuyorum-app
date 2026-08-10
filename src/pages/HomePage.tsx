@@ -1,18 +1,21 @@
 import { ArrowRight, Flame, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { ActivityCard } from '../components/ActivityCard'
-import { activities, categoryMeta } from '../data/activities'
+import { categoryMeta } from '../data/activities'
 import { useApp } from '../hooks/useApp'
-import { calculateAge, isAgeInRange } from '../utils/age'
+import { generateDailyProgram } from '../utils/dailyProgramEngine'
 
 export function HomePage() {
   const { activeChild, data } = useApp()
   if (!activeChild) return null
 
-  const age = calculateAge(activeChild.birthDate)
-  const suitable = activities.filter((activity) => isAgeInRange(age.totalMonths, activity.ageMin, activity.ageMax))
-  const todaysActivities = suitable.filter((activity, index, all) => all.findIndex((item) => item.category === activity.category) === index).slice(0, 4)
   const completedIds = new Set(data.completions.filter((item) => item.childId === activeChild.id).map((item) => item.activityId))
+  const dailyProgram = generateDailyProgram({
+    childBirthDate: activeChild.birthDate,
+    today: new Date(),
+    completedActivityIds: Array.from(completedIds),
+  })
+  const todaysActivities = dailyProgram.activities
   const today = new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })
 
   return (

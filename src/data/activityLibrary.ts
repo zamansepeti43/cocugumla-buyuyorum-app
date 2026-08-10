@@ -1,0 +1,149 @@
+import type { Activity, ActivityCategory, ActivitySkill } from '../types/models'
+
+const makeActivity = (
+  id: string,
+  title: string,
+  description: string,
+  category: ActivityCategory,
+  skill: ActivitySkill,
+  ageMin: number,
+  ageMax: number,
+  duration: number,
+  materials: string[],
+  instructions: string[],
+  parentTip: string,
+  benefits: string[],
+  safetyNotesOrVariations?: string[] | number,
+  variationsOrCooldown?: string[] | number,
+  repeatCooldownDays = 2,
+): Activity => {
+  const safetyNotes = Array.isArray(safetyNotesOrVariations) ? safetyNotesOrVariations : []
+  const variations = Array.isArray(variationsOrCooldown) ? variationsOrCooldown : []
+  const cooldown = typeof safetyNotesOrVariations === 'number'
+    ? safetyNotesOrVariations
+    : typeof variationsOrCooldown === 'number'
+      ? variationsOrCooldown
+      : repeatCooldownDays
+
+  return {
+    id,
+    title,
+    description,
+    category,
+    skill,
+    ageMin,
+    ageMax,
+    duration,
+    materials,
+    instructions,
+    parentTip,
+    benefits,
+    difficulty: 'easy',
+    safetyNotes,
+    variations,
+    repeatCooldownDays: cooldown,
+    completed: false,
+    isPremium: false,
+  }
+}
+
+const ageGroupActivities: Record<string, Activity[]> = {
+  '0-3 ay': [
+    makeActivity('baby-0-3-01', 'Yüz ve Ses Takibi', 'Bebekle kısa süreli yüz ve ses takibi oyunu oynayın.', 'social', 'göz teması', 0, 3, 3, ['Yüzünüzün yakınında bir obje'], ['Bebekle yavaşça konuşun.', 'Yüz ifadelerinizi değiştirin.', 'Sesi kısa süreli ve sakin tutun.'], 'Sakin bir ortamda kısa oyunlar tercih edin.', ['göz teması', 'duyusal farkındalık'], ['Yüz ifadesi değiştirin.', 'İki farklı ses çıkarın.'], 1),
+    makeActivity('baby-0-3-02', 'Kontrast Kart İzleme', 'Siyah-beyaz görselleri kısa süre izletin.', 'cognitive', 'görsel takip', 0, 3, 4, ['Kontrast kartlar'], ['Kartı 20 cm uzaktan gösterin.', 'Yavaşça sola-sağa hareket ettirin.', 'Bebek bakışını izlerse kısa süre devam edin.'], 'Bebek yorulursa oyunu bırakın.', ['görsel dikkat', 'bakış takibi'], ['Kırmızı-siyah kart kullanın.', 'Tek bir görsel ile oynayın.'], 1),
+    makeActivity('baby-0-3-03', 'Sakin Mimik Oyunu', 'Bebekle yüz ifadeleri üzerinden kısa etkileşim kurun.', 'social', 'duygu farkı', 0, 3, 3, ['Yüzünüz'], ['Kısa süre gülümseyin.', 'Şaşkın ve sakin ifadeler yapın.', 'Bebek cevap verirse kısa süre tekrar edin.'], 'Yüzünüz çok yakın olmasın.', ['duygu tanıma', 'sosyal paylaşım'], ['Sakin bir yüzle başlayın.', 'Bebek sessizse kısa mola verin.'], 2),
+    makeActivity('baby-0-3-04', 'Sesli Selamlaşma', 'Bebekle kısa ve nazik seslerle selamlaşın.', 'language', 'ses farkındalığı', 0, 3, 2, ['Yüzünüz'], ['Farklı sesler çıkarın.', 'Her seferinde kısa tutun.', 'Bebek cevap verirse tekrar edin.'], 'Sesi yüksek ve sert yapmayın.', ['dinleme', 'ses farkındalığı'], ['Farklı heceleri deneyin.', 'Sadece bir sesi tekrarlayın.'], 1),
+    makeActivity('baby-0-3-05', 'El Bileği Hareketi', 'Bebeğin kollarını sakin bir şekilde hareket ettirin.', 'motor', 'kafa ve kol koordinasyonu', 0, 3, 3, ['Yumuşak battaniye'], ['Bebeği rahatça yerleştirin.', 'Elle hafifçe kolları hareket ettirin.', 'Bebek yorulursa durun.'], 'Hareketleri çok sert yapmayın.', ['kol kontrolü', 'hareket farkındalığı'], ['Bir kolu sonra diğerini hareket ettirin.', 'Sadece kısa tekrarlar yapın.'], 2),
+    makeActivity('baby-0-3-06', 'Duyusal Dokunuş', 'Bebekle yumuşak dokunuşlar ve nazik temas kurun.', 'creativity', 'duyusal keşif', 0, 3, 4, ['Yumuşak bez'], ['Doku farkı olan bir bez seçin.', 'Yavaşça dokunun.', 'Bebeğin tepkisini izleyin.'], 'Kullanılan malzeme temiz ve yumuşak olsun.', ['dokunma farkındalığı', 'rahatlama'], ['İki farklı dokuyu karşılaştırın.', 'Sadece birkaç saniye sürdürün.'], 2),
+  ],
+  '4-6 ay': [
+    makeActivity('baby-4-6-01', 'Tummy Time Kısa Oyun', 'Güvenli tummy time ile baş ve göğüs kontrolünü destekleyin.', 'motor', 'gövde kontrolü', 4, 6, 5, ['Yumuşak zemin', 'Battaniye'], ['Bebeği yüzüstü yatırın.', 'Kısa süre bekleyin.', 'İlk seferde 1-2 dakika ile başlayın.'], 'Bebek rahatsız olursa hemen bırakın.', ['gövde kontrolü', 'baş stabilitesi'], ['Aynı pozisyonda tekrar edin.', 'Bir oyuncakla dikkat çekin.'], 2),
+    makeActivity('baby-4-6-02', 'Parmak ve Renk Kıyaslaması', 'Bebekle iki farklı rengin kısa karşılaştırmasını yapın.', 'cognitive', 'renk farkı', 4, 6, 4, ['İki renkli kart'], ['Kartları yakın mesafede gösterin.', 'Bir renk seçin.', 'Bebek bakarsa kısa süre tekrar edin.'], 'Kartlar bebeğin ağzına yakın tutulmasın.', ['renk farkındalığı', 'dikkat'], ['Büyük farklılık veren renkleri seçin.', 'Tek renkli kartla da oynayın.'], 2),
+    makeActivity('baby-4-6-03', 'Sesli Takip', 'Bebekle sesin yönünü kısa süre takip ettirin.', 'language', 'ses yönü', 4, 6, 4, ['Ses kaynağı'], ['Ses değiştirin.', 'Sağa-sola hafifçe dönün.', 'Bebek dönmeye çalışırsa kısa süre devam edin.'], 'Ses kaynağı çok yüksek olmasın.', ['ses farkındalığı', 'dikkat'], ['Sabit bir ses kullanın.', 'İki farklı sesle tekrar edin.'], 2),
+    makeActivity('baby-4-6-04', 'El-İşaret Oyunları', 'Bebeğin rahatça ellerini ve parmaklarını keşfetmesine rehberlik edin.', 'motor', 'el kavrama', 4, 6, 4, ['Yumuşak oyuncak'], ['Oyuncağı avuca yerleştirin.', 'Yavaşça parmakla dokunun.', 'Bebek kavrarsa kısa süre bırakın.'], 'Küçük parçalar kullanmayın.', ['el kavrama', 'hafif kas gelişimi'], ['Bir elden diğerine geçirin.', 'Sadece bir oyuncakla oynayın.'], 2),
+    makeActivity('baby-4-6-05', 'Bebekle Mimik Eşleştirme', 'Aynı mimik ve hareketleri tekrar ederek etkileşim kurun.', 'social', 'mimik eşleştirme', 4, 6, 3, ['Yüzünüz'], ['Bir mimik yapın.', 'Bebek cevap verirse aynı hareketi tekrar edin.', 'Birkaç tekrar sonra mola verin.'], 'Yüzünüz çok yakın olmayın.', ['duygu paylaşımı', 'ortak dikkat'], ['Gülümseme ve şaşkınlık yapın.', 'Bebek sıkılırsa durun.'], 2),
+    makeActivity('baby-4-6-06', 'Kısa Müzik ve Zil', 'Yumuşak müzik ve seslerle dikkat çekin.', 'creativity', 'ritim farkı', 4, 6, 4, ['Yumuşak zil veya müzik'], ['Kısa bir ritim açın.', 'Bebek dinlerse aynı ritmi tekrar edin.', 'Yavaşça durun.'], 'Sesler çok yüksek olmasın.', ['ritim farkındalığı', 'duyusal keşif'], ['Farklı ritimlerle tekrar edin.', 'Sessiz bir bölüm ekleyin.'], 2),
+  ],
+  '7-9 ay': [
+    makeActivity('baby-7-9-01', 'Yuvarlak Nesne Keşfi', 'Bebekle yuvarlak nesneleri inceleyin.', 'cognitive', 'nesne farkı', 7, 9, 6, ['Yuvarlak oyuncak'], ['Bir oyun hamurunu veya yuvarlak nesneyi verin.', 'Bebeğin elinde tutmasını izleyin.', 'Bir sonraki nesneye geçin.'], 'Nesneler büyük ve güvenli olsun.', ['nesne farkındalığı', 'el-göz koordinasyonu'], ['İki farklı nesne kullanın.', 'Büyük-boyutlu parça seçin.'], 2),
+    makeActivity('baby-7-9-02', 'Sesi Bulma', 'Bebeğin sesin kaynağını takip etmesini destekleyin.', 'language', 'ses keşfi', 7, 9, 5, ['Sesli oyuncak'], ['Ses çıkarın.', 'Bebeği ses yönüne döndürün.', 'İki farklı sesle tekrar edin.'], 'Ses kaynağı güvenli ve yumuşak olsun.', ['ses yönü', 'dikkat'], ['Sıfırdan bir sesli oyuna başlayın.', 'Sesi hafifçe değiştirin.'], 2),
+    makeActivity('baby-7-9-03', 'Küçük Taşıma Oyunu', 'Bebekle nesneleri bir kaba diğerine taşıyın.', 'motor', 'taşıma', 7, 9, 6, ['İki küçük kap'], ['Bir kap verin.', 'İkinci kapağa taşımayı gösterin.', 'Bebek denemek isterse destekleyin.'], 'Tüm parçalar büyük ve güvenli olsun.', ['el becerisi', 'koordine hareket'], ['Konteynerleri yakın tutun.', 'Tek bir nesneyle başlayın.'], 2),
+    makeActivity('baby-7-9-04', 'Ebeveynle Oyun Arkadaşı', 'Bebekle birlikte basit bir taklit oyunu yapın.', 'social', 'taklit', 7, 9, 5, ['Oyuncak'], ['Bir basit hareket yapın.', 'Bebek aynı hareketi yapmaya çalışırsa övgüyle destekleyin.', 'Bir sonraki hareketi deneyin.'], 'İlk seferde kısa süreye odaklanın.', ['sosyal etkileşim', 'taklit becerisi'], ['Yavaş hareketlerle başlayın.', 'Aynı hareketi tekrar edin.'], 2),
+    makeActivity('baby-7-9-05', 'Ritm İle Dokunma', 'Bebekle ritmik dokunuşlarla etkileşim kurun.', 'creativity', 'ritmik his', 7, 9, 4, ['Yumuşak ritim aleti'], ['Yavaş bir ritim tutun.', 'Dokunuşları bacak ve kollarla eşleştirin.', 'Bebek tepki verirse ikinci turu yapın.'], 'Alet çok sert ses çıkarmasın.', ['ritim algısı', 'duyusal keşif'], ['Daha yavaş bir ritim seçin.', 'Sessiz bir sürüm deneyin.'], 2),
+    makeActivity('baby-7-9-06', 'Kapağı Açma', 'Bebekle kapak açma ve kapatma basit oyununu yapın.', 'cognitive', 'problem çözme', 7, 9, 6, ['Güvenli kapaklı kap'], ['Kapı kapaklarını gösterin.', 'Kısık bir seferde açın.', 'Bebek ilgilenirse tekrarlayın.'], 'Parçalar bebeğin ağzına yakın tutulmasın.', ['basit problem çözme', 'odaklanma'], ['Kapakları farklı boyutta verin.', 'Daha az parçayla başlayın.'], 2),
+  ],
+  '10-12 ay': [
+    makeActivity('baby-10-12-01', 'Küçük Kutuları Doldurma', 'Kutulara basit nesneleri yerleştirme oyunu oynayın.', 'cognitive', 'eşleştirme', 10, 12, 7, ['İki küçük kutu', 'Büyük nesneler'], ['Bir kutuyu gösterin.', 'Nesneleri içine yerleştirin.', 'Bebek denemek isterse kısık bir rehberlik yapın.'], 'Nesneler yutulabilecek küçük parçalar olmamalı.', ['eşleştirme', 'odaklanma'], ['Renkli nesneler kullanın.', 'Tek kutuyla başlayın.'], 2),
+    makeActivity('baby-10-12-02', 'İki Nesne Karşılaştırma', 'İki farklı nesnenin özelliklerini kısa süre anlatın.', 'language', 'kelime bilgisi', 10, 12, 5, ['İki oyuncak'], ['İki oyuncak gösterin.', 'İlkini adlandırın.', 'İkinciyi de kısa şekilde tanıtın.'], 'Açık ve kısa kelimeler kullanın.', ['kelime farkındalığı', 'bakış paylaşımı'], ['Bir nesnenin rengini vurgulayın.', 'İki nesneyi yan yana koyun.'], 2),
+    makeActivity('baby-10-12-03', 'Küçük Adım Takibi', 'Bebekle kısa mesafe boyunca adım atma ve takip etme oyunu yapın.', 'motor', 'denge', 10, 12, 5, ['Yumuşak zemin'], ['İki adım uzakta oturun.', 'Bebek yaklaşırsa kollarıyla destekleyin.', 'Kısa süre sonra durun.'], 'Bebek düşecek kadar hızlı hareket ettirilmesin.', ['denge', 'hareket koordinasyonu'], ['Bir el desteği ile tekrar edin.', 'Daha kısa mesafe seçin.'], 2),
+    makeActivity('baby-10-12-04', 'Sırayla Ses çıkarma', 'Bebeğin ses çıkarması için sırayla rol oynayın.', 'social', 'sıra bekleme', 10, 12, 4, ['Yüzünüz'], ['Bir ses çıkarın.', 'Bebek cevap verirse tekrar edin.', 'Sıra kısa kalsın.'], 'Sesi fazla uzatmayın.', ['sosyal etkileşim', 'bekleme'], ['Bir az daha yavaş başlayın.', 'Tek bir sesle sürdürün.'], 2),
+    makeActivity('baby-10-12-05', 'Müzik ve Çalkalama', 'Müzikle basit ritim hareketleri deneyin.', 'creativity', 'ritim', 10, 12, 5, ['Müzik', 'Küçük ritim aleti'], ['Müziği başlatın.', 'Yavaş ritmi tekrar edin.', 'Bebek tepki verirse biraz uzatın.'], 'Aleti çok sert sallamayın.', ['ritim algısı', 'duyusal keşif'], ['Sakin bir melodi seçin.', 'Bir kısa molayla tekrar edin.'], 2),
+    makeActivity('baby-10-12-06', 'İki Adımlı Gösterim', 'Bebeğe bir görev için iki adım gösterin.', 'cognitive', 'basit sıralama', 10, 12, 6, ['Oyuncak'], ['Bir adım verin.', 'İkinci adımı gösterin.', 'Bebeğin denemesine fırsat verin.'], 'İşlem kısa ve net olsun.', ['sıralama', 'hatırlama'], ['Tek adımlı sürümle başlayın.', 'Aynı oyunu tekrar edin.'], 2),
+  ],
+  '13-18 ay': [
+    makeActivity('toddler-13-18-01', 'Nesne Eşleştirme', 'Büyük parçaları eşleştirme oyunu oynayın.', 'cognitive', 'eşleştirme', 13, 18, 8, ['İki eş nesne'], ['Nesneyi gösterin.', 'İkincisini aynı yerde bulun.', 'Bebeğin eşleştirmesine destek olun.'], 'Parçalar yutulabilecek kadar küçük olmayın.', ['eşleştirme', 'gözlem'], ['Aynı renkte parça seçin.', 'Tek eşleştirme ile başlayın.'], 2),
+    makeActivity('toddler-13-18-02', 'Kelime Kartı', 'Basit kelime kartlarıyla konuşun.', 'language', 'kelime öğrenme', 13, 18, 6, ['Resimli kartlar'], ['Bir kart seçin.', 'Adını söyleyin.', 'Bebek işaret ederse tekrar söyleyin.'], 'İşaret yaparken kısa ve net konuşun.', ['kelime bilgisi', 'dinleme'], ['Bir kartın rengini söyleyin.', 'İki kartla başlayın.'], 2),
+    makeActivity('toddler-13-18-03', 'Yavaş Yürüme Parkuru', 'Küçük yürüme parkurunda yavaş ilerleyin.', 'motor', 'denge', 13, 18, 8, ['Yumuşak zemin', 'Bant'], ['Kısa bir çizgi oluşturun.', 'Yavaşça üstünden geçin.', 'İşaretlerle destekleyin.'], 'Parkur kaygan değilse güvenli olsun.', ['denge', 'motor kontrol'], ['Tek bir çizgi ile başlayın.', 'Yavaş adım kullanın.'], 3),
+    makeActivity('toddler-13-18-04', 'Oyuncakla Sorumluluk', 'Küçük görev olarak oyuncakları toplama yapın.', 'social', 'yardım', 13, 18, 6, ['Oyuncaklar'], ['Bir kutu gösterin.', 'Oyuncakları toplatın.', 'Birlikte kutuya koyun.'], 'Görevi kısa tutun.', ['sorumluluk', 'iş birliği'], ['Eşya sayısını azaltın.', 'Bir kutuyla tekrar edin.'], 2),
+    makeActivity('toddler-13-18-05', 'Parmak Boyama', 'Su bazlı boyalarla basit çizimler yapın.', 'creativity', 'öz ifade', 13, 18, 8, ['Su bazlı boya', 'Kağıt'], ['Bir çizgi çizin.', 'Renk seçin.', 'İşaret ederek birlikte adlandırın.'], 'Boyaları gözden uzak kullanın.', ['öz ifade', 'yapılandırma'], ['Tek renkle başlayın.', 'Büyük çizgiler kullanın.'], 3),
+    makeActivity('toddler-13-18-06', 'İki Basamaklı Sıra', 'İki adımlı basit görevleri sıralayın.', 'cognitive', 'sıralama', 13, 18, 6, ['Oyuncak'], ['Bir adım verin.', 'İkinci adımı ekleyin.', 'İki adımı birlikte tamamlayın.'], 'Görev size uygun uzunlukta olsun.', ['sıralama', 'hatırlama'], ['Bir adımlı sürümle başlayın.', 'Tekrarlarda değiştirin.'], 2),
+  ],
+  '19-24 ay': [
+    makeActivity('toddler-19-24-01', 'Resim Anlatma', 'Bir resim üzerinden kısa anlatım yapın.', 'language', 'anlatım', 19, 24, 7, ['Resimli kitap'], ['Bir sayfa seçin.', 'Ne gördüğünü söyleyin.', 'Bir cümle ekleyin.'], 'Soru sayısını kısa tutun.', ['kelime kullanımı', 'dil gelişimi'], ['Aynı resimle tekrar edin.', 'Sadece iki öğe söyleyin.'], 2),
+    makeActivity('toddler-19-24-02', 'Sınıflandırma Kutuları', 'İki kutuya basit nesneleri ayırın.', 'cognitive', 'sınıflandırma', 19, 24, 8, ['İki kutu', 'Nesneler'], ['Nesneleri görsel olarak ayırın.', 'İki kutunun adını söyleyin.', 'Birkaç kez tekrar edin.'], 'Nesneler küçük parça olmamalı.', ['sınıflandırma', 'dikkat'], ['Bir grubu değiştirin.', 'Renkli nesneyle başlayın.'], 2),
+    makeActivity('toddler-19-24-03', 'Bant Yolu', 'Bantla kısa bir yol oluşturun ve yürüyün.', 'motor', 'denge', 19, 24, 8, ['Kağıt bant'], ['Yavaş bir yol yapın.', 'Parmak ucuyla ilerleyin.', 'Başarı durumunda tekrar edin.'], 'Kaymaz zemin seçin.', ['denge', 'koordinasyon'], ['Daha kısa yol kullanın.', 'Düz çizgiyle başlayın.'], 3),
+    makeActivity('toddler-19-24-04', 'Taklit Oyunları', 'Temel günlük hareketleri taklit edin.', 'social', 'taklit', 19, 24, 7, ['Oyuncak'], ['Bir günlük hareket yapın.', 'Çocuğun aynı hareketi yapmasını isteyin.', 'Bir sonraki hareketi deneyin.'], 'Her adım kısa ve netolsun.', ['sosyal öğrenme', 'öz düzenleme'], ['Basit bir hareketle başlayın.', 'Yavaş bir ritim seçin.'], 2),
+    makeActivity('toddler-19-24-05', 'Kâğıt Renk Düzeni', 'Kâğıt renklerini birleştirip düzenleyin.', 'creativity', 'renk keşfi', 19, 24, 7, ['Kâğıt parçaları'], ['Parçaları yan yana koyun.', 'Bir renk düzeni oluşturun.', 'Beğendiğin düzeni gösterin.'], 'Kesilmiş parçalar büyük olsun.', ['yaratıcılık', 'dikkat'], ['İki renkle başlayın.', 'İzleyin ve övgüleyin.'], 2),
+    makeActivity('toddler-19-24-06', 'Kısa Hikâye Anlatımı', 'Üç nesne ile mini hikâye kurun.', 'language', 'hikâye', 19, 24, 8, ['Üç oyuncak'], ['Üç nesne seçin.', 'Kısa bir cümle kurun.', 'Birlikte hikâyeyi tamamlayın.'], 'Parçaları çok uzatmadan kullanın.', ['sözel ifade', 'hafıza'], ['Tek bir nesne odaklı başlayın.', 'Aynı hikâyeyi tekrar tekrar anlatın.'], 2),
+  ],
+  '2-3 yaş': [
+    makeActivity('preschool-2-3-01', 'Renk Avı', 'Evde belirli bir renkte nesneler bulma oyunu oynayın.', 'cognitive', 'renk farkındalığı', 24, 36, 8, ['Renkli nesneler'], ['Bir renk seçin.', 'Bu renkte üç nesne bulun.', 'Bulunanları birlikte sayın.'], 'Oda güvenli ve temiz olsun.', ['dikkat', 'sınıflandırma'], ['Sadece bir renk seçin.', 'Nesne sayısını azaltın.'], 2),
+    makeActivity('preschool-2-3-02', 'Hikâye Torbası', 'Torbadaki nesnelerle kısa bir hikâye kurun.', 'language', 'anlatım', 24, 36, 10, ['Bez torba', '3 oyuncak'], ['Nesneleri çıkarın.', 'Her birini kısa cümleyle anlatın.', 'Hikâyeyi birleştirin.'], 'Oyun alanı düzenli olsun.', ['kelime üretimi', 'hafıza'], ['İki nesneyle başlayın.', 'Hikâyeyi kısa tutun.'], 2),
+    makeActivity('preschool-2-3-03', 'Küçük Parkur', 'Kısa bir parkur üzerinden dengeli bir yürüyüş yapın.', 'motor', 'denge', 24, 36, 8, ['Bant veya çizgi'], ['Bir çizgi oluşturun.', 'Parmak ucuyla ilerleyin.', 'Yavaşça tekrar edin.'], 'Kaygan zemin kullanmayın.', ['denge', 'koordinasyon'], ['Düz çizgiyle başlayın.', 'Yavaş adım kullanın.'], 3),
+    makeActivity('preschool-2-3-04', 'Sırayla Oyun', 'Basit oyunda sırayla oynayın.', 'social', 'sıra bekleme', 24, 36, 7, ['Top veya blok'], ['Bir sıra belirleyin.', 'Her turu söyleyin.', 'Oyunun sonunda özetleyin.'], 'Bekleme süresi kısa tutulmalı.', ['sıra bekleme', 'öz düzenleme'], ['Tek bir turla başlayın.', 'Topu yavaşça verin.'], 2),
+    makeActivity('preschool-2-3-05', 'Müziğe Göre Çizgi', 'Müzik ve çizgi ile ritim keşfi yapın.', 'creativity', 'ritim', 24, 36, 8, ['Kağıt', 'Boya kalemi', 'Müzik'], ['Müziği açın.', 'Çizgiler çizin.', 'Birlikte isim verin.'], 'Müziği rahat bir seviyede tutun.', ['öz ifade', 'ritim'], ['Tek renk kullanın.', 'Yavaş ritimle başlayın.'], 2),
+    makeActivity('preschool-2-3-06', 'Adım Sayma', 'Odaya girerken adımları birlikte sayın.', 'cognitive', 'sayı farkındalığı', 24, 36, 6, ['Malzeme gerekmiyor'], ['Bir hedef seçin.', 'Her adımda sayı söyleyin.', 'Başka bir rotada tekrar edin.'], 'Sayılar doğal bir akışta söylenmeli.', ['sayı farkındalığı', 'odaklanma'], ['İki adımla başlayın.', 'Kısa rotayı seçin.'], 2),
+  ],
+  '3-4 yaş': [
+    makeActivity('preschool-3-4-01', 'Şekil Dedektifi', 'Büyük şekilleri ayırma oyunu oynayın.', 'cognitive', 'şekil tanıma', 36, 48, 10, ['Bloklar veya kapaklar'], ['Şekilleri gösterin.', 'Benzer olanı yan yana koyun.', 'Çocuğun seçimini övgüyle destekleyin.'], 'Parçalar büyük ve güvenli olsun.', ['sınıflandırma', 'dikkat'], ['İki şekille başlayın.', 'Bir renkle sınırlayın.'], 2),
+    makeActivity('preschool-3-4-02', 'Ses Yürüyüşü', 'Evde ve dışarıda duyulan sesleri adlandırın.', 'language', 'ses farkındalığı', 36, 48, 8, ['Malzeme gerekmiyor'], ['Bir dakika dinleyin.', 'Duyulan bir sesi söyleyin.', 'Sesin kaynağını birlikte bulun.'], 'Sesleri gereksiz yere yüksek yapmayın.', ['dinleme', 'kelime üretimi'], ['Sadece ev içi sesler seçin.', 'İkili bir liste yapın.'], 2),
+    makeActivity('preschool-3-4-03', 'Balıkçı Havuzu', 'Bir kaptan diğerine nesne aktarın.', 'motor', 'ince motor', 36, 48, 10, ['Küçük kaplar', 'Büyük boncuklar'], ['Nesneleri bir kaba koyun.', 'Diğer kaba aktarın.', 'İşin sonunda sayın.'], 'Parçalar yutulabilecek kadar küçük olmayın.', ['ince motor', 'el-göz koordinasyonu'], ['Büyük parçalarla başlayın.', 'Tek bir kaptan oynayın.'], 2),
+    makeActivity('preschool-3-4-04', 'Yardımcı Eller', 'Küçük bir sorumluluk görevi üstlenin.', 'social', 'sorumluluk', 36, 48, 8, ['Oyuncaklar', 'Kutular'], ['Bir görev seçin.', 'Görevi birlikte yapın.', 'Sonucu birlikte paylaşın.'], 'Görev zorlayıcı olmamalı.', ['iş birliği', 'sorumluluk'], ['Bir kutu toplama işi seçin.', 'Hedef sayısını azaltın.'], 2),
+    makeActivity('preschool-3-4-05', 'Kutudan Dünya', 'Boş kutuyla hayali bir mekân kurun.', 'creativity', 'hayal gücü', 36, 48, 12, ['Karton kutu', 'Kağıt'], ['Kutunun ne olacağını konuşun.', 'Detaylar ekleyin.', 'İçinde mini bir oyun kurun.'], 'Kutu güvenli ve yumuşak olsun.', ['planlama', 'yaratıcılık'], ['Tek bir detay ekleyin.', 'Bir karakter seçin.'], 2),
+    makeActivity('preschool-3-4-06', 'İki Adımlı İpucu', 'Basit bir görevi iki adımda tamamlayın.', 'cognitive', 'sıralama', 36, 48, 7, ['Oyuncak'], ['Bir görev verin.', 'İlk adımı gösterin.', 'İkinci adımı birlikte yapın.'], 'Adımları kısa ve net tutun.', ['sıralama', 'hatırlama'], ['Sadece iki adım kullanın.', 'Tekrarlar kısa olsun.'], 2),
+  ],
+  '4-5 yaş': [
+    makeActivity('preschool-4-5-01', 'Örüntü Devam Ettir', 'Basit örüntüleri devam ettirin.', 'cognitive', 'örüntü', 48, 60, 10, ['Bloklar veya mandallar'], ['Bir örüntü kurun.', 'Sıradaki parçayı sorun.', 'Kendi örüntüsünü kurmasını isteyin.'], 'Örüntü iki parçalı ile başlayın.', ['mantık', 'dikkat'], ['İki renk seçin.', 'Örüntüyü kısa tutun.'], 2),
+    makeActivity('preschool-4-5-02', 'Günlük Rapor', 'Günün en güzel anını anlatın.', 'language', 'sıralı anlatım', 48, 60, 8, ['Malzeme gerekmiyor'], ['Bir anı seçin.', 'Ne oldu anlatın.', 'Bir ek detay ekleyin.'], 'Soru sayısını sınırlayarak destekleyin.', ['öz ifade', 'hafıza'], ['Bir anı seçin.', 'İki cümle ile başlayın.'], 2),
+    makeActivity('preschool-4-5-03', 'Mandal Aktarmaca', 'Maşa ile basit nesneleri taşıın.', 'motor', 'ince motor', 48, 60, 10, ['Büyük ponpon', 'Maşa'], ['Nesneleri bir kaba koyun.', 'Diğer kaba taşıyın.', 'Renklerine göre düzenleyin.'], 'Parçalar yutulabilecek kadar küçük olmayın.', ['el-göz koordinasyonu', 'ince motor'], ['Büyük parçalarla başlayın.', 'Hedefi azaltın.'], 2),
+    makeActivity('preschool-4-5-04', 'Duygu Yüzleri', 'Duyguları yüz ifadeleriyle canlandırın.', 'social', 'duygu tanıma', 48, 60, 8, ['Ayna'], ['Mutlu ve üzgün ifadeler yapın.', 'Ne zaman hissettiğinizi konuşun.', 'Bir sonraki duyguyu deneyin.'], 'Duyguları kabul edici bir dilde söyleyin.', ['empati', 'duygu farkı'], ['İki duygu ile başlayın.', 'Sakin bir ortam seçin.'], 2),
+    makeActivity('preschool-4-5-05', 'Doğa Kolajı', 'Güvenli doğa parçalarıyla kolaj yapın.', 'creativity', 'duyusal keşif', 48, 60, 10, ['Yapraklar', 'Kağıt'], ['Güvenli parçalar toplayın.', 'Katmanlar oluşturun.', 'Kurduğunuz düzeni konuşun.'], 'Parçalar küçük ve tehlikeli olmamalı.', ['yaratıcılık', 'düzenleme'], ['Tek bir renk seçin.', 'Az sayıda parça kullanın.'], 2),
+    makeActivity('preschool-4-5-06', 'Basit Problem Çözme', 'Bir mini problem için seçenek üretin.', 'cognitive', 'problem çözme', 48, 60, 8, ['Oyuncaklar'], ['Bir zorluk örneği gösterin.', 'Çözüm önerebileceğiniz seçenekleri söyleyin.', 'En uygun çözümü seçin.'], 'Süreç basit ve eğlenceli olsun.', ['problem çözme', 'akıl yürütme'], ['İki seçenekle başlayın.', 'Sadece bir soruyla ilerleyin.'], 2),
+  ],
+  '5-6 yaş': [
+    makeActivity('school-5-6-01', 'Aynı ve Farklı', 'Nesneleri aynı ve farklı özelliklerine göre ayırın.', 'cognitive', 'karşılaştırma', 60, 72, 10, ['Nesneler'], ['İki nesne seçin.', 'Benzerlik ve farklılıklarını tartışın.', 'Bir sınıflandırma yapın.'], 'Sınıflandırma kısa tutulmalı.', ['karşılaştırma', 'analiz'], ['İki nesneyle başlayın.', 'Renk ve boyutu vurgulayın.'], 2),
+    makeActivity('school-5-6-02', 'Sesli Okuma Kısa Adım', 'Kısa metin parçalarını birlikte seslendirin.', 'language', 'okuma hazırlığı', 60, 72, 8, ['Kitap veya kart'], ['Kısa bir cümle seçin.', 'Kelimeyi sesli söyleyin.', 'Anlamı birlikte tartışın.'], 'Metin kısa ve anlamlı olsun.', ['okuma hazırlığı', 'kelime bilgisi'], ['Bir cümle seçin.', 'Tek bir kelime üzerinde konuşun.'], 2),
+    makeActivity('school-5-6-03', 'Atış ve Hedef', 'Yumuşak bir hedefe atış yapın.', 'motor', 'hedefleme', 60, 72, 10, ['Yumuşak top veya kâğıt top'], ['Bir hedef koyun.', 'Yavaşça atış yapın.', 'Puan yerine deneme odaklı olun.'], 'Alan açık ve güvenli olsun.', ['koordine hareket', 'el kontrolü'], ['Yakın mesafeden başlayın.', 'Yavaş bir ritim seçin.'], 3),
+    makeActivity('school-5-6-04', 'İyilik Notu', 'Birine bir not ya da çizim hazırlayın.', 'social', 'şefkat', 60, 72, 8, ['Kâğıt', 'Boya kalemi'], ['Bir kişi seçin.', 'İyilik veya teşekkür yazın.', 'Notu birlikte verin.'], 'İfade özgür ve destekleyici olsun.', ['duygu paylaşımı', 'sosyal beceri'], ['Kısa bir notla başlayın.', 'Sadece bir çizim ekleyin.'], 2),
+    makeActivity('school-5-6-05', 'Gölge Hikâyesi', 'El gölgeleriyle kısa hikâye anlatın.', 'creativity', 'hikâye kurma', 60, 72, 10, ['El feneri', 'Boş duvar'], ['Bir gölge oluşturun.', 'Kısa bir hikâye kurun.', 'Hikâyeyi birlikte tamamlayın.'], 'Feneri göz seviyesine tutmayın.', ['yaratıcılık', 'anlatım'], ['İki karakter kullanın.', 'Kısa bir başlangıç seçin.'], 2),
+    makeActivity('school-5-6-06', 'Zaman Planı', 'Küçük bir görev için zaman planı oluşturun.', 'cognitive', 'planlama', 60, 72, 8, ['Kâğıt', 'Kalem'], ['Bir görevi seçin.', 'Adımları yazın.', 'Görev sırasını kontrol edin.'], 'Görev kısa ve gerçekçi olsun.', ['planlama', 'sorumluluk'], ['Üç adımlı bir görev seçin.', 'Sadece kısa bir plan yapın.'], 2),
+  ],
+  '6-8 yaş': [
+    makeActivity('school-6-8-01', 'Problem Çözme Kartı', 'Mini bir problem çözme kartı hazırlayın.', 'cognitive', 'problem çözme', 72, 96, 12, ['Kartlar', 'Kalem'], ['Bir problem seçin.', 'Adım adım çözüm üretin.', 'Sonuçları karşılaştırın.'], 'Problem gerçekçi ve kısa olsun.', ['akıl yürütme', 'karar verme'], ['İki seçenek sunun.', 'Aynı problemi tekrar çözün.'], 3),
+    makeActivity('school-6-8-02', 'Kısa Anlatı Yazma', 'Kısa bir mini metin yazın.', 'language', 'yazı hazırlığı', 72, 96, 10, ['Kâğıt', 'Kalem'], ['Bir olay seçin.', 'Üç cümle yazın.', 'Kısa bir başlık ekleyin.'], 'Metin kısa ve anlaşılır olsun.', ['yazma', 'sıralı anlatım'], ['Üç cümleye sınırlayın.', 'Bir temayı seçin.'], 2),
+    makeActivity('school-6-8-03', 'Top Atma ve Hedef', 'Yumuşak top ile hedefe atış yapın.', 'motor', 'hedefleme', 72, 96, 12, ['Yumuşak top', 'Hedef'], ['Bir hedef seçin.', 'Yavaşça atın.', 'Hedefe yakın olan atışları özetleyin.'], 'Atış alanı açık ve güvenli olsun.', ['el kontrolü', 'koordinasyon'], ['Yakın mesafe ile başlayın.', 'Bir tür hedef kullanın.'], 3),
+    makeActivity('school-6-8-04', 'Grup Çözümü', 'Bir grubu birlikte çözmeye çalışın.', 'social', 'iş birliği', 72, 96, 10, ['Kart veya oyuncak'], ['Bir problemi paylaşın.', 'Çözüm önerileri alın.', 'En iyi çözümü seçin.'], 'Süreci destekleyici ve rahat tutun.', ['iş birliği', 'empati'], ['İki seçenek sunun.', 'Üç adımlı bir görev seçin.'], 2),
+    makeActivity('school-6-8-05', 'Müzik ve Şekil', 'Müziğe uygun şekiller çizin.', 'creativity', 'ritim', 72, 96, 10, ['Kâğıt', 'Boya kalemi', 'Müzik'], ['Müziği açın.', 'Ritme göre çizgiler çizin.', 'Çizimi birlikte anlatın.'], 'Müziği düşük seviyede tutun.', ['öz ifade', 'ritim'], ['İki renk kullanın.', 'Kısa bir bölüm seçin.'], 2),
+    makeActivity('school-6-8-06', 'Planlama Günlüğü', 'Bir günlük planı hazırlayın.', 'cognitive', 'planlama', 72, 96, 8, ['Kâğıt', 'Kalem'], ['Bir gün seçin.', 'Görevleri sıralayın.', 'Tamamlandı mı kontrol edin.'], 'Görevleri gerçekçi tutun.', ['planlama', 'sorumluluk'], ['Bir adet görev seçin.', 'Sadece üç adım yazın.'], 2),
+  ],
+  '8-10 yaş': [
+    makeActivity('school-8-10-01', 'Hafıza Kartları', 'Kısa hafıza kartlarıyla eşleşme oyunu oynayın.', 'cognitive', 'hafıza', 96, 120, 12, ['Hafıza kartları'], ['Kartları karıştırın.', 'Kısaca görünmelerini sağlayın.', 'Eşleşmeyi bulun.'], 'Kartlar kolay ve açık olsun.', ['hafıza', 'odaklanma'], ['İki çiftle başlayın.', 'Zorluk seviyesini yavaşça artırın.'], 3),
+    makeActivity('school-8-10-02', 'Kelime Avı', 'Belirli bir tema üzerinden kelime üretin.', 'language', 'kelime üretimi', 96, 120, 10, ['Kâğıt', 'Kalem'], ['Bir tema seçin.', 'On kelime yazın.', 'En sevdiğiniz kelimeyi seçin.'], 'Tema kısa ve tanıdık olsun.', ['kelime bilgisi', 'sözel ifade'], ['Bir tema seçin.', 'Beş kelimeyle başlayın.'], 2),
+    makeActivity('school-8-10-03', 'İp Üzerinde Denge', 'Yumuşak ip üzerinde yavaş denge egzersizi yapın.', 'motor', 'denge', 96, 120, 12, ['Yumuşak halat veya çizgi'], ['Bir çizgi oluşturun.', 'Yavaşça geçin.', 'Güvenli bir alan seçin.'], 'Alan açık ve zeminde risk olmamalı.', ['denge', 'koordinasyon'], ['Düz bir çizgi seçin.', 'Kısa mesafe kullanın.'], 3),
+    makeActivity('school-8-10-04', 'Akranla İş Birliği', 'Küçük bir ortak görev yapın.', 'social', 'iş birliği', 96, 120, 10, ['Oyuncak veya kart'], ['Bir görev paylaşın.', 'Rolleri tanımlayın.', 'Başarıyı birlikte kutlayın.'], 'Görev gerçekçi ve kısa olsun.', ['iş birliği', 'sorumluluk'], ['İki adımlı bir görev seçin.', 'Aynı rolü paylaşın.'], 2),
+    makeActivity('school-8-10-05', 'Kendi Kendi Tasarı', 'Kendi tasarımını yaratın.', 'creativity', 'yaratıcılık', 96, 120, 12, ['Kâğıt', 'Kalem'], ['Bir tema belirleyin.', 'Kendi tasarımı oluşturun.', 'Bir açıklama ekleyin.'], 'Tasarımla yavaşça ilerleyin.', ['yaratıcılık', 'öz ifade'], ['İki renk ile başlayın.', 'Basit bir tema seçin.'], 2),
+    makeActivity('school-8-10-06', 'Günlük Hedef', 'Bir gün için hedef listesi oluşturun.', 'cognitive', 'planlama', 96, 120, 8, ['Kâğıt', 'Kalem'], ['Bir gün seçin.', 'Üç hedef yazın.', 'Tamamlamayı kontrol edin.'], 'Görevlerin gerçekçi olması önemli.', ['planlama', 'öz düzenleme'], ['Bir hedef seçin.', 'Üç adımla sınırlayın.'], 2),
+  ],
+}
+
+export const additionalActivities: Activity[] = Object.values(ageGroupActivities).flat()

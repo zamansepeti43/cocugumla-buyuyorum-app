@@ -2,6 +2,94 @@ export const activityCategories = ['cognitive', 'language', 'motor', 'social', '
 
 export type ActivityCategory = (typeof activityCategories)[number]
 export type ActivityDifficulty = 'easy' | 'medium'
+export type ActivitySkill =
+  | 'attention'
+  | 'memory'
+  | 'problem-solving'
+  | 'early-math'
+  | 'visual-tracking'
+  | 'listening'
+  | 'expressive-language'
+  | 'receptive-language'
+  | 'fine-motor'
+  | 'gross-motor'
+  | 'coordination'
+  | 'self-regulation'
+  | 'social-connection'
+  | 'empathy'
+  | 'creativity'
+  | 'sensory-play'
+  | 'planning'
+  | 'responsibility'
+  | 'göz teması'
+  | 'görsel takip'
+  | 'duygu farkı'
+  | 'ses farkındalığı'
+  | 'kafa ve kol koordinasyonu'
+  | 'duyusal keşif'
+  | 'gövde kontrolü'
+  | 'renk farkı'
+  | 'kelime öğrenme'
+  | 'yardım'
+  | 'renk keşfi'
+  | 'hikâye'
+  | 'ses yönü'
+  | 'el kavrama'
+  | 'mimik eşleştirme'
+  | 'ritim farkı'
+  | 'nesne farkı'
+  | 'ses keşfi'
+  | 'taşıma'
+  | 'taklit'
+  | 'ritmik his'
+  | 'problem çözme'
+  | 'eşleştirme'
+  | 'kelime bilgisi'
+  | 'denge'
+  | 'sıra bekleme'
+  | 'ritim'
+  | 'basit sıralama'
+  | 'sıralama'
+  | 'anlatım'
+  | 'sınıflandırma'
+  | 'öz ifade'
+  | 'renk farkındalığı'
+  | 'şekil tanıma'
+  | 'ses farkındalığı'
+  | 'ince motor'
+  | 'sorumluluk'
+  | 'hayal gücü'
+  | 'örüntü'
+  | 'sıralı anlatım'
+  | 'duygu tanıma'
+  | 'karşılaştırma'
+  | 'okuma hazırlığı'
+  | 'hedefleme'
+  | 'şefkat'
+  | 'hikâye kurma'
+  | 'planlama'
+  | 'yazı hazırlığı'
+  | 'iş birliği'
+  | 'yaratıcılık'
+  | 'hafıza'
+  | 'kelime üretimi'
+  | 'öz düzenleme'
+  | 'analiz'
+  | 'uyum'
+  | 'bakış paylaşımı'
+  | 'gözlem'
+  | 'duyusal farkındalık'
+  | 'duygu tanıma'
+  | 'kısa anlatım'
+  | 'okuma'
+  | 'sosyal beceri'
+  | 'akıl yürütme'
+  | 'duygu paylaşımı'
+  | 'yapılandırma'
+  | 'düzenleme'
+  | 'sayı farkındalığı'
+  | 'nezaket'
+  | 'problem çözme'
 
 export interface Activity {
   id: string
@@ -10,12 +98,16 @@ export interface Activity {
   ageMin: number
   ageMax: number
   category: ActivityCategory
+  skill: ActivitySkill
   duration: number
   materials: string[]
   instructions: string[]
   parentTip: string
   benefits: string[]
   difficulty: ActivityDifficulty
+  safetyNotes: string[]
+  variations: string[]
+  repeatCooldownDays: number
   completed: boolean
   isPremium: boolean
 }
@@ -33,11 +125,18 @@ export interface ActivityCompletion {
   completedAt: string
 }
 
+export interface DailyProgramRecord {
+  childId: string
+  date: string
+  activityIds: string[]
+}
+
 export interface AppData {
   hasOnboarded: boolean
   children: ChildProfile[]
   activeChildId: string | null
   completions: ActivityCompletion[]
+  dailyPrograms: DailyProgramRecord[]
 }
 
 export interface EnglishWord {

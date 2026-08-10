@@ -7,6 +7,7 @@ const initialData: AppData = {
   children: [],
   activeChildId: null,
   completions: [],
+  dailyPrograms: [],
 }
 
 function read(): AppData {

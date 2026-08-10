@@ -1,4 +1,4 @@
-import type { Activity, ActivityCategory } from '../types/models'
+import type { Activity, ActivityCategory, ActivitySkill } from '../types/models'
 
 const makeActivity = (
   id: string,
@@ -13,8 +13,24 @@ const makeActivity = (
   ageMin = 24,
   ageMax = 84,
 ): Activity => ({
-  id, title, description, category, duration, materials, instructions, parentTip,
-  benefits, ageMin, ageMax, difficulty: 'easy', completed: false, isPremium: false,
+  id,
+  title,
+  description,
+  category,
+  skill: 'attention' as ActivitySkill,
+  duration,
+  materials,
+  instructions,
+  parentTip,
+  benefits,
+  ageMin,
+  ageMax,
+  difficulty: 'easy',
+  safetyNotes: [],
+  variations: [],
+  repeatCooldownDays: 1,
+  completed: false,
+  isPremium: false,
 })
 
 export const activities: Activity[] = [

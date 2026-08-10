@@ -9,6 +9,7 @@ export interface AppContextValue {
   setActiveChild: (childId: string) => void
   removeChild: (childId: string) => void
   toggleActivity: (activityId: string) => void
+  saveDailyProgram: (childId: string, date: string, activityIds: string[]) => void
   resetData: () => void
 }
 

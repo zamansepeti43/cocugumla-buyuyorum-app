@@ -3,6 +3,19 @@ export const activityCategories = ['cognitive', 'language', 'motor', 'social', '
 export type ActivityCategory = (typeof activityCategories)[number]
 export type ActivityDifficulty = 'easy' | 'medium'
 export type ActivityType = 'guided' | 'visual' | 'game' | 'quiz' | 'matching' | 'memory' | 'sorting' | 'creative'
+export type ActivityInteractionId =
+  | 'contrast-track'
+  | 'balloon-track'
+  | 'touch-and-see'
+  | 'sorting-game'
+  | 'color-match-mini'
+  | 'missing-shape'
+  | 'animal-finder'
+  | 'motion-track'
+  | 'size-picker'
+  | 'twin-match'
+  | 'sound-object'
+  | 'moving-shape'
 export type ActivitySkill =
   | 'attention'
   | 'memory'
@@ -110,6 +123,7 @@ export interface Activity {
   variations: string[]
   repeatCooldownDays: number
   activityType?: ActivityType
+  interactionId?: ActivityInteractionId
   completed: boolean
   isPremium: boolean
 }

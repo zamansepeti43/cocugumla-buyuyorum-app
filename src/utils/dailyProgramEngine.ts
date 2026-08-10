@@ -43,7 +43,7 @@ function getCategoryWeights(categoryWeights?: Partial<Record<ActivityCategory, n
 }
 
 function isInteractiveType(activityType?: ActivityType): boolean {
-  return activityType !== undefined && ['visual', 'game', 'matching', 'memory', 'quiz'].includes(activityType)
+  return activityType !== undefined && ['visual', 'game', 'matching', 'memory', 'sorting', 'quiz'].includes(activityType)
 }
 
 function shouldPreferInteractive(totalMonths: number): boolean {
@@ -131,7 +131,7 @@ export function generateDailyProgram({ childBirthDate, today, completedActivityI
     }
   })
 
-  const targetCount = Math.min(6, Math.max(selected.length, 4))
+  const targetCount = 5
   const remainingPool = eligible.filter((activity) => !selectedIds.has(activity.id))
   const fallbackRemainingPool = fallbackPool.filter((activity) => !selectedIds.has(activity.id))
 
@@ -151,7 +151,19 @@ export function generateDailyProgram({ childBirthDate, today, completedActivityI
     if (nextIndex >= 0) pool.splice(nextIndex, 1)
   }
 
-  const finalActivities = selected.slice(0, targetCount)
+  let finalActivities = selected.slice(0, targetCount)
+
+  if (shouldPreferInteractive(ageInfo.totalMonths) && !finalActivities.some((item) => isInteractiveType(item.activityType))) {
+    const interactiveFallback = [...eligible, ...fallbackPool].find((item) => isInteractiveType(item.activityType) && !finalActivities.some((picked) => picked.id === item.id))
+    if (interactiveFallback) {
+      if (finalActivities.length >= targetCount) {
+        finalActivities = [...finalActivities.slice(0, targetCount - 1), interactiveFallback]
+      } else {
+        finalActivities = [...finalActivities, interactiveFallback].slice(0, targetCount)
+      }
+    }
+  }
+
   if (finalActivities.length === 0) {
     const fallbackActivity = fallbackPool[0]
     if (fallbackActivity) {

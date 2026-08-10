@@ -2,7 +2,8 @@ import { Search, SlidersHorizontal } from 'lucide-react'
 import { useDeferredValue, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ActivityCard } from '../components/ActivityCard'
-import { activities, categoryMeta } from '../data/activities'
+import { categoryMeta } from '../data/activities'
+import { allActivities } from '../data/allActivities'
 import { useApp } from '../hooks/useApp'
 import type { ActivityCategory } from '../types/models'
 import { calculateAge, isAgeInRange } from '../utils/age'
@@ -15,7 +16,7 @@ export function ActivitiesPage() {
   const category = searchParams.get('category') as ActivityCategory | null
   const age = activeChild ? calculateAge(activeChild.birthDate) : null
   const completedIds = new Set(data.completions.filter((item) => item.childId === activeChild?.id).map((item) => item.activityId))
-  const filtered = activities.filter((activity) => {
+  const filtered = allActivities.filter((activity) => {
     const isSuitable = !age || isAgeInRange(age.totalMonths, activity.ageMin, activity.ageMax)
     const matchesCategory = !category || activity.category === category
     const matchesSearch = activity.title.toLocaleLowerCase('tr-TR').includes(deferredSearch.toLocaleLowerCase('tr-TR'))

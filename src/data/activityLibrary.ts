@@ -1,4 +1,4 @@
-import type { Activity, ActivityCategory, ActivitySkill, ActivityType } from '../types/models'
+import type { Activity, ActivityCategory, ActivityInteractionId, ActivitySkill, ActivityType } from '../types/models'
 
 const makeActivity = (
   id: string,
@@ -17,6 +17,7 @@ const makeActivity = (
   variationsOrCooldown?: string[] | number,
   repeatCooldownDays = 2,
   activityType: ActivityType = 'guided',
+  interactionId?: ActivityInteractionId,
 ): Activity => {
   const safetyNotes = Array.isArray(safetyNotesOrVariations) ? safetyNotesOrVariations : []
   const variations = Array.isArray(variationsOrCooldown) ? variationsOrCooldown : []
@@ -44,6 +45,7 @@ const makeActivity = (
     variations,
     repeatCooldownDays: cooldown,
     activityType,
+    interactionId,
     completed: false,
     isPremium: false,
   }
@@ -97,6 +99,14 @@ const ageGroupActivities: Record<string, Activity[]> = {
     makeActivity('baby-7-9-12', 'Dokun ve Sırala', 'Bebekle dokunma ve sıralama deneyimi yaşayın.', 'creativity', 'sensory-play', 7, 9, 4, ['İki farklı obje'], ['Objeleri yan yana koyun.', 'Bebeğin dokunmasını destekleyin.', 'Sırayı çok uzun yapmayın.'], 'Objeler temiz ve güvenli olsun.', ['duyusal keşif', 'sıralama'], ['İki obje kullanın.'], [], 2, 'sorting'),
     makeActivity('baby-7-9-13', 'Gizli Nesne Hatırla', 'Bebekle bir nesneyi kısa süre hatırlatın.', 'cognitive', 'memory', 7, 9, 4, ['Bir oyuncak'], ['Nesneyi gösterin.', 'Bir süre saklayın.', 'Tekrar gösterin.'], 'Süre çok uzun olmamalı.', ['hafıza', 'dikkat'], ['Tek nesneyle başlayın.'], [], 2, 'memory'),
     makeActivity('baby-7-9-14', 'Harf Sesi Bul', 'Bebekle basit ses ve görsel eşleşme deneyimi yaşayın.', 'language', 'listening', 7, 9, 4, ['İki sesli kart'], ['Bir sesi çıkarın.', 'Kartı gösterin.', 'Bebek tepki verirse tekrar edin.'], 'Sesi sakin tutun.', ['ses farkındalığı', 'dinleme'], ['İki kartla başlayın.'], [], 2, 'game'),
+    makeActivity('baby-7-9-15', 'Doğru Rengi Bul', 'Ekrandaki hedef renge dokunarak kısa renk bulma oyunu oynayın.', 'cognitive', 'renk farkındalığı', 7, 9, 5, ['Ekran'], ['Hedef rengi dinleyin veya okuyun.', 'Doğru renge dokunun.', '3 tur sonunda sonucu gözlemleyin.'], 'Bebeğin oyunu kısa aralarla oynamasını destekleyin.', ['renk farkındalığı', 'dikkat'], ['İki renkle başlayın.', 'Yanlışta birlikte tekrar deneyin.'], [], 2, 'quiz', 'color-match-mini'),
+    makeActivity('baby-7-9-16', 'Kaybolan Şekli Bul', 'Kısa süre görünen şeklin hangisi olduğunu seçin.', 'cognitive', 'memory', 7, 9, 5, ['Ekran'], ['Şekli gözlemleyin.', 'Kaybolunca seçeneklerden bulun.', 'Doğruysa bir sonraki tura geçin.'], 'Hızlı ilerlemek yerine kısa ve sakin tekrarlar yapın.', ['hafıza', 'görsel dikkat'], ['İki şekil ile başlayın.', 'Turları kısa tutun.'], [], 2, 'memory', 'missing-shape'),
+    makeActivity('baby-7-9-17', 'Hayvanı Bul', 'Ekrandaki hayvanlar arasından söylenen hayvanı seçin.', 'language', 'listening', 7, 9, 5, ['Ekran'], ['Hedef hayvanı dinleyin.', 'Doğru hayvana dokunun.', 'Geri bildirimi izleyin.'], 'Yönlendirmeyi sakin bir ses tonu ile yapın.', ['kelime bilgisi', 'görsel dikkat'], ['İki hayvanla başlayın.', 'Doğru seçimleri övün.'], [], 2, 'matching', 'animal-finder'),
+    makeActivity('baby-7-9-18', 'Hareketli Şekli Takip Et', 'Hareket eden şekle doğru anda dokunarak takip oyunu oynayın.', 'motor', 'coordination', 7, 9, 5, ['Ekran'], ['Şekli takip edin.', 'Vur komutunda dokunun.', '3 tur tamamlayın.'], 'Kısa süreli oynatıp mola verin.', ['el-göz koordinasyonu', 'odaklanma'], ['Yavaş turdan başlayın.', 'Başarıdan sonra yön değiştirin.'], [], 2, 'game', 'motion-track'),
+    makeActivity('baby-7-9-19', 'Büyük-Küçük Seç', 'Büyük ya da küçük nesneyi yönergeye göre seçin.', 'cognitive', 'karşılaştırma', 7, 9, 5, ['Ekran'], ['Yönergeyi okuyun.', 'Büyük veya küçük nesneye dokunun.', 'Sonucu kontrol edin.'], 'Yönergeleri kısa tutun.', ['karşılaştırma', 'karar verme'], ['Önce sadece büyük seçimi çalışın.', 'Sonra küçük seçimi ekleyin.'], [], 2, 'quiz', 'size-picker'),
+    makeActivity('baby-7-9-20', 'Aynısını Bul', 'Gösterilen örnekle aynı olan nesneyi seçin.', 'cognitive', 'attention', 7, 9, 5, ['Ekran'], ['Örnek nesneyi inceleyin.', 'Aynı olanı bulun.', 'Geri bildirimi takip edin.'], 'Dikkati dağıtan öğeleri azaltın.', ['eşleştirme', 'dikkat'], ['İki seçenekle başlayın.', 'Doğru seçimde kısa kutlama yapın.'], [], 2, 'matching', 'twin-match'),
+    makeActivity('baby-7-9-21', 'Sesli Nesneyi Bul', 'Ses simgesine göre doğru nesneyi seçin.', 'language', 'receptive-language', 7, 9, 5, ['Ekran'], ['Ses simgesini etkinleştirin.', 'Hedef nesneyi bulun.', 'Doğru/yanlış sonucunu izleyin.'], 'Sesleri çok yüksek kullanmayın.', ['dinleme', 'eşleştirme'], ['İki nesne ile başlayın.', 'Aynı hedefi kısa tekrar edin.'], [], 2, 'quiz', 'sound-object'),
+    makeActivity('baby-7-9-22', 'Hareket Edeni Yakala', 'Ekranda hareket eden şekli doğru anda yakalayın.', 'creativity', 'attention', 7, 9, 5, ['Ekran'], ['Şeklin hareketini izleyin.', 'Merkezdeyken dokunun.', 'Turları tamamlayın.'], 'Oyun süresini kısa tutun.', ['dikkat', 'zamanlama'], ['Yavaş hızdan başlayın.', 'Doğru anı birlikte kutlayın.'], [], 2, 'visual', 'moving-shape'),
   ],
   '10-12 ay': [
     makeActivity('baby-10-12-01', 'Küçük Kutuları Doldurma', 'Kutulara basit nesneleri yerleştirme oyunu oynayın.', 'cognitive', 'eşleştirme', 10, 12, 7, ['İki küçük kutu', 'Büyük nesneler'], ['Bir kutuyu gösterin.', 'Nesneleri içine yerleştirin.', 'Bebek denemek isterse kısık bir rehberlik yapın.'], 'Nesneler yutulabilecek küçük parçalar olmamalı.', ['eşleştirme', 'odaklanma'], ['Renkli nesneler kullanın.', 'Tek kutuyla başlayın.'], 2),

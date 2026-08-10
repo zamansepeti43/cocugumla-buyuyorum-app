@@ -1,13 +1,15 @@
 import { ArrowLeft, Check, Clock3, Gauge, PackageOpen, Sparkles } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { activities, categoryMeta } from '../data/activities'
+import { ActivityInteractionPanel } from '../components/ActivityInteractionPanel'
+import { categoryMeta } from '../data/activities'
+import { allActivities } from '../data/allActivities'
 import { useApp } from '../hooks/useApp'
 import { calculateAge, formatAgeRange, isAgeInRange } from '../utils/age'
 
 export function ActivityDetailPage() {
   const { id } = useParams()
   const { activeChild, data, toggleActivity } = useApp()
-  const activity = activities.find((item) => item.id === id)
+  const activity = allActivities.find((item) => item.id === id)
   if (!activity) return <Navigate to="/activities" replace />
 
   const childAge = activeChild ? calculateAge(activeChild.birthDate) : null
@@ -32,6 +34,7 @@ export function ActivityDetailPage() {
       </div>
       <div className="detail-layout">
         <article className="detail-content">
+          <ActivityInteractionPanel activity={activity} />
           <section><h2>Gerekli malzemeler</h2><div className="material-list">{activity.materials.map((material) => <span key={material}>{material}</span>)}</div></section>
           <section><span className="kicker">ADIM ADIM</span><h2>Nasıl yapılır?</h2><ol className="steps">{activity.instructions.map((instruction, index) => <li key={instruction}><span>{index + 1}</span><p>{instruction}</p></li>)}</ol></section>
           <section className="parent-tip"><Sparkles /><div><h2>Ebeveyn için küçük ipucu</h2><p>{activity.parentTip}</p></div></section>

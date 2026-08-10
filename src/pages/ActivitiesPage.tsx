@@ -5,7 +5,7 @@ import { ActivityCard } from '../components/ActivityCard'
 import { activities, categoryMeta } from '../data/activities'
 import { useApp } from '../hooks/useApp'
 import type { ActivityCategory } from '../types/models'
-import { calculateAge } from '../utils/age'
+import { calculateAge, isAgeInRange } from '../utils/age'
 
 export function ActivitiesPage() {
   const { activeChild, data } = useApp()
@@ -16,7 +16,7 @@ export function ActivitiesPage() {
   const age = activeChild ? calculateAge(activeChild.birthDate) : null
   const completedIds = new Set(data.completions.filter((item) => item.childId === activeChild?.id).map((item) => item.activityId))
   const filtered = activities.filter((activity) => {
-    const isSuitable = !age || (age.totalMonths >= activity.ageMin && age.totalMonths <= activity.ageMax)
+    const isSuitable = !age || isAgeInRange(age.totalMonths, activity.ageMin, activity.ageMax)
     const matchesCategory = !category || activity.category === category
     const matchesSearch = activity.title.toLocaleLowerCase('tr-TR').includes(deferredSearch.toLocaleLowerCase('tr-TR'))
     return isSuitable && matchesCategory && matchesSearch

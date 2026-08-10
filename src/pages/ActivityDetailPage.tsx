@@ -2,6 +2,7 @@ import { ArrowLeft, Check, Clock3, Gauge, PackageOpen, Sparkles } from 'lucide-r
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { activities, categoryMeta } from '../data/activities'
 import { useApp } from '../hooks/useApp'
+import { calculateAge, formatAgeRange, isAgeInRange } from '../utils/age'
 
 export function ActivityDetailPage() {
   const { id } = useParams()
@@ -9,9 +10,13 @@ export function ActivityDetailPage() {
   const activity = activities.find((item) => item.id === id)
   if (!activity) return <Navigate to="/activities" replace />
 
+  const childAge = activeChild ? calculateAge(activeChild.birthDate) : null
+  const isSuitable = !childAge || isAgeInRange(childAge.totalMonths, activity.ageMin, activity.ageMax)
+  if (!isSuitable) return <Navigate to="/activities" replace />
+
   const category = categoryMeta[activity.category]
   const completed = data.completions.some((item) => item.activityId === activity.id && item.childId === activeChild?.id)
-  const ageRange = `${Math.floor(activity.ageMin / 12)}-${Math.floor(activity.ageMax / 12)} yaş`
+  const ageRange = formatAgeRange(activity.ageMin, activity.ageMax)
 
   return (
     <div className="page detail-page">

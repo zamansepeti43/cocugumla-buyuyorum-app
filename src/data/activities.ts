@@ -1,4 +1,4 @@
-import type { Activity, ActivityCategory, ActivitySkill } from '../types/models'
+import type { Activity, ActivityCategory, ActivityInteractionId, ActivitySkill } from '../types/models'
 
 const makeActivity = (
   id: string,
@@ -13,6 +13,7 @@ const makeActivity = (
   ageMin = 24,
   ageMax = 84,
   activityType: Activity['activityType'] = 'guided',
+  interactionId?: ActivityInteractionId,
 ): Activity => ({
   id,
   title,
@@ -31,6 +32,7 @@ const makeActivity = (
   variations: [],
   repeatCooldownDays: 1,
   activityType,
+  interactionId,
   completed: false,
   isPremium: false,
 })
@@ -43,7 +45,7 @@ export const activities: Activity[] = [
   makeActivity('cog-count-steps', 'Adımlarımızı Sayalım', 'Ev içinde kısa bir rotada adımları birlikte sayın.', 'cognitive', 6, ['Malzeme gerekmiyor'], ['Kısa bir hedef belirleyin.', 'Her adımda yüksek sesle sayı söyleyin.', 'Farklı rotalarda tekrar edin.'], 'Sayı sırası karışırsa oyunu bölmeden birlikte devam edin.', ['sayı farkındalığı', 'odaklanma'], 25, 60),
 
   makeActivity('lang-story-bag', 'Hikâye Torbası', 'Üç nesneden kısa bir hikâye üretin.', 'language', 12, ['Bez torba', '3 güvenli oyuncak'], ['Oyuncakları sırayla torbadan çıkarın.', 'Her oyuncak için bir cümle kurun.', 'Cümleleri birleştirip mini bir hikâye oluşturun.'], 'Çocuğun eklediği ayrıntıları kesmeden hikayeye dahil edin.', ['kelime kullanımı', 'anlatım'], 49, 120),
-  makeActivity('lang-sound-walk', 'Sesleri Dinleyelim', 'Evdeki günlük sesleri fark edip birlikte adlandırın.', 'language', 5, ['Malzeme gerekmiyor'], ['30-60 saniye sessizce dinleyin.', 'Duyduğunuz bir sesi siz adlandırın.', 'Aynı sesi tekrar duyunca birlikte taklit edin.'], 'Tek kelimelik ifadeleri tekrar ederek model olun.', ['dinleme', 'ses farkındalığı'], 4, 9),
+  makeActivity('lang-sound-walk', 'Sesleri Dinleyelim', 'Ne yapacağız: Evdeki yumuşak sesleri kısa süre dinleyip adlandıracağız.', 'language', 5, ['Ekstra malzeme gerekmiyor'], ['Çocuk ne yapacak: Duyduğu sese bakış veya sesle tepki verecek.', 'Ebeveyn ne yapacak: Kısa bekleme sonrası sesi adlandırıp tekrar edecek.', 'Süre ve malzeme: 5 dakika, sessiz bir köşe.'], 'Güvenlik notu: Ani ve yüksek seslerden kaçının.', ['dinleme', 'ses farkındalığı'], 4, 9, 'quiz', 'sound-object'),
   makeActivity('lang-picture-talk', 'Resimde Ne Görüyoruz?', 'Resimli kart veya kitapla kısa konuşmalar yapın.', 'language', 7, ['Resimli kitap veya büyük görsel kart'], ['Bir görsel seçin ve işaret ederek adını söyleyin.', 'Çocuğun işaretine veya sesine karşılık verin.', 'Aynı görselde bir ayrıntıyı daha birlikte bulun.'], 'Yanıt süresini bekleyin ve her denemeyi olumlu karşılayın.', ['alıcı dil', 'ortak dikkat'], 10, 24),
   makeActivity('lang-rhyme', 'Uyaklı Kelimeler', 'Benzer sesle biten eğlenceli kelimeler üretin.', 'language', 8, ['Malzeme gerekmiyor'], ['Kolay bir kelime söyleyin.', 'Aynı sesle biten başka kelimeler bulun.', 'Kelimelerle kısa ve komik bir cümle kurun.'], 'Gerçek kelime olmasa da ritim ve ses oyununu sürdürün.', ['ses farkındalığı', 'kelime üretimi'], 49, 96),
   makeActivity('lang-daily-reporter', 'Günün Muhabiri', 'Çocuğunuz gününden bir anı sırayla anlatsın.', 'language', 8, ['Oyuncak mikrofon (isteğe bağlı)'], ['Bugünden sevdiği bir anı seçmesini isteyin.', 'Ne oldu, kim vardı, sonra ne oldu sorularıyla destekleyin.', 'Siz de benzer bir kısa anlatım paylaşın.'], 'Soru sayısını sınırlayıp anlatımı bölmemeye çalışın.', ['sıralı anlatım', 'öz ifade'], 61, 120),

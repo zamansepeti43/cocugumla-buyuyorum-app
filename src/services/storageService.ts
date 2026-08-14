@@ -7,7 +7,8 @@ const initialData: AppData = {
   children: [],
   activeChildId: null,
   completions: [],
-  dailyPrograms: [],
+  favorites: [],
+  observations: [],
 }
 
 function read(): AppData {

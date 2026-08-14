@@ -44,7 +44,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         children,
         activeChildId: current.activeChildId === childId ? children[0]?.id ?? null : current.activeChildId,
         completions: current.completions.filter((completion) => completion.childId !== childId),
-        dailyPrograms: current.dailyPrograms.filter((item) => item.childId !== childId),
       }
     })
   }
@@ -66,24 +65,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  function saveDailyProgram(childId: string, date: string, activityIds: string[]) {
-    setData((current) => {
-      const filtered = current.dailyPrograms.filter((item) => !(item.childId === childId && item.date === date))
-      return {
-        ...current,
-        dailyPrograms: [...filtered, { childId, date, activityIds }],
-      }
-    })
-  }
-
   function resetData() {
     storageService.clearData()
-    setData({ hasOnboarded: false, children: [], activeChildId: null, completions: [], dailyPrograms: [] })
+    setData({ hasOnboarded: false, children: [], activeChildId: null, completions: [], favorites: [], observations: [] })
   }
 
-  return (
+return (
     <AppContext.Provider value={{
-      data, activeChild, completeOnboarding, addChild, setActiveChild, removeChild, toggleActivity, saveDailyProgram, resetData,
+      data, activeChild, completeOnboarding, addChild, setActiveChild, removeChild, toggleActivity, resetData,
     }}>
       {children}
     </AppContext.Provider>

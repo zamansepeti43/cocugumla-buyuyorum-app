@@ -1,3 +1,5 @@
+import type { Activity } from '../types/models'
+
 export interface AgeInfo {
   years: number
   months: number
@@ -17,15 +19,15 @@ function getAgeGroup(totalMonths: number): string {
   if (totalMonths <= 48) return '3-4 yaş'
   if (totalMonths <= 60) return '4-5 yaş'
   if (totalMonths <= 72) return '5-6 yaş'
-  if (totalMonths <= 96) return '6-8 yaş'
-  return '8-10 yaş'
+  if (totalMonths <= 96) return '6-8 ya�Y'
+  return '8-10 ya�Y'
 }
 
 function formatAgePoint(totalMonths: number): string {
   if (totalMonths < 24) return `${totalMonths} ay`
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
-  return months > 0 ? `${years} yaş ${months} ay` : `${years} yaş`
+  return months > 0 ? `${years} ya�Y ${months} ay` : `${years} ya�Y`
 }
 
 export function calculateAge(birthDate: string, today = new Date()): AgeInfo {
@@ -38,7 +40,7 @@ export function calculateAge(birthDate: string, today = new Date()): AgeInfo {
 
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
-  const label = years > 0 ? `${years} yaş ${months} ay` : `${months} aylık`
+  const label = years > 0 ? `${years} ya�Y ${months} ay` : `${months} aylık`
 
   const ageGroup = getAgeGroup(totalMonths)
 
@@ -55,4 +57,56 @@ export function formatAgeRange(ageMin: number, ageMax: number): string {
 
 export function getMaxBirthDate(): string {
   return new Date().toISOString().split('T')[0]
+}
+
+export interface DailyProgram {
+  developmentActivity: string
+  gameActivity: string
+}
+
+export function selectDailyProgram(
+  ageInfo: AgeInfo,
+  completedIds: Set<string>,
+  allActivities: Activity[]
+): DailyProgram {
+  const suitable = allActivities.filter(
+    (activity) =>
+      ageInfo.totalMonths >= activity.ageMin &&
+      ageInfo.totalMonths <= activity.ageMax &&
+      !completedIds.has(activity.id)
+  )
+
+  const developmentActivities = suitable.filter(
+    (a) => a.category !== 'creativity' && a.category !== 'language'
+  )
+
+  const gameActivities = suitable.filter(
+    (a) =>
+      ['game', 'quiz', 'matching', 'memory', 'sorting', 'creative', 'visual'].includes(
+        a.activityType ?? ''
+      )
+  )
+
+  const selectFirst = (activities: Activity[]): Activity | undefined => {
+    const uncompleted = activities.filter(
+      (a) => !completedIds.has(a.id)
+    )
+    return uncompleted[0] || activities[0]
+  }
+
+  // Fallback activity IDs when no suitable activities found
+  const fallbackDevId = allActivities.find(
+    (a) => a.category !== 'creativity' && a.category !== 'language'
+  )?.id ?? 'cog-color-hunt'
+
+  const fallbackGameId = allActivities.find(
+    (a) => ['game', 'quiz', 'matching', 'memory', 'sorting', 'creative', 'visual'].includes(
+      a.activityType ?? ''
+    )
+  )?.id ?? 'cog-color-hunt'
+
+  return {
+    developmentActivity: selectFirst(developmentActivities)?.id || fallbackDevId,
+    gameActivity: selectFirst(gameActivities)?.id || fallbackGameId,
+  }
 }

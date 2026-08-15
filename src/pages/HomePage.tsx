@@ -17,21 +17,26 @@ export function HomePage() {
   })
   const todaysActivities = dailyProgram.activities
   const today = new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })
+  const age = {
+    label: new Date().getFullYear() - new Date(activeChild.birthDate).getFullYear(),
+    ageGroup: activeChild.birthDate ? new Date().getFullYear() - new Date(activeChild.birthDate).getFullYear() >= 3 ? '3+' : '0-2' : 'Bilinmiyor',
+  }
 
   return (
     <div className="page home-page">
       <section className="home-hero">
         <div>
           <span className="date-label">{today}</span>
-          <h1>Günaydın, {activeChild.name}! <span aria-hidden="true">👋</span></h1>
-          <p>Bugün birlikte {todaysActivities.length} küçük aktivite yapabilirsiniz.</p>
+          <h1>Günaydın, {activeChild.name}! 👋</h1>
+          <p>Yaş: {age.label} ({age.ageGroup})</p>
+<p>Bugün birlikte {todaysActivities.length} küçük aktivite yapabilirsiniz.</p>
         </div>
         <div className="streak-pill"><Flame size={22} /><span><strong>{completedIds.size}</strong> keşif tamamlandı</span></div>
       </section>
 
       <section className="daily-banner">
-        <div className="daily-illustration">🌤️</div>
-        <div><span className="eyebrow"><Sparkles size={15} /> Bugünün küçük fikri</span><h2>Merakına eşlik et, cevabı birlikte arayın.</h2><p>Bir aktiviteyi tamamlamak kadar birlikte soru sormak da değerlidir.</p></div>
+        <div className="daily-illustration" style={{ width: '80px', height: '80px', margin: '0 auto 24px', background: '#1e1e2f', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🌤️</div>
+        <div><span className="eyebrow" style={{ color: '#7d7b8e', fontSize: '13px', marginBottom: '8px' }}><Sparkles size={15} /> Bugünün küçük fikri</span><h2 style={{ color: '#f5f0eb', fontSize: '20px', fontWeight: '600', marginBottom: '8px' }}>Merakına eşlik et, cevabı birlikte arayın.</h2><p style={{ color: '#a8a79c', fontSize: '14px' }}>Bir aktiviteyi tamamlamak kadar birlikte soru sormak da değerlidir.</p></div>
       </section>
 
       <section className="section-block">

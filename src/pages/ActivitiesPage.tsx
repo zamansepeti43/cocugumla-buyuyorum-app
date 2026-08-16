@@ -1,56 +1,116 @@
-import { Search, SlidersHorizontal } from 'lucide-react'
-import { useDeferredValue, useState } from 'react'
+import { Search } from 'lucide-react'
+import { useDeferredValue, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ActivityCard } from '../components/ActivityCard'
-import { activities, categoryMeta } from '../data/activities'
+import { categoryMeta } from '../data/activities'
+import { allActivities } from '../data/allActivities'
 import { useApp } from '../hooks/useApp'
-import type { ActivityCategory } from '../types/models'
-import { calculateAge } from '../utils/age'
+import type { Activity, ActivityCategory } from '../types/models'
+import { calculateAge, getAgeGroups } from '../utils/age'
+import { formatChildName } from '../utils/childName'
+
+type FilterMode = 'all' | 'sound' | 'visual' | 'game' | 'home' | 'sensory'
+
+const SOUND_INTERACTIONS = new Set(['sound-cue', 'sound-object', 'animal-finder'])
+const VISUAL_INTERACTIONS = new Set([
+  'contrast-track',
+  'balloon-track',
+  'touch-and-see',
+  'motion-track',
+  'moving-shape',
+  'picture-match',
+  'missing-shape',
+])
+
+const FILTERS: Array<{ key: FilterMode | ActivityCategory; label: string; icon: string }> = [
+  { key: 'all', label: 'Tümü', icon: '✨' },
+  { key: 'sound', label: 'Sesli', icon: '🔊' },
+  { key: 'visual', label: 'Görsel', icon: '👀' },
+  { key: 'game', label: 'Oyun', icon: '🎮' },
+  { key: 'home', label: 'Evde Yap', icon: '🏠' },
+  { key: 'cognitive', label: 'Bilişsel', icon: '🧠' },
+  { key: 'language', label: 'Dil', icon: '🗣️' },
+  { key: 'motor', label: 'Motor', icon: '🤲' },
+  { key: 'social', label: 'Sosyal-Duygusal', icon: '❤️' },
+  { key: 'creativity', label: 'Yaratıcılık', icon: '🎨' },
+  { key: 'sensory', label: 'Duyusal', icon: '🖐️' },
+]
+
+function getActivityModes(activity: Activity): Set<FilterMode> {
+  const modes = new Set<FilterMode>()
+  if (activity.interactionId) {
+    if (SOUND_INTERACTIONS.has(activity.interactionId)) modes.add('sound')
+    if (VISUAL_INTERACTIONS.has(activity.interactionId)) modes.add('visual')
+    if (
+      !SOUND_INTERACTIONS.has(activity.interactionId) &&
+      !VISUAL_INTERACTIONS.has(activity.interactionId)
+    ) {
+      modes.add('game')
+    }
+    if (activity.interactionId === 'touch-and-see') modes.add('sensory')
+  } else {
+    modes.add('home')
+    const sensoryText = `${activity.description} ${activity.benefits.join(' ')}`
+    if (sensoryText.includes('duyusal')) modes.add('sensory')
+  }
+  return modes
+}
 
 export function ActivitiesPage() {
   const { activeChild, data } = useApp()
   const [searchParams, setSearchParams] = useSearchParams()
   const [search, setSearch] = useState('')
   const deferredSearch = useDeferredValue(search)
-  const category = searchParams.get('category') as ActivityCategory | null
+  const filter = searchParams.get('filter') as FilterMode | ActivityCategory | null
+  const ageGroupIndex = searchParams.get('age')
+  const ageGroups = useMemo(() => getAgeGroups(), [])
+  const activeAgeGroup =
+    ageGroupIndex === null
+      ? null
+      : ageGroups[Math.min(Math.max(Number(ageGroupIndex) || 0, 0), ageGroups.length - 1)]
   const age = activeChild ? calculateAge(activeChild.birthDate) : null
   const completedIds = new Set(
     data.completions.filter((item) => item.childId === activeChild?.id).map((item) => item.activityId)
   )
 
-  const filtered = activities.filter((activity) => {
-    const isSuitable = !age || (age.totalMonths >= activity.ageMin && age.totalMonths <= activity.ageMax)
-    const matchesCategory = !category || activity.category === category
-    const matchesSearch = activity.title
-      .toLocaleLowerCase('tr-TR')
-      .includes(deferredSearch.toLocaleLowerCase('tr-TR'))
-    return isSuitable && matchesCategory && matchesSearch
-  })
+  const filtered = useMemo(() => {
+    const searchText = deferredSearch.toLocaleLowerCase('tr-TR')
+    return allActivities.filter((activity) => {
+      const matchesFilter =
+        !filter ||
+        filter === 'all' ||
+        (Object.prototype.hasOwnProperty.call(categoryMeta, filter)
+          ? activity.category === (filter as ActivityCategory)
+          : getActivityModes(activity).has(filter as FilterMode))
+      const matchesSearch =
+        !searchText ||
+        activity.title.toLocaleLowerCase('tr-TR').includes(searchText) ||
+        activity.skill.toLocaleLowerCase('tr-TR').includes(searchText)
+      const matchesAge =
+        !activeAgeGroup ||
+        (activity.ageMin <= activeAgeGroup.max && activity.ageMax >= activeAgeGroup.min)
+      return matchesFilter && matchesSearch && matchesAge
+    })
+  }, [filter, deferredSearch, activeAgeGroup])
 
-  const allActivities = activities.filter((activity) => {
-    const isSuitable = !age || (age.totalMonths >= activity.ageMin && age.totalMonths <= activity.ageMax)
-    const matchesCategory = !category || activity.category === category
-    const matchesSearch = activity.title
-      .toLocaleLowerCase('tr-TR')
-      .includes(deferredSearch.toLocaleLowerCase('tr-TR'))
-    return isSuitable && matchesCategory && matchesSearch
-  })
+  const isAgeSuitable = (activity: Activity): boolean =>
+    !age || (age.totalMonths >= activity.ageMin && age.totalMonths <= activity.ageMax)
 
   return (
     <div className="page">
-      <section className="page-title" style={{ background: 'linear-gradient(135deg, #1e1e2f 0%, #0d0d14 100%)', padding: '32px 20px', borderRadius: '24px 24px 0 0', marginBottom: '32px' }}>
+      <section className="page-title">
         <div>
-          <span className="kicker" style={{ color: '#fbbc33', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>BİRLİKTE KEŞFEDİN</span>
-          <h1 style={{ color: '#f5f0eb', fontSize: '32px', fontWeight: '600' }}>Aktiviteler</h1>
-          <p style={{ color: '#a8a79c' }}>{activeChild?.name} için oyun ve öğrenme önerileri.</p>
+          <span className="kicker">BİRLİKTE KEŞFEDİN</span>
+          <h1>Aktiviteler</h1>
+          <p>{formatChildName(activeChild?.name)} için oyun ve öğrenme önerileri.</p>
         </div>
-        <div className="result-count" style={{ marginTop: '16px', color: '#6b6b80' }}>
+        <div className="result-count">
           <strong>{filtered.length}</strong>
           <span>aktivite</span>
         </div>
       </section>
 
-      <div className="filter-bar" style={{ background: 'linear-gradient(135deg, #1e1e2f 0%, #0f0f1a 100%)', padding: '24px 20px', borderRadius: '16px', marginBottom: '24px' }}>
+      <div className="filter-bar">
         <label className="search-box">
           <Search size={20} />
           <span className="sr-only">Aktivite ara</span>
@@ -58,32 +118,54 @@ export function ActivitiesPage() {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Aktivite ara..."
-            style={{ width: '100%', padding: '12px 48px 12px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid #333', borderRadius: '24px', color: '#f5f0eb', fontSize: '14px' }}
           />
         </label>
 
-        <div className="filter-icon" title="Kategori filtresi" style={{ marginLeft: '16px' }}>
-          <SlidersHorizontal size={20} />
+        <div className="filter-tabs" role="tablist" aria-label="Yaş grubu filtresi">
+          <button
+            className={!activeAgeGroup ? 'active' : ''}
+            onClick={() =>
+              setSearchParams((params) => {
+                const next = new URLSearchParams(params)
+                next.delete('age')
+                return next
+              })
+            }
+          >
+            Tüm Yaşlar
+          </button>
+          {ageGroups.map((group, index) => (
+            <button
+              key={group.label}
+              className={activeAgeGroup?.label === group.label ? 'active' : ''}
+              onClick={() =>
+                setSearchParams((params) => {
+                  const next = new URLSearchParams(params)
+                  next.set('age', String(index))
+                  return next
+                })
+              }
+            >
+              {group.label}
+            </button>
+          ))}
         </div>
 
-        <div className="filter-tabs" style={{ display: 'flex', gap: '12px', marginTop: '16px', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '20px' }}>
-          <button
-            style={{ background: 'rgba(251, 189, 51, 0.1)', color: '#fbbc33', padding: '8px 16px', borderRadius: '20px', fontWeight: '500', border: '1px solid #fbbc33' }}
-            className={!category ? 'active' : ''}
-            onClick={() => setSearchParams({})
-          }
-          >
-            Tümü
-          </button>
-
-          {Object.entries(categoryMeta).map(([key, item]) => (
+        <div className="filter-tabs" role="tablist" aria-label="Kategori filtresi">
+          {FILTERS.map((item) => (
             <button
-              key={key}
-              style={{ background: 'rgba(251, 189, 51, 0.1)', color: '#fbbc33', padding: '8px 16px', borderRadius: '20px', fontWeight: '500', margin: '4px', border: '1px solid #fbbc33' }}
-              className={category === key ? 'active' : ''}
-              onClick={() => setSearchParams({ category: key })}
+              key={item.key}
+              className={filter === item.key ? 'active' : ''}
+              onClick={() =>
+                setSearchParams((params) => {
+                  const next = new URLSearchParams(params)
+                  if (item.key === 'all') next.delete('filter')
+                  else next.set('filter', item.key)
+                  return next
+                })
+              }
             >
-              <span style={{ color: '#fbbc33' }}>{item.icon}</span>
+              <span aria-hidden="true">{item.icon}</span>
               {item.label}
             </button>
           ))}
@@ -97,55 +179,17 @@ export function ActivitiesPage() {
               key={activity.id}
               activity={activity}
               completed={completedIds.has(activity.id)}
+              ageSuitable={isAgeSuitable(activity)}
             />
           ))}
         </div>
       ) : (
-        <div className="empty-state" style={{ textAlign: 'center', padding: '40px 20px' }}>
-          <span style={{ fontSize: '48px', color: '#333' }}>🔎</span>
-          <h2 style={{ color: '#6b6b80', margin: '16px 0' }}>Uygun aktivite bulunamadı</h2>
-          <p style={{ color: '#a8a79c', fontSize: '14px' }}>Arama veya kategori filtresini değiştirmeyi deneyin.</p>
+        <div className="empty-state">
+          <span aria-hidden="true">🔎</span>
+          <h2>Uygun aktivite bulunamadı</h2>
+          <p>Arama, yaş veya kategori filtresini değiştirmeyi deneyin.</p>
         </div>
       )}
-
-      {/* Tüm Etkinlikler Bölümü */}
-      <section className="section-block" style={{ marginTop: '24px' }}>
-        <div className="page-title" style={{ background: 'linear-gradient(135deg, #1e1e2f 0%, #0f0f1a 100%)', padding: '16px 20px', borderRadius: '12px', marginBottom: '20px' }}>
-          <div>
-            <span className="kicker" style={{ color: '#fbbc33', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>TÜM ETKİNLİKLER</span>
-            <h1>Tüm Aktiviteler</h1>
-          </div>
-        </div>
-
-        <div className="filter-bar" style={{ background: 'linear-gradient(135deg, #1e1e2f 0%, #0f0f1a 100%)', padding: '20px', borderRadius: '12px', marginBottom: '20px' }}>
-          <label className="search-box">
-            <Search size={16} />
-            <span className="sr-only">Aktivite ara</span>
-            <input
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="Aktivite ara..."
-              style={{ width: '100%', padding: '12px 48px 12px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid #333', borderRadius: '24px', color: '#f5f0eb', fontSize: '14px' }}
-            />
-          </label>
-        </div>
-
-        <div className="activity-grid listing-grid">
-          {allActivities.map((activity) => (
-            <ActivityCard
-              key={activity.id}
-              activity={activity}
-              completed={completedIds.has(activity.id)}
-            />
-          ))}
-        </div>
-
-        <div className="empty-state" style={{ textAlign: 'center', padding: '20px', color: '#6b6b80' }}>
-          <span>🔍</span>
-          <h2>Filtre uygulayarak daha fazlaaktivite bulun</h2>
-          <p>Yaş, kategori veya arama ile filtreleyebilirsiniz.</p>
-        </div>
-      </section>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { BookOpen, ChartNoAxesColumnIncreasing, Home, Shapes, UserRound } from '
 import { NavLink, Outlet } from 'react-router-dom'
 import { useApp } from '../hooks/useApp'
 import { calculateAge } from '../utils/age'
+import { childNameInitial, formatChildName } from '../utils/childName'
 
 const navItems = [
   { to: '/home', label: 'Ana Sayfa', shortLabel: 'Ana Sayfa', icon: Home },
@@ -17,9 +18,8 @@ export function AppLayout() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <NavLink to="/home" className="brand" aria-label="Çocuğumla Büyüyorum ana sayfa">
-          <span className="brand-mark">ÇB</span>
-          <span>Çocuğumla Büyüyorum</span>
+        <NavLink to="/home" className="brand" aria-label="Çocuğumla Büyüyorum">
+          <img src="/logo.png" alt="Çocuğumla Büyüyorum logo" className="brand-logo" />
         </NavLink>
         <nav className="desktop-nav" aria-label="Ana navigasyon">
           {navItems.map(({ to, label, icon: Icon }) => (
@@ -30,8 +30,8 @@ export function AppLayout() {
         </nav>
         {activeChild && (
           <NavLink to="/profile" className="child-chip">
-            <span>{activeChild.name.charAt(0).toLocaleUpperCase('tr-TR')}</span>
-            <div><strong>{activeChild.name}</strong><small>{calculateAge(activeChild.birthDate).label}</small></div>
+            <span>{childNameInitial(activeChild.name)}</span>
+            <div><strong>{formatChildName(activeChild.name)}</strong><small>{calculateAge(activeChild.birthDate).label}</small></div>
           </NavLink>
         )}
       </header>

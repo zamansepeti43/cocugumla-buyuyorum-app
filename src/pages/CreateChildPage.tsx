@@ -3,6 +3,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../hooks/useApp'
 import { calculateAge, getMaxBirthDate } from '../utils/age'
+import { childNameInitial } from '../utils/childName'
 
 export function CreateChildPage() {
   const { addChild, data } = useApp()
@@ -39,7 +40,7 @@ export function CreateChildPage() {
 
           {age && (
             <div className="age-preview" aria-live="polite">
-              <div className="avatar-preview">{name.trim().charAt(0).toLocaleUpperCase('tr-TR') || '★'}</div>
+              <div className="avatar-preview">{childNameInitial(name.trim())}</div>
               <div><span>Şu an</span><strong>{age.label}</strong><small>{age.ageGroup}</small></div>
             </div>
           )}

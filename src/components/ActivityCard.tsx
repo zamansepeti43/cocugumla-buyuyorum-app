@@ -1,27 +1,31 @@
-import { Check, ChevronRight, Clock3 } from 'lucide-react'
+import { Check, Clock3, Baby, Target } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { categoryMeta } from '../data/activities'
 import type { Activity } from '../types/models'
+import { formatAgeRange } from '../utils/age'
+import { activityShortDescription } from '../utils/activityText'
+import { ActivityVisual } from './ActivityVisual'
 
-export function ActivityCard({ activity, completed }: { activity: Activity; completed: boolean }) {
+export function ActivityCard({ activity, completed, ageSuitable }: { activity: Activity; completed: boolean; ageSuitable?: boolean }) {
   const category = categoryMeta[activity.category]
 
   return (
     <Link to={`/activities/${activity.id}`} className={`activity-card ${category.color}`}>
-      <div className="activity-icon" aria-hidden="true">{category.icon}</div>
+      <div className="activity-thumb" aria-hidden="true"><ActivityVisual activity={activity} /></div>
       <div className="activity-card-body">
         <div className="activity-card-topline">
           <span>{category.label}</span>
+          {ageSuitable && <span className="age-suitable-label">Yaşına uygun</span>}
           {completed && <span className="completed-label"><Check size={14} /> Tamamlandı</span>}
         </div>
         <h3>{activity.title}</h3>
-        <p>{activity.description}</p>
+        <p>{activityShortDescription(activity)}</p>
         <div className="activity-meta">
           <span><Clock3 size={15} /> {activity.duration} dk</span>
-          <span>{activity.materials[0]}</span>
+          <span><Baby size={15} /> {formatAgeRange(activity.ageMin, activity.ageMax)}</span>
+          <span><Target size={15} /> {activity.skill}</span>
         </div>
       </div>
-      <ChevronRight className="card-arrow" size={20} aria-hidden="true" />
     </Link>
   )
 }

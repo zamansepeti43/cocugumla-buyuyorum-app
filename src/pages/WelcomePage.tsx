@@ -16,7 +16,7 @@ export function WelcomePage() {
   return (
     <main className="welcome-page">
       <section className="welcome-copy">
-        <div className="welcome-brand"><span className="brand-mark">ÇB</span> Çocuğumla Büyüyorum</div>
+        <div className="welcome-brand"><img src="/logo.png" alt="Çocuğumla Büyüyorum logo" className="brand-logo" /></div>
         <div className="eyebrow"><Sparkles size={16} /> Her güne küçük bir keşif</div>
         <h1>Birlikte büyüyen <em>güzel anlar.</em></h1>
         <p>Çocuğunuzla her gün küçük bir adım, yarın büyük bir gelişim.</p>

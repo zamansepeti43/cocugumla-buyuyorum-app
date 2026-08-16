@@ -4,6 +4,9 @@ import { ActivityCard } from '../components/ActivityCard'
 import { categoryMeta } from '../data/activities'
 import { useApp } from '../hooks/useApp'
 import { generateDailyProgram } from '../utils/dailyProgramEngine'
+import { calculateAge } from '../utils/age'
+import { formatChildName } from '../utils/childName'
+import { formatGreeting } from '../utils/greeting'
 
 export function HomePage() {
   const { activeChild, data } = useApp()
@@ -17,17 +20,14 @@ export function HomePage() {
   })
   const todaysActivities = dailyProgram.activities
   const today = new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })
-  const age = {
-    label: new Date().getFullYear() - new Date(activeChild.birthDate).getFullYear(),
-    ageGroup: activeChild.birthDate ? new Date().getFullYear() - new Date(activeChild.birthDate).getFullYear() >= 3 ? '3+' : '0-2' : 'Bilinmiyor',
-  }
+  const age = calculateAge(activeChild.birthDate)
 
   return (
     <div className="page home-page">
       <section className="home-hero">
         <div>
           <span className="date-label">{today}</span>
-          <h1>Günaydın, {activeChild.name}! 👋</h1>
+          <h1>{formatGreeting(formatChildName(activeChild.name))}</h1>
           <p>Yaş: {age.label} ({age.ageGroup})</p>
 <p>Bugün birlikte {todaysActivities.length} küçük aktivite yapabilirsiniz.</p>
         </div>
@@ -46,7 +46,7 @@ export function HomePage() {
 
       <section className="category-strip">
         <div><span className="kicker">KEŞFET</span><h2>Gelişim alanları</h2></div>
-        <div className="category-list">{Object.entries(categoryMeta).map(([key, item]) => <Link to={`/activities?category=${key}`} key={key} className={item.color}><span>{item.icon}</span>{item.label}</Link>)}</div>
+        <div className="category-list">{Object.entries(categoryMeta).map(([key, item]) => <Link to={`/activities?filter=${key}`} key={key} className={item.color}><span>{item.icon}</span>{item.label}</Link>)}</div>
       </section>
     </div>
   )

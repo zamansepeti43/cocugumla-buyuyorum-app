@@ -8,26 +8,36 @@ export interface AgeInfo {
   ageGroup: string
 }
 
-function getAgeGroup(totalMonths: number): string {
-  if (totalMonths <= 3) return '0-3 ay'
-  if (totalMonths <= 6) return '4-6 ay'
-  if (totalMonths <= 9) return '7-9 ay'
-  if (totalMonths <= 12) return '10-12 ay'
-  if (totalMonths <= 18) return '13-18 ay'
-  if (totalMonths <= 24) return '19-24 ay'
-  if (totalMonths <= 36) return '2-3 yaş'
-  if (totalMonths <= 48) return '3-4 yaş'
-  if (totalMonths <= 60) return '4-5 yaş'
-  if (totalMonths <= 72) return '5-6 yaş'
-  if (totalMonths <= 96) return '6-8 ya�Y'
-  return '8-10 ya�Y'
+const AGE_GROUPS: Array<{ label: string; min: number; max: number }> = [
+  { label: '0-3 ay', min: 0, max: 3 },
+  { label: '4-6 ay', min: 4, max: 6 },
+  { label: '7-9 ay', min: 7, max: 9 },
+  { label: '10-12 ay', min: 10, max: 12 },
+  { label: '13-18 ay', min: 13, max: 18 },
+  { label: '19-24 ay', min: 19, max: 24 },
+  { label: '2-3 yaş', min: 25, max: 36 },
+  { label: '3-4 yaş', min: 37, max: 48 },
+  { label: '4-5 yaş', min: 49, max: 60 },
+  { label: '5-6 yaş', min: 61, max: 72 },
+  { label: '6-8 yaş', min: 73, max: 96 },
+  { label: '8-10 yaş', min: 97, max: 120 },
+  { label: '10-12 yaş', min: 121, max: 144 },
+]
+
+export function getAgeGroup(totalMonths: number): string {
+  const group = AGE_GROUPS.find((item) => totalMonths <= item.max)
+  return group?.label ?? '10-12 yaş'
+}
+
+export function getAgeGroups(): Array<{ label: string; min: number; max: number }> {
+  return AGE_GROUPS
 }
 
 function formatAgePoint(totalMonths: number): string {
   if (totalMonths < 24) return `${totalMonths} ay`
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
-  return months > 0 ? `${years} ya�Y ${months} ay` : `${years} ya�Y`
+  return months > 0 ? `${years} yaş ${months} ay` : `${years} yaş`
 }
 
 export function calculateAge(birthDate: string, today = new Date()): AgeInfo {
@@ -40,7 +50,7 @@ export function calculateAge(birthDate: string, today = new Date()): AgeInfo {
 
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
-  const label = years > 0 ? `${years} ya�Y ${months} ay` : `${months} aylık`
+  const label = years > 0 ? `${years} yaş ${months} ay` : `${months} aylık`
 
   const ageGroup = getAgeGroup(totalMonths)
 

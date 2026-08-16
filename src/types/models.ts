@@ -27,6 +27,24 @@ export type ActivityInteractionId =
   | 'twin-match'
   | 'sound-object'
   | 'moving-shape'
+  | 'sound-cue'
+  | 'drag-sort'
+  | 'picture-match'
+  | 'pattern-complete'
+  | 'memory-grid'
+  | 'shape-puzzle'
+  | 'word-pick'
+  | 'logic-grid'
+  | 'attention-spot'
+  | 'sequence-memory'
+  | 'mini-tetris'
+  | 'candy-match'
+  | 'reaction-target'
+  | 'strategy-plan'
+  | 'strategy-maze'
+  | 'complex-puzzle'
+  | 'advanced-memory'
+  | 'box-opening'
 
 export type ActivitySkill = string
 
@@ -34,6 +52,7 @@ export interface Activity {
   id: string
   title: string
   description: string
+  purpose?: string
   ageMin: number
   ageMax: number
   category: ActivityCategory

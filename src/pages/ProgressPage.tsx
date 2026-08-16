@@ -2,6 +2,7 @@ import { Award, CalendarDays, CheckCircle2, Flame, Trophy } from 'lucide-react'
 import { activities, categoryMeta } from '../data/activities'
 import { useApp } from '../hooks/useApp'
 import type { ActivityCategory, ActivityCompletion } from '../types/models'
+import { formatChildName } from '../utils/childName'
 
 function dateKey(value: string | Date) {
   return new Date(value).toISOString().split('T')[0]
@@ -35,7 +36,7 @@ export function ProgressPage() {
 
   return (
     <div className="page">
-      <section className="page-title"><div><span className="kicker">KÜÇÜK ADIMLAR, GÜZEL ANILAR</span><h1>{activeChild?.name}’in ilerlemesi</h1><p>Tamamladığınız her aktivite, birlikte geçirdiğiniz değerli bir an.</p></div></section>
+      <section className="page-title"><div><span className="kicker">KÜÇÜK ADIMLAR, GÜZEL ANILAR</span><h1>{formatChildName(activeChild?.name)}’in ilerlemesi</h1><p>Tamamladığınız her aktivite, birlikte geçirdiğiniz değerli bir an.</p></div></section>
       <div className="stat-grid">
         <div className="stat-card coral"><CheckCircle2 /><span><strong>{completions.length}</strong>Toplam aktivite</span></div>
         <div className="stat-card sun"><CalendarDays /><span><strong>{weekly.length}</strong>Bu hafta</span></div>

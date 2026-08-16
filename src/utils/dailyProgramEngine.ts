@@ -1,7 +1,7 @@
 import { activities as baseActivities } from '../data/activities'
 import { additionalActivities } from '../data/activityLibrary'
-import { calculateAge, isAgeInRange } from './age'
-import type { Activity, ActivityCategory, ActivityType } from '../types/models'
+import { calculateAge, getAgeGroup, isAgeInRange } from './age'
+import type { Activity, ActivityCategory, ActivityInteractionId } from '../types/models'
 
 export interface DailyProgramEngineOptions {
   childBirthDate: string
@@ -13,24 +13,17 @@ export interface DailyProgramEngineOptions {
 export interface DailyProgramResult {
   ageGroup: string
   activities: Activity[]
+  missingRoles: string[]
 }
 
 const fullActivityPool: Activity[] = [...baseActivities, ...additionalActivities]
 
-function getAgeGroup(totalMonths: number): string {
-  if (totalMonths <= 3) return '0-3 ay'
-  if (totalMonths <= 6) return '4-6 ay'
-  if (totalMonths <= 9) return '7-9 ay'
-  if (totalMonths <= 12) return '10-12 ay'
-  if (totalMonths <= 18) return '13-18 ay'
-  if (totalMonths <= 24) return '19-24 ay'
-  if (totalMonths <= 36) return '2-3 yaş'
-  if (totalMonths <= 48) return '3-4 yaş'
-  if (totalMonths <= 60) return '4-5 yaş'
-  if (totalMonths <= 72) return '5-6 yaş'
-  if (totalMonths <= 96) return '6-8 yaş'
-  return '8-10 yaş'
-}
+const SOUND_INTERACTIONS: ActivityInteractionId[] = ['sound-cue', 'sound-object', 'animal-finder', 'word-pick']
+const VISUAL_INTERACTIONS: ActivityInteractionId[] = ['contrast-track', 'balloon-track', 'touch-and-see', 'motion-track', 'moving-shape', 'picture-match']
+
+type DailyRole = 'sound' | 'visual' | 'game' | 'home'
+
+const ROLE_ORDER: DailyRole[] = ['sound', 'visual', 'game', 'home', 'home']
 
 function getCategoryWeights(categoryWeights?: Partial<Record<ActivityCategory, number>>): Record<ActivityCategory, number> {
   return {
@@ -42,12 +35,21 @@ function getCategoryWeights(categoryWeights?: Partial<Record<ActivityCategory, n
   }
 }
 
-function isInteractiveType(activityType?: ActivityType): boolean {
-  return activityType !== undefined && ['visual', 'game', 'matching', 'memory', 'sorting', 'quiz'].includes(activityType)
+function getActivityRole(activity: Activity): DailyRole {
+  const id = activity.interactionId
+  if (id && SOUND_INTERACTIONS.includes(id)) return 'sound'
+  if (id && VISUAL_INTERACTIONS.includes(id)) return 'visual'
+  if (id) return 'game'
+  return 'home'
 }
 
-function shouldPreferInteractive(totalMonths: number): boolean {
-  return totalMonths > 3
+function roleLabel(role: DailyRole): string {
+  switch (role) {
+    case 'sound': return 'Sesli aktivite'
+    case 'visual': return 'Görsel aktivite'
+    case 'game': return 'Oyun aktivitesi'
+    case 'home': return 'Evde yapılan aktivite'
+  }
 }
 
 export function generateDailyProgram({ childBirthDate, today, completedActivityIds = [], categoryWeights }: DailyProgramEngineOptions): DailyProgramResult {
@@ -56,26 +58,16 @@ export function generateDailyProgram({ childBirthDate, today, completedActivityI
   const weights = getCategoryWeights(categoryWeights)
   const completedRecently = new Set(completedActivityIds)
 
-  const eligible = fullActivityPool.filter((activity) => {
-    const inRange = isAgeInRange(ageInfo.totalMonths, activity.ageMin, activity.ageMax)
-    if (!inRange) return false
+  const inRange = (activity: Activity): boolean => isAgeInRange(ageInfo.totalMonths, activity.ageMin, activity.ageMax)
 
+  const eligible = fullActivityPool.filter((activity) => {
+    if (!inRange(activity)) return false
     const blockedByCooldown = activity.repeatCooldownDays > 0 && completedRecently.has(activity.id)
     return !blockedByCooldown
   })
 
-  const fallbackPool = fullActivityPool.filter((activity) => isAgeInRange(ageInfo.totalMonths, activity.ageMin, activity.ageMax))
+  const fallbackPool = fullActivityPool.filter(inRange)
 
-  const byCategory = Object.entries(weights).reduce<Record<ActivityCategory, Activity[]>>((acc, [category, weight]) => {
-    acc[category as ActivityCategory] = eligible.filter((activity) => activity.category === category).slice(0, Math.max(1, 3 * weight))
-    return acc
-  }, { cognitive: [], language: [], motor: [], social: [], creativity: [] })
-
-  const selected: Activity[] = []
-  const selectedIds = new Set<string>()
-  const selectedCategories = new Set<ActivityCategory>()
-  const categories: ActivityCategory[] = ['cognitive', 'language', 'motor', 'social', 'creativity']
-  const categoryOrder = [...categories].sort((a, b) => (weights[b] ?? 0) - (weights[a] ?? 0))
   const typePriority: Record<string, number> = {
     visual: 4,
     game: 4,
@@ -87,92 +79,50 @@ export function generateDailyProgram({ childBirthDate, today, completedActivityI
     guided: 1,
   }
 
-  const pickBestActivity = (items: Activity[], hasInteractiveSelection: boolean): Activity | undefined => {
+  const pickBest = (items: Activity[]): Activity | undefined => {
     if (items.length === 0) return undefined
 
     const ranked = items
-      .filter((activity) => !selectedIds.has(activity.id))
       .map((activity) => {
         const baseScore = (typePriority[activity.activityType ?? 'guided'] ?? 1) * 3 + (weights[activity.category] ?? 1)
-        const categoryPenalty = selectedCategories.has(activity.category) ? 5 : 0
-        const interactionBonus = shouldPreferInteractive(ageInfo.totalMonths) && isInteractiveType(activity.activityType) && !hasInteractiveSelection ? 6 : 0
-
-        return { activity, score: baseScore + interactionBonus - categoryPenalty }
+        const interactiveBonus = activity.interactionId ? 4 : 0
+        return { activity, score: baseScore + interactiveBonus }
       })
       .sort((a, b) => b.score - a.score)
 
     return ranked[0]?.activity
   }
 
-  let hasInteractiveSelection = false
+  const selected: Activity[] = []
+  const selectedIds = new Set<string>()
+  const missingRoles: string[] = []
 
-  categoryOrder.forEach((category) => {
-    const items = byCategory[category]
-    const item = pickBestActivity(items, hasInteractiveSelection)
+  ROLE_ORDER.forEach((role) => {
+    const roleEligible = eligible.filter(
+      (activity) => !selectedIds.has(activity.id) && getActivityRole(activity) === role,
+    )
+    const pick = pickBest(roleEligible) ?? pickBest(fallbackPool.filter(
+      (activity) => !selectedIds.has(activity.id) && getActivityRole(activity) === role,
+    ))
 
-    if (item) {
-      selected.push(item)
-      selectedIds.add(item.id)
-      selectedCategories.add(item.category)
-      if (!hasInteractiveSelection && isInteractiveType(item.activityType)) {
-        hasInteractiveSelection = true
-      }
-    } else {
-      const fallbackItems = fallbackPool.filter((activity) => activity.category === category && !selectedIds.has(activity.id))
-      const fallbackItem = pickBestActivity(fallbackItems, hasInteractiveSelection)
-      if (fallbackItem) {
-        selected.push(fallbackItem)
-        selectedIds.add(fallbackItem.id)
-        selectedCategories.add(fallbackItem.category)
-        if (!hasInteractiveSelection && isInteractiveType(fallbackItem.activityType)) {
-          hasInteractiveSelection = true
-        }
-      }
+    if (pick) {
+      selected.push(pick)
+      selectedIds.add(pick.id)
+      return
+    }
+
+    missingRoles.push(roleLabel(role))
+    const filler = pickBest(eligible.filter((activity) => !selectedIds.has(activity.id)))
+      ?? pickBest(fallbackPool.filter((activity) => !selectedIds.has(activity.id)))
+    if (filler) {
+      selected.push(filler)
+      selectedIds.add(filler.id)
     }
   })
 
-  const targetCount = 5
-  const remainingPool = eligible.filter((activity) => !selectedIds.has(activity.id))
-  const fallbackRemainingPool = fallbackPool.filter((activity) => !selectedIds.has(activity.id))
-
-  while (selected.length < targetCount) {
-    const pool = remainingPool.length > 0 ? remainingPool : fallbackRemainingPool
-    const nextActivity = pickBestActivity(pool, hasInteractiveSelection)
-    if (!nextActivity) break
-
-    selected.push(nextActivity)
-    selectedIds.add(nextActivity.id)
-    selectedCategories.add(nextActivity.category)
-    if (!hasInteractiveSelection && isInteractiveType(nextActivity.activityType)) {
-      hasInteractiveSelection = true
-    }
-
-    const nextIndex = pool.findIndex((activity) => activity.id === nextActivity.id)
-    if (nextIndex >= 0) pool.splice(nextIndex, 1)
-  }
-
-  let finalActivities = selected.slice(0, targetCount)
-
-  if (shouldPreferInteractive(ageInfo.totalMonths) && !finalActivities.some((item) => isInteractiveType(item.activityType))) {
-    const interactiveFallback = [...eligible, ...fallbackPool].find((item) => isInteractiveType(item.activityType) && !finalActivities.some((picked) => picked.id === item.id))
-    if (interactiveFallback) {
-      if (finalActivities.length >= targetCount) {
-        finalActivities = [...finalActivities.slice(0, targetCount - 1), interactiveFallback]
-      } else {
-        finalActivities = [...finalActivities, interactiveFallback].slice(0, targetCount)
-      }
-    }
-  }
-
-  if (finalActivities.length === 0) {
-    const fallbackActivity = fallbackPool[0]
-    if (fallbackActivity) {
-      return { ageGroup, activities: [fallbackActivity] }
-    }
-  }
-
   return {
     ageGroup,
-    activities: finalActivities,
+    activities: selected,
+    missingRoles,
   }
 }

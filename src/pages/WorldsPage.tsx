@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import './worlds-premium.css'
+import './worlds-refinement.css'
 
 type World = {
   id: string
@@ -126,9 +127,6 @@ export function WorldsPage() {
   return (
     <div className="page worlds-page">
       <section className="worlds-shell">
-        {/* =====================================================
-            PREMIUM SAYFA BAŞLIĞI
-           ===================================================== */}
         <header
           className="worlds-heading"
           style={{
@@ -206,9 +204,6 @@ export function WorldsPage() {
           </div>
         </header>
 
-        {/* =====================================================
-            ANA HARİTA
-           ===================================================== */}
         <section className="worlds-map">
           <img
             src="/keşif-haritası-arkaplan.png"
@@ -264,9 +259,6 @@ export function WorldsPage() {
           </aside>
         </section>
 
-        {/* =====================================================
-            KEŞİF YOLCULUĞU
-           ===================================================== */}
         <section className="journey-panel">
           <div className="journey-title">
             <Map size={19} />

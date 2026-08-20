@@ -4,6 +4,7 @@ import { useProgress } from '../hooks/useProgress'
 import { SectionCard } from '../components/SectionCard'
 import { ArrowLeft, Lock, Star } from 'lucide-react'
 import './world-detail.css'
+import './world-islands.css'
 
 const worldPresentation: Record<string, { title: string; description: string; islands: string[] }> = {
   forest: { title: 'Doğa Dünyası', description: 'Hayvanlar, doğa ve sesler', islands: ['Hayvanlar', 'Doğa', 'Sesler'] },
@@ -34,11 +35,7 @@ export function WorldDetailPage() {
     )
   }
 
-  const presentation = worldPresentation[worldId] ?? {
-    title: world.title,
-    description: world.description,
-    islands: [],
-  }
+  const presentation = worldPresentation[worldId] ?? { title: world.title, description: world.description, islands: [] }
   const unlocked = isWorldUnlocked(worldId)
   const sectionsList = getSections(worldId)
   const totalStars = getTotalStars()
@@ -68,7 +65,7 @@ export function WorldDetailPage() {
           <div><span className="kicker">KEŞFEDİLECEK ADACIKLAR</span><strong>Bu dünyada nereye gitmek istersin?</strong></div>
           <div className="world-islands-list">
             {presentation.islands.map((island, index) => (
-              <div className="world-island-chip" key={island}><span>{['🌿','🚀','📚','🎮','🧠'][index % 5]}</span>{island}</div>
+              <div className="world-island-chip" key={island}><span>{['🌿', '🚀', '📚', '🎮', '🧠'][index % 5]}</span>{island}</div>
             ))}
           </div>
         </section>

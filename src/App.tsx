@@ -8,6 +8,11 @@ import { EnglishPage } from './pages/EnglishPage'
 import { HomePage } from './pages/HomePage'
 import { ProfilePage } from './pages/ProfilePage'
 import { ProgressPage } from './pages/ProgressPage'
+import { WorldsPage } from './pages/WorldsPage'
+import { WorldDetailPage } from './pages/WorldDetailPage'
+import { SectionPage } from './pages/SectionPage'
+import { ContentPlayerPage } from './pages/ContentPlayerPage'
+import { ParentPage } from './pages/ParentPage'
 
 export default function App() {
   return (
@@ -16,11 +21,16 @@ export default function App() {
       <Route path="/child/new" element={<CreateChildPage />} />
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
+        <Route path="/worlds" element={<WorldsPage />} />
+        <Route path="/worlds/:worldId" element={<WorldDetailPage />} />
+        <Route path="/worlds/:worldId/section/:sectionId" element={<SectionPage />} />
+        <Route path="/worlds/content/:contentId" element={<ContentPlayerPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/activities/:id" element={<ActivityDetailPage />} />
         <Route path="/english" element={<EnglishPage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/parent" element={<ParentPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>

@@ -1,53 +1,60 @@
-import { Award, CalendarDays, CheckCircle2, Flame, Trophy } from 'lucide-react'
-import { activities, categoryMeta } from '../data/activities'
+import { CheckCircle2, Flame, Trophy, Award } from 'lucide-react'
 import { useApp } from '../hooks/useApp'
-import type { ActivityCategory, ActivityCompletion } from '../types/models'
+import { useProgress } from '../hooks/useProgress'
 import { formatChildName } from '../utils/childName'
-
-function dateKey(value: string | Date) {
-  return new Date(value).toISOString().split('T')[0]
-}
-
-function getStreak(completions: ActivityCompletion[]) {
-  const dates = new Set(completions.map((item) => dateKey(item.completedAt)))
-  const cursor = new Date()
-  if (!dates.has(dateKey(cursor))) cursor.setDate(cursor.getDate() - 1)
-  let streak = 0
-  while (dates.has(dateKey(cursor))) {
-    streak += 1
-    cursor.setDate(cursor.getDate() - 1)
-  }
-  return streak
-}
+import { Link } from 'react-router-dom'
 
 export function ProgressPage() {
-  const { activeChild, data } = useApp()
-  const completions = data.completions.filter((item) => item.childId === activeChild?.id)
-  const weekStart = new Date()
-  weekStart.setHours(0, 0, 0, 0)
-  weekStart.setDate(weekStart.getDate() - ((weekStart.getDay() + 6) % 7))
-  const weekly = completions.filter((item) => new Date(item.completedAt) >= weekStart)
-  const streak = getStreak(completions)
-  const counts = Object.keys(categoryMeta).reduce<Record<ActivityCategory, number>>((result, category) => {
-    result[category as ActivityCategory] = weekly.filter((completion) => activities.find((activity) => activity.id === completion.activityId)?.category === category).length
-    return result
-  }, { cognitive: 0, language: 0, motor: 0, social: 0, creativity: 0 })
-  const maxCount = Math.max(1, ...Object.values(counts))
+  const { activeChild } = useApp()
+  const { progressRecords, getTotalStars } = useProgress()
+  const totalStars = getTotalStars()
+  const completedCount = progressRecords.filter((r) => r.completed).length
+
+  const recentCompletions = progressRecords
+    .filter((r) => r.completed)
+    .sort((a, b) => new Date(b.completedAt ?? '').getTime() - new Date(a.completedAt ?? '').getTime())
+    .slice(0, 8)
 
   return (
     <div className="page">
-      <section className="page-title"><div><span className="kicker">KÜÇÜK ADIMLAR, GÜZEL ANILAR</span><h1>{formatChildName(activeChild?.name)}’in ilerlemesi</h1><p>Tamamladığınız her aktivite, birlikte geçirdiğiniz değerli bir an.</p></div></section>
+      <section className="page-title"><div><span className="kicker">KEŞİF YOLCULUĞU</span><h1>{formatChildName(activeChild?.name)}’in izleri</h1><p>Her tamamlanan içerik, küçük bir başarıdır.</p></div></section>
       <div className="stat-grid">
-        <div className="stat-card coral"><CheckCircle2 /><span><strong>{completions.length}</strong>Toplam aktivite</span></div>
-        <div className="stat-card sun"><CalendarDays /><span><strong>{weekly.length}</strong>Bu hafta</span></div>
-        <div className="stat-card mint"><Flame /><span><strong>{streak} gün</strong>Günlük seri</span></div>
-        <div className="stat-card sky"><Award /><span><strong>{new Set(completions.map((item) => dateKey(item.completedAt))).size}</strong>Aktif gün</span></div>
+        <div className="stat-card coral"><CheckCircle2 /><span><strong>{completedCount}</strong>Keşif</span></div>
+        <div className="stat-card sun"><Flame /><span><strong>{totalStars}</strong>Yıldız</span></div>
+        <div className="stat-card mint"><Trophy /><span><strong>{recentCompletions.length}</strong>Son keşif</span></div>
+        <div className="stat-card sky"><Award /><span><strong>5</strong>Sıradaki hedef</span></div>
       </div>
       <div className="progress-layout">
-        <section className="progress-card"><div className="section-heading"><div><span className="kicker">BU HAFTA</span><h2>Gelişim alanları</h2></div><span className="week-total">{weekly.length} aktivite</span></div><div className="bar-chart">{Object.entries(categoryMeta).map(([key, item]) => <div className="bar-row" key={key}><span className="bar-label"><i>{item.icon}</i>{item.label}</span><div className="bar-track"><span className={item.color} style={{ width: `${(counts[key as ActivityCategory] / maxCount) * 100}%` }} /></div><strong>{counts[key as ActivityCategory]}</strong></div>)}</div></section>
-        <section className="milestone-card"><div className="trophy-mark"><Trophy /></div><span className="kicker">SIRADAKİ MİNİ HEDEF</span><h2>5 aktiviteyi birlikte tamamlayın</h2><p>{Math.min(completions.length, 5)} / 5 aktivite</p><div className="goal-track"><span style={{ width: `${Math.min(100, completions.length * 20)}%` }} /></div></section>
+        <section className="progress-card">
+          <div className="section-heading">
+            <div>
+              <span className="kicker">SON İLERLEMELER</span>
+              <h2>Ne keşfetti?</h2>
+            </div>
+          </div>
+          <div className="recent-list">
+            {recentCompletions.length === 0 && (
+              <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>Henüz keşif yok. İlk içeriği tamamlamaya ne dersin?</p>
+            )}
+            {recentCompletions.map((record) => (
+              <div key={record.contentId} className="recent-item">
+                <span className="recent-icon">✅</span>
+                <span>{record.contentId.replace(/-/g, ' ')}</span>
+                <span className="recent-stars">{'⭐'.repeat(record.stars)}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="milestone-card">
+          <div className="trophy-mark"><Trophy /></div>
+          <span className="kicker">SIRADAKİ HEDEF</span>
+          <h2>5 keşifi tamamla</h2>
+          <p>{Math.min(completedCount, 5)} / 5 keşif</p>
+          <div className="goal-track"><span style={{ width: `${Math.min(100, completedCount * 20)}%` }} /></div>
+          <Link to="/worlds" className="primary-button" style={{ marginTop: 16 }}>Keşif Haritası'na Git</Link>
+        </section>
       </div>
-      <p className="medical-note">Bu ekran yalnızca birlikte yaptığınız aktiviteleri gösterir; tıbbi veya gelişimsel değerlendirme sunmaz.</p>
+      <p className="medical-note">Bu ekran yalnızca birlikte yaptığınız keşifleri gösterir; tıbbi veya gelişimsel değerlendirme sunmaz.</p>
     </div>
   )
 }

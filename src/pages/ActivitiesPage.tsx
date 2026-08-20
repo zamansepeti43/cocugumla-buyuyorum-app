@@ -8,6 +8,7 @@ import { useApp } from '../hooks/useApp'
 import type { Activity, ActivityCategory } from '../types/models'
 import { calculateAge, getAgeGroups } from '../utils/age'
 import { formatChildName } from '../utils/childName'
+import './activities.css'
 
 type FilterMode = 'all' | 'sound' | 'visual' | 'game' | 'home' | 'sensory'
 
@@ -51,7 +52,7 @@ function getActivityModes(activity: Activity): Set<FilterMode> {
   } else {
     modes.add('home')
     const sensoryText = `${activity.description} ${activity.benefits.join(' ')}`
-    if (sensoryText.includes('duyusal')) modes.add('sensory')
+    if (sensoryText.includes('duzusal')) modes.add('sensory')
   }
   return modes
 }
@@ -94,10 +95,10 @@ export function ActivitiesPage() {
   }, [filter, deferredSearch, activeAgeGroup])
 
   const isAgeSuitable = (activity: Activity): boolean =>
-    !age || (age.totalMonths >= activity.ageMin && age.totalMonths <= activity.ageMax)
+    !age || (age.totalMonths >= activity.ageMin && activity.ageMax <= age.totalMonths)
 
   return (
-    <div className="page">
+    <div className="activities-page">
       <section className="page-title">
         <div>
           <span className="kicker">BİRLİKTE KEŞFEDİN</span>

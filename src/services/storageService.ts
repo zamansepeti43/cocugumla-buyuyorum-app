@@ -9,12 +9,21 @@ const initialData: AppData = {
   completions: [],
   favorites: [],
   observations: [],
+  progressRecords: [],
+  childProgress: [],
 }
 
 function read(): AppData {
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
-    return saved ? { ...initialData, ...JSON.parse(saved) as AppData } : initialData
+    if (!saved) return initialData
+    const parsed = JSON.parse(saved) as Partial<AppData>
+    return {
+      ...initialData,
+      ...parsed,
+      progressRecords: Array.isArray(parsed.progressRecords) ? parsed.progressRecords : [],
+      childProgress: Array.isArray(parsed.childProgress) ? parsed.childProgress : [],
+    }
   } catch {
     return initialData
   }

@@ -1,0 +1,286 @@
+/* ============================================================
+   CONTENT PLAYER PAGE - PREMIUM STYLE
+   ============================================================ */
+
+.content-player-page {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   background: #080a13;
+   color: #fff;
+   padding: 24px;
+   box-sizing: border-box;
+}
+
+.content-player-header {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 16px;
+   margin-bottom: 24px;
+}
+
+.content-player-back-link {
+   align-self: flex-start;
+   font-size: 18px;
+   color: #fff;
+   opacity: 0.8;
+   transition: opacity .2s ease;
+}
+.content-player-back-link:hover {
+   opacity: 1;
+}
+.content-player-back-link .arrow-left {
+   margin-right: 8px;
+}
+
+.content-player-header-inner {
+   text-align: center;
+   max-width: 500px;
+}
+
+.content-player-title {
+   font-size: 28px;
+   font-weight: 800;
+   margin: 0 0 8px 0;
+}
+
+.content-player-description {
+   font-size: 18px;
+   line-height: 1.4;
+   opacity: 0.9;
+}
+
+.content-player-badge {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   margin-top: 16px;
+   font-size: 16px;
+}
+.content-player-badge .sparkles {
+   font-size: 20px;
+   color: #f1b400;
+}
+.content-player-badge .duration {
+   font-weight: 600;
+}
+
+.content-player-body {
+   flex-grow: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.content-player-game-wrapper {
+   width: 100%;
+   max-width: 600px;
+   height: 400px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: rgba(255,255,255,.05);
+   border-radius: 20px;
+   overflow: hidden;
+   margin: 0 auto;
+}
+
+.content-complete-bar {
+   margin-top: 24px;
+   text-align: center;
+}
+.primary-button {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   background: linear-gradient(135deg, #4caf50, #45a049);
+   color: #fff;
+   border: none;
+   border-radius: 12px;
+   padding: 12px 24px;
+   font-size: 16px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: transform .2s ease, background .2s ease;
+}
+.primary-button:hover {
+   transform: translateY(-2px);
+   background: linear-gradient(135deg, #43a047, #3e8e41);
+}
+.primary-button:active {
+   transform: translateY(0);
+}
+.primary-button .checkcircle2 {
+   font-size: 20px;
+}
+
+/* Reward Screen styling */
+.reward-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0,0,0,.7);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 1000;
+}
+.reward-card {
+   background: rgba(255,255,255,.95);
+   color: #080a13;
+   border-radius: 24px;
+   padding: 32px;
+   text-align: center;
+   max-width: 90%;
+   width: 400px;
+   position: relative;
+}
+.reward-close {
+   position: absolute;
+   top: 12px;
+   right: 12px;
+   background: transparent;
+   border: none;
+   font-size: 20px;
+   cursor: pointer;
+   padding: 4px;
+   border-radius: 50%;
+   transition: background .2s ease;
+}
+.reward-close:hover {
+   background: rgba(0,0,0,.05);
+}
+.reward-emoji {
+   font-size: 48px;
+   margin-bottom: 16px;
+}
+.reward-card h2 {
+   font-size: 24px;
+   font-weight: 800;
+   margin: 0 0 16px 0;
+}
+.reward-message {
+   font-size: 18px;
+   opacity: 0.9;
+   margin: 0 0 24px 0;
+   line-height: 1.4;
+}
+.reward-stars {
+   display: flex;
+   justify-content: center;
+   gap: 6px;
+   margin: 0 0 24px 0;
+}
+.reward-star {
+   font-size: 20px;
+   animation: rewardStarPulse 1.5s ease-in-out infinite;
+}
+.reward-star:nth-child(2) {
+   animation-delay: 200ms;
+}
+.reward-star:nth-child(3) {
+   animation-delay: 400ms;
+}
+@keyframes rewardStarPulse {
+   0%, 100% { opacity: 0.6; }
+   50% { opacity: 1; }
+}
+.reward-unlock {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   margin-top: 24px;
+   font-size: 16px;
+   opacity: 0.9;
+}
+.reward-unlock .trophy {
+   font-size: 20px;
+}
+.reward-continue {
+   background: linear-gradient(135deg, #1976d2, #1565c0);
+   color: #fff;
+   border: none;
+   border-radius: 12px;
+   padding: 12px 24px;
+   font-size: 16px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: transform .2s ease, background .2s ease;
+}
+.reward-continue:hover {
+   transform: translateY(-2px);
+   background: linear-gradient(135deg, #1565c0, #0d47a1);
+}
+.reward-continue:active {
+   transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+   .content-player-title {
+      font-size: 24px;
+   }
+   .content-player-description {
+      font-size: 16px;
+   }
+   .content-player-badge {
+      margin-top: 12px;
+      font-size: 14px;
+   }
+   .content-player-game-wrapper {
+      height: 300px;
+   }
+   .primary-button {
+      padding: 10px 20px;
+      font-size: 14px;
+   }
+   .reward-card {
+      width: 90%;
+      max-width: none;
+   }
+}
+
+@media (max-width: 600px) {
+   .content-player-page {
+      padding: 16px;
+   }
+   .content-player-header {
+      gap: 12px;
+   }
+   .content-player-title {
+      font-size: 20px;
+   }
+   .content-player-description {
+      font-size: 14px;
+   }
+   .content-player-badge {
+      margin-top: 12px;
+      font-size: 12px;
+   }
+   .content-player-game-wrapper {
+      height: 250px;
+   }
+   .content-complete-bar {
+      margin-top: 20px;
+   }
+   .primary-button {
+      padding: 8px 16px;
+      font-size: 12px;
+   }
+   .reward-card {
+      padding: 24px;
+   }
+   .reward-emoji {
+      font-size: 36px;
+   }
+   .reward-card h2 {
+      font-size: 20px;
+   }
+   .reward-message {
+      font-size: 16px;
+   }
+}

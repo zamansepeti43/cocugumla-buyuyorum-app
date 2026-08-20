@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react'
 import type { ActivityInteractionId } from '../../types/models'
 import { AdvancedMemoryGame } from './AdvancedMemoryGame'
 import { AnimalFinderGame } from './AnimalFinderGame'
@@ -97,7 +96,7 @@ export const gameTitles: Partial<Record<ActivityInteractionId, string>> = {
   'box-opening': 'Kapağı Aç',
 }
 
-export const gameRenderers: Partial<Record<ActivityInteractionId, () => ReactElement>> = {
+export const gameRenderers: Partial<Record<ActivityInteractionId, React.ComponentType<Record<string, unknown>>>> = {
   'contrast-track': ContrastTrack,
   'balloon-track': BalloonTrack,
   'touch-and-see': TouchAndSee,

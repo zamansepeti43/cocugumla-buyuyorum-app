@@ -4,15 +4,16 @@ export type ActivityCategory = (typeof activityCategories)[number]
 
 export type ActivityDifficulty = 'easy' | 'medium'
 
-export type ActivityType =
-  | 'guided'
-  | 'visual'
-  | 'game'
-  | 'quiz'
-  | 'matching'
-  | 'memory'
-  | 'sorting'
-  | 'creative'
+export type WorldId =
+  | 'forest'
+  | 'space'
+  | 'sea'
+  | 'english'
+  | 'math'
+  | 'speech'
+  | 'games'
+  | 'stories'
+  | 'fairy-tales'
 
 export type ActivityInteractionId =
   | 'contrast-track'
@@ -112,6 +113,8 @@ export interface AppData {
   completions: ActivityCompletion[]
   favorites: string[]
   observations: ActivityObservation[]
+  progressRecords: ProgressRecord[]
+  childProgress: ChildProgress[]
 }
 
 export interface EnglishWord {
@@ -139,4 +142,91 @@ export interface EnglishProgress {
   childId: string
   lessonId: string
   completedAt: string
+}
+
+export type WorldId =
+  | 'forest'
+  | 'space'
+  | 'english'
+  | 'math'
+  | 'speech'
+  | 'games'
+  | 'stories'
+  | 'fairy-tales'
+
+export interface World {
+  id: WorldId
+  title: string
+  description: string
+  icon: string
+  color: string
+  minAge: number
+  maxAge: number
+  order: number
+}
+
+export interface Section {
+  id: string
+  worldId: WorldId
+  title: string
+  description: string
+  order: number
+  minAge: number
+  maxAge: number
+  requiredStars?: number
+}
+
+export type ContentType = 'lesson' | 'game' | 'story' | 'interactive'
+
+export interface ContentItem {
+  id: string
+  sectionId: string
+  type: ContentType
+  title: string
+  description: string
+  order: number
+  interactionId?: ActivityInteractionId
+  isLocked: boolean
+  minAge: number
+  maxAge: number
+  duration: number
+  parentTip?: string
+  benefits?: string[]
+  materials?: string[]
+  instructions?: string[]
+}
+
+export interface ProgressRecord {
+  childId: string
+  worldId: WorldId
+  sectionId: string
+  contentId: string
+  completed: boolean
+  completedAt?: string
+  stars: number
+  attempts: number
+}
+
+export interface ChildProgress {
+  childId: string
+  currentWorld: WorldId
+  unlockedSections: string[]
+  completedContent: string[]
+  totalStars: number
+  lastPlayedAt: string
+}
+
+export interface Story {
+  id: string
+  title: string
+  description: string
+  ageMin: number
+  ageMax: number
+  duration: number
+  pages: Array<{
+    text: string
+    image?: string
+    sound?: string
+  }>
+  moral?: string
 }

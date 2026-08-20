@@ -1,0 +1,186 @@
+/* ============================================================
+   ACTIVITY CARD - PREMIUM STYLE
+   ============================================================ */
+
+.activity-card {
+   display: flex;
+   flex-direction: column;
+   height: 220px;
+   width: 180px;
+   border-radius: 20px;
+   overflow: hidden;
+   background: #fff;
+   color: #080a13;
+   text-decoration: none;
+   transition: transform .2s ease, box-shadow .2s ease;
+   position: relative;
+   border: 2px solid transparent;
+   /* The color from category will be used as a border or accent */
+}
+.activity-card:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 12px 24px rgba(0,0,0,.15);
+}
+.activity-card:active {
+   transform: translateY(0);
+}
+
+/* We'll use the category color as a left border or as a background for the topline */
+.activity-card-body {
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   padding: 16px;
+   box-sizing: border-box;
+}
+.activity-card-topline {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   margin-bottom: 12px;
+   font-size: 14px;
+   font-weight: 600;
+}
+.activity-card-topline .category-label {
+   /* We'll set the color from the category via the parent's class? 
+      We can't directly use the category color in CSS because it's a class like "red", "blue", etc.
+      We can predefine colors for each category in the CSS, but that would be repetitive.
+      Alternatively, we can leave the text color as is and use the category color as a background for the label or as a border.
+      Let's do: we'll add a left border to the activity-card with the category color, and then set the text color to white or dark based on the color.
+      But we don't know the color at CSS time.
+      We can use the class that is passed (e.g., "red", "blue") to set the color of the border and the text of the category label.
+      We'll define CSS variables for each category color in the component? That would be too much.
+      Alternatively, we can keep the category label as is and let the background of the card be white, and the category label text be the category color? 
+      We can do: in the component, we can set the style of the category label to have the color from the category.
+      But we are not to change the component's behavior? We are allowed to change the styling, and we can change the component if it's only for styling and doesn't break functionality.
+      We are already changing the component for SectionCard and we are allowed to do so.
+      We can change ActivityCard.tsx to set the style of the category label to have the color from the category.
+      However, we are trying to minimize changes to the component's logic.
+      Alternatively, we can use the existing class (e.g., "red", "blue") to set the color of the category label via CSS.
+      We can define a set of colors in the CSS for each possible category class.
+      We don't know all the possible category colors, but we can look at categoryMeta in ../data/activities.
+      Let's do that: we'll create a set of CSS rules for each category color that we know of.
+      We'll update this CSS if new categories are added, but for now we can cover the existing ones.
+      We'll look at the data later if needed.
+      For now, we'll assume the category color is a string that matches a CSS variable or a class we can target.
+      We'll change the approach: we'll keep the activity-card's background white, and we'll add a left border of 4px with the category color.
+      We can do this by setting a style on the activity-card for the border-left color.
+      We'll change the ActivityCard.tsx to add a style for border-left color.
+      We'll do that in the component update.
+      */
+}
+.activity-card-topline .age-suitable-label {
+   background: rgba(76, 175, 80, .2);
+   color: #2e7d32;
+   padding: 2px 8px;
+   border-radius: 10px;
+   font-size: 12px;
+}
+.activity-card-topline .completed-label {
+   display: flex;
+   align-items: center;
+   gap: 4px;
+   background: rgba(33, 150, 243, .2);
+   color: #1565c0;
+   padding: 2px 8px;
+   border-radius: 10px;
+   font-size: 12px;
+}
+.activity-card-topline .completed-label .check {
+   font-size: 14px;
+}
+.activity-card-body h3 {
+   margin: 0 0 8px 0;
+   font-size: 20px;
+   font-weight: 600;
+   line-height: 1.2;
+}
+.activity-card-body p {
+   margin: 0;
+   font-size: 14px;
+   line-height: 1.4;
+   color: #555;
+   flex-grow: 1;
+}
+.activity-meta {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 12px;
+   margin-top: 16px;
+   font-size: 14px;
+   color: #666;
+}
+.activity-meta span {
+   display: flex;
+   align-items: center;
+   gap: 4px;
+}
+.activity-meta .clock3,
+.activity-meta .baby,
+.activity-meta .target {
+   font-size: 16px;
+}
+
+/* We'll also style the activity-thumb to have a fixed height and show the ActivityVisual */
+.activity-thumb {
+   height: 80px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: rgba(0,0,0,.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+   .activity-card {
+      height: 200px;
+      width: 160px;
+   }
+   .activity-card-body {
+      padding: 12px;
+   }
+   .activity-card-topline {
+      gap: 6px;
+      margin-bottom: 8px;
+   }
+   .activity-card-body h3 {
+      font-size: 18px;
+   }
+   .activity-card-body p {
+      font-size: 13px;
+   }
+   .activity-meta {
+      gap: 8px;
+      font-size: 13px;
+   }
+   .activity-thumb {
+      height: 60px;
+   }
+}
+
+@media (max-width: 600px) {
+   .activity-card {
+      height: 180px;
+      width: 140px;
+   }
+   .activity-card-body {
+      padding: 10px;
+   }
+   .activity-card-topline {
+      gap: 4px;
+      margin-bottom: 6px;
+   }
+   .activity-card-body h3 {
+      font-size: 16px;
+   }
+   .activity-card-body p {
+      font-size: 12px;
+   }
+   .activity-meta {
+      gap: 6px;
+      font-size: 12px;
+   }
+   .activity-thumb {
+      height: 50px;
+   }
+}

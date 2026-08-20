@@ -1,1356 +1,288 @@
-/* ============================================================
-   ÇOCUĞUMLA BÜYÜYORUM
-   KEŞİF HARİTASI — PREMIUM FINAL
-   ============================================================ */
-
-
-/* ============================================================
-   SAYFA RESET
-   ============================================================ */
+/* ÇOCUĞUMLA BÜYÜYORUM — KEŞİF HARİTASI */
 
 .worlds-page {
-  width: 100% !important;
-  max-width: none !important;
-  min-width: 0 !important;
-
-  margin: 0 !important;
-  padding: 20px 24px 40px !important;
-
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 18px 22px 42px;
   box-sizing: border-box;
-
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(48, 78, 165, 0.16),
-      transparent 55%
-    ),
-    #080a13;
-
-  color: #ffffff;
+  background: radial-gradient(circle at 50% 0%, rgba(83,76,190,.14), transparent 48%), #080a13;
+  color: #fff;
 }
 
 .worlds-shell {
-  width: min(1500px, 100%) !important;
-  max-width: 1500px !important;
-
-  margin: 0 auto !important;
+  width: min(1420px, 100%);
+  margin: 0 auto;
 }
-
-
-/* ============================================================
-   ÜST BAŞLIK
-   ============================================================ */
 
 .worlds-heading {
-  width: 100%;
-
+  min-height: 108px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-
-  gap: 25px;
-
-  margin-bottom: 16px;
-}
-
-.worlds-heading > div:first-child {
-  min-width: 0;
+  gap: 24px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(139,137,255,.24);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(27,35,77,.98), rgba(17,22,49,.98) 58%, rgba(42,29,72,.98));
+  box-shadow: 0 18px 38px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 .worlds-eyebrow {
   display: flex;
   align-items: center;
   gap: 7px;
-
-  margin-bottom: 4px;
-
-  color: #7560ff;
-
-  font-size: 12px;
+  margin-bottom: 5px;
+  color: #8d7cff;
+  font-size: 10px;
   font-weight: 900;
-
-  letter-spacing: 0.08em;
-}
-
-.worlds-eyebrow svg {
-  width: 17px;
-  height: 17px;
+  letter-spacing: .1em;
 }
 
 .worlds-heading h1 {
   margin: 0;
-
-  color: #ffffff;
-
-  font-size: clamp(28px, 3vw, 43px);
+  color: #fff;
+  font-size: clamp(25px, 2.7vw, 36px);
   line-height: 1.05;
-
-  font-weight: 900;
-
-  letter-spacing: -0.035em;
+  letter-spacing: -.035em;
 }
 
 .worlds-heading p {
+  max-width: 650px;
   margin: 7px 0 0;
-
-  color: rgba(235, 241, 255, 0.72);
-
-  font-size: 13px;
+  color: rgba(235,241,255,.68);
+  font-size: 11px;
+  line-height: 1.45;
 }
-
-
-/* ============================================================
-   ÜST İSTATİSTİKLER
-   ============================================================ */
 
 .worlds-heading-stats {
   display: flex;
-  gap: 9px;
-
-  flex-shrink: 0;
+  gap: 8px;
+  flex: 0 0 auto;
 }
 
-.worlds-heading-stats > div {
-  min-width: 105px;
-
-  padding: 10px 13px;
-
-  box-sizing: border-box;
-
+.heading-stat {
+  min-width: 108px;
+  padding: 10px 12px;
   display: grid;
-
-  grid-template-columns: 22px 1fr;
+  grid-template-columns: 21px 1fr;
   grid-template-rows: auto auto;
-
-  column-gap: 6px;
-
+  column-gap: 7px;
   border-radius: 13px;
-
-  background: rgba(255, 255, 255, 0.97);
-
-  color: #1a2750;
-
-  border: 1px solid rgba(255,255,255,.5);
-
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.18);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
 }
 
-.worlds-heading-stats svg {
-  grid-row: 1 / span 2;
-
-  align-self: center;
-
-  color: #f5b800;
-}
-
-.worlds-heading-stats > div:nth-child(2) svg {
-  color: #7254dc;
-}
-
-.worlds-heading-stats strong {
-  font-size: 15px;
-  line-height: 1;
-}
-
-.worlds-heading-stats span {
-  margin-top: 3px;
-
-  color: #6a7288;
-
-  font-size: 8px;
-}
-
-
-/* ============================================================
-   ANA HARİTA
-   ============================================================ */
+.heading-stat svg { grid-row: 1 / span 2; align-self: center; color: #f5c43b; }
+.heading-stat:nth-child(2) svg { color: #a88cff; }
+.heading-stat strong { font-size: 15px; line-height: 1; }
+.heading-stat span { margin-top: 3px; color: rgba(235,241,255,.54); font-size: 8px; }
 
 .worlds-map {
   position: relative;
-
-  width: 100% !important;
-  height: 720px !important;
-
-  min-height: 720px !important;
-
-  margin: 0 !important;
-
-  box-sizing: border-box;
-
+  width: 100%;
+  height: clamp(520px, 57vw, 700px);
+  min-height: 520px;
   overflow: hidden;
-
-  border-radius: 22px 22px 0 0;
-
-  border: 1px solid rgba(255,255,255,.22);
-
-  /*
-   * TEMİZ HARİTA GÖRSELİ
-   *
-   * İki isim destekleniyor:
-   * kesif-haritasi-arkaplan.png
-   * keşif-haritası-arkaplan.png
-   */
-
-  background-color: #67cee4;
-
-  background-image:
-    url("/kesif-haritasi-arkaplan.png"),
-    url("/keşif-haritası-arkaplan.png");
-
-  background-repeat: no-repeat;
-
-  background-position: center center;
-
-  background-size: cover;
-
-  box-shadow:
-    0 22px 55px rgba(0,0,0,.32),
-    inset 0 1px 0 rgba(255,255,255,.2);
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  background: #5ec9df url('/keşif-haritası-arkaplan.png') center / cover no-repeat;
+  box-shadow: 0 24px 55px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.18);
 }
 
-
-/*
- * ÖNCEKİ CSS'TEKİ SAĞ BEYAZ BLOĞU TAMAMEN KAPAT.
- */
-
-.worlds-map::before,
-.worlds-map::after {
-  display: none !important;
-
-  content: none !important;
-}
-
-
-/* ============================================================
-   HARİTA DEKORASYONLARI
-   ============================================================ */
-
-.map-cloud,
-.map-sun,
-.map-water-detail {
+.worlds-map-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   pointer-events: none;
-
-  z-index: 2;
+  user-select: none;
 }
 
-
-/*
- * Eski route çizgilerini de kapatıyoruz.
- * Çünkü temiz harita görselinde yollar zaten var.
- */
-
-.map-route {
-  display: none !important;
-}
-
-
-/* ============================================================
-   HARİTA DÜNYA BUTONLARI
-   ============================================================ */
-
-/*
- * ÇOK ÖNEMLİ:
- *
- * Temiz arka planın içinde adalar zaten var.
- * Bu nedenle world-island-art görünmez.
- *
- * Sadece dünya etiketi kalır.
- */
+.worlds-map-buttons { position: absolute; inset: 0; z-index: 10; }
 
 .world-button {
-   position: absolute !important;
-
-  width: 190px !important;
-  min-width: 190px !important;
-  max-width: 190px !important;
-
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-
-  padding: 0 !important;
-  margin: 0 !important;
-
-  display: block !important;
-
-  background: transparent !important;
-
-  border: 0 !important;
-
-  color: #ffffff;
-
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  color: #fff;
   text-decoration: none;
-
   cursor: pointer;
-
+  transform: translate(-50%, -50%);
+  transition: transform .18s ease, filter .18s ease;
   z-index: 20;
-
-  transform-origin: center center;
-
-  transition:
-    transform .18s ease,
-    filter .18s ease;
 }
 
-.world-button:hover {
-   transform: scale(1.07) !important;
+.world-button:hover { transform: translate(-50%, -50%) scale(1.055); filter: brightness(1.08) drop-shadow(0 8px 15px rgba(0,0,0,.28)); }
+.world-button:active { transform: translate(-50%, -50%) scale(.97); }
 
-  filter: brightness(1.08) drop-shadow(
-    0 8px 12px rgba(0,0,0,.2)
-  );
-}
-
-.world-button:active {
-   transform: scale(.94) !important;
-}
-
-
-/* ============================================================
-   DÜNYA GÖRSELİNİ KAPAT
-   ============================================================ */
-
-.world-island-art {
-  display: none !important;
-}
-
-
-/* ============================================================
-   DÜNYA ETİKETLERİ
-   ============================================================ */
+.world-button-forest { left: 23%; top: 36%; }
+.world-button-space { left: 49%; top: 30%; }
+.world-button-english { left: 78%; top: 40%; }
+.world-button-games { left: 49%; top: 72%; }
+.world-button-math { left: 72%; top: 73%; }
 
 .world-label {
-  position: relative !important;
-
-  width: max-content !important;
-
-  min-width: 145px !important;
-  max-width: 190px !important;
-
-  height: auto !important;
-
-  margin: 0 !important;
-
-  padding: 9px 14px !important;
-
+  width: max-content;
+  min-width: 150px;
+  max-width: 210px;
+  padding: 8px 12px 9px;
   box-sizing: border-box;
-
-  display: flex !important;
-
+  border-radius: 14px;
+  display: flex;
   flex-direction: column;
-
   align-items: center;
-  justify-content: center;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.28);
+  transform: translate(-50%, -50%);
+}
 
+.world-label-top { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.world-emoji { font-size: 17px; line-height: 1; }
+.world-label strong { font-size: 12px; line-height: 1.1; font-weight: 900; white-space: nowrap; }
+.world-stars { display: flex; align-items: center; gap: 3px; margin-top: 4px; font-size: 9px; font-weight: 800; }
+.world-subislands { display: flex; gap: 4px; margin-top: 6px; }
+.world-subislands span { padding: 3px 5px; border-radius: 7px; background: rgba(0,0,0,.18); font-size: 7px; line-height: 1; white-space: nowrap; }
+
+.world-label-green { background: linear-gradient(180deg,#54ca35,#27942b); }
+.world-label-purple { background: linear-gradient(180deg,#8b50f0,#5720b6); }
+.world-label-blue { background: linear-gradient(180deg,#269fe4,#1768b4); }
+.world-label-orange { background: linear-gradient(180deg,#ff9d29,#e96700); }
+.world-label-lime { background: linear-gradient(180deg,#7bce38,#4a9f1f); }
+
+/* The background artwork contains decorative islands. The five clickable labels above are the main worlds. */
+.world-island-art { display: none !important; }
+
+.map-progress-card {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 158px;
+  padding: 10px 11px;
+  box-sizing: border-box;
   border-radius: 15px;
-
-  color: #ffffff;
-
-  text-align: center;
-
-  box-shadow:
-    0 8px 18px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.28);
-
-  z-index: 30;
+  background: rgba(255,255,255,.95);
+  border: 1px solid rgba(255,255,255,.8);
+  color: #253158;
+  box-shadow: 0 12px 24px rgba(0,0,0,.22);
+  z-index: 40;
 }
 
-.world-label strong {
-  display: block;
+.map-progress-title { display: flex; align-items: center; justify-content: space-between; color: #5b6480; font-size: 9px; font-weight: 800; }
+.map-progress-body { display: flex; align-items: center; gap: 9px; margin-top: 8px; }
+.map-progress-body > div:last-child { display: flex; flex-direction: column; min-width: 0; }
+.map-progress-body strong { font-size: 13px; }
+.map-progress-body span { margin-top: 2px; color: #707992; font-size: 8px; }
+.map-progress-body small { margin-top: 5px; color: #e2a900; font-size: 8px; font-weight: 800; }
+.map-progress-ring { position: relative; width: 48px; height: 48px; flex: 0 0 48px; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(#48b42f 0 66%, #dce4e7 66% 100%); }
+.map-progress-ring::before { content: ''; position: absolute; width: 35px; height: 35px; border-radius: 50%; background: #fff; }
+.map-progress-ring strong { position: relative; z-index: 1; color: #21345a; font-size: 12px; }
 
-  margin: 0;
-
-  color: #ffffff;
-
-  font-size: 13px;
-
-  line-height: 1.15;
-
-  font-weight: 900;
-
-  white-space: nowrap;
-}
-
-.world-label span {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 4px;
-
-  margin-top: 4px;
-
-  color: #ffffff;
-
-  font-size: 11px;
-
-  line-height: 1;
-
-  font-weight: 800;
-
-  white-space: nowrap;
-}
-
-.world-label span svg {
-  width: 14px;
-  height: 14px;
-}
-
-
-/* ============================================================
-   ETİKET RENKLERİ
-   ============================================================ */
-
-.world-label-green {
-  background:
-    linear-gradient(
-      180deg,
-      #58cb35,
-      #299b29
-    );
-}
-
-.world-label-purple {
-  background:
-    linear-gradient(
-      180deg,
-      #8b4df0,
-      #5b20bd
-    );
-}
-
-.world-label-blue {
-  background:
-    linear-gradient(
-      180deg,
-      #269fe4,
-      #176ab5
-    );
-}
-
-.world-label-navy {
-  background:
-    linear-gradient(
-      180deg,
-      #2871c5,
-      #17498d
-    );
-}
-
-.world-label-pink {
-  background:
-    linear-gradient(
-      180deg,
-      #ed519b,
-      #c62975
-    );
-}
-
-.world-label-orange {
-  background:
-    linear-gradient(
-      180deg,
-      #ff9e26,
-      #ed6d00
-    );
-}
-
-.world-label-lime {
-  background:
-    linear-gradient(
-      180deg,
-      #75ca35,
-      #4aa520
-    );
-}
-
-
-/* ============================================================
-   DÜNYA POZİSYONLARI
-   ============================================================ */
-
-/*
- * Haritadaki adaların üzerine oturacaklar.
- *
- * Sağ panel olmadığı için artık bütün harita kullanılabilir.
- */
-
-.world-button-forest {
-   left: 20% !important;
-  top: 27% !important;
-}
-
-.world-button-space {
-   left: 44% !important;
-  top: 22% !important;
-}
-
-.world-button-sea {
-   left: 67% !important;
-  top: 29% !important;
-}
-
-.world-button-english {
-   left: 78% !important;
-  top: 35% !important;
-}
-
-.world-button-stories {
-   left: 23% !important;
-  top: 62% !important;
-}
-
-.world-button-games {
-   left: 45% !important;
-  top: 62% !important;
-}
-
-.world-button-math {
-   left: 67% !important;
-  top: 64% !important;
-}
-
-
-/* ============================================================
-   SAĞ PANEL
-   ============================================================ */
-
-/*
- * Artık sağ tarafta beyaz kolon yok.
- *
- * Kartlar doğrudan haritanın üzerinde duruyor.
- */
-
-.worlds-side-panel {
-  position: absolute !important;
-
-  top: 28px !important;
-  right: 22px !important;
-
-  width: 245px !important;
-  height: auto !important;
-
-  box-sizing: border-box;
-
-  padding: 0 !important;
-
-  display: flex !important;
-
-  flex-direction: column;
-
-  gap: 12px;
-
-  z-index: 50;
-}
-
-
-/* ============================================================
-   İLERLEME KARTI
-   ============================================================ */
-
-.progress-panel {
-   position: fixed !important;
-   top: 120px !important;
-   left: 120px !important;
-   width: 160px !important;
-   min-width: 0 !important;
-   padding: 8px !important;
-   box-sizing: border-box;
-   border-radius: 17px;
-   background:
-     rgba(255,255,255,.96);
-   border: 1px solid rgba(255,255,255,.7);
-   color: #18244a;
-   box-shadow:
-     0 10px 25px rgba(0,0,0,.20);
-   z-index: 40 !important;
-   transform: none !important;
-   display: block !important;
-   margin: 0 !important;
-}
- 
-.progress-panel .progress-ring {
-   width: 60px !important;
-   height: 60px !important;
-   margin: 8px auto 4px !important;
-}
-.progress-panel .progress-ring > div {
-   font-size: 18px !important;
-}
-.progress-panel .progress-text {
-   font-size: 12px !important;
-   display: block !important;
-   text-align: center !important;
-   margin-bottom: 6px !important;
-}
-.progress-panel .progress-stars {
-   font-size: 12px !important;
-   text-align: center !important;
-}
-.progress-panel .progress-stars .Star {
-   width: 12px !important;
-   height: 12px !important;
-   font-size: 12px !important;
-}
-
-
-.progress-ring {
-  position: relative;
-
-  width: 96px;
-  height: 96px;
-
-  margin: 13px auto 9px;
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 50%;
-
-  background:
-    conic-gradient(
-      #49b52f 0 66%,
-      #dce5ea 66% 100%
-    );
-}
-
-.progress-ring::before {
-  content: "";
-
+.random-world-button {
   position: absolute;
-
-  width: 70px;
-  height: 70px;
-
-  border-radius: 50%;
-
-  background: #ffffff;
-}
-
-.progress-ring > div {
-  position: relative;
-
-  z-index: 2;
-
-  color: #17284f;
-
-  font-size: 21px;
-
-  font-weight: 900;
-}
-
-.progress-text {
-  display: block;
-
-  text-align: center;
-
-  color: #59647d;
-
-  font-size: 10px;
-}
-
-.progress-stars {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 5px;
-
-  margin-top: 8px;
-
-  color: #f1b400;
-
-  font-size: 13px;
-}
-
-
-/* ============================================================
-   İPUÇLARI
-   ============================================================ */
-
-.tips-panel {
-  position: relative;
-
-  width: 100% !important;
-
-  min-height: 160px;
-
-  padding: 15px !important;
-
+  right: 18px;
+  bottom: 20px;
+  width: 158px;
+  min-height: 53px;
+  padding: 8px 10px;
   box-sizing: border-box;
-
-  overflow: hidden;
-
-  border-radius: 17px;
-
-  background:
-    rgba(255,255,255,.96);
-
-  border: 1px solid rgba(255,255,255,.7);
-
-  color: #1c294d;
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,.20);
-}
-
-.tips-panel ul {
-  margin: 10px 0 0;
-
-  padding-left: 17px;
-
-  display: grid;
-
-  gap: 6px;
-
-  color: #59647d;
-
-  font-size: 10px;
-
-  line-height: 1.25;
-}
-
-.tips-panel li::marker {
-  color: #f0b400;
-}
-
-.tips-character {
-  position: absolute;
-
-  right: 7px;
-  bottom: 4px;
-
-  font-size: 43px;
-
-  pointer-events: none;
-}
-
-
-/* ============================================================
-   RASTGELE KEŞFET
-   ============================================================ */
-
-.random-world {
-  width: 100% !important;
-
-  min-height: 70px;
-
-  padding: 12px 13px;
-
-  box-sizing: border-box;
-
   display: flex;
-
   align-items: center;
-
-  gap: 9px;
-
-  border-radius: 17px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffd83e,
-      #ffb91c
-    );
-
-  border: 1px solid rgba(255,255,255,.35);
-
-  color: #17234b;
-
+  gap: 8px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(255,255,255,.85);
+  color: #273052;
   text-decoration: none;
-
-  box-shadow:
-    0 10px 22px rgba(0,0,0,.18);
-
-  transition:
-    transform .18s ease,
-    filter .18s ease;
+  box-shadow: 0 12px 25px rgba(0,0,0,.22);
+  z-index: 45;
+  transition: transform .18s ease, filter .18s ease;
 }
-
-.random-world:hover {
-  transform: translateY(-2px) scale(1.02);
-
-  filter: brightness(1.04);
-}
-
-.random-world:active {
-  transform: scale(.96);
-}
-
-.random-icon {
-  width: 40px;
-  height: 40px;
-
-  flex: 0 0 40px;
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 11px;
-
-  background: rgba(255,255,255,.55);
-
-  font-size: 23px;
-}
-
-.random-world > div:nth-child(2) {
-  flex: 1;
-}
-
-.random-world strong {
-  display: block;
-
-  font-size: 12px;
-}
-
-.random-world span {
-  display: block;
-
-  margin-top: 2px;
-
-  font-size: 9px;
-
-  opacity: .75;
-}
-
-.random-arrow {
-  font-size: 25px !important;
-
-  font-weight: 900;
-}
-
-
-/* ============================================================
-   KEŞİF YOLCULUĞU
-   ============================================================ */
+.random-world-button:hover { transform: translateY(-3px); filter: brightness(1.03); }
+.random-icon { width: 31px; height: 31px; flex: 0 0 31px; display: grid; place-items: center; border-radius: 9px; background: linear-gradient(135deg,#7254dc,#9a7cf4); font-size: 16px; }
+.random-copy { display: flex; flex-direction: column; min-width: 0; }
+.random-copy strong { font-size: 10px; }
+.random-copy small { margin-top: 2px; color: #777f97; font-size: 8px; }
+.random-arrow { margin-left: auto; color: #7254dc; font-size: 21px; font-weight: 900; }
 
 .journey-panel {
-  position: relative;
-
-  width: 100% !important;
-
-  min-height: 110px;
-
-  margin: 0 !important;
-
-  padding: 15px 20px !important;
-
+  margin-top: 14px;
+  padding: 16px 18px;
   box-sizing: border-box;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 20px;
-
-  border-radius: 0 0 20px 20px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.98),
-      rgba(244,247,255,.98)
-    );
-
-  color: #1c2850;
-
-  box-shadow:
-    0 12px 28px rgba(0,0,0,.18);
-
-  z-index: 60;
+  border-radius: 18px;
+  background: radial-gradient(circle at 0 0, rgba(112,83,220,.15), transparent 34%), linear-gradient(135deg,#171b38,#0d1022);
+  border: 1px solid rgba(137,145,219,.23);
+  box-shadow: 0 18px 38px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
 }
 
-.journey-title {
-  display: flex;
+.journey-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 13px; }
+.journey-title { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 12px; }
+.journey-title svg { color: #9d88ff; }
+.journey-heading > span { color: rgba(235,241,255,.5); font-size: 8px; }
+.journey-track { display: flex; align-items: center; gap: 5px; }
+.journey-step-wrapper { display: flex; align-items: center; min-width: 0; flex: 1 1 0; }
+.journey-step { min-width: 58px; display: flex; flex-direction: column; align-items: center; gap: 5px; color: rgba(235,241,255,.75); text-decoration: none; font-size: 8px; font-weight: 800; transition: transform .16s ease, color .16s ease; }
+.journey-step:hover { transform: translateY(-2px); color: #fff; }
+.journey-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; color: #aa95ff; background: rgba(114,84,220,.14); border: 1px solid rgba(142,126,245,.3); }
+.journey-arrow { color: rgba(166,151,240,.45); font-size: 14px; }
+.journey-message { flex: 0 0 250px; min-height: 54px; padding: 8px 11px; display: flex; align-items: center; gap: 8px; box-sizing: border-box; border-radius: 12px; background: rgba(115,88,224,.12); border: 1px solid rgba(140,120,240,.16); color: #b9aaff; }
+.journey-message strong { display: block; color: #fff; font-size: 9px; }
+.journey-message span { display: block; margin-top: 3px; color: rgba(235,241,255,.55); font-size: 7px; line-height: 1.25; }
+.worlds-bottom-hint { padding: 9px 0 0; text-align: center; color: rgba(235,241,255,.42); font-size: 8px; }
 
-  align-items: center;
+/* The old duplicate footer navigation is intentionally not used. */
+.worlds-footer-actions { display: none !important; }
 
-  gap: 7px;
-
-  flex: 0 0 auto;
-
-  color: #2b365d;
-
-  font-size: 11px;
-
-  font-weight: 800;
+@media (max-width: 1050px) {
+  .worlds-page { padding: 14px 14px 30px; }
+  .worlds-heading { padding: 17px 18px; }
+  .worlds-map { height: 570px; min-height: 570px; }
+  .world-label { min-width: 132px; padding: 7px 9px; }
+  .world-label strong { font-size: 10px; }
+  .world-subislands span { font-size: 6px; }
+  .journey-message { flex-basis: 190px; }
 }
 
-.journey-track {
-  flex: 1;
-
-  min-width: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 5px;
+@media (max-width: 760px) {
+  .worlds-heading { flex-direction: column; align-items: flex-start; }
+  .worlds-heading-stats { width: 100%; }
+  .heading-stat { flex: 1; }
+  .worlds-map { height: 500px; min-height: 500px; }
+  .map-progress-card { top: 12px; left: 12px; width: 142px; }
+  .random-world-button { right: 12px; bottom: 12px; width: 142px; }
+  .world-label { min-width: 112px; }
+  .world-label-top { gap: 4px; }
+  .world-emoji { font-size: 14px; }
+  .world-label strong { font-size: 9px; }
+  .world-stars { font-size: 7px; }
+  .world-subislands { display: none; }
+  .journey-heading > span { display: none; }
+  .journey-track { overflow-x: auto; padding-bottom: 3px; }
+  .journey-step-wrapper { flex: 0 0 auto; }
+  .journey-message { display: none; }
 }
 
-.journey-step-wrapper {
-  display: flex;
-
-  align-items: center;
-
-  min-width: 0;
-}
-
-.journey-step {
-  position: relative;
-
-  min-width: 67px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  gap: 4px;
-
-  color: #465171;
-
-  text-decoration: none;
-
-  font-size: 8px;
-
-  font-weight: 800;
-
-  transition:
-    transform .16s ease,
-    color .16s ease;
-}
-
-.journey-step:hover {
-  transform: translateY(-3px);
-
-  color: #5d47d7;
-}
-
-.journey-step:active {
-  transform: scale(.92);
-}
-
-.journey-icon {
-  position: relative;
-
-  width: 40px;
-  height: 40px;
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 11px;
-
-  background: #f2f5ff;
-
-  border: 1px solid #d8e0f4;
-
-  color: #5868a5;
-}
-
-.journey-lock {
-  position: absolute;
-
-  right: -4px;
-  bottom: -4px;
-
-  width: 15px;
-  height: 15px;
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 50%;
-
-  background: #dce3ef;
-
-  color: #75809b;
-}
-
-.journey-arrow {
-  padding: 0 2px;
-
-  color: #a2acc3;
-
-  font-size: 16px;
-
-  font-weight: 800;
-}
-
-.journey-message {
-  flex: 0 0 275px;
-
-  min-height: 65px;
-
-  padding: 9px 13px;
-
-  box-sizing: border-box;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  border-radius: 13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f2eeff,
-      #e9e4ff
-    );
-
-  color: #5742c6;
-}
-
-.journey-message strong {
-  display: block;
-
-  font-size: 11px;
-}
-
-.journey-message span {
-  display: block;
-
-  margin-top: 3px;
-
-  color: #77729b;
-
-  font-size: 8px;
-}
-
-
-/* ============================================================
-   ALT BUTONLAR
-   ============================================================ */
-
-.worlds-footer-actions {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 7px;
-
-  margin-top: 10px;
-}
-
-.worlds-footer-actions a {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 4px;
-
-  padding: 6px 10px;
-
-  border-radius: 8px;
-
-  background: rgba(255,255,255,.92);
-
-  color: #303b5e;
-
-  text-decoration: none;
-
-  font-size: 9px;
-
-  font-weight: 800;
-
-  transition:
-    transform .16s ease,
-    background .16s ease;
-}
-
-.worlds-footer-actions a:hover {
-  transform: translateY(-2px);
-
-  background: #ffffff;
-}
-
-.worlds-footer-actions a:active {
-  transform: scale(.94);
-}
-
-
-/* ============================================================
-   MASAÜSTÜ GENİŞ EKRAN
-   ============================================================ */
-
-@media (min-width: 1500px) {
-
-  .worlds-map {
-    height: 760px !important;
-    min-height: 760px !important;
-  }
-
-  .worlds-side-panel {
-    right: 28px !important;
-    top: 30px !important;
-
-    width: 260px !important;
-  }
-
-.world-button-forest {
-   left: 20% !important;
-    top: 27% !important;
-  }
-
-.world-button-space {
-   left: 44% !important;
-    top: 22% !important;
-  }
-
-.world-button-sea {
-   left: 67% !important;
-    top: 29% !important;
-  }
-
-.world-button-english {
-   left: 77% !important;
-    top: 36% !important;
-  }
-
-.world-button-stories {
-   left: 22% !important;
-    top: 62% !important;
-  }
-
-.world-button-games {
-   left: 45% !important;
-    top: 62% !important;
-  }
-
-.world-button-math {
-   left: 67% !important;
-    top: 64% !important;
-  }
-}
-
-
-/* ============================================================
-   ORTA EKRAN
-   ============================================================ */
-
-@media (max-width: 1150px) {
-
-  .worlds-page {
-    padding: 18px 15px 35px !important;
-  }
-
-  .worlds-heading h1 {
-    font-size: 32px;
-  }
-
-  .worlds-map {
-    height: 650px !important;
-    min-height: 650px !important;
-  }
-
-  .worlds-side-panel {
-    width: 215px !important;
-
-    right: 15px !important;
-    top: 20px !important;
-  }
-
-.world-button {
-   transform: scale(.86) !important;
-  }
-
-.world-button:hover {
-   transform: scale(.92) !important;
-  }
-
-  .journey-message {
-    flex-basis: 220px;
-  }
-}
-
-
-/* ============================================================
-   TABLET
-   ============================================================ */
-
-@media (max-width: 850px) {
-
-  .worlds-heading {
-    align-items: flex-start;
-
-    flex-direction: column;
-  }
-
-  .worlds-heading-stats {
-    width: 100%;
-  }
-
-  .worlds-heading-stats > div {
-    flex: 1;
-  }
-
-  .worlds-map {
-    height: 800px !important;
-    min-height: 800px !important;
-  }
-
-  .worlds-side-panel {
-    width: 220px !important;
-
-    right: 12px !important;
-    top: 15px !important;
-  }
-
-.world-button {
-   transform: scale(.72) !important;
-  }
-
-.world-button:hover {
-   transform: scale(.78) !important;
-  }
-
-  .journey-panel {
-    flex-wrap: wrap;
-
-    justify-content: center;
-  }
-
-  .journey-title {
-    width: 100%;
-  }
-
-  .journey-message {
-    flex-basis: 100%;
-  }
-}
-
-
-/* ============================================================
-   TELEFON
-   ============================================================ */
-
-@media (max-width: 600px) {
-
-  .worlds-page {
-    padding: 10px 8px 25px !important;
-  }
-
-  .worlds-heading h1 {
-    font-size: 25px;
-  }
-
-  .worlds-heading p {
-    font-size: 11px;
-  }
-
-  .worlds-map {
-    height: 850px !important;
-    min-height: 850px !important;
-
-    background-size: auto 65%;
-    background-position: center top;
-  }
-
-  .worlds-side-panel {
-    top: auto !important;
-    bottom: 15px !important;
-
-    left: 10px !important;
-    right: 10px !important;
-
-    width: auto !important;
-
-    flex-direction: row;
-  }
-
-  .progress-panel {
-    flex: 1;
-  }
-
-  .tips-panel {
-    flex: 1;
-  }
-
-  .random-world {
-    flex: 1;
-  }
-
-.world-button {
-   transform: scale(.58) !important;
-  }
-
-.world-button:hover {
-   transform: scale(.64) !important;
-  }
-
-  .journey-track {
-    overflow-x: auto;
-
-    justify-content: flex-start;
-
-    padding-bottom: 5px;
-  }
-
-  .journey-arrow {
-    display: none;
-  }
-
-.journey-message {
-   flex-basis: 100%;
-   }
-   
-   .worlds-footer-actions {
-   flex-wrap: wrap;
-   }
-/* Progress panel repositioned on map */
-.progress-panel {
-   position: absolute !important;
-   top: 80px !important;
-   left: 80px !important;
-   width: 200px !important;
-   min-width: 0 !important;
-   padding: 10px !important;
-   box-sizing: border-box;
-   font-size: 14px !important;
-   z-index: 40 !important;
-   transform: none !important;
-   display: block !important;
-}
-.progress-panel .panel-heading {
-   font-size: 13px !important;
-   margin-bottom: 6px !important;
-}
-.progress-panel .progress-ring {
-   width: 60px !important;
-   height: 60px !important;
-   margin: 8px auto 4px !important;
-}
-.progress-panel .progress-ring > div {
-   font-size: 18px !important;
-}
-.progress-panel .progress-text {
-   font-size: 12px !important;
-   display: block !important;
-   text-align: center !important;
-   margin-bottom: 6px !important;
-}
-.progress-panel .progress-stars {
-   font-size: 12px !important;
-   text-align: center !important;
-}
-.progress-panel .progress-stars .Star {
-   width: 12px !important;
-   height: 12px !important;
-   font-size: 12px !important;
-}
+@media (max-width: 520px) {
+  .worlds-page { padding: 10px 9px 24px; }
+  .worlds-heading { margin-bottom: 10px; border-radius: 15px; padding: 14px; }
+  .worlds-heading h1 { font-size: 23px; }
+  .worlds-heading p { font-size: 9px; }
+  .worlds-map { height: 430px; min-height: 430px; border-radius: 15px; }
+  .map-progress-card { transform: scale(.88); transform-origin: top left; }
+  .random-world-button { transform: scale(.88); transform-origin: bottom right; }
+  .world-button-forest { left: 22%; top: 35%; }
+  .world-button-space { left: 49%; top: 29%; }
+  .world-button-english { left: 78%; top: 39%; }
+  .world-button-games { left: 49%; top: 71%; }
+  .world-button-math { left: 72%; top: 72%; }
+  .world-label { min-width: 98px; padding: 6px 7px; }
+  .world-label strong { font-size: 8px; }
+  .world-emoji { font-size: 12px; }
+  .journey-panel { padding: 13px; border-radius: 15px; }
 }

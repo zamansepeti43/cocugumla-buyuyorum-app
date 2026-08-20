@@ -5,6 +5,7 @@ import { SectionCard } from '../components/SectionCard'
 import { ArrowLeft, Lock, Star } from 'lucide-react'
 import './world-detail.css'
 import './world-islands.css'
+import './world-visuals.css'
 
 const worldPresentation: Record<string, { title: string; description: string; islands: string[] }> = {
   forest: { title: 'Doğa Dünyası', description: 'Hayvanlar, doğa ve sesler', islands: ['Hayvanlar', 'Doğa', 'Sesler'] },
@@ -12,6 +13,14 @@ const worldPresentation: Record<string, { title: string; description: string; is
   english: { title: 'Dil & Hikâye Dünyası', description: 'İngilizce, konuşma ve hikâyeler', islands: ['İngilizce', 'Hikâyeler', 'Konuşma'] },
   games: { title: 'Oyun Dünyası', description: 'Dikkat, hafıza ve eğlenceli oyunlar', islands: ['Dikkat', 'Hafıza', 'Mini Oyunlar'] },
   math: { title: 'Zihin Dünyası', description: 'Sayılar, şekiller ve mantık', islands: ['Sayılar', 'Şekiller', 'Mantık'] },
+}
+
+const islandArt = {
+  forest: ['https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=88'],
+  space: ['https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=900&q=88'],
+  english: ['https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=88'],
+  games: ['https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=88'],
+  math: ['https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=88'],
 }
 
 export function WorldDetailPage() {
@@ -39,6 +48,7 @@ export function WorldDetailPage() {
   const unlocked = isWorldUnlocked(worldId)
   const sectionsList = getSections(worldId)
   const totalStars = getTotalStars()
+  const art = islandArt[worldId as keyof typeof islandArt] ?? islandArt.forest
 
   return (
     <div className="page world-detail-page">
@@ -62,10 +72,19 @@ export function WorldDetailPage() {
 
       {presentation.islands.length > 0 && (
         <section className="world-islands-strip" aria-label="Dünyanın alt adaları">
-          <div><span className="kicker">KEŞFEDİLECEK ADACIKLAR</span><strong>Bu dünyada nereye gitmek istersin?</strong></div>
+          <div>
+            <span className="kicker">KEŞFEDİLECEK ADACIKLAR</span>
+            <strong>Bu dünyanın adalarına çık, keşfetmeye başla.</strong>
+          </div>
           <div className="world-islands-list">
             {presentation.islands.map((island, index) => (
-              <div className="world-island-chip" key={island}><span>{['🌿', '🚀', '📚', '🎮', '🧠'][index % 5]}</span>{island}</div>
+              <div
+                className="world-island-chip"
+                key={island}
+                style={{ backgroundImage: `url(${art[index % art.length]})` }}
+              >
+                <span aria-hidden="true">🌴</span>{island}
+              </div>
             ))}
           </div>
         </section>

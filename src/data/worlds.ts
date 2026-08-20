@@ -12,6 +12,16 @@ export const worlds: World[] = [
     order: 1,
   },
   {
+    id: 'space',
+    title: 'Uzay',
+    description: 'Gezegenler, yıldızlar ve uzay araçları',
+    icon: '🚀',
+    color: 'lilac',
+    minAge: 36,
+    maxAge: 144,
+    order: 2,
+  },
+  {
     id: 'sea',
     title: 'Deniz',
     description: 'Deniz canlıları ve su altı keşifleri',
@@ -86,11 +96,11 @@ export const worlds: World[] = [
 export const worldMeta: Record<WorldId, { label: string; icon: string; color: string }> = {
   forest: { label: 'Orman', icon: '🌳', color: 'mint' },
   space: { label: 'Uzay', icon: '🚀', color: 'lilac' },
+  sea: { label: 'Deniz', icon: '🐋', color: 'sky' },
   english: { label: 'İngilizce', icon: '🇬🇧', color: 'sky' },
   math: { label: 'Matematik', icon: '🔢', color: 'sun' },
   speech: { label: 'Konuşma', icon: '🗣️', color: 'coral' },
   games: { label: 'Oyunlar', icon: '🎮', color: 'mint' },
   stories: { label: 'Hikâyeler', icon: '📖', color: 'lilac' },
   'fairy-tales': { label: 'Masallar', icon: '🧚', color: 'sky' },
-  sea: { label: 'Deniz', icon: '🐋', color: 'sky' },
 }

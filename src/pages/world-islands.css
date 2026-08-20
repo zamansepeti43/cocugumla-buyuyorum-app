@@ -1,0 +1,8 @@
+.world-islands-strip { display:flex; align-items:center; justify-content:space-between; gap:18px; margin:14px 0; padding:14px 18px; border-radius:17px; background:linear-gradient(135deg,rgba(25,31,61,.98),rgba(14,18,36,.98)); border:1px solid rgba(137,145,219,.18); box-shadow:0 12px 28px rgba(0,0,0,.18); }
+.world-islands-strip > div:first-child { display:flex; flex-direction:column; gap:4px; min-width:210px; }
+.world-islands-strip .kicker { color:#8f7cff; font-size:8px; font-weight:900; letter-spacing:.1em; }
+.world-islands-strip > div:first-child strong { color:#fff; font-size:13px; }
+.world-islands-list { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+.world-island-chip { display:inline-flex; align-items:center; gap:6px; padding:8px 11px; border-radius:11px; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.09); color:rgba(240,243,255,.86); font-size:9px; font-weight:800; }
+.world-island-chip span { font-size:14px; }
+@media (max-width:700px) { .world-islands-strip{align-items:flex-start;flex-direction:column}.world-islands-strip > div:first-child{min-width:0}.world-islands-list{justify-content:flex-start} }

@@ -4,6 +4,16 @@ export type ActivityCategory = (typeof activityCategories)[number]
 
 export type ActivityDifficulty = 'easy' | 'medium'
 
+export type ActivityType =
+  | 'guided'
+  | 'visual'
+  | 'game'
+  | 'quiz'
+  | 'matching'
+  | 'memory'
+  | 'sorting'
+  | 'creative'
+
 export type WorldId =
   | 'forest'
   | 'space'
@@ -143,16 +153,6 @@ export interface EnglishProgress {
   lessonId: string
   completedAt: string
 }
-
-export type WorldId =
-  | 'forest'
-  | 'space'
-  | 'english'
-  | 'math'
-  | 'speech'
-  | 'games'
-  | 'stories'
-  | 'fairy-tales'
 
 export interface World {
   id: WorldId

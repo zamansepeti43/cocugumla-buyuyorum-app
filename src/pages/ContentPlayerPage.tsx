@@ -1,33 +1,30 @@
+import { useCallback, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { ArrowLeft, CheckCircle2, Lock, Sparkles } from 'lucide-react'
 import { useWorlds } from '../hooks/useWorlds'
 import { useProgress } from '../hooks/useProgress'
-import { GameShell } from '../components/games'
+import { GameShell, gameRenderers } from '../components/games'
 import { ErrorBoundary } from '../components/games/ErrorBoundary'
-import { gameRenderers } from '../components/games'
-import { ArrowLeft, CheckCircle2, Sparkles } from 'lucide-react'
-import type { WorldId } from '../types/models'
 import { RewardScreen } from '../components/RewardScreen'
-import { useCallback, useState } from 'react'
 import './content-player.css'
 
 export function ContentPlayerPage() {
   const { contentId } = useParams()
-  const { getContentItem, isContentUnlocked, getWorld } = useWorlds()
+  const { getContentItem, getSection, isContentUnlocked, getWorld } = useWorlds()
   const { markCompleted, isCompleted } = useProgress()
-  const [reward, setReward] = useState<{ open: boolean; title: string; message: string; unlockedSection?: string }>({
+  const [reward, setReward] = useState({
     open: false,
     title: '',
     message: '',
-    unlockedSection: undefined,
+    unlockedSection: undefined as string | undefined,
   })
 
-  const item = contentId ? getContentItem(contentId) : null
-  const notFound = !contentId || !item
+  const item = contentId ? getContentItem(contentId) : undefined
+  const section = item ? getSection(item.sectionId) : undefined
+  const world = section ? getWorld(section.worldId) : undefined
   const unlocked = item ? isContentUnlocked(item.id) : false
   const GameComponent = item?.interactionId ? gameRenderers[item.interactionId] : null
   const alreadyCompleted = item ? isCompleted(item.id) : false
-  const worldId = item?.sectionId?.split('-')[0] as WorldId | undefined
-  const world = item ? getWorld(worldId || '') : undefined
 
   const showReward = useCallback((unlockedSectionTitle?: string) => {
     if (!item) return
@@ -40,18 +37,18 @@ export function ContentPlayerPage() {
   }, [item])
 
   const handleComplete = useCallback(() => {
-    if (!item || !worldId) return
-    markCompleted(item.id, worldId, item.sectionId, 1)
+    if (!item || !section) return
+    markCompleted(item.id, section.worldId, item.sectionId, 1)
     showReward()
-  }, [item, worldId, markCompleted, showReward])
+  }, [item, section, markCompleted, showReward])
 
   const handleRewardContinue = useCallback(() => {
     setReward((current) => ({ ...current, open: false }))
   }, [])
 
-  if (notFound) {
+  if (!item || !section || !world) {
     return (
-      <div className="page">
+      <div className="page content-player-page">
         <div className="empty-state">
           <span aria-hidden="true">🎮</span>
           <h2>İçerik bulunamadı</h2>
@@ -61,19 +58,35 @@ export function ContentPlayerPage() {
     )
   }
 
-  const typeLabel = item.type === 'game' ? 'Oyun' : item.type === 'lesson' ? 'Ders' : item.type === 'story' ? 'Hikâye' : 'Etkileşimli'
+  const typeLabel =
+    item.type === 'game'
+      ? 'Oyun'
+      : item.type === 'lesson'
+        ? 'Ders'
+        : item.type === 'story'
+          ? 'Hikâye'
+          : 'Etkileşimli'
 
   return (
-    <div className="content-player-page">
-      <section className="content-player-header" style={{ ['--world-color' as string]: `var(--${world?.color || 'mint'})` }}>
-        <Link to={`/worlds/${item.sectionId.split('-')[0]}/section/${item.sectionId}`} className="content-player-back-link" aria-label="Bölüm sayfasına geri dön">
-          <ArrowLeft size={18} /> Geri
+    <div className="page content-player-page">
+      <section
+        className="content-player-header"
+        style={{ ['--world-color' as string]: `var(--${world.color})` }}
+      >
+        <Link
+          to={`/worlds/${world.id}/section/${section.id}`}
+          className="content-player-back-link"
+          aria-label="Bölüm sayfasına geri dön"
+        >
+          <ArrowLeft size={18} /> {section.title}
         </Link>
+
         <div className="content-player-header-inner">
-          <span className="content-player-type">{typeLabel}</span>
+          <span className="content-player-type">{world.icon} {world.title} · {typeLabel}</span>
           <h1 className="content-player-title">{item.title}</h1>
           <p className="content-player-description">{item.description}</p>
         </div>
+
         <div className="content-player-badge">
           <Sparkles size={16} className="sparkles" />
           <span className="duration">{item.duration} dk</span>
@@ -82,8 +95,8 @@ export function ContentPlayerPage() {
 
       {!unlocked && (
         <div className="locked-notice">
-          <span>🔒</span>
-          <p>Bu içerik henüz kilidi açılmadı.</p>
+          <Lock size={18} />
+          <p>Bu içerik henüz kilitli. Önce bölümün kilidini açmalısın.</p>
         </div>
       )}
 
@@ -110,19 +123,17 @@ export function ContentPlayerPage() {
             </GameShell>
           </div>
 
-          {!alreadyCompleted ? (
-            <div className="content-complete-bar">
+          <div className="content-complete-bar">
+            {!alreadyCompleted ? (
               <button className="primary-button complete-button" onClick={handleComplete}>
                 <CheckCircle2 size={18} /> Tamamla
               </button>
-            </div>
-          ) : (
-            <div className="content-complete-bar">
+            ) : (
               <div className="completed-badge">
                 <CheckCircle2 size={18} /> Tamamlandı
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </section>
       )}
 

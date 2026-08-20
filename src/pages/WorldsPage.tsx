@@ -4,120 +4,101 @@ import {
   Gamepad2,
   Globe2,
   Home,
-  Lock,
   Map,
   Medal,
   Play,
-  Sparkles,
   Star,
   Trophy,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import './worlds-premium.css'
-import './worlds-refinement.css'
 
 type World = {
   id: string
   title: string
-  subtitle: string
+  description: string
   emoji: string
   stars: string
   tone: string
   buttonClass: string
+  islands: string[]
 }
 
 const worlds: World[] = [
   {
     id: 'forest',
-    title: 'Orman Dünyası',
-    subtitle: 'Hayvanlar ve doğa',
-    emoji: '🦌',
+    title: 'Doğa Dünyası',
+    description: 'Hayvanlar, doğa ve sesler',
+    emoji: '🌳',
     stars: '24/48',
     tone: 'green',
     buttonClass: 'world-button-forest',
+    islands: ['Hayvanlar', 'Doğa', 'Sesler'],
   },
   {
     id: 'space',
-    title: 'Uzay Dünyası',
-    subtitle: 'Gezegenler ve uzay',
+    title: 'Keşif Dünyası',
+    description: 'Uzay, deniz, bilim ve keşif',
     emoji: '🚀',
-    stars: '18/36',
+    stars: '38/76',
     tone: 'purple',
     buttonClass: 'world-button-space',
-  },
-  {
-    id: 'sea',
-    title: 'Deniz Dünyası',
-    subtitle: 'Deniz canlılarını keşfet',
-    emoji: '🐋',
-    stars: '20/40',
-    tone: 'blue',
-    buttonClass: 'world-button-sea',
+    islands: ['Uzay', 'Deniz', 'Bilim'],
   },
   {
     id: 'english',
-    title: 'English World',
-    subtitle: 'Learn English',
-    emoji: '🇬🇧',
-    stars: '16/32',
-    tone: 'navy',
+    title: 'Dil & Hikâye Dünyası',
+    description: 'İngilizce, konuşma ve hikâyeler',
+    emoji: '📚',
+    stars: '38/76',
+    tone: 'blue',
     buttonClass: 'world-button-english',
-  },
-  {
-    id: 'stories',
-    title: 'Hikâye Dünyası',
-    subtitle: 'Hikâyeler ve kitaplar',
-    emoji: '📖',
-    stars: '22/44',
-    tone: 'pink',
-    buttonClass: 'world-button-stories',
+    islands: ['İngilizce', 'Hikâyeler', 'Konuşma'],
   },
   {
     id: 'games',
-    title: 'Oyunlar Dünyası',
-    subtitle: 'Eğlenceli oyunlar',
+    title: 'Oyun Dünyası',
+    description: 'Dikkat, hafıza ve eğlenceli oyunlar',
     emoji: '🎮',
     stars: '30/60',
     tone: 'orange',
     buttonClass: 'world-button-games',
+    islands: ['Dikkat', 'Hafıza', 'Mini Oyunlar'],
   },
   {
     id: 'math',
-    title: 'Matematik Dünyası',
-    subtitle: 'Sayılar ve şekiller',
-    emoji: '🔢',
+    title: 'Zihin Dünyası',
+    description: 'Sayılar, şekiller ve mantık',
+    emoji: '🧠',
     stars: '18/36',
     tone: 'lime',
     buttonClass: 'world-button-math',
+    islands: ['Sayılar', 'Şekiller', 'Mantık'],
   },
 ]
 
 const journey = [
-  { label: 'Ana Sayfa', icon: Home, to: '/home', locked: false },
-  { label: 'Keşif Haritası', icon: Map, to: '/worlds', locked: false },
-  { label: 'Dünya', icon: Globe2, to: '/worlds/forest', locked: false },
-  { label: 'Bölüm', icon: BookOpen, to: '/worlds/forest/section/1', locked: false },
-  { label: 'Ders / İçerik', icon: Play, to: '/worlds/content/a001', locked: false },
-  { label: 'Oyun', icon: Gamepad2, to: '/activities', locked: false },
-  { label: 'Ödül', icon: Trophy, to: '/progress', locked: false },
+  { label: 'Ana Sayfa', icon: Home, to: '/home' },
+  { label: 'Keşfet', icon: Map, to: '/worlds' },
+  { label: 'Dünya', icon: Globe2, to: '/worlds/forest' },
+  { label: 'Bölüm', icon: BookOpen, to: '/worlds/forest/section/1' },
+  { label: 'İçerik', icon: Play, to: '/worlds/content/a001' },
+  { label: 'Oyun', icon: Gamepad2, to: '/activities' },
+  { label: 'Ödül', icon: Trophy, to: '/progress' },
 ]
 
 function WorldButton({ world }: { world: World }) {
   return (
-    <NavLink
-      to={`/worlds/${world.id}`}
-      className={`world-button ${world.buttonClass}`}
-      aria-label={`${world.title} aç`}
-    >
-      <div className={`world-button-art world-button-art-${world.tone}`}>
-        <span>{world.emoji}</span>
-      </div>
+    <NavLink to={`/worlds/${world.id}`} className={`world-button ${world.buttonClass}`} aria-label={`${world.title} aç`}>
       <div className={`world-label world-label-${world.tone}`}>
-        <strong>{world.title}</strong>
-        <span>
-          <Star size={15} fill="currentColor" />
-          {world.stars}
-        </span>
+        <div className="world-label-top">
+          <span className="world-emoji" aria-hidden="true">{world.emoji}</span>
+          <strong>{world.title}</strong>
+        </div>
+        <span className="world-stars"><Star size={12} fill="currentColor" />{world.stars}</span>
+        <div className="world-subislands" aria-hidden="true">
+          {world.islands.map((island) => <span key={island}>{island}</span>)}
+        </div>
       </div>
     </NavLink>
   )
@@ -127,180 +108,60 @@ export function WorldsPage() {
   return (
     <div className="page worlds-page">
       <section className="worlds-shell">
-        <header
-          className="worlds-heading"
-          style={{
-            alignItems: 'center',
-            padding: '20px 24px',
-            marginBottom: '18px',
-            borderRadius: '22px',
-            boxSizing: 'border-box',
-            background: 'linear-gradient(135deg, rgba(27,38,82,.98) 0%, rgba(18,23,52,.98) 58%, rgba(39,28,72,.98) 100%)',
-            border: '1px solid rgba(135,153,255,.22)',
-            boxShadow: '0 18px 40px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.08)',
-          }}
-        >
-          <div style={{ flex: '1 1 auto' }}>
-            <div className="worlds-eyebrow">
-              <Compass size={17} />
-              KEŞİF HARİTASI
-            </div>
-            <h1 style={{ fontSize: 'clamp(27px, 3vw, 38px)' }}>
-              Dünyaları keşfet, yeni maceralara atıl!
-            </h1>
-            <p style={{ marginTop: '8px', maxWidth: '620px' }}>
-              Öğrenirken eğlen, yıldızlarını topla ve yeni dünyaların kilidini aç.
-            </p>
+        <header className="worlds-heading">
+          <div>
+            <div className="worlds-eyebrow"><Compass size={16} />KEŞİF HARİTASI</div>
+            <h1>Dünyanı seç, keşfe başla!</h1>
+            <p>Beş ana dünyayı keşfet. Her dünyanın içinde yeni adacıklar ve öğrenme maceraları seni bekliyor.</p>
           </div>
-
-          <div
-            className="worlds-heading-stats"
-            style={{
-              display: 'flex',
-              alignItems: 'stretch',
-              gap: '10px',
-              flexShrink: 0,
-            }}
-          >
-            <div
-              style={{
-                minWidth: '112px',
-                padding: '12px 14px',
-                display: 'grid',
-                gridTemplateColumns: '22px 1fr',
-                gridTemplateRows: 'auto auto',
-                columnGap: '7px',
-                borderRadius: '15px',
-                background: 'rgba(255,255,255,.07)',
-                border: '1px solid rgba(255,255,255,.13)',
-                boxShadow: 'none',
-                color: '#fff',
-              }}
-            >
-              <Star size={19} fill="currentColor" style={{ gridRow: '1 / span 2', alignSelf: 'center', color: '#f5c43b' }} />
-              <strong style={{ color: '#fff', fontSize: '16px' }}>1.280</strong>
-              <span style={{ color: 'rgba(235,241,255,.58)', fontSize: '9px' }}>Toplam Yıldız</span>
-            </div>
-
-            <div
-              style={{
-                minWidth: '112px',
-                padding: '12px 14px',
-                display: 'grid',
-                gridTemplateColumns: '22px 1fr',
-                gridTemplateRows: 'auto auto',
-                columnGap: '7px',
-                borderRadius: '15px',
-                background: 'rgba(255,255,255,.07)',
-                border: '1px solid rgba(255,255,255,.13)',
-                boxShadow: 'none',
-                color: '#fff',
-              }}
-            >
-              <Sparkles size={19} style={{ gridRow: '1 / span 2', alignSelf: 'center', color: '#a88cff' }} />
-              <strong style={{ color: '#fff', fontSize: '16px' }}>66%</strong>
-              <span style={{ color: 'rgba(235,241,255,.58)', fontSize: '9px' }}>Keşif İlerlemesi</span>
-            </div>
+          <div className="worlds-heading-stats">
+            <div className="heading-stat"><Star size={18} fill="currentColor" /><strong>1.280</strong><span>Toplam yıldız</span></div>
+            <div className="heading-stat"><Compass size={18} /><strong>66%</strong><span>Keşif ilerlemesi</span></div>
           </div>
         </header>
 
-        <section className="worlds-map">
-          <img
-            src="/keşif-haritası-arkaplan.png"
-            alt=""
-            className="worlds-map-background"
-            draggable={false}
-          />
+        <section className="worlds-map" aria-label="Keşif dünyaları haritası">
+          <img src="/keşif-haritası-arkaplan.png" alt="" className="worlds-map-background" draggable={false} />
 
-          <div className="worlds-map-buttons">
-            {worlds.map((world) => (
-              <WorldButton key={world.id} world={world} />
-            ))}
+          <div className="map-progress-card">
+            <div className="map-progress-title"><span>Keşif İlerlemen</span><Compass size={13} /></div>
+            <div className="map-progress-body">
+              <div className="map-progress-ring"><strong>66%</strong></div>
+              <div><strong>7 / 12</strong><span>Dünya keşfedildi</span><small>⭐ 148 / 224</small></div>
+            </div>
           </div>
 
-          <aside className="worlds-side-panel">
-            <div className="progress-panel">
-              <div className="panel-heading">
-                <span>Keşif İlerlemen</span>
-                <Sparkles size={17} />
-              </div>
-              <div className="progress-ring">
-                <div><strong>66%</strong></div>
-              </div>
-              <strong className="progress-text">7/12 Dünya keşfedildi</strong>
-              <div className="progress-stars">
-                <Star size={19} fill="currentColor" />
-                <strong>148 / 224</strong>
-              </div>
-            </div>
+          <div className="worlds-map-buttons">
+            {worlds.map((world) => <WorldButton key={world.id} world={world} />)}
+          </div>
 
-            <div className="tips-panel">
-              <div className="panel-heading">
-                <span>💡 Keşfetme İpuçları</span>
-              </div>
-              <ul>
-                <li>Yeni dünyalar keşfet</li>
-                <li>Oyunlar oyna</li>
-                <li>Yıldız kazan</li>
-                <li>Ödüllerini topla</li>
-                <li>Öğrenirken eğlen!</li>
-              </ul>
-              <div className="tips-character">🧸</div>
-            </div>
-
-            <NavLink to="/worlds/random" className="random-world-button">
-              <div className="random-icon">🎲</div>
-              <div>
-                <strong>Rastgele Keşfet</strong>
-                <span>Beni şaşırt!</span>
-              </div>
-              <span className="random-arrow">›</span>
-            </NavLink>
-          </aside>
+          <NavLink to="/worlds/random" className="random-world-button" aria-label="Rastgele dünya keşfet">
+            <span className="random-icon">🎲</span>
+            <span className="random-copy"><strong>Beni şaşırt!</strong><small>Rastgele keşfet</small></span>
+            <span className="random-arrow">›</span>
+          </NavLink>
         </section>
 
         <section className="journey-panel">
-          <div className="journey-title">
-            <Map size={19} />
-            <strong>Keşif Yolculuğun</strong>
+          <div className="journey-heading">
+            <div className="journey-title"><Map size={18} /><strong>Keşif Yolculuğun</strong></div>
+            <span>Öğren → Pekiştir → Tamamla → Ödülünü kazan</span>
           </div>
           <div className="journey-track">
             {journey.map((step, index) => {
               const Icon = step.icon
               return (
                 <div className="journey-step-wrapper" key={step.label}>
-                  <NavLink
-                    to={step.to}
-                    className={`journey-step ${step.locked ? 'journey-step-locked' : ''}`}
-                  >
-                    <div className="journey-icon">
-                      <Icon size={22} />
-                      {step.locked && (
-                        <span className="journey-lock"><Lock size={10} /></span>
-                      )}
-                    </div>
-                    <span>{step.label}</span>
-                  </NavLink>
+                  <NavLink to={step.to} className="journey-step"><div className="journey-icon"><Icon size={20} /></div><span>{step.label}</span></NavLink>
                   {index < journey.length - 1 && <div className="journey-arrow">→</div>}
                 </div>
               )
             })}
-          </div>
-          <div className="journey-message">
-            <Medal size={31} />
-            <div>
-              <strong>Her keşif seni yeni bilgilerle buluşturur!</strong>
-              <span>Dünyaları keşfet, dersleri tamamla ve ödüllerini topla.</span>
-            </div>
+            <div className="journey-message"><Medal size={24} /><div><strong>Her keşif yeni bir bilgi!</strong><span>Yıldızlarını topla ve yeni dünyaların kilidini aç.</span></div></div>
           </div>
         </section>
 
-        <nav className="worlds-footer-actions">
-          <NavLink to="/home"><Home size={16} />Ana Sayfa</NavLink>
-          <NavLink to="/activities"><Gamepad2 size={16} />Oyunlar</NavLink>
-          <NavLink to="/english"><BookOpen size={16} />İngilizce</NavLink>
-          <NavLink to="/progress"><Trophy size={16} />İlerlemem</NavLink>
-        </nav>
+        <div className="worlds-bottom-hint"><span>🗺️</span> Haritadaki dünyalara tıklayarak keşfe başlayabilirsin.</div>
       </section>
     </div>
   )

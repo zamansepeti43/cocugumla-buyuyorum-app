@@ -30,22 +30,26 @@ export function useWorlds() {
   }, [totalMonths])
 
   const getWorld = (worldId: string): World | undefined => {
-    return worlds.find((w) => w.id === worldId)
+    return worlds.find((world) => world.id === worldId)
   }
 
+  // A world page should always be able to display its complete structure.
+  // Age and star restrictions are handled by the lock state, not by hiding data.
   const getSections = (worldId: string): Section[] => {
     return sections
-      .filter((section) => section.worldId === worldId && totalMonths >= section.minAge && totalMonths <= section.maxAge)
+      .filter((section) => section.worldId === worldId)
       .sort((a, b) => a.order - b.order)
   }
 
   const getSection = (sectionId: string): Section | undefined => {
-    return sections.find((s) => s.id === sectionId)
+    return sections.find((section) => section.id === sectionId)
   }
 
+  // Likewise, keep all content visible in a section and let isContentUnlocked
+  // determine whether the child can open each item.
   const getContent = (sectionId: string): ContentItem[] => {
     return allContent
-      .filter((item) => item.sectionId === sectionId && totalMonths >= item.minAge && totalMonths <= item.maxAge)
+      .filter((item) => item.sectionId === sectionId)
       .sort((a, b) => a.order - b.order)
   }
 
@@ -54,38 +58,40 @@ export function useWorlds() {
   }
 
   const isWorldUnlocked = (worldId: string): boolean => {
-    const world = worlds.find((w) => w.id === worldId)
+    const world = getWorld(worldId)
     if (!world) return false
     if (totalMonths < world.minAge || totalMonths > world.maxAge) return false
     if (!activeProgress) return true
-    return activeProgress.unlockedSections.some((sectionId) => {
-      const section = sections.find((s) => s.id === sectionId)
-      return section?.worldId === worldId
+
+    const worldSections = sections.filter((section) => section.worldId === worldId)
+    if (worldSections.length === 0) return true
+
+    return worldSections.some((section) => {
+      if (activeProgress.unlockedSections.includes(section.id)) return true
+      return (section.requiredStars ?? 0) <= totalStars
     })
   }
 
   const isSectionUnlocked = (sectionId: string): boolean => {
-    const section = sections.find((s) => s.id === sectionId)
+    const section = getSection(sectionId)
     if (!section) return false
     if (totalMonths < section.minAge || totalMonths > section.maxAge) return false
     if (!activeProgress) return true
     if (activeProgress.unlockedSections.includes(sectionId)) return true
+
     const requiredStars = section.requiredStars ?? 0
-    if (requiredStars <= 0) return true
-    return totalStars >= requiredStars
+    return requiredStars <= 0 || totalStars >= requiredStars
   }
 
   const isContentUnlocked = (contentId: string): boolean => {
-    const item = allContent.find((c) => c.id === contentId)
+    const item = getContentItem(contentId)
     if (!item) return false
     if (totalMonths < item.minAge || totalMonths > item.maxAge) return false
-    const section = sections.find((s) => s.id === item.sectionId)
+    if (item.isLocked) return false
+
+    const section = getSection(item.sectionId)
     if (!section) return true
-    if (!activeProgress) return true
-    if (activeProgress.unlockedSections.includes(item.sectionId)) return true
-    const requiredStars = section.requiredStars ?? 0
-    if (requiredStars <= 0) return true
-    return totalStars >= requiredStars
+    return isSectionUnlocked(section.id)
   }
 
   return {

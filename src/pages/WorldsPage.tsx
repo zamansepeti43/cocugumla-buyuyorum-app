@@ -16,12 +16,6 @@ import './world-visuals.css'
 import './worlds-reference.css'
 import './worlds-mobile-fix.css'
 
-const fiveWorldArtworkOverride = `
-  .app-shell-worlds .worlds-map-background {
-    content: url('/kesif-haritasi-5-dunya.svg?v=5world-final') !important;
-  }
-`
-
 type World = {
   id: string
   title: string
@@ -69,8 +63,7 @@ export function WorldsPage() {
     <div className="page worlds-page">
       <section className="worlds-shell">
         <section className="worlds-map" aria-label="Keşif dünyaları haritası">
-          <style>{fiveWorldArtworkOverride}</style>
-          <img src="/kesif-haritasi-5-dunya.svg?v=5world-final" alt="Keşif Dünyası - beş dünya haritası" className="worlds-map-background" draggable={false} />
+          <img src="/kesif-haritasi-5-dunya-final.svg?v=final-worlds" alt="Keşif Dünyası - beş dünya haritası" className="worlds-map-background" draggable={false} />
           <div className="map-atmosphere" aria-hidden="true" />
           <div className="map-progress-card">
             <div className="map-progress-title"><span>İlerlemen</span><Compass size={13} /></div>

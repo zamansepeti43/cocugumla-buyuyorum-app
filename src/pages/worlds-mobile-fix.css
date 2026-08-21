@@ -1,18 +1,20 @@
 /* Mobile discovery-map fixes */
-@media (max-width:760px){
-  /* Keep only the global AppLayout mobile navigation; the desktop journey bar is hidden on phones. */
+
+@media (max-width:760px) and (orientation:portrait){
   .journey-panel{display:none!important}
 }
 
-/* In landscape on phones/tablets, the discovery map becomes the full viewport. */
+/* Landscape phones/tablets: discovery map fills the viewport above the premium global nav. */
 @media (max-width:900px) and (orientation:landscape){
   .app-shell-worlds .topbar{display:none!important}
-  .app-shell-worlds .bottom-nav{display:none!important}
-  .worlds-main-content{min-height:100svh!important}
+  .app-shell-worlds .reference-bottom-nav{display:none!important}
+  .app-shell-worlds .bottom-nav{display:grid!important}
+  .worlds-main-content{min-height:calc(100svh - 72px)!important;padding-bottom:72px!important;box-sizing:border-box!important}
   .worlds-page{width:100%!important;margin:0!important;padding:0!important}
   .worlds-shell{width:100%!important;max-width:none!important}
-  .worlds-map{width:100%!important;height:100svh!important;min-height:0!important;border-radius:0!important;box-shadow:none!important}
-  .worlds-map-background{width:100%!important;height:100%!important;object-fit:cover!important}
+  .worlds-map{width:100%!important;height:calc(100svh - 72px)!important;min-height:calc(100svh - 72px)!important;border-radius:0!important;box-shadow:none!important}
+  /* Force the current five-world artwork and bypass the legacy seven-island asset. */
+  .worlds-map-background{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;content:url('/kesif-haritasi-arkaplan.png?v=5worlds')!important}
   .map-progress-card{top:10px!important;left:10px!important;transform:scale(.78)!important;transform-origin:top left!important}
   .world-button{width:138px!important;height:48px!important}
   .world-button-forest{left:23%!important;top:52%!important}
@@ -26,4 +28,9 @@
   .world-stars{font-size:6px!important}
   .random-world-button{right:12px!important;bottom:12px!important;width:130px!important;min-height:44px!important}
   .journey-panel{display:none!important}
+}
+
+@media (max-width:900px) and (orientation:landscape) and (max-height:700px){
+  .worlds-main-content{min-height:calc(100svh - 64px)!important;padding-bottom:64px!important}
+  .worlds-map{height:calc(100svh - 64px)!important;min-height:calc(100svh - 64px)!important}
 }

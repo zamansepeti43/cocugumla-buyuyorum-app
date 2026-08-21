@@ -60,21 +60,38 @@ function NatureWorldMap({ onBack }: { onBack: () => void }) {
   )
 }
 
-export function WorldDetailPage() {
-  const { worldId } = useParams()
-  const { getWorld, getSections, isWorldUnlocked, isSectionUnlocked } = useWorlds()
-  const { getTotalStars } = useProgress()
+export function NatureWorldPage() {
   const [natureEntered, setNatureEntered] = useState(false)
 
+  return (
+    <div className="nature-world-route">
+      {!natureEntered ? (
+        <ForestDiscoveryGame onNext={() => setNatureEntered(true)} />
+      ) : (
+        <NatureWorldMap onBack={() => setNatureEntered(false)} />
+      )}
+    </div>
+  )
+}
+
+export function WorldDetailPage() {
+  const { worldId } = useParams()
   if (!worldId) return null
+
+  if (worldId === 'forest') {
+    return <NatureWorldPage />
+  }
+
+  return <RegularWorldDetailPage worldId={worldId} />
+}
+
+function RegularWorldDetailPage({ worldId }: { worldId: string }) {
+  const { getWorld, getSections, isWorldUnlocked, isSectionUnlocked } = useWorlds()
+  const { getTotalStars } = useProgress()
   const world = getWorld(worldId)
 
   if (!world) {
     return <div className="page world-detail-page"><div className="empty-state"><span aria-hidden="true">🌍</span><h2>Dünya bulunamadı</h2><p>Bu dünya harita verilerinde kayıtlı değil.</p><Link to="/worlds">Keşif Haritası'na dön</Link></div></div>
-  }
-
-  if (worldId === 'forest') {
-    return <div className="nature-world-route">{!natureEntered ? <ForestDiscoveryGame onNext={() => setNatureEntered(true)} /> : <NatureWorldMap onBack={() => setNatureEntered(false)} />}</div>
   }
 
   const presentation = worldPresentation[worldId] ?? { title: world.title, description: world.description, islands: [] }

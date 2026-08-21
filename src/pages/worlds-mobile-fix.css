@@ -1,0 +1,29 @@
+/* Mobile discovery-map fixes */
+@media (max-width:760px){
+  /* Keep only the global AppLayout mobile navigation; the desktop journey bar is hidden on phones. */
+  .journey-panel{display:none!important}
+}
+
+/* In landscape on phones/tablets, the discovery map becomes the full viewport. */
+@media (max-width:900px) and (orientation:landscape){
+  .app-shell-worlds .topbar{display:none!important}
+  .app-shell-worlds .bottom-nav{display:none!important}
+  .worlds-main-content{min-height:100svh!important}
+  .worlds-page{width:100%!important;margin:0!important;padding:0!important}
+  .worlds-shell{width:100%!important;max-width:none!important}
+  .worlds-map{width:100%!important;height:100svh!important;min-height:0!important;border-radius:0!important;box-shadow:none!important}
+  .worlds-map-background{width:100%!important;height:100%!important;object-fit:cover!important}
+  .map-progress-card{top:10px!important;left:10px!important;transform:scale(.78)!important;transform-origin:top left!important}
+  .world-button{width:138px!important;height:48px!important}
+  .world-button-forest{left:23%!important;top:52%!important}
+  .world-button-space{left:50%!important;top:52%!important}
+  .world-button-games{left:77%!important;top:52%!important}
+  .world-button-english{left:35%!important;top:82%!important}
+  .world-button-math{left:70%!important;top:82%!important}
+  .world-label{min-width:104px!important;max-width:132px!important;padding:5px 7px!important}
+  .world-label strong{font-size:7px!important}
+  .world-subislands{display:none!important}
+  .world-stars{font-size:6px!important}
+  .random-world-button{right:12px!important;bottom:12px!important;width:130px!important;min-height:44px!important}
+  .journey-panel{display:none!important}
+}

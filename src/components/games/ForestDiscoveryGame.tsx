@@ -45,18 +45,13 @@ export function ForestDiscoveryGame({ onNext }: Props) {
         <div className="forest-world-sign">🌿 DOĞA DÜNYASI</div>
 
         <div className={`forest-welcome-card ${step === 'talk' ? 'show' : ''}`}>
-          <div className="story-avatar">
-            <img src="/illustrations/forest/leo-lion.svg" alt="Leo" />
-          </div>
-          <div>
-            <strong>{step === 'enter' ? 'Leo geliyor!' : 'Leo:'}</strong>
-            <p>{message}</p>
-          </div>
+          <div className="story-avatar"><img src="/illustrations/forest/leo-lion.svg" alt="Leo" /></div>
+          <div><strong>{step === 'enter' ? 'Leo geliyor!' : 'Leo:'}</strong><p>{message}</p></div>
         </div>
 
         <div className="forest-intro-hint">Doğa Dünyası'na hoş geldin 🌱</div>
 
-        <button className="forest-next-button" type="button" onClick={onNext}>
+        <button className="forest-next-button" type="button" disabled={step !== 'talk'} onClick={onNext}>
           İleri <span>→</span>
         </button>
       </div>

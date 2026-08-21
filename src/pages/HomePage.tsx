@@ -12,8 +12,9 @@ const navItems = [
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-// Sıcak, sevimli çocuk-öğrenme sahnesi: metin/kartların arkasında tam ekran hero görseli.
-const heroImage = 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1800&q=88'
+// Ana sayfa arka planı: public/assets/home/home-bg.webp
+// Görsel artık harici bir kaynaktan değil, projenin kendi assets klasöründen yüklenir.
+const heroImage = '/assets/home/home-bg.webp'
 const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
 const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 
@@ -58,21 +59,13 @@ export function HomePage() {
 
             <div className="reference-goal-card">
               <div className="goal-icon"><Trophy size={20} /></div>
-              <div>
-                <strong>Günlük Hedef</strong>
-                <small>Bugünkü hedefini tamamla<br />rozetini kazan!</small>
-              </div>
-              <div className="goal-progress"><span /></div>
-              <b>3 / 5</b>
+              <div><strong>Günlük Hedef</strong><small>Bugünkü hedefini tamamla<br />rozetini kazan!</small></div>
+              <div className="goal-progress"><span /></div><b>3 / 5</b>
             </div>
 
             <NavLink to="/activities" className="reference-continue-card">
               <div className="continue-thumb" style={{ backgroundImage: `url("${animalImage}")` }} />
-              <div className="continue-copy">
-                <strong>Devam Et</strong>
-                <span>Uzayda Gezegenler</span>
-                <small>Keşif Dünyası</small>
-              </div>
+              <div className="continue-copy"><strong>Devam Et</strong><span>Uzayda Gezegenler</span><small>Keşif Dünyası</small></div>
               <span className="continue-button">Devam Et</span>
             </NavLink>
 

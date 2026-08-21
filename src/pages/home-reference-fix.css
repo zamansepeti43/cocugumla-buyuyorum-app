@@ -11,16 +11,15 @@
 }
 
 .reference-brand { gap: 10px; align-items: center; }
-.reference-brand .brand-mark {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
+.reference-brand-logo {
   display: block;
+  width: 185px;
+  height: 58px;
+  object-fit: contain;
+  object-position: left center;
 }
 .reference-brand::before { display: none; }
-.brand-mark i { left: 2px; top: 8px; color: #ef476f; font-size: 31px; transform: rotate(-13deg); }
-.brand-mark b { right: 0; top: 1px; color: #ffd34d; font-size: 15px; }
-.brand-mark em { left: 18px; bottom: 2px; color: #5dd4a0; font-size: 10px; }
+.reference-brand .brand-mark { display: none; }
 .brand-title { font-family: Georgia,serif; font-size: 24px; line-height: 1; letter-spacing: -.5px; }
 
 .reference-nav { gap: 7px; }
@@ -83,66 +82,10 @@
 .reference-bottom-nav svg { width: 22px; height: 22px; }
 .reference-home-mobile { display: none; }
 
-/* Logo: make the compact mark visually closer to the supplied reference. */
-.reference-brand .brand-mark {
-  position: relative;
-  width: 46px;
-  height: 46px;
-  flex-basis: 46px;
-  overflow: visible;
-}
-.reference-brand .brand-mark::before,
-.reference-brand .brand-mark::after {
-  content: '';
-  position: absolute;
-  display: block;
-  border-radius: 11px 15px 15px 11px;
-  transform: rotate(32deg);
-  box-shadow: 0 3px 8px rgba(0,0,0,.18);
-}
-.reference-brand .brand-mark::before {
-  width: 20px;
-  height: 27px;
-  left: 1px;
-  top: 10px;
-  background: linear-gradient(145deg,#8e6bd8,#d54d9a);
-  transform: rotate(-38deg);
-}
-.reference-brand .brand-mark::after {
-  width: 19px;
-  height: 24px;
-  left: 12px;
-  top: 4px;
-  background: linear-gradient(145deg,#f5a85b,#ef5f77);
-  transform: rotate(34deg);
-}
-.reference-brand .brand-mark i {
-  z-index: 3;
-  left: 12px;
-  top: 14px;
-  color: #ef476f;
-  font-size: 25px;
-  text-shadow: 0 2px 5px rgba(0,0,0,.22);
-}
-.reference-brand .brand-mark b {
-  z-index: 4;
-  right: 0;
-  top: 0;
-  color: #ffd34d;
-  font-size: 15px;
-}
-.reference-brand .brand-mark em {
-  z-index: 4;
-  left: 24px;
-  bottom: 2px;
-  color: #5dd4a0;
-  font-size: 9px;
-}
-
 @media (max-width: 1100px) {
   .reference-home-shell { width: 100%; min-width: 900px; }
   .reference-topbar { grid-template-columns: 245px 1fr 50px; padding: 0 14px; }
-  .brand-title { font-size: 20px; }
+  .reference-brand-logo { width: 165px; height: 52px; }
   .reference-nav-link { padding: 0 8px; font-size: 10px; }
   .reference-home-hero { height: 560px; }
   .reference-parent-panel,.reference-recommend-panel { right: 18px; width: 190px; }
@@ -155,8 +98,7 @@
   .reference-home-shell { width: 100%; min-width: 0; }
   .reference-topbar { height: 64px; grid-template-columns: 1fr 44px; padding: 0 12px; }
   .reference-nav { display: none; }
-  .brand-title { font-size: 18px; }
-  .reference-brand .brand-mark { width: 34px; height: 34px; flex-basis: 34px; }
+  .reference-brand-logo { width: 145px; height: 46px; }
   .reference-home-hero { height: 620px; border-radius: 0; }
   .reference-greeting { left: 18px; top: 28px; }
   .reference-greeting h1 { font-size: 24px; }

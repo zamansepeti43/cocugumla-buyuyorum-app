@@ -19,6 +19,10 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/child/new" element={<CreateChildPage />} />
+
+      {/* World screens are app screens, not website pages: Nature World owns the full viewport. */}
+      <Route path="/worlds/forest" element={<ProtectedRoute><WorldDetailPage /></ProtectedRoute>} />
+
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/worlds" element={<WorldsPage />} />

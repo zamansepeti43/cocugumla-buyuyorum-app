@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useGameSession } from '../../hooks/useGameSession'
 import { playRealSound, unlockAudio, findRealSoundByKey, type RealSoundDescriptor } from '../../utils/audio'
+import './AnimalFinderGame.css'
 
 type AnimalCard = {
   id: string

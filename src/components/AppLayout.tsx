@@ -9,6 +9,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useApp } from '../hooks/useApp'
 import { calculateAge } from '../utils/age'
 import { childNameInitial, formatChildName } from '../utils/childName'
+import '../mobile-layout-fix.css'
 
 const navItems = [
   { to: '/home', label: 'Ana Sayfa', shortLabel: 'Ana Sayfa', icon: Home },

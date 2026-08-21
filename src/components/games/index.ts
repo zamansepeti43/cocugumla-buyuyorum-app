@@ -9,6 +9,7 @@ import { ColorMatchGame } from './ColorMatchGame'
 import { ComplexPuzzleGame } from './ComplexPuzzleGame'
 import { ContrastTrack } from './ContrastTrack'
 import { DragSortGame } from './DragSortGame'
+import { ForestDiscoveryGame } from './ForestDiscoveryGame'
 import { LogicGridGame } from './LogicGridGame'
 import { MemoryGridGame } from './MemoryGridGame'
 import { MiniTetrisGame } from './MiniTetrisGame'
@@ -41,6 +42,7 @@ export { ColorMatchGame } from './ColorMatchGame'
 export { ComplexPuzzleGame } from './ComplexPuzzleGame'
 export { ContrastTrack } from './ContrastTrack'
 export { DragSortGame } from './DragSortGame'
+export { ForestDiscoveryGame } from './ForestDiscoveryGame'
 export { GameShell } from './GameShell'
 export { LogicGridGame } from './LogicGridGame'
 export { MemoryGridGame } from './MemoryGridGame'
@@ -70,7 +72,7 @@ export const gameTitles: Partial<Record<ActivityInteractionId, string>> = {
   'sorting-game': 'Dokun ve Sırala',
   'color-match-mini': 'Doğru Rengi Bul',
   'missing-shape': 'Kaybolan Şekli Bul',
-  'animal-finder': 'Hayvanı Bul',
+  'animal-finder': 'Ormanda Hayvanları Keşfet',
   'motion-track': 'Hareketli Şekli Takip Et',
   'size-picker': 'Büyük-Küçük Seç',
   'twin-match': 'Aynısını Bul',
@@ -103,7 +105,7 @@ export const gameRenderers: Partial<Record<ActivityInteractionId, React.Componen
   'sorting-game': SortingGame,
   'color-match-mini': ColorMatchGame,
   'missing-shape': MissingShapeGame,
-  'animal-finder': AnimalFinderGame,
+  'animal-finder': ForestDiscoveryGame,
   'motion-track': MotionTrackGame,
   'size-picker': SizePickerGame,
   'twin-match': TwinMatchGame,

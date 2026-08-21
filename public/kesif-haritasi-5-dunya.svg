@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#49d9ee"/><stop offset=".55" stop-color="#19a8d5"/><stop offset="1" stop-color="#0879b5"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  <linearGradient id="land" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9df06c"/><stop offset="1" stop-color="#39a957"/></linearGradient>
+  <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d49aff"/><stop offset="1" stop-color="#7138d8"/></linearGradient>
+  <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd36a"/><stop offset="1" stop-color="#ef7a29"/></linearGradient>
+  <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9cecff"/><stop offset="1" stop-color="#2e7ee8"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#064c78" flood-opacity=".35"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#sea)"/>
+<circle cx="240" cy="170" r="230" fill="url(#glow)"/><circle cx="1330" cy="690" r="280" fill="url(#glow)"/>
+<g fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3">
+ <path d="M0 240 C280 130 520 360 790 230 S1280 120 1600 270"/><path d="M0 650 C300 500 510 760 830 610 S1280 500 1600 670"/>
+ <path d="M120 410 C350 330 530 470 720 400"/><path d="M960 430 C1190 350 1400 490 1540 420"/>
+</g>
+<g fill="#fff" opacity=".55"><circle cx="90" cy="310" r="5"/><circle cx="470" cy="120" r="7"/><circle cx="1040" cy="190" r="5"/><circle cx="1480" cy="360" r="7"/><circle cx="780" cy="770" r="6"/><circle cx="1210" cy="820" r="5"/></g>
+
+<!-- 1 Nature World -->
+<g transform="translate(120 150)" filter="url(#shadow)">
+ <ellipse cx="210" cy="190" rx="210" ry="72" fill="#056d9f" opacity=".35"/>
+ <path d="M10 150 C30 50 100 15 205 30 C300 5 390 65 405 145 C370 225 275 255 175 245 C75 250 20 215 10 150Z" fill="url(#land)" stroke="#d8ff9a" stroke-width="6"/>
+ <path d="M125 185 C150 145 175 110 205 75 C235 115 260 155 285 190" fill="none" stroke="#d7b06a" stroke-width="18" stroke-linecap="round"/>
+ <g fill="#207c42"><circle cx="95" cy="105" r="35"/><circle cx="145" cy="80" r="42"/><circle cx="300" cy="95" r="38"/><circle cx="345" cy="125" r="31"/></g>
+ <rect x="193" y="55" width="24" height="75" rx="10" fill="#8b5a32"/><circle cx="205" cy="45" r="52" fill="#56b85d"/>
+ <text x="205" y="292" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="800" fill="#fff">DOĞA</text>
+</g>
+
+<!-- 2 Discovery World -->
+<g transform="translate(590 75)" filter="url(#shadow)">
+ <ellipse cx="210" cy="220" rx="205" ry="70" fill="#056d9f" opacity=".35"/>
+ <path d="M15 175 C25 80 95 30 190 35 C300 0 390 65 405 160 C360 245 265 270 165 255 C70 260 20 225 15 175Z" fill="url(#purple)" stroke="#f0c9ff" stroke-width="6"/>
+ <g fill="#ffd84d"><circle cx="85" cy="115" r="9"/><circle cx="120" cy="75" r="6"/><circle cx="310" cy="95" r="8"/><circle cx="350" cy="135" r="5"/></g>
+ <path d="M155 155 C175 95 245 95 265 155" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+ <circle cx="210" cy="130" r="38" fill="#6fe5ff" stroke="#fff" stroke-width="7"/>
+ <path d="M210 90 L225 130 L210 170 L195 130Z" fill="#fff" opacity=".85"/>
+ <text x="210" y="302" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="800" fill="#fff">KEŞİF</text>
+</g>
+
+<!-- 3 Language & Story World -->
+<g transform="translate(1110 145)" filter="url(#shadow)">
+ <ellipse cx="205" cy="205" rx="205" ry="68" fill="#056d9f" opacity=".35"/>
+ <path d="M10 160 C25 70 95 30 190 35 C290 15 380 70 400 155 C360 230 270 255 175 245 C70 250 20 215 10 160Z" fill="url(#blue)" stroke="#d7fbff" stroke-width="6"/>
+ <path d="M115 145 Q205 75 300 145 L300 205 Q205 240 115 205Z" fill="#fff" opacity=".92"/>
+ <path d="M155 150 H260 M155 175 H235" stroke="#5b7bdc" stroke-width="10" stroke-linecap="round"/>
+ <path d="M75 95 Q55 60 80 45 Q105 65 95 95" fill="#ef4444"/><path d="M325 90 Q345 55 370 70 Q355 95 335 105" fill="#fff"/>
+ <text x="205" y="292" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" font-weight="800" fill="#fff">HİKÂYE</text>
+</g>
+
+<!-- 4 Game World -->
+<g transform="translate(400 525)" filter="url(#shadow)">
+ <ellipse cx="215" cy="180" rx="215" ry="70" fill="#056d9f" opacity=".35"/>
+ <path d="M15 135 C30 55 105 20 205 30 C305 15 390 70 410 140 C375 220 275 245 175 235 C75 245 25 205 15 135Z" fill="url(#orange)" stroke="#fff0b0" stroke-width="6"/>
+ <rect x="130" y="75" width="170" height="105" rx="24" fill="#222b59" stroke="#fff" stroke-width="7"/>
+ <circle cx="205" cy="128" r="28" fill="#7ee8ff"/><circle cx="162" cy="112" r="8" fill="#ff6f91"/><circle cx="250" cy="150" r="8" fill="#ffd84d"/>
+ <path d="M100 115 h45 M122 92 v45" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+ <text x="215" y="280" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="800" fill="#fff">OYUN</text>
+</g>
+
+<!-- 5 Mind World -->
+<g transform="translate(1010 525)" filter="url(#shadow)">
+ <ellipse cx="210" cy="180" rx="210" ry="70" fill="#056d9f" opacity=".35"/>
+ <path d="M10 140 C25 60 95 20 195 30 C295 10 390 65 405 145 C370 220 275 245 175 235 C70 245 20 205 10 140Z" fill="url(#land)" stroke="#d8ff9a" stroke-width="6"/>
+ <g fill="#7c5ce7" stroke="#fff" stroke-width="5"><path d="M170 75 l55 0 25 45 -25 45 -55 0 -25 -45Z"/><circle cx="120" cy="130" r="22"/><circle cx="300" cy="105" r="18"/><circle cx="300" cy="175" r="22"/></g>
+ <path d="M205 100 Q180 125 205 150 Q230 175 205 195" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+ <text x="210" y="280" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="800" fill="#fff">ZİHİN</text>
+</g>
+
+<!-- small route markers -->
+<g fill="#fff" opacity=".9"><circle cx="515" cy="405" r="10"/><circle cx="965" cy="405" r="10"/><circle cx="1080" cy="500" r="10"/><circle cx="360" cy="500" r="10"/></g>
+<g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="12 18" opacity=".6">
+ <path d="M410 330 C500 280 535 260 600 265"/><path d="M990 300 C1050 300 1090 310 1130 325"/><path d="M1180 450 C1120 490 1080 520 1060 545"/><path d="M430 500 C490 540 520 555 560 565"/>
+</g>
+</svg>

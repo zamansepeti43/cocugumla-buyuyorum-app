@@ -1,173 +1,55 @@
 /* Native-app viewport: the browser is only the host; the app owns the entire screen. */
-html, body, #root {
-  width: 100%;
-  height: 100%;
-  min-width: 320px;
-  min-height: 100%;
-  margin: 0;
-  overflow: hidden !important;
-}
+html, body, #root { width:100%; height:100%; min-width:320px; min-height:100%; margin:0; overflow:hidden !important; }
+body { overscroll-behavior:none; background:#101b12 !important; }
+.app-shell { position:fixed !important; inset:0 !important; width:100vw !important; height:100dvh !important; min-height:0 !important; overflow:hidden !important; display:grid !important; grid-template-rows:82px minmax(0,1fr) !important; background:#c9ef86 !important; isolation:isolate; }
+.topbar { position:relative !important; top:auto !important; left:auto !important; width:100% !important; height:82px !important; min-height:82px !important; padding:10px clamp(14px,3vw,46px) !important; display:grid !important; grid-template-columns:minmax(170px,1fr) auto minmax(170px,1fr) !important; align-items:center !important; gap:clamp(10px,2vw,30px) !important; z-index:50 !important; background:rgba(246,255,225,.94) !important; border:0 !important; box-shadow:0 8px 24px rgba(74,105,36,.16) !important; backdrop-filter:blur(12px) !important; }
+.brand { justify-self:start !important; min-width:0 !important; }
+.brand-logo { height:54px !important; max-width:190px !important; filter:drop-shadow(0 3px 4px rgba(62,89,28,.18)) !important; }
+.desktop-nav { justify-self:center !important; height:62px !important; padding:7px !important; display:flex !important; align-items:center !important; gap:7px !important; background:#fff !important; border:4px solid rgba(119,163,65,.12) !important; border-radius:34px !important; box-shadow:0 7px 18px rgba(74,105,36,.12) !important; }
+.desktop-nav a { min-height:46px !important; padding:0 18px !important; display:flex !important; align-items:center !important; justify-content:center !important; gap:8px !important; border-radius:27px !important; color:#73806a !important; background:transparent !important; font-size:14px !important; font-weight:900 !important; white-space:nowrap !important; }
+.desktop-nav a:hover { color:#52752e !important; background:#eef9d9 !important; }
+.desktop-nav a.active { color:#fff !important; background:linear-gradient(180deg,#a9d82f,#8dc324) !important; box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 5px 10px rgba(100,143,36,.22) !important; }
+.child-chip { justify-self:end !important; min-width:0 !important; padding:6px 12px 6px 6px !important; border-radius:30px !important; background:#fff !important; box-shadow:0 6px 18px rgba(74,105,36,.12) !important; }
+.child-chip > span { width:40px !important; height:40px !important; background:#a9d82f !important; }
+.child-chip strong { color:#56614d !important; }.child-chip small { color:#8c9882 !important; }.parent-access { justify-self:end !important; margin-left:-12px !important; }
+.main-content { min-height:0 !important; height:auto !important; overflow:hidden !important; position:relative !important; padding:0 !important; }
+.main-content > * { width:100% !important; min-width:0 !important; }
+.main-content .page { width:min(1440px,calc(100% - 48px)) !important; max-width:1440px !important; min-height:100% !important; margin:0 auto !important; padding:30px 0 46px !important; overflow-x:hidden !important; overflow-y:auto !important; scrollbar-width:thin; scrollbar-color:rgba(93,133,46,.35) transparent; }
+.bottom-nav { display:none !important; }
 
-body {
-  overscroll-behavior: none;
-  background: #101b12 !important;
-}
+/* HomePage already contains its own reference header. The app shell owns the chrome, so keep only the actual home surface. */
+.reference-home-page { width:100% !important; height:100% !important; min-height:0 !important; overflow:hidden !important; background:linear-gradient(180deg,#d9f59c 0%,#bfe86a 100%) !important; }
+.reference-home-shell { width:100% !important; min-width:0 !important; height:100% !important; padding:0 !important; margin:0 !important; }
+.reference-topbar, .reference-bottom-nav, .reference-home-mobile { display:none !important; }
+.reference-home-main { width:100% !important; height:100% !important; min-height:0 !important; padding:0 !important; overflow:hidden !important; }
+.reference-home-hero { width:100% !important; height:100% !important; min-height:0 !important; max-width:none !important; margin:0 !important; border-radius:0 !important; box-shadow:none !important; }
+.reference-hero-art { background-position:center center !important; background-size:cover !important; }
 
-.app-shell {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  display: grid !important;
-  grid-template-rows: 82px minmax(0, 1fr) !important;
-  background: #c9ef86 !important;
-  isolation: isolate;
-}
+/* World pages are full-screen scenes below the app chrome. */
+.app-shell-worlds { grid-template-rows:82px minmax(0,1fr) !important; }
+.app-shell-worlds .worlds-main-content { min-height:0 !important; height:100% !important; padding:0 !important; overflow:hidden !important; }
 
-/* The navigation is part of the app chrome, never a website header. */
-.topbar {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  height: 82px !important;
-  min-height: 82px !important;
-  padding: 10px clamp(14px, 3vw, 46px) !important;
-  display: grid !important;
-  grid-template-columns: minmax(170px, 1fr) auto minmax(170px, 1fr) !important;
-  align-items: center !important;
-  gap: clamp(10px, 2vw, 30px) !important;
-  z-index: 50 !important;
-  background: rgba(246,255,225,.94) !important;
-  border: 0 !important;
-  box-shadow: 0 8px 24px rgba(74,105,36,.16) !important;
-  backdrop-filter: blur(12px) !important;
+@media (max-width:1100px) {
+  .app-shell { grid-template-rows:72px minmax(0,1fr) !important; }
+  .topbar { height:72px !important; min-height:72px !important; grid-template-columns:auto 1fr auto !important; }
+  .brand-logo { height:48px !important; max-width:160px !important; }
+  .desktop-nav { height:56px !important; }
+  .desktop-nav a { padding:0 12px !important; font-size:12px !important; }
+  .child-chip div { display:none !important; }.child-chip { padding-right:6px !important; }
 }
-
-.brand { justify-self: start !important; min-width: 0 !important; }
-.brand-logo { height: 54px !important; max-width: 190px !important; filter: drop-shadow(0 3px 4px rgba(62,89,28,.18)) !important; }
-
-.desktop-nav {
-  justify-self: center !important;
-  height: 62px !important;
-  padding: 7px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 7px !important;
-  background: #fff !important;
-  border: 4px solid rgba(119,163,65,.12) !important;
-  border-radius: 34px !important;
-  box-shadow: 0 7px 18px rgba(74,105,36,.12) !important;
+@media (max-width:760px) {
+  .topbar { padding:8px 10px !important; grid-template-columns:auto minmax(0,1fr) auto !important; gap:8px !important; }
+  .brand-logo { height:40px !important; max-width:125px !important; }
+  .desktop-nav { width:100% !important; max-width:430px !important; justify-self:center !important; height:52px !important; gap:3px !important; padding:5px !important; }
+  .desktop-nav a { flex:1 1 0 !important; min-width:0 !important; padding:0 5px !important; font-size:0 !important; gap:0 !important; }
+  .desktop-nav a svg { width:21px !important; height:21px !important; }
+  .child-chip { display:none !important; }.parent-access { margin:0 !important; }
+  .main-content .page { width:calc(100% - 20px) !important; padding:18px 0 30px !important; }
 }
-
-.desktop-nav a {
-  min-height: 46px !important;
-  padding: 0 18px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  border-radius: 27px !important;
-  color: #73806a !important;
-  background: transparent !important;
-  font-size: 14px !important;
-  font-weight: 900 !important;
-  white-space: nowrap !important;
+@media (orientation:portrait) and (max-width:760px) {
+  .app-shell { grid-template-rows:68px minmax(0,1fr) !important; }
+  .topbar { height:68px !important; min-height:68px !important; }
+  .brand-logo { height:37px !important; max-width:112px !important; }
+  .desktop-nav a svg { width:20px !important; height:20px !important; }
 }
-
-.desktop-nav a:hover { color: #52752e !important; background: #eef9d9 !important; }
-.desktop-nav a.active {
-  color: #fff !important;
-  background: linear-gradient(180deg,#a9d82f,#8dc324) !important;
-  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), 0 5px 10px rgba(100,143,36,.22) !important;
-}
-
-.child-chip {
-  justify-self: end !important;
-  min-width: 0 !important;
-  padding: 6px 12px 6px 6px !important;
-  border-radius: 30px !important;
-  background: #fff !important;
-  box-shadow: 0 6px 18px rgba(74,105,36,.12) !important;
-}
-.child-chip > span { width: 40px !important; height: 40px !important; background: #a9d82f !important; }
-.child-chip strong { color: #56614d !important; }
-.child-chip small { color: #8c9882 !important; }
-.parent-access { justify-self: end !important; margin-left: -12px !important; }
-
-.main-content {
-  min-height: 0 !important;
-  height: auto !important;
-  overflow: hidden !important;
-  position: relative !important;
-  padding: 0 !important;
-}
-
-/* Pages scroll only inside the app surface, never the browser document. */
-.main-content > * {
-  width: 100% !important;
-  min-width: 0 !important;
-}
-.main-content .page {
-  width: min(1440px, calc(100% - 48px)) !important;
-  max-width: 1440px !important;
-  min-height: 100% !important;
-  margin: 0 auto !important;
-  padding: 30px 0 46px !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(93,133,46,.35) transparent;
-}
-
-/* World pages remain true full-screen scenes with no app chrome inside them. */
-.app-shell-worlds {
-  grid-template-rows: 82px minmax(0,1fr) !important;
-}
-.app-shell-worlds .worlds-main-content {
-  min-height: 0 !important;
-  height: 100% !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-.bottom-nav { display: none !important; }
-
-@media (max-width: 1100px) {
-  .app-shell { grid-template-rows: 72px minmax(0,1fr) !important; }
-  .topbar { height: 72px !important; min-height: 72px !important; grid-template-columns: auto 1fr auto !important; }
-  .brand-logo { height: 48px !important; max-width: 160px !important; }
-  .desktop-nav { height: 56px !important; }
-  .desktop-nav a { padding: 0 12px !important; font-size: 12px !important; }
-  .child-chip div { display: none !important; }
-  .child-chip { padding-right: 6px !important; }
-}
-
-@media (max-width: 760px) {
-  .topbar {
-    padding: 8px 10px !important;
-    grid-template-columns: auto minmax(0,1fr) auto !important;
-    gap: 8px !important;
-  }
-  .brand-logo { height: 40px !important; max-width: 125px !important; }
-  .desktop-nav { width: 100% !important; max-width: 430px !important; justify-self: center !important; height: 52px !important; gap: 3px !important; padding: 5px !important; }
-  .desktop-nav a { flex: 1 1 0 !important; min-width: 0 !important; padding: 0 5px !important; font-size: 0 !important; gap: 0 !important; }
-  .desktop-nav a svg { width: 21px !important; height: 21px !important; }
-  .child-chip { display: none !important; }
-  .parent-access { margin: 0 !important; }
-  .main-content .page { width: calc(100% - 20px) !important; padding: 18px 0 30px !important; }
-}
-
-@media (orientation: portrait) and (max-width: 760px) {
-  /* Keep the product an app rather than a responsive website: portrait gets the same fixed app surface. */
-  .app-shell { grid-template-rows: 68px minmax(0,1fr) !important; }
-  .topbar { height: 68px !important; min-height: 68px !important; }
-  .brand-logo { height: 37px !important; max-width: 112px !important; }
-  .desktop-nav a svg { width: 20px !important; height: 20px !important; }
-}
-
-@media (display-mode: fullscreen), (display-mode: standalone) {
-  html, body, #root { width: 100%; height: 100%; overflow: hidden !important; }
-}
+@media (display-mode:fullscreen),(display-mode:standalone) { html,body,#root { width:100%;height:100%;overflow:hidden !important; } }

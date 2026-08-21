@@ -1,0 +1,63 @@
+/* Mobile navigation and fullscreen orientation fix. */
+
+@media (max-width: 760px) and (orientation: portrait) {
+  /* On phones the bottom navigation is the only primary navigation. */
+  .desktop-nav { display: none !important; }
+
+  .topbar {
+    height: 64px !important;
+    padding: 0 14px !important;
+    grid-template-columns: 1fr auto !important;
+    gap: 10px !important;
+  }
+
+  .brand-logo {
+    height: 50px !important;
+    max-width: 150px !important;
+  }
+
+  .child-chip {
+    justify-self: end !important;
+  }
+
+  .child-chip div,
+  .parent-access {
+    display: none !important;
+  }
+
+  .child-chip > span {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .bottom-nav {
+    display: grid !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 100 !important;
+  }
+
+  .main-content {
+    min-height: calc(100svh - 64px) !important;
+    padding-bottom: 76px !important;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  /* Landscape phone = app-like fullscreen content. */
+  .topbar,
+  .bottom-nav {
+    display: none !important;
+  }
+
+  .app-shell,
+  .main-content {
+    min-height: 100svh !important;
+  }
+
+  .page {
+    min-height: 100svh !important;
+  }
+}

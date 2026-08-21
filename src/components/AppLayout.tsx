@@ -22,42 +22,39 @@ const navItems = [
 export function AppLayout() {
   const { activeChild } = useApp()
   const location = useLocation()
-  const isHomePage = location.pathname === '/home'
   const isWorldsPage = location.pathname.startsWith('/worlds')
 
   return (
     <div className={`app-shell ${isWorldsPage ? 'app-shell-worlds' : ''}`}>
-      {!isHomePage && (
-        <header className="topbar">
-          <NavLink to="/home" className="brand" aria-label="Çocuğumla Büyüyorum">
-            <img src="/logo.png" alt="Çocuğumla Büyüyorum logo" className="brand-logo" />
-          </NavLink>
+      <header className="topbar">
+        <NavLink to="/home" className="brand" aria-label="Çocuğumla Büyüyorum">
+          <img src="/logo.png" alt="Çocuğumla Büyüyorum logo" className="brand-logo" />
+        </NavLink>
 
-          <nav className="desktop-nav" aria-label="Ana navigasyon">
-            {navItems.map(({ to, label, icon: Icon }) => (
-              <NavLink key={to} to={to} className={({ isActive }) => isActive ? 'active' : ''}>
-                <Icon size={18} aria-hidden="true" />
-                {label}
-              </NavLink>
-            ))}
-          </nav>
+        <nav className="desktop-nav" aria-label="Ana navigasyon">
+          {navItems.map(({ to, label, icon: Icon }) => (
+            <NavLink key={to} to={to} className={({ isActive }) => isActive ? 'active' : ''}>
+              <Icon size={18} aria-hidden="true" />
+              {label}
+            </NavLink>
+          ))}
+        </nav>
 
-          {activeChild && (
-            <>
-              <NavLink to="/profile" className="child-chip">
-                <span>{childNameInitial(activeChild.name)}</span>
-                <div>
-                  <strong>{formatChildName(activeChild.name)}</strong>
-                  <small>{calculateAge(activeChild.birthDate).label}</small>
-                </div>
-              </NavLink>
-              <NavLink to="/parent" className="parent-access" title="Ebeveyn Paneli" aria-label="Ebeveyn Paneli">
-                <Shield size={20} />
-              </NavLink>
-            </>
-          )}
-        </header>
-      )}
+        {activeChild && (
+          <>
+            <NavLink to="/profile" className="child-chip">
+              <span>{childNameInitial(activeChild.name)}</span>
+              <div>
+                <strong>{formatChildName(activeChild.name)}</strong>
+                <small>{calculateAge(activeChild.birthDate).label}</small>
+              </div>
+            </NavLink>
+            <NavLink to="/parent" className="parent-access" title="Ebeveyn Paneli" aria-label="Ebeveyn Paneli">
+              <Shield size={20} />
+            </NavLink>
+          </>
+        )}
+      </header>
 
       <main className={`main-content ${isWorldsPage ? 'worlds-main-content' : ''}`}>
         <Outlet />

@@ -64,11 +64,6 @@ export function WorldsPage() {
         <section className="worlds-map" aria-label="Keşif dünyaları haritası">
           <img src="/kesif-haritasi-arkaplan.png" alt="" className="worlds-map-background" draggable={false} />
           <div className="map-atmosphere" aria-hidden="true" />
-          <header className="map-title">
-            <div className="worlds-eyebrow"><Compass size={14} /> KEŞİF HARİTASI</div>
-            <h1>Dünyaları keşfet, yeni maceralara atıl!</h1>
-            <p>Öğrenirken eğlen, yıldızlarını topla ve yeni dünyaların kilidini aç.</p>
-          </header>
           <div className="map-progress-card">
             <div className="map-progress-title"><span>İlerlemen</span><Compass size={13} /></div>
             <div className="map-progress-ring"><strong>66%</strong></div>

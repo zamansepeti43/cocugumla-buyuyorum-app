@@ -1,6 +1,5 @@
 /* Mobile navigation + landscape fullscreen layout fix */
 
-/* Phones/tablets: keep exactly one navigation on the home screen. */
 @media (pointer: coarse) and (max-width: 1100px) {
   .reference-nav { display: none !important; }
   .reference-bottom-nav { display: none !important; }
@@ -44,29 +43,27 @@
   .reference-home-main { padding-bottom: 68px; }
 }
 
-/* Landscape phone: hide all navigation and fill the available viewport. */
-@media (pointer: coarse) and (orientation: landscape) and (max-height: 700px) {
+/* Landscape: use the whole web viewport and NEVER lock the document's vertical scroll. */
+@media (pointer: coarse) and (orientation: landscape) {
   html, body, #root {
     width: 100%;
     min-width: 0;
-    height: 100%;
     min-height: 100%;
-    overflow: hidden;
   }
 
   body { background: #050711; }
 
   .app-shell,
+  .main-content,
   .reference-home-page,
   .reference-home-shell,
-  .reference-home-main,
-  .main-content {
+  .reference-home-main {
     width: 100vw !important;
     min-width: 0 !important;
     max-width: none !important;
-    height: 100svh !important;
+    height: auto !important;
     min-height: 100svh !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   .reference-topbar,
@@ -76,31 +73,44 @@
     display: none !important;
   }
 
+  .reference-home-main { padding: 0 !important; }
+
   .reference-home-hero {
     width: 100vw !important;
+    min-width: 0 !important;
     height: 100svh !important;
     min-height: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
   }
 
-  .reference-hero-art { background-position: center center !important; }
-  .reference-home-main { padding: 0 !important; }
+  .reference-hero-art {
+    background-position: center center !important;
+    background-size: cover !important;
+  }
 }
 
-/* Larger landscape tablets/phones: same app-like composition. */
-@media (pointer: coarse) and (orientation: landscape) and (min-height: 701px) and (max-width: 1200px) {
-  .reference-topbar,
-  .topbar,
-  .bottom-nav,
-  .reference-bottom-nav { display: none !important; }
-
-  .reference-home-shell,
-  .reference-home-page,
-  .reference-home-main,
-  .reference-home-hero,
-  .main-content {
-    width: 100vw !important;
-    min-width: 0 !important;
+/* Compact landscape phones: fit the UI cards inside the short horizontal viewport. */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 700px) {
+  .reference-home-hero .reference-greeting {
+    transform: scale(.84);
+    transform-origin: left top;
   }
+
+  .reference-home-hero .reference-goal-card,
+  .reference-home-hero .reference-continue-card {
+    transform: scale(.78);
+    transform-origin: left top;
+  }
+
+  .reference-home-hero .reference-parent-panel,
+  .reference-home-hero .reference-recommend-panel {
+    transform: scale(.78);
+    transform-origin: right top;
+  }
+}
+
+/* Installed PWA modes can remove browser chrome completely. */
+@media (display-mode: fullscreen), (display-mode: standalone) {
+  html, body, #root { width: 100%; min-height: 100%; }
 }

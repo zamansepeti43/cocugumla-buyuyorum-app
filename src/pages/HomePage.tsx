@@ -12,9 +12,8 @@ const navItems = [
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-// Hero: gerçek bir çocuk çizim/eğitim fotoğrafı. Referanstaki sıcak ve sevimli
-// çocuk odaklı ana ekran kompozisyonuna uygun olacak şekilde doğrudan görsel URL'si kullanılıyor.
-const heroImage = 'https://unsplash.com/photos/nqI3t8M3qcI/download?force=true&w=1800'
+// Sıcak, sevimli çocuk-öğrenme sahnesi: metin/kartların arkasında tam ekran hero görseli.
+const heroImage = 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1800&q=88'
 const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
 const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 

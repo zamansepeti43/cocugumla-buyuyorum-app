@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useWorlds } from '../hooks/useWorlds'
 import { useProgress } from '../hooks/useProgress'
@@ -24,25 +25,55 @@ const islandArt = {
   math: ['https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=88'],
 }
 
+function NatureWorldMap({ onBack }: { onBack: () => void }) {
+  const islands = [
+    { title: 'Hayvanlar', icon: '🦊', art: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=900&q=88' },
+    { title: 'Doğa', icon: '🌿', art: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=88' },
+    { title: 'Sesler', icon: '🔊', art: 'https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=900&q=88' },
+  ]
+
+  return (
+    <main className="nature-world-screen" aria-label="Doğa Dünyası haritası">
+      <header className="nature-map-header">
+        <button type="button" className="nature-map-back" onClick={onBack}><ArrowLeft size={20} /> Geri</button>
+        <div><span>🌿 DOĞA DÜNYASI</span><h1>Keşfetmeye hazır mısın?</h1></div>
+        <div className="nature-map-stars">⭐ 0</div>
+      </header>
+      <div className="nature-map-scene">
+        <div className="nature-map-cloud cloud-a" /><div className="nature-map-cloud cloud-b" />
+        <div className="nature-map-sun" />
+        <div className="nature-map-hill hill-a" /><div className="nature-map-hill hill-b" />
+        <div className="nature-map-river" />
+        <div className="nature-map-path path-one" /><div className="nature-map-path path-two" />
+        <div className="nature-map-character">🦁</div>
+        <div className="nature-map-islands">
+          {islands.map((island, index) => (
+            <button key={island.title} type="button" className={`nature-map-island island-${index + 1}`} style={{ backgroundImage: `linear-gradient(180deg,rgba(255,255,255,.08),rgba(20,65,37,.58)),url(${island.art})` }}>
+              <span className="island-icon">{island.icon}</span><strong>{island.title}</strong><small>Keşfet →</small>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="nature-map-tip">Leo ile birlikte bir adaya dokun ve keşfe başla! 🐾</div>
+    </main>
+  )
+}
+
 export function WorldDetailPage() {
   const { worldId } = useParams()
   const { getWorld, getSections, isWorldUnlocked, isSectionUnlocked } = useWorlds()
   const { getTotalStars } = useProgress()
+  const [natureEntered, setNatureEntered] = useState(false)
 
   if (!worldId) return null
   const world = getWorld(worldId)
 
   if (!world) {
-    return (
-      <div className="page world-detail-page">
-        <div className="empty-state">
-          <span aria-hidden="true">🌍</span>
-          <h2>Dünya bulunamadı</h2>
-          <p>Bu dünya harita verilerinde kayıtlı değil.</p>
-          <Link to="/worlds">Keşif Haritası'na dön</Link>
-        </div>
-      </div>
-    )
+    return <div className="page world-detail-page"><div className="empty-state"><span aria-hidden="true">🌍</span><h2>Dünya bulunamadı</h2><p>Bu dünya harita verilerinde kayıtlı değil.</p><Link to="/worlds">Keşif Haritası'na dön</Link></div></div>
+  }
+
+  if (worldId === 'forest') {
+    return <div className="nature-world-route">{!natureEntered ? <ForestDiscoveryGame onNext={() => setNatureEntered(true)} /> : <NatureWorldMap onBack={() => setNatureEntered(false)} />}</div>
   }
 
   const presentation = worldPresentation[worldId] ?? { title: world.title, description: world.description, islands: [] }
@@ -54,59 +85,14 @@ export function WorldDetailPage() {
   return (
     <div className="page world-detail-page">
       <Link to="/worlds" className="back-link"><ArrowLeft size={18} />Keşif Haritası</Link>
-
-      {worldId === 'forest' ? (
-        <section className="forest-world-entry" aria-label="Doğa Dünyası giriş sahnesi">
-          <ForestDiscoveryGame />
-        </section>
-      ) : (
-        <section className="world-hero" style={{ ['--world-color' as string]: `var(--${world.color})` }}>
-          <div className="world-hero-visual">
-            <span className="world-hero-icon">{world.icon}</span>
-            <div className="world-hero-deco" aria-hidden="true"><span>✨</span><span>⭐</span><span>✨</span></div>
-          </div>
-          <div>
-            <span className="kicker">DÜNYA</span>
-            <h1>{presentation.title}</h1>
-            <p>{presentation.description}</p>
-          </div>
-          <div className="world-hero-stats"><span><Star size={16} />{totalStars} yıldız</span></div>
-        </section>
-      )}
-
-      {!unlocked && (
-        <div className="locked-notice"><Lock size={18} /><div><strong>Bu dünya şu anda kilitli.</strong><p>İçeriği görebilir, kilitli bölümleri ilerleme koşulları karşılandığında açabilirsin.</p></div></div>
-      )}
-
-      {presentation.islands.length > 0 && (
-        <section className="world-islands-strip" aria-label="Dünyanın alt adaları">
-          <div>
-            <span className="kicker">KEŞFEDİLECEK ADACIKLAR</span>
-            <strong>Bu dünyanın adalarına çık, keşfetmeye başla.</strong>
-          </div>
-          <div className="world-islands-list">
-            {presentation.islands.map((island, index) => (
-              <div className="world-island-chip" key={island} style={{ backgroundImage: `url(${art[index % art.length]})` }}>
-                <span aria-hidden="true">🌴</span>{island}
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="section-block">
-        <div className="section-heading">
-          <div><span className="kicker">BÖLÜMLER</span><h2>Bu dünyada neler öğreneceğiz?</h2></div>
-          <span className="section-count">{sectionsList.length} bölüm</span>
-        </div>
-        {sectionsList.length > 0 ? (
-          <div className="sections-list">
-            {sectionsList.map((section) => <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />)}
-          </div>
-        ) : (
-          <div className="section-empty"><span>📚</span><strong>Bu dünyaya henüz bölüm eklenmemiş.</strong></div>
-        )}
+      <section className="world-hero" style={{ ['--world-color' as string]: `var(--${world.color})` }}>
+        <div className="world-hero-visual"><span className="world-hero-icon">{world.icon}</span><div className="world-hero-deco" aria-hidden="true"><span>✨</span><span>⭐</span><span>✨</span></div></div>
+        <div><span className="kicker">DÜNYA</span><h1>{presentation.title}</h1><p>{presentation.description}</p></div>
+        <div className="world-hero-stats"><span><Star size={16} />{totalStars} yıldız</span></div>
       </section>
+      {!unlocked && <div className="locked-notice"><Lock size={18} /><div><strong>Bu dünya şu anda kilitli.</strong><p>İçeriği görebilir, kilitli bölümleri ilerleme koşulları karşılandığında açabilirsin.</p></div></div>}
+      {presentation.islands.length > 0 && <section className="world-islands-strip" aria-label="Dünyanın alt adaları"><div><span className="kicker">KEŞFEDİLECEK ADACIKLAR</span><strong>Bu dünyanın adalarına çık, keşfetmeye başla.</strong></div><div className="world-islands-list">{presentation.islands.map((island, index) => <div className="world-island-chip" key={island} style={{ backgroundImage: `url(${art[index % art.length]})` }}><span aria-hidden="true">🌴</span>{island}</div>)}</div></section>}
+      <section className="section-block"><div className="section-heading"><div><span className="kicker">BÖLÜMLER</span><h2>Bu dünyada neler öğreneceğiz?</h2></div><span className="section-count">{sectionsList.length} bölüm</span></div>{sectionsList.length > 0 ? <div className="sections-list">{sectionsList.map((section) => <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />)}</div> : <div className="section-empty"><span>📚</span><strong>Bu dünyaya henüz bölüm eklenmemiş.</strong></div>}</section>
     </div>
   )
 }

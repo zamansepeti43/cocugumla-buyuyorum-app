@@ -12,9 +12,11 @@ const navItems = [
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-const heroImage = '/ChatGPT Image 20 Ağu 2026 02_31_03.png'
-const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
-const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
+// Keep homepage imagery local so the hero never renders as an empty block
+// because an external URL or a renamed public asset is unavailable.
+const heroImage = '/assets/home/hero.webp'
+const storyImage = '/assets/home/story.webp'
+const animalImage = '/assets/home/animal.webp'
 
 export function HomePage() {
   const { activeChild } = useApp()

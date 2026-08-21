@@ -72,13 +72,13 @@
     overflow:hidden!important;
   }
 
-  /* Keep the same final 5-world artwork in landscape. */
+  /* Use the final 5-world artwork on landscape too. */
   .app-shell-worlds .worlds-map-background{
     width:100%!important;
     height:100%!important;
     object-fit:cover!important;
     object-position:center center!important;
-    content:url('/kesif-haritasi-arkaplan.png')!important;
+    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
   }
 
   .journey-panel{display:none!important}

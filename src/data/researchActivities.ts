@@ -1,4 +1,4 @@
-import type { Activity, ActivityCategory, WorldId } from '../types/models'
+import type { Activity, ActivityCategory, ActivityInteractionId, WorldId } from '../types/models'
 import { researchData1 } from './researchData1'
 import { researchData2 } from './researchData2'
 import { researchData3 } from './researchData3'
@@ -6,7 +6,7 @@ import { researchData4 } from './researchData4'
 import { researchData5 } from './researchData5'
 import { researchData6 } from './researchData6'
 
-type Row=[string,number,number,number,string,string,number,number,string]
+type Row=readonly [string,number,number,number,string,string,number,number,ActivityInteractionId]
 const rows:Row[]=[...researchData1,...researchData2,...researchData3,...researchData4,...researchData5,...researchData6]
 const areas=["Dinleme","Dil","İnce Motor","Duyusal","Neden-Sonuç","Kaba Motor","Keşif","Sosyal","Yönerge","Bilişsel","Görsel","Motor","Hareket","Sanat","Renkler","Şekiller","Matematik","Duygular","Günlük Yaşam","Müzik","Hikâye","Geometri","İngilizce","Bilim","Mantık","Sosyal-Duygusal","Keşfet","Masal","Oyun","Okuma Hazırlığı"]
 const cats:ActivityCategory[]=["cognitive","language","motor","cognitive","cognitive","motor","cognitive","social","cognitive","cognitive","cognitive","motor","motor","creativity","cognitive","cognitive","cognitive","social","social","creativity","social","cognitive","language","cognitive","cognitive","social","cognitive","social","cognitive","language"]

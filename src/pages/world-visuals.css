@@ -1,44 +1,202 @@
-/* Discovery map visual overrides for the new 5-island artwork. */
+/* Real-photo visual system. Photos are served from Unsplash's image CDN and used as atmospheric UI artwork. */
 
-.worlds-map .worlds-map-background {
-  object-fit: cover;
-  object-position: center center;
+.worlds-map .map-atmosphere {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.16), transparent 28%),
+    linear-gradient(180deg, rgba(9,25,61,.02), rgba(5,11,31,.22));
+  mix-blend-mode:soft-light;
 }
 
-/* The background artwork already contains the five illustrated islands.
-   Do not place a second photographic island over them. */
-.worlds-map .world-island-visual {
-  display: none !important;
-}
+.worlds-map .worlds-map-buttons { z-index:10; }
 
 .worlds-map .world-button {
-  width: 0;
-  height: 0;
-  overflow: visible;
+  width: 210px;
+  height: 170px;
+  transform: translate(-50%, -50%);
+}
+.worlds-map .world-button:hover { transform: translate(-50%, -50%) scale(1.045); }
+.worlds-map .world-button:active { transform: translate(-50%, -50%) scale(.98); }
+
+.world-island-visual {
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:210px;
+  height:142px;
+  transform:translate(-50%,-50%) rotate(-2deg);
+  overflow:hidden;
+  border:5px solid rgba(255,255,255,.78);
+  border-radius:48% 52% 43% 57% / 53% 43% 57% 47%;
+  background-position:center;
+  background-size:cover;
+  box-shadow:
+    0 24px 30px rgba(0,0,0,.28),
+    0 7px 0 rgba(50,65,55,.45),
+    inset 0 0 0 1px rgba(255,255,255,.25);
+  filter:saturate(1.08) contrast(1.02);
+}
+.world-island-visual::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.18), transparent 34%, rgba(0,0,0,.18));
+}
+.world-island-glow {
+  position:absolute;
+  width:70px;
+  height:70px;
+  left:18px;
+  top:12px;
+  border-radius:50%;
+  background:rgba(255,255,255,.22);
+  filter:blur(16px);
 }
 
-/* Match the clickable world labels to the five islands in the supplied artwork:
-   top row = nature / discovery / games, bottom row = stories / mind. */
-.worlds-map .world-button-forest { left: 23.5%; top: 34%; }
-.worlds-map .world-button-space { left: 50%; top: 34%; }
-.worlds-map .world-button-games { left: 77.5%; top: 34%; }
-.worlds-map .world-button-english { left: 32.5%; top: 75%; }
-.worlds-map .world-button-math { left: 65%; top: 75%; }
+.world-button-forest .world-island-visual { background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=88'); }
+.world-button-space .world-island-visual { background-image:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=88'); }
+.world-button-english .world-island-visual { background-image:url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=88'); }
+.world-button-games .world-island-visual { background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=88'); }
+.world-button-math .world-island-visual { background-image:url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=88'); }
 
 .worlds-map .world-label {
-  min-width: 150px;
-  max-width: 205px;
-  padding: 8px 12px 9px;
-  border: 2px solid rgba(255,255,255,.72);
-  border-radius: 14px;
-  box-shadow: 0 9px 20px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.25);
-  backdrop-filter: blur(4px);
+  position:absolute;
+  left:50%;
+  top:94%;
+  z-index:4;
+  min-width:145px;
+  padding:8px 12px;
+  transform:translateX(-50%);
+  border:2px solid rgba(255,255,255,.68);
+  box-shadow:0 9px 18px rgba(0,0,0,.3);
+  backdrop-filter:blur(5px);
+}
+.worlds-map .world-label-top { gap:6px; }
+.worlds-map .world-emoji { font-size:15px; }
+.worlds-map .world-label strong { font-size:10px; }
+.worlds-map .world-stars { font-size:8px; }
+
+/* Original positions are retained here as a fallback; final artwork overrides are below. */
+.world-button-forest { left:23%; top:38%; }
+.world-button-space { left:49%; top:30%; }
+.world-button-english { left:78%; top:39%; }
+.world-button-games { left:48%; top:72%; }
+.world-button-math { left:73%; top:72%; }
+
+/* World detail: replace the plain chip strip with a scenic mini archipelago. */
+.world-detail-page .world-islands-strip {
+  position:relative;
+  display:block;
+  min-height:360px;
+  padding:24px;
+  overflow:hidden;
+  border-radius:24px;
+  background:
+    linear-gradient(180deg, rgba(13,22,52,.22), rgba(7,11,25,.72)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=88') center/cover;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 24px 50px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.world-detail-page .world-islands-strip > div:first-child { position:relative; z-index:4; min-width:0; }
+.world-detail-page .world-islands-strip .kicker { color:#c4b7ff; }
+.world-detail-page .world-islands-strip > div:first-child strong { font-size:18px; }
+.world-detail-page .world-islands-list {
+  position:absolute;
+  inset:76px 24px 24px;
+  display:block;
+}
+.world-detail-page .world-island-chip {
+  position:absolute;
+  width:29%;
+  min-height:145px;
+  padding:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:hidden;
+  border:4px solid rgba(255,255,255,.72);
+  border-radius:47% 53% 44% 56% / 54% 43% 57% 46%;
+  color:#fff;
+  background-position:center;
+  background-size:cover;
+  box-shadow:0 20px 30px rgba(0,0,0,.32), 0 7px 0 rgba(38,45,70,.45);
+  font-size:13px;
+  font-weight:900;
+  text-shadow:0 2px 7px rgba(0,0,0,.55);
+  transition:transform .18s ease, filter .18s ease;
+}
+.world-detail-page .world-island-chip:hover { transform:translateY(-6px) scale(1.025); filter:brightness(1.08); }
+.world-detail-page .world-island-chip::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, transparent 42%, rgba(0,0,0,.72));
+}
+.world-detail-page .world-island-chip::after {
+  content:'Keşfet →';
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  font-size:9px;
+  opacity:.8;
+}
+.world-detail-page .world-island-chip span { display:none; }
+.world-detail-page .world-island-chip:nth-child(1) { left:2%; top:12%; background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=88'); }
+.world-detail-page .world-island-chip:nth-child(2) { left:35.5%; top:0; background-image:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=800&q=88'); }
+.world-detail-page .world-island-chip:nth-child(3) { right:2%; top:14%; background-image:url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=88'); }
+
+/* Home: replace emoji placeholders with real photographic artwork. */
+.premium-home-page .premium-illustration > span { opacity:0; }
+.premium-home-page .premium-illustration {
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  border-radius:42% 58% 52% 48% / 48% 44% 56% 52%;
+  box-shadow:0 22px 40px rgba(0,0,0,.25), inset 0 0 0 4px rgba(255,255,255,.18);
+  overflow:hidden;
+}
+.premium-home-page .premium-illustration::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),transparent 38%,rgba(0,0,0,.18));
+}
+.premium-home-page .illustration-child { background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=88'); }
+.premium-home-page .illustration-lion { background-image:url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=88'); }
+.premium-home-page .illustration-tiger { background-image:url('https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=800&q=88'); }
+.premium-home-page .illustration-bear { background-image:url('https://images.unsplash.com/photo-1554322662-4b56d7e7b2b3?auto=format&fit=crop&w=800&q=88'); }
+.premium-home-page .illustration-elephant { background-image:url('https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=88'); }
+.premium-home-page .premium-illustration i,
+.premium-home-page .premium-illustration b { display:none; }
+
+/* Final positioning for the supplied five-island discovery artwork. */
+.worlds-map .worlds-map-background { object-fit:cover; object-position:center center; }
+.worlds-map .world-island-visual { display:none !important; }
+.worlds-map .world-button { width:0; height:0; overflow:visible; }
+.worlds-map .world-button-forest { left:23.5%; top:34%; }
+.worlds-map .world-button-space { left:50%; top:34%; }
+.worlds-map .world-button-games { left:77.5%; top:34%; }
+.worlds-map .world-button-english { left:32.5%; top:75%; }
+.worlds-map .world-button-math { left:65%; top:75%; }
+.worlds-map .world-label {
+  min-width:150px;
+  max-width:205px;
+  padding:8px 12px 9px;
+  border:2px solid rgba(255,255,255,.72);
+  border-radius:14px;
+  box-shadow:0 9px 20px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.25);
+  backdrop-filter:blur(4px);
 }
 
-@media (max-width: 760px) {
-  .worlds-map .world-button-forest { left: 23.5%; top: 34%; }
-  .worlds-map .world-button-space { left: 50%; top: 34%; }
-  .worlds-map .world-button-games { left: 77.5%; top: 34%; }
-  .worlds-map .world-button-english { left: 32.5%; top: 75%; }
-  .worlds-map .world-button-math { left: 65%; top: 75%; }
+@media (max-width:760px) {
+  .worlds-map .world-button-forest { left:23.5%; top:34%; }
+  .worlds-map .world-button-space { left:50%; top:34%; }
+  .worlds-map .world-button-games { left:77.5%; top:34%; }
+  .worlds-map .world-button-english { left:32.5%; top:75%; }
+  .worlds-map .world-button-math { left:65%; top:75%; }
 }

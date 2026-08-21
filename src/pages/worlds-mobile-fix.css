@@ -1,10 +1,10 @@
 /* Mobile discovery-map layout. */
 
-@media (max-width:760px) and (orientation:portrait){
+@media(max-width:760px) and (orientation:portrait){
   .journey-panel{display:none!important}
 }
 
-@media (max-width:900px) and (orientation:landscape){
+@media(max-width:900px) and (orientation:landscape){
   .app-shell-worlds .topbar{display:none!important}
   .app-shell-worlds .reference-bottom-nav{display:none!important}
 
@@ -72,19 +72,19 @@
     overflow:hidden!important;
   }
 
-  /* Use the previously generated Keşif Dünyası artwork instead of the placeholder map. */
+  /* Keep the same final 5-world artwork in landscape. */
   .app-shell-worlds .worlds-map-background{
     width:100%!important;
     height:100%!important;
     object-fit:cover!important;
     object-position:center center!important;
-    content:url('/ChatGPT%20Image%2020%20A%C4%9Fu%202026%2002_31_03.png?v=2')!important;
+    content:url('/kesif-haritasi-arkaplan.png')!important;
   }
 
   .journey-panel{display:none!important}
 }
 
-@media (max-width:900px) and (orientation:landscape) and (max-height:700px){
+@media(max-width:900px) and (orientation:landscape) and (max-height:700px){
   .app-shell-worlds .worlds-main-content{min-height:100dvh!important;padding-bottom:0!important}
   .app-shell-worlds .worlds-map{height:100dvh!important;min-height:100dvh!important}
 }

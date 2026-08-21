@@ -1,4 +1,4 @@
-import { useRive } from '@rive-app/react-canvas'
+import { Alignment, Fit, useRive } from '@rive-app/react-canvas'
 
 type InteractiveRiveAnimationProps = {
   src: string
@@ -8,10 +8,8 @@ type InteractiveRiveAnimationProps = {
 }
 
 /**
- * Reusable animation layer for Çocuğumla Büyüyorum.
- *
- * The Rive runtime is MIT licensed. Individual .riv assets must be checked
- * separately for their own license before being shipped commercially.
+ * Reusable Rive animation layer for Çocuğumla Büyüyorum.
+ * Individual .riv assets must be checked separately for their own license.
  */
 export function InteractiveRiveAnimation({
   src,
@@ -24,8 +22,8 @@ export function InteractiveRiveAnimation({
     autoplay: true,
     stateMachines,
     layout: {
-      fit: 'contain',
-      alignment: 'center',
+      fit: Fit.Contain,
+      alignment: Alignment.Center,
     },
   })
 

@@ -12,11 +12,11 @@ const navItems = [
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-// Keep homepage imagery local so the hero never renders as an empty block
-// because an external URL or a renamed public asset is unavailable.
-const heroImage = '/assets/home/hero.webp'
-const storyImage = '/assets/home/story.webp'
-const animalImage = '/assets/home/animal.webp'
+// Use served web images here. The previous local hero path pointed to a file
+// that is not present in the repository, which made the hero render black.
+const heroImage = 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1800&q=90'
+const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
+const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 
 export function HomePage() {
   const { activeChild } = useApp()
@@ -49,7 +49,7 @@ export function HomePage() {
 
         <main className="reference-home-main">
           <section className="reference-home-hero">
-            <div className="reference-hero-art" style={{ backgroundImage: `url(${heroImage})` }} />
+            <div className="reference-hero-art" style={{ backgroundImage: `url("${heroImage}")` }} />
             <div className="reference-hero-shade" />
 
             <div className="reference-greeting">
@@ -68,7 +68,7 @@ export function HomePage() {
             </div>
 
             <NavLink to="/activities" className="reference-continue-card">
-              <div className="continue-thumb" style={{ backgroundImage: `url(${animalImage})` }} />
+              <div className="continue-thumb" style={{ backgroundImage: `url("${animalImage}")` }} />
               <div className="continue-copy">
                 <strong>Devam Et</strong>
                 <span>Uzayda Gezegenler</span>
@@ -79,15 +79,15 @@ export function HomePage() {
 
             <aside className="reference-parent-panel">
               <div className="panel-heading"><span>Ebeveyn Rehberi</span><ChevronDown size={13} /></div>
-              <div className="baby-photo" style={{ backgroundImage: `url(${storyImage})` }} />
+              <div className="baby-photo" style={{ backgroundImage: `url("${storyImage}")` }} />
               <div className="baby-copy"><small>Bebeğiniz</small><strong>2 Aylık</strong><span>Bu dönemde neler<br />yapabilirsiniz?</span></div>
               <NavLink to="/parent" className="guide-button">Rehberi Gör</NavLink>
             </aside>
 
             <aside className="reference-recommend-panel">
               <div className="panel-heading"><span>Önerilen İçerik</span><ChevronDown size={13} /></div>
-              <NavLink to="/worlds" className="mini-content"><span className="mini-image animal" style={{ backgroundImage: `url(${animalImage})` }} /><span><strong>Renkleri Öğreniyorum</strong><small>Oyun Dünyası</small></span></NavLink>
-              <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url(${storyImage})` }} /><span><strong>Hayvan Sesleri</strong><small>Doğa Dünyası</small></span></NavLink>
+              <NavLink to="/worlds" className="mini-content"><span className="mini-image animal" style={{ backgroundImage: `url("${animalImage}")` }} /><span><strong>Renkleri Öğreniyorum</strong><small>Oyun Dünyası</small></span></NavLink>
+              <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url("${storyImage}")` }} /><span><strong>Hayvan Sesleri</strong><small>Doğa Dünyası</small></span></NavLink>
             </aside>
           </section>
 

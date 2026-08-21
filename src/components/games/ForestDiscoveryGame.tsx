@@ -1,56 +1,78 @@
 import { useEffect, useState } from 'react'
-import { AnimatedSprite, duckFrames } from './AnimatedSprite'
 import './ForestDiscoveryGame.css'
 
-const guideBase = '/animations/kenney/toon/female-adventurer/character_femaleAdventurer_'
-const guideFrames = { idle: [`${guideBase}idle.png`], talk: [`${guideBase}talk.png`], cheer: [`${guideBase}cheer0.png`, `${guideBase}cheer1.png`], walk: Array.from({ length: 8 }, (_, i) => `${guideBase}walk${i}.png`) }
-const animals = [
-  { id: 'duck', name: 'Ördek', emoji: '🦆', fact: 'Ördekler yüzebilir ve suyu çok sever.' },
-  { id: 'dog', name: 'Köpek', emoji: '🐶', fact: 'Köpeklerin çok güçlü bir koku alma duyusu vardır.' },
-  { id: 'cow', name: 'İnek', emoji: '🐮', fact: 'İnekler otçuldur ve çoğunlukla ot yer.' },
-  { id: 'cat', name: 'Kedi', emoji: '🐱', fact: 'Kediler bıyıklarını çevrelerini hissetmek için kullanır.' },
+type Character = { id: string; name: string; image: string; fact: string; color: string }
+
+const characters: Character[] = [
+  { id: 'leo', name: 'Leo', image: '/illustrations/forest/leo-fox.svg', fact: 'Tilki çok iyi koku alır ve geceleri de çevresini dikkatle dinler.', color: '#ff9b5c' },
+  { id: 'luna', name: 'Luna', image: '/illustrations/forest/rabbit.svg', fact: 'Tavşanların uzun kulakları sesleri uzaktan duymalarına yardım eder.', color: '#e6a1d1' },
+  { id: 'milo', name: 'Milo', image: '/illustrations/forest/bear.svg', fact: 'Ayılar güçlü koku alma duyularıyla yiyecekleri uzaktan bulabilir.', color: '#b9784f' },
 ]
 
-function ToonGuide({ mode }: { mode: keyof typeof guideFrames }) {
-  const frames = guideFrames[mode]
-  const [frame, setFrame] = useState(0)
-  useEffect(() => {
-    if (frames.length === 1) { setFrame(0); return }
-    const timer = window.setInterval(() => setFrame((v) => (v + 1) % frames.length), mode === 'walk' ? 95 : 220)
-    return () => window.clearInterval(timer)
-  }, [frames.length, mode])
-  return <img src={frames[frame]} className="forest-guide-character" alt="Minik Kaşif" />
-}
-
 export function ForestDiscoveryGame() {
-  const [selected, setSelected] = useState('duck')
-  const [mode, setMode] = useState<'idle' | 'walk' | 'jump'>('idle')
-  const [guideMode, setGuideMode] = useState<keyof typeof guideFrames>('talk')
-  const [message, setMessage] = useState('Merhaba küçük kaşif! Ormanda bir hayvan keşfedelim.')
+  const [selected, setSelected] = useState('leo')
+  const [action, setAction] = useState<'idle' | 'bounce' | 'walk'>('idle')
+  const [message, setMessage] = useState('Merhaba küçük kaşif! Bugün ormanda Leo ile bir maceraya çıkıyoruz.')
   const [stars, setStars] = useState(0)
+  const character = characters.find((item) => item.id === selected) ?? characters[0]
+
   useEffect(() => {
-    const timer = window.setInterval(() => { setMode((v) => v === 'idle' ? 'walk' : 'idle'); setGuideMode((v) => v === 'talk' ? 'idle' : 'talk') }, 5000)
+    const timer = window.setInterval(() => setAction((value) => value === 'idle' ? 'bounce' : 'idle'), 4200)
     return () => window.clearInterval(timer)
   }, [])
-  const chooseAnimal = (id: string) => {
-    const animal = animals.find((item) => item.id === id)!
-    setSelected(id); setMode(id === 'duck' ? 'jump' : 'idle'); setGuideMode('cheer'); setStars((v) => v + 1)
-    setMessage(id === 'duck' ? 'Harika! Ördeği buldun. Ona dokununca zıplıyor! 🦆' : `${animal.name} hakkında yeni bir şey öğrendin! ${animal.fact}`)
+
+  const discover = (item: Character) => {
+    setSelected(item.id)
+    setAction('bounce')
+    setStars((value) => value + 1)
+    setMessage(`Harika keşif! ${item.name}: ${item.fact}`)
   }
-  return <div className="forest-discovery">
-    <div className="forest-scene">
-      <div className="forest-background-art" aria-hidden="true" /><div className="forest-sky-glow" />
-      <div className="forest-cloud cloud-one" /><div className="forest-cloud cloud-two" /><div className="forest-sun" />
-      <div className="forest-tree tree-left" /><div className="forest-tree tree-right" /><div className="forest-flower flower-one" /><div className="forest-flower flower-two" /><div className="forest-bush" />
-      <div className={`forest-character ${mode === 'walk' ? 'character-walking' : ''} ${mode === 'jump' ? 'character-jumping' : ''}`} onClick={() => { setMode('jump'); setGuideMode('cheer'); setStars((v) => v + 1); setMessage('Vak vak! Ördek seni fark etti! 🦆') }} role="button" tabIndex={0} aria-label="Animasyonlu ördeğe dokun">
-        <AnimatedSprite frames={duckFrames(mode)} fps={mode === 'jump' ? 8 : 10} width={190} height={190} alt="Animasyonlu ördek" /><span className="forest-character-shadow" />
+
+  return (
+    <div className="forest-discovery">
+      <div className="forest-scene" style={{ ['--character-color' as string]: character.color }}>
+        <div className="forest-layer forest-back" />
+        <div className="forest-layer forest-mid" />
+        <div className="forest-sun-art" />
+        <div className="forest-cloud-art cloud-one" />
+        <div className="forest-cloud-art cloud-two" />
+        <div className="forest-hill hill-one" />
+        <div className="forest-hill hill-two" />
+        <div className="forest-flower-bed" />
+
+        <div className={`forest-main-character ${action === 'bounce' ? 'is-bouncing' : ''} ${action === 'walk' ? 'is-walking' : ''}`}>
+          <img src={character.image} alt={character.name} />
+          <div className="character-glow" />
+        </div>
+
+        <div className="forest-story-card">
+          <div className="story-avatar"><img src="/illustrations/forest/leo-fox.svg" alt="Leo" /></div>
+          <div><strong>Leo</strong><p>{action === 'bounce' ? 'Vay! Bunu birlikte keşfettik!' : 'Sence ormanda başka neler var?'}</p></div>
+        </div>
+
+        <button className="forest-hotspot hotspot-flower" onClick={() => { setAction('bounce'); setMessage('Çiçeklerin arasında minik bir kelebek saklanıyor! 🦋'); setStars((value) => value + 1) }} aria-label="Çiçeği keşfet">✦</button>
+        <button className="forest-hotspot hotspot-tree" onClick={() => { setAction('bounce'); setMessage('Ağacın dallarında kuşların sesini duyabiliyor musun?'); setStars((value) => value + 1) }} aria-label="Ağacı keşfet">●</button>
       </div>
-      <div className="forest-guide-panel"><div className="forest-guide-bubble"><strong>Minik Kaşif</strong><span>{guideMode === 'cheer' ? 'Harika keşfettin!' : 'Hadi birlikte keşfedelim!'}</span></div><div className="forest-guide-character-wrap"><ToonGuide mode={guideMode} /></div></div>
-      <div className="forest-sparkles" aria-hidden="true">✦ ✧ ✦</div>
+
+      <div className="forest-header">
+        <div><span className="forest-kicker">DOĞA DÜNYASI · HİKÂYELİ KEŞİF</span><h2>Leo ile Orman Macerası</h2><p>Dokun, keşfet ve küçük kaşifin hikâyesine devam et.</p></div>
+        <div className="forest-stars">⭐ {stars}</div>
+      </div>
+
+      <div className="forest-message" aria-live="polite"><span className="forest-message-icon">💬</span><span>{message}</span></div>
+
+      <div className="forest-character-options">
+        {characters.map((item) => (
+          <button key={item.id} type="button" className={selected === item.id ? 'selected' : ''} onClick={() => discover(item)}>
+            <img src={item.image} alt="" /><span>{item.name}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="forest-actions">
+        <button type="button" className="forest-primary" onClick={() => { setAction('walk'); setMessage(`${character.name} seni ormanın derinliklerine götürüyor!`); setStars((value) => value + 1) }}>🌿 Maceraya Devam Et</button>
+        <button type="button" className="forest-secondary" onClick={() => { setAction('bounce'); setMessage(`${character.name} çok mutlu! Birlikte zıplayalım!`); setStars((value) => value + 1) }}>✨ Tepki Ver</button>
+      </div>
     </div>
-    <div className="forest-header"><div><span className="forest-kicker">🌿 ORMAN DÜNYASI · ANİMASYONLU KEŞİF</span><h2>Ormanda Hayvanları Keşfet</h2><p>Dokun, hareketini izle ve yeni bir şey öğren.</p></div><div className="forest-stars">⭐ {stars}</div></div>
-    <div className="forest-message" aria-live="polite"><span className="forest-message-icon">💬</span><span>{message}</span></div>
-    <div className="forest-animal-options">{animals.map((animal) => <button key={animal.id} type="button" className={selected === animal.id ? 'selected' : ''} onClick={() => chooseAnimal(animal.id)}><span>{animal.emoji}</span><strong>{animal.name}</strong></button>)}</div>
-    <div className="forest-actions"><button type="button" className="forest-primary" onClick={() => { setMode('walk'); setGuideMode('walk'); setMessage('Ördek ormanda yürüyor. Minik Kaşif de onu takip ediyor! 👀') }}>🚶 Keşfe Çık</button><button type="button" className="forest-secondary" onClick={() => { setMode('jump'); setGuideMode('cheer'); setStars((v) => v + 1); setMessage('Zıpla ördek! 🎉') }}>🦆 Zıplat</button></div>
-  </div>
+  )
 }

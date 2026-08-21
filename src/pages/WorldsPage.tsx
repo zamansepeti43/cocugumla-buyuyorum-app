@@ -63,7 +63,7 @@ export function WorldsPage() {
     <div className="page worlds-page">
       <section className="worlds-shell">
         <section className="worlds-map" aria-label="Keşif dünyaları haritası">
-          <img src="/kesif-haritasi-arkaplan.png" alt="" className="worlds-map-background" draggable={false} />
+          <img src="/kesif-haritasi-5-dunya.svg" alt="" className="worlds-map-background" draggable={false} />
           <div className="map-atmosphere" aria-hidden="true" />
           <div className="map-progress-card">
             <div className="map-progress-title"><span>İlerlemen</span><Compass size={13} /></div>

@@ -3,7 +3,7 @@
 @media(max-width:760px) and (orientation:portrait){
   .journey-panel{display:none!important}
 
-  /* Mobile portrait: the final five-world artwork is the single map source. */
+  /* Mobile portrait: use the canonical five-world artwork. */
   .app-shell-worlds .worlds-main-content{
     width:100%!important;
     min-height:100dvh!important;
@@ -31,7 +31,7 @@
     max-width:none!important;
     object-fit:cover!important;
     object-position:center center!important;
-    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
+    content:url('/kesif-haritasi-arkaplan.png?v=5world-final')!important;
     z-index:0!important;
   }
   .app-shell-worlds .map-atmosphere{z-index:1!important}
@@ -39,11 +39,9 @@
   .app-shell-worlds .worlds-map-buttons,
   .app-shell-worlds .random-world-button{z-index:5!important}
 
-  /* Keep the five world buttons above the artwork and prevent overflow. */
   .app-shell-worlds .worlds-map-buttons{position:absolute!important;inset:0!important}
   .app-shell-worlds .random-world-button{position:absolute!important;right:14px!important;bottom:14px!important}
 
-  /* Bottom navigation stays outside the map and remains fully tappable. */
   .app-shell-worlds .bottom-nav{
     position:fixed!important;
     left:0!important;
@@ -95,7 +93,6 @@
   .app-shell-worlds .topbar{display:none!important}
   .app-shell-worlds .reference-bottom-nav{display:none!important}
 
-  /* Landscape navigation: fixed compact rail on the left. */
   .app-shell-worlds .bottom-nav{
     position:fixed!important;
     left:10px!important;
@@ -166,7 +163,7 @@
     max-width:none!important;
     object-fit:cover!important;
     object-position:center center!important;
-    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
+    content:url('/kesif-haritasi-arkaplan.png?v=5world-final')!important;
     z-index:0!important;
   }
   .app-shell-worlds .map-atmosphere{z-index:1!important}

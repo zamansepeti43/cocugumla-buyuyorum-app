@@ -1,83 +1,17 @@
-/* Final discovery-map layout — clean placement over the supplied artwork. */
-.worlds-page{background:#050817!important;padding:14px 18px 28px!important}
-.worlds-shell{width:min(1480px,100%)!important}
-.worlds-heading{display:none!important}
-.worlds-map{position:relative!important;height:clamp(650px,58vw,800px)!important;min-height:620px!important;border-radius:22px!important;overflow:hidden!important;box-shadow:0 28px 70px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.15)!important}
-.worlds-map-background{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;z-index:0!important}
-.map-atmosphere{z-index:1!important}
-.map-title,.worlds-eyebrow{display:none!important}
+/* Reference map layout overrides. */
 
-/* Progress — high contrast so it remains readable over the artwork. */
-.map-progress-card{top:24px!important;left:24px!important;width:128px!important;padding:10px!important;border-radius:16px!important;background:rgba(6,12,30,.94)!important;border:1px solid rgba(255,255,255,.42)!important;backdrop-filter:blur(10px)!important;box-shadow:0 14px 30px rgba(0,0,0,.38)!important;color:#fff!important;text-align:center!important;z-index:50!important}
-.map-progress-title{display:flex!important;color:#fff!important;font-size:8px!important}
-.map-progress-ring{width:62px!important;height:62px!important;margin:7px auto 4px!important;background:conic-gradient(#61dcff 0 66%,#283a63 66% 100%)!important}
-.map-progress-ring::before{width:46px!important;height:46px!important;background:#0c1731!important}
-.map-progress-ring strong{color:#fff!important;font-size:12px!important}
-.map-progress-total{display:inline-flex!important;color:#fff!important;font-size:10px!important}
-
-.worlds-map-buttons{position:absolute!important;inset:0!important;z-index:20!important}
-.world-button{width:190px!important;height:56px!important;overflow:visible!important;transform:translate(-50%,-50%)!important}
-.world-button:hover{transform:translate(-50%,-50%) scale(1.04)!important}
-.world-island-visual{display:none!important}
-
-/* Match each label to the island it belongs to. The top row is raised; the bottom row is lowered without covering the islands. */
-.world-button-forest{left:23%!important;top:53%!important}
-.world-button-space{left:50%!important;top:53%!important}
-.world-button-games{left:78%!important;top:53%!important}
-.world-button-english{left:35%!important;top:82%!important}
-.world-button-math{left:70%!important;top:82%!important}
-
-.world-label{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;min-width:150px!important;max-width:190px!important;padding:7px 10px 8px!important;box-sizing:border-box!important;border:2px solid rgba(255,255,255,.7)!important;border-radius:12px!important;box-shadow:0 9px 20px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.3)!important;backdrop-filter:blur(5px)!important}
-.world-label strong{font-size:10px!important;line-height:1.05!important}
-.world-label-top{gap:5px!important}
-.world-emoji{font-size:14px!important}
-.world-subislands{display:flex!important;justify-content:center!important;gap:3px!important;margin-top:5px!important;flex-wrap:wrap!important}
-.world-subislands span{padding:3px 5px!important;border:1px solid rgba(255,255,255,.2)!important;border-radius:7px!important;background:rgba(0,0,0,.24)!important;font-size:6.5px!important}
-.world-stars{margin-top:3px!important;font-size:8px!important}
-
-.random-world-button{right:22px!important;bottom:22px!important;width:160px!important;min-height:54px!important;border-radius:14px!important;background:rgba(8,14,35,.92)!important;border:1px solid rgba(255,255,255,.35)!important;z-index:50!important}
-
-/* Thin journey bar with larger, easier-to-hit navigation buttons. */
-.journey-panel{margin-top:8px!important;padding:7px 12px!important;border-radius:14px!important;background:linear-gradient(135deg,rgba(21,24,59,.98),rgba(12,15,34,.98))!important;border:1px solid rgba(142,130,235,.28)!important}
-.journey-heading{margin-bottom:4px!important}
-.journey-title{font-size:9px!important}
-.journey-heading>span{font-size:6.5px!important}
-.journey-track{display:flex!important;align-items:center!important;gap:3px!important}
-.journey-step-wrapper{min-width:0!important}
-.journey-step{min-width:76px!important;gap:2px!important;font-size:7px!important}
-.journey-icon{width:46px!important;height:46px!important;border-radius:50%!important}
-.journey-icon svg{width:24px!important;height:24px!important}
-.journey-arrow{font-size:12px!important}
-.journey-message{flex:0 0 220px!important;min-height:42px!important;padding:5px 8px!important}
-.journey-message strong{font-size:7.5px!important}
-.journey-message span{font-size:6px!important}
-
-@media(max-width:1050px){
-  .world-button-forest{left:23%!important}.world-button-space{left:50%!important}.world-button-games{left:77%!important}
-  .world-button-english{left:35%!important}.world-button-math{left:70%!important}
-  .journey-step{min-width:64px!important}.journey-message{flex-basis:180px!important}
+.app-shell-worlds .worlds-map-background{
+  display:block!important;
 }
 
-@media(max-width:760px){
-  .worlds-map{height:500px!important;min-height:500px!important}
-  .map-progress-card{top:12px!important;left:12px!important;width:112px!important;transform:scale(.9)!important;transform-origin:top left!important}
-  .world-button{width:145px!important;height:50px!important}
-  .world-button-forest{left:23%!important;top:53%!important}.world-button-space{left:50%!important;top:53%!important}.world-button-games{left:77%!important;top:53%!important}
-  .world-button-english{left:35%!important;top:82%!important}.world-button-math{left:70%!important;top:82%!important}
-  .world-label{min-width:108px!important;max-width:140px!important;padding:6px 7px!important}
-  .world-label strong{font-size:7px!important}.world-subislands{display:none!important}.world-stars{font-size:6px!important}
-  .random-world-button{right:12px!important;bottom:12px!important;width:140px!important;min-height:48px!important}
-  .journey-heading>span,.journey-message{display:none!important}
-  .journey-track{overflow-x:auto!important;padding-bottom:1px!important}
-  .journey-step{min-width:58px!important}.journey-icon{width:40px!important;height:40px!important}
+@media(max-width:760px) and (orientation:portrait){
+  .app-shell-worlds .worlds-map-background{
+    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
+  }
 }
 
-@media(max-width:520px){
-  .worlds-page{padding:9px 8px 20px!important}
-  .worlds-map{height:430px!important;min-height:430px!important}
-  .world-button{width:120px!important;height:46px!important}
-  .world-button-forest{left:22%!important;top:53%!important}.world-button-space{left:50%!important;top:53%!important}.world-button-games{left:78%!important;top:53%!important}
-  .world-button-english{left:35%!important;top:82%!important}.world-button-math{left:70%!important;top:82%!important}
-  .world-label{min-width:88px!important;max-width:110px!important;padding:5px!important}.world-label strong{font-size:6px!important}
-  .journey-panel{padding:6px 7px!important}.journey-step{min-width:54px!important}.journey-icon{width:38px!important;height:38px!important}
+@media(max-width:900px) and (orientation:landscape){
+  .app-shell-worlds .worlds-map-background{
+    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
+  }
 }

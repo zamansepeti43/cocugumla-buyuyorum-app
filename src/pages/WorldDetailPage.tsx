@@ -8,6 +8,7 @@ import { ArrowLeft, Lock, Star } from 'lucide-react'
 import './world-detail.css'
 import './world-islands.css'
 import './world-visuals.css'
+import './nature-world-screen.css'
 
 const worldPresentation: Record<string, { title: string; description: string; islands: string[] }> = {
   forest: { title: 'Doğa Dünyası', description: 'Hayvanlar, doğa ve sesler', islands: ['Hayvanlar', 'Doğa', 'Sesler'] },

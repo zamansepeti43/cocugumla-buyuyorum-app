@@ -1,1 +1,1 @@
-export { allActivities, categoryMeta } from './allActivities'
+export { allActivities, activities, categoryMeta } from './allActivities'

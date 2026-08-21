@@ -1,6 +1,5 @@
 import type { ActivityInteractionId } from '../../types/models'
 import { AdvancedMemoryGame } from './AdvancedMemoryGame'
-import { AnimalFinderGame } from './AnimalFinderGame'
 import { AttentionSpotGame } from './AttentionSpotGame'
 import { BalloonTrack } from './BalloonTrack'
 import { BoxOpeningGame } from './BoxOpeningGame'
@@ -71,7 +70,7 @@ export const gameTitles: Partial<Record<ActivityInteractionId, string>> = {
   'touch-and-see': 'Dokun ve Gör',
   'sorting-game': 'Dokun ve Sırala',
   'color-match-mini': 'Doğru Rengi Bul',
-  'missing-shape': 'Kaybolan Şekli Bul',
+  'missing-shape': 'Doğru Şekli Bul',
   'animal-finder': 'Ormanda Hayvanları Keşfet',
   'motion-track': 'Hareketli Şekli Takip Et',
   'size-picker': 'Büyük-Küçük Seç',

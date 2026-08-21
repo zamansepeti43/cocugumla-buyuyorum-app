@@ -28,8 +28,7 @@ export function HomePage() {
       <div className="reference-home-shell">
         <header className="reference-topbar">
           <NavLink to="/home" className="reference-brand">
-            <span className="brand-mark"><i>♥</i><b>✦</b><em>●</em></span>
-            <span className="brand-title">Çocuğumla <strong>Büyüyorum</strong></span>
+            <img src="/logo.png" alt="Çocuğumla Büyüyorum" className="reference-brand-logo" />
           </NavLink>
 
           <nav className="reference-nav">

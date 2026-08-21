@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 620">
+<defs>
+ <radialGradient id="mane" cx="50%" cy="38%"><stop stop-color="#9a4b24"/><stop offset=".72" stop-color="#6d301d"/><stop offset="1" stop-color="#4b2418"/></radialGradient>
+ <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffc95c"/><stop offset="1" stop-color="#ed8b35"/></linearGradient>
+ <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#69b85b"/><stop offset="1" stop-color="#2e7544"/></linearGradient>
+</defs>
+<ellipse cx="240" cy="590" rx="105" ry="19" fill="#315d38" opacity=".22"/>
+<!-- mane --> <path d="M109 190C66 133 91 65 145 71C154 18 214 30 240 61C276 23 331 39 334 83C392 74 415 139 373 182C409 229 380 288 334 294C328 349 278 374 240 344C201 375 148 351 144 300C92 295 67 240 109 190Z" fill="url(#mane)"/>
+<!-- ears --> <path d="M143 127C104 111 101 60 127 49C159 36 188 69 182 111Z" fill="#e9953c" stroke="#5b2d1b" stroke-width="8"/><path d="M337 127C376 111 379 60 353 49C321 36 292 69 298 111Z" fill="#e9953c" stroke="#5b2d1b" stroke-width="8"/>
+<!-- face --> <ellipse cx="240" cy="205" rx="112" ry="126" fill="url(#fur)" stroke="#7c3b21" stroke-width="8"/>
+<ellipse cx="196" cy="183" rx="23" ry="31" fill="#fff"/><ellipse cx="284" cy="183" rx="23" ry="31" fill="#fff"/><circle cx="201" cy="188" r="12" fill="#33251e"/><circle cx="279" cy="188" r="12" fill="#33251e"/><circle cx="204" cy="183" r="4" fill="#fff"/><circle cx="282" cy="183" r="4" fill="#fff"/>
+<ellipse cx="240" cy="232" rx="18" ry="13" fill="#5a2c25"/><path d="M205 254Q240 287 275 254" fill="none" stroke="#632c25" stroke-width="9" stroke-linecap="round"/><path d="M217 261Q240 278 263 261" fill="#f27a70"/>
+<!-- body/outfit --> <path d="M151 329Q240 288 329 329L349 493Q240 530 131 493Z" fill="url(#shirt)" stroke="#285d3a" stroke-width="8"/>
+<path d="M167 345Q240 325 313 345" fill="none" stroke="#9bd879" stroke-width="7" opacity=".65"/>
+<!-- backpack --> <path d="M137 350Q100 378 111 470" fill="none" stroke="#6c4325" stroke-width="30" stroke-linecap="round"/><path d="M343 350Q380 378 369 470" fill="none" stroke="#6c4325" stroke-width="30" stroke-linecap="round"/>
+<!-- arms --> <path d="M153 367Q95 400 106 456" fill="none" stroke="#f2a746" stroke-width="34" stroke-linecap="round"/><path d="M327 366Q389 339 403 284" fill="none" stroke="#f2a746" stroke-width="34" stroke-linecap="round"/>
+<!-- waving paw --> <circle cx="404" cy="274" r="28" fill="#f2a746"/><path d="M389 253l-8-25M404 248l-1-28M418 251l8-25" stroke="#f2a746" stroke-width="12" stroke-linecap="round"/>
+<!-- compass --> <circle cx="240" cy="365" r="31" fill="#f4d37a" stroke="#714829" stroke-width="7"/><circle cx="240" cy="365" r="20" fill="#eaf3e6"/><path d="m240 345 7 20-7 20-7-20Z" fill="#e46a46"/>
+<!-- shorts/legs --> <path d="M151 478L204 478L196 548L143 548Z" fill="#d9a95f" stroke="#865a32" stroke-width="7"/><path d="M276 478L329 478L337 548L284 548Z" fill="#d9a95f" stroke="#865a32" stroke-width="7"/>
+<!-- boots --> <path d="M140 532Q172 518 205 538L210 581Q171 597 129 579Z" fill="#704426" stroke="#4a2b1c" stroke-width="8"/><path d="M275 538Q308 518 340 532L351 579Q309 597 270 581Z" fill="#704426" stroke="#4a2b1c" stroke-width="8"/>
+<!-- tail --> <path d="M330 440Q421 458 394 528Q378 559 349 538" fill="none" stroke="#ed8b35" stroke-width="24" stroke-linecap="round"/><circle cx="349" cy="538" r="24" fill="#6d301d"/>
+</svg>

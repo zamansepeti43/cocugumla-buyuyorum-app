@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react'
 import { AnimatedSprite, duckFrames } from './AnimatedSprite'
 import './ForestDiscoveryGame.css'
 
+const guideBase = '/animations/kenney/toon/female-adventurer/character_femaleAdventurer_'
+const guideFrames = {
+  idle: [`${guideBase}idle.png`],
+  talk: [`${guideBase}talk.png`],
+  cheer: [`${guideBase}cheer0.png`, `${guideBase}cheer1.png`],
+  walk: Array.from({ length: 8 }, (_, index) => `${guideBase}walk${index}.png`),
+}
+
 const animals = [
   { id: 'duck', name: 'Ördek', emoji: '🦆', fact: 'Ördekler yüzebilir ve suyu çok sever.' },
   { id: 'dog', name: 'Köpek', emoji: '🐶', fact: 'Köpeklerin çok güçlü bir koku alma duyusu vardır.' },
@@ -9,15 +17,41 @@ const animals = [
   { id: 'cat', name: 'Kedi', emoji: '🐱', fact: 'Kediler bıyıklarını çevrelerini hissetmek için kullanır.' },
 ]
 
+function ToonGuide({ mode }: { mode: keyof typeof guideFrames }) {
+  const frames = guideFrames[mode]
+  const [frame, setFrame] = useState(0)
+
+  useEffect(() => {
+    if (frames.length === 1) {
+      setFrame(0)
+      return
+    }
+    const timer = window.setInterval(() => {
+      setFrame((current) => (current + 1) % frames.length)
+    }, mode === 'walk' ? 95 : 220)
+    return () => window.clearInterval(timer)
+  }, [frames.length, mode])
+
+  return (
+    <img
+      src={frames[frame]}
+      className="forest-guide-character"
+      alt="Minik Kaşif"
+    />
+  )
+}
+
 export function ForestDiscoveryGame() {
   const [selected, setSelected] = useState('duck')
   const [mode, setMode] = useState<'idle' | 'walk' | 'jump'>('idle')
+  const [guideMode, setGuideMode] = useState<keyof typeof guideFrames>('talk')
   const [message, setMessage] = useState('Merhaba küçük kaşif! Ormanda bir hayvan keşfedelim.')
   const [stars, setStars] = useState(0)
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setMode((current) => current === 'idle' ? 'walk' : 'idle')
+      setGuideMode((current) => current === 'talk' ? 'idle' : 'talk')
     }, 5000)
     return () => window.clearInterval(timer)
   }, [])
@@ -26,6 +60,7 @@ export function ForestDiscoveryGame() {
     const animal = animals.find((item) => item.id === id)!
     setSelected(id)
     setMode(id === 'duck' ? 'jump' : 'idle')
+    setGuideMode('cheer')
     setStars((value) => value + 1)
     setMessage(id === 'duck'
       ? 'Harika! Ördeği buldun. Ona dokununca zıplıyor! 🦆'
@@ -35,12 +70,11 @@ export function ForestDiscoveryGame() {
   return (
     <div className="forest-discovery">
       <div className="forest-scene">
+        <div className="forest-background-art" aria-hidden="true" />
         <div className="forest-sky-glow" />
         <div className="forest-cloud cloud-one">☁️</div>
         <div className="forest-cloud cloud-two">☁️</div>
         <div className="forest-sun">☀️</div>
-        <div className="forest-hill hill-back" />
-        <div className="forest-hill hill-front" />
         <div className="forest-tree tree-left">🌳</div>
         <div className="forest-tree tree-right">🌳</div>
         <div className="forest-flower flower-one">🌼</div>
@@ -51,6 +85,7 @@ export function ForestDiscoveryGame() {
           className={`forest-character ${mode === 'walk' ? 'character-walking' : ''} ${mode === 'jump' ? 'character-jumping' : ''}`}
           onClick={() => {
             setMode('jump')
+            setGuideMode('cheer')
             setStars((value) => value + 1)
             setMessage('Vak vak! Ördek seni fark etti! 🦆')
           }}
@@ -69,11 +104,13 @@ export function ForestDiscoveryGame() {
           <span className="forest-character-shadow" />
         </div>
 
-        <div className="forest-guide">
-          <div className="forest-guide-avatar">🧒</div>
-          <div>
+        <div className="forest-guide-panel">
+          <div className="forest-guide-bubble">
             <strong>Minik Kaşif</strong>
-            <span>Ördeğe dokun!</span>
+            <span>{guideMode === 'cheer' ? 'Harika keşfettin!' : 'Hadi birlikte keşfedelim!'}</span>
+          </div>
+          <div className="forest-guide-character-wrap">
+            <ToonGuide mode={guideMode} />
           </div>
         </div>
 
@@ -111,10 +148,12 @@ export function ForestDiscoveryGame() {
       <div className="forest-actions">
         <button type="button" className="forest-primary" onClick={() => {
           setMode('walk')
-          setMessage('Ördek ormanda yürüyor. Bakalım nereye gidecek? 👀')
-        }}>🚶 Yürüt</button>
+          setGuideMode('walk')
+          setMessage('Ördek ormanda yürüyor. Minik Kaşif de onu takip ediyor! 👀')
+        }}>🚶 Keşfe Çık</button>
         <button type="button" className="forest-secondary" onClick={() => {
           setMode('jump')
+          setGuideMode('cheer')
           setStars((value) => value + 1)
           setMessage('Zıpla ördek! 🎉')
         }}>🦆 Zıplat</button>

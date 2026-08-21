@@ -12,9 +12,7 @@ const navItems = [
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-// Use served web images here. The previous local hero path pointed to a file
-// that is not present in the repository, which made the hero render black.
-const heroImage = 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1800&q=90'
+const heroImage = 'https://www.earlychildhood.sa.gov.au/__data/assets/image/0009/914994/EducationDepartmentFEB2020AZ7-321.jpg'
 const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
 const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 
@@ -89,15 +87,15 @@ export function HomePage() {
               <NavLink to="/worlds" className="mini-content"><span className="mini-image animal" style={{ backgroundImage: `url("${animalImage}")` }} /><span><strong>Renkleri Öğreniyorum</strong><small>Oyun Dünyası</small></span></NavLink>
               <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url("${storyImage}")` }} /><span><strong>Hayvan Sesleri</strong><small>Doğa Dünyası</small></span></NavLink>
             </aside>
-          </section>
 
-          <nav className="reference-bottom-nav" aria-label="Ana menü">
-            <NavLink to="/worlds"><Compass size={18} /><span>Keşfet</span></NavLink>
-            <NavLink to="/activities"><Gamepad2 size={18} /><span>Oyunlar</span></NavLink>
-            <NavLink to="/stories"><BookOpen size={18} /><span>Kitaplık</span></NavLink>
-            <NavLink to="/activities"><Sparkles size={18} /><span>Etkinlikler</span></NavLink>
-            <NavLink to="/profile"><Trophy size={18} /><span>Ödüller</span></NavLink>
-          </nav>
+            <nav className="reference-bottom-nav" aria-label="Ana menü">
+              <NavLink to="/worlds"><Compass size={18} /><span>Keşfet</span></NavLink>
+              <NavLink to="/activities"><Gamepad2 size={18} /><span>Oyunlar</span></NavLink>
+              <NavLink to="/stories"><BookOpen size={18} /><span>Kitaplık</span></NavLink>
+              <NavLink to="/activities"><Sparkles size={18} /><span>Etkinlikler</span></NavLink>
+              <NavLink to="/profile"><Trophy size={18} /><span>Ödüller</span></NavLink>
+            </nav>
+          </section>
         </main>
 
         <div className="reference-home-mobile"><ArrowRight size={14} /> Kaydırarak keşfet</div>

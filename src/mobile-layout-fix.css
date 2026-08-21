@@ -1,51 +1,22 @@
-/* Mobile navigation + landscape fullscreen layout fix */
+/* Mobile navigation: portrait = hidden, landscape = premium fixed navigation. */
 
-@media (pointer: coarse) and (max-width: 1100px) {
-  .reference-nav { display: none !important; }
-  .reference-bottom-nav { display: flex !important; }
-
+@media (pointer: coarse) and (max-width: 1100px) and (orientation: portrait) {
+  .reference-nav,
+  .reference-bottom-nav,
   .bottom-nav {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    z-index: 1000 !important;
-    height: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
-    padding: 6px 8px env(safe-area-inset-bottom, 0px) !important;
-    display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    align-items: center;
-    background: rgba(13,13,20,.97);
-    border-top: 1px solid rgba(255,255,255,.10);
-    backdrop-filter: blur(16px);
+    display: none !important;
   }
 
-  .bottom-nav a {
-    min-width: 0;
-    min-height: 54px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 600;
-    border-radius: 10px;
+  .main-content,
+  .reference-home-main {
+    padding-bottom: 0 !important;
   }
-
-  .bottom-nav a.active {
-    color: var(--gold);
-    background: rgba(244,185,63,.08);
-  }
-
-  .main-content { min-height: 100svh; padding-bottom: 68px; }
-  .reference-home-main { padding-bottom: 68px; }
 }
 
-/* Landscape phone/tablet: hide browser-like app chrome and use the complete web viewport. */
 @media (pointer: coarse) and (orientation: landscape) {
-  html, body, #root {
+  html,
+  body,
+  #root {
     width: 100%;
     min-width: 0;
     min-height: 100%;
@@ -58,89 +29,189 @@
 
   .app-shell,
   .main-content,
+  .worlds-main-content,
   .reference-home-page,
   .reference-home-shell,
   .reference-home-main {
     width: 100% !important;
     min-width: 0 !important;
     max-width: none !important;
-    height: auto !important;
     min-height: 100svh !important;
     overflow: visible !important;
   }
 
+  /* Browser/header chrome is removed from the app layout in landscape. */
   .reference-topbar,
   .topbar,
-  .bottom-nav {
+  .reference-bottom-nav {
     display: none !important;
   }
 
-  /* Keep the application's 5 navigation buttons in landscape.
-     They live inside the 1380x610 composition and therefore scale together
-     with the rest of the home screen instead of disappearing. */
-  .reference-bottom-nav {
-    display: flex !important;
-    position: absolute !important;
+  /* The real application navigation: visible ONLY in landscape. */
+  .bottom-nav {
+    position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    z-index: 50 !important;
-    height: 82px !important;
-    padding: 0 16% !important;
+    width: 100% !important;
+    height: 72px !important;
+    padding: 7px max(18px, env(safe-area-inset-left, 0px)) max(7px, env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    z-index: 9999 !important;
+    background: linear-gradient(180deg, rgba(15,17,38,.96), rgba(7,9,22,.99)) !important;
+    border-top: 1px solid rgba(150,137,255,.28) !important;
+    box-shadow: 0 -12px 35px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06) !important;
+    backdrop-filter: blur(18px) saturate(130%) !important;
+  }
+
+  .bottom-nav a {
+    min-width: 0 !important;
+    min-height: 56px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    color: rgba(235,241,255,.58) !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
+    transition: .18s ease !important;
+  }
+
+  .bottom-nav a svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  .bottom-nav a.active {
+    color: #f5c43b !important;
+    background: linear-gradient(180deg, rgba(245,196,59,.13), rgba(245,196,59,.04)) !important;
+    border-color: rgba(245,196,59,.24) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 5px 18px rgba(0,0,0,.18) !important;
+  }
+
+  .main-content {
+    padding-bottom: 72px !important;
     box-sizing: border-box !important;
   }
 
+  /* Home landscape: fit the full composition above the navigation bar. */
   .reference-home-main {
-    padding: 0 !important;
-    overflow: visible !important;
+    padding: 0 0 72px !important;
+    box-sizing: border-box !important;
   }
 
   .reference-home-hero {
-    width: 1380px !important;
-    height: 610px !important;
-    min-width: 1380px !important;
-    min-height: 610px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: calc(100svh - 72px) !important;
+    min-height: calc(100svh - 72px) !important;
     max-width: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    transform: none !important;
-    transform-origin: top left !important;
     margin: 0 !important;
+    transform: none !important;
   }
 
   .reference-hero-art {
     background-position: center center !important;
     background-size: cover !important;
   }
+
+  /* Discovery map landscape: reserve the full bottom navigation height. */
+  .app-shell-worlds .worlds-main-content {
+    min-height: calc(100svh - 72px) !important;
+    padding-bottom: 72px !important;
+    box-sizing: border-box !important;
+  }
+
+  .app-shell-worlds .worlds-page {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .app-shell-worlds .worlds-shell {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .app-shell-worlds .worlds-map {
+    width: 100% !important;
+    height: calc(100svh - 72px) !important;
+    min-height: calc(100svh - 72px) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .app-shell-worlds .worlds-map-background {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    content: url('/kesif-haritasi-arkaplan.png?v=5worlds') !important;
+  }
+
+  .app-shell-worlds .journey-panel {
+    display: none !important;
+  }
 }
 
-/* Never force a clipped 100vh hero on short landscape screens. */
 @media (pointer: coarse) and (orientation: landscape) and (max-height: 700px) {
-  .reference-home-shell,
-  .reference-home-page,
-  .reference-home-main {
-    overflow: visible !important;
-  }
-
-  .reference-bottom-nav {
+  .bottom-nav {
     height: 64px !important;
-    padding: 0 12% !important;
+    padding: 5px max(10px, env(safe-area-inset-left, 0px)) max(5px, env(safe-area-inset-bottom, 0px)) !important;
+    gap: 5px !important;
   }
 
-  .reference-bottom-nav a {
+  .bottom-nav a {
+    min-height: 54px !important;
     font-size: 8px !important;
-    gap: 4px !important;
+    gap: 3px !important;
+    border-radius: 10px !important;
   }
 
-  .reference-bottom-nav svg {
-    width: 18px !important;
-    height: 18px !important;
+  .bottom-nav a svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .main-content {
+    padding-bottom: 64px !important;
+  }
+
+  .reference-home-main {
+    padding-bottom: 64px !important;
+  }
+
+  .reference-home-hero {
+    height: calc(100svh - 64px) !important;
+    min-height: calc(100svh - 64px) !important;
+  }
+
+  .app-shell-worlds .worlds-main-content {
+    min-height: calc(100svh - 64px) !important;
+    padding-bottom: 64px !important;
+  }
+
+  .app-shell-worlds .worlds-map {
+    height: calc(100svh - 64px) !important;
+    min-height: calc(100svh - 64px) !important;
   }
 }
 
-/* Installed PWA modes can remove browser chrome completely. */
+/* Installed PWA/fullscreen modes use the whole device viewport. */
 @media (display-mode: fullscreen), (display-mode: standalone) {
-  html, body, #root {
+  html,
+  body,
+  #root {
     width: 100%;
     min-height: 100%;
   }

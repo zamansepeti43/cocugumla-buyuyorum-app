@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useWorlds } from '../hooks/useWorlds'
 import { useProgress } from '../hooks/useProgress'
 import { SectionCard } from '../components/SectionCard'
+import { ForestDiscoveryGame } from '../components/games/ForestDiscoveryGame'
 import { ArrowLeft, Lock, Star } from 'lucide-react'
 import './world-detail.css'
 import './world-islands.css'
@@ -52,19 +53,26 @@ export function WorldDetailPage() {
 
   return (
     <div className="page world-detail-page">
-      <section className="world-hero" style={{ ['--world-color' as string]: `var(--${world.color})` }}>
-        <Link to="/worlds" className="back-link"><ArrowLeft size={18} />Keşif Haritası</Link>
-        <div className="world-hero-visual">
-          <span className="world-hero-icon">{world.icon}</span>
-          <div className="world-hero-deco" aria-hidden="true"><span>✨</span><span>⭐</span><span>✨</span></div>
-        </div>
-        <div>
-          <span className="kicker">DÜNYA</span>
-          <h1>{presentation.title}</h1>
-          <p>{presentation.description}</p>
-        </div>
-        <div className="world-hero-stats"><span><Star size={16} />{totalStars} yıldız</span></div>
-      </section>
+      <Link to="/worlds" className="back-link"><ArrowLeft size={18} />Keşif Haritası</Link>
+
+      {worldId === 'forest' ? (
+        <section className="forest-world-entry" aria-label="Doğa Dünyası giriş sahnesi">
+          <ForestDiscoveryGame />
+        </section>
+      ) : (
+        <section className="world-hero" style={{ ['--world-color' as string]: `var(--${world.color})` }}>
+          <div className="world-hero-visual">
+            <span className="world-hero-icon">{world.icon}</span>
+            <div className="world-hero-deco" aria-hidden="true"><span>✨</span><span>⭐</span><span>✨</span></div>
+          </div>
+          <div>
+            <span className="kicker">DÜNYA</span>
+            <h1>{presentation.title}</h1>
+            <p>{presentation.description}</p>
+          </div>
+          <div className="world-hero-stats"><span><Star size={16} />{totalStars} yıldız</span></div>
+        </section>
+      )}
 
       {!unlocked && (
         <div className="locked-notice"><Lock size={18} /><div><strong>Bu dünya şu anda kilitli.</strong><p>İçeriği görebilir, kilitli bölümleri ilerleme koşulları karşılandığında açabilirsin.</p></div></div>
@@ -78,11 +86,7 @@ export function WorldDetailPage() {
           </div>
           <div className="world-islands-list">
             {presentation.islands.map((island, index) => (
-              <div
-                className="world-island-chip"
-                key={island}
-                style={{ backgroundImage: `url(${art[index % art.length]})` }}
-              >
+              <div className="world-island-chip" key={island} style={{ backgroundImage: `url(${art[index % art.length]})` }}>
                 <span aria-hidden="true">🌴</span>{island}
               </div>
             ))}

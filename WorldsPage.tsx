@@ -1,5 +1,6 @@
 import { useWorlds } from '../hooks/useWorlds'
 import { WorldCard } from '../components/WorldCard'
+import { NatureWorldEntrance } from '../components/NatureWorldEntrance'
 
 export function WorldsPage() {
   const { availableWorlds, lockedWorlds } = useWorlds()
@@ -13,6 +14,8 @@ export function WorldsPage() {
           <p>Yaşına uygun dünyaları keşfedip içerikleri tamamla.</p>
         </div>
       </section>
+
+      {availableWorlds.some((world) => world.id === 'forest') && <NatureWorldEntrance />}
 
       {availableWorlds.length > 0 && (
         <section className="section-block">

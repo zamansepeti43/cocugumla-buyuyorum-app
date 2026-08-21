@@ -1,4 +1,4 @@
-import { Alignment, Fit, useRive } from '@rive-app/react-canvas'
+import { useRive } from '@rive-app/react-canvas'
 
 type InteractiveRiveAnimationProps = {
   src: string
@@ -21,10 +21,6 @@ export function InteractiveRiveAnimation({
     src,
     autoplay: true,
     stateMachines,
-    layout: {
-      fit: Fit.Contain,
-      alignment: Alignment.Center,
-    },
   })
 
   return (

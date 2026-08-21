@@ -43,7 +43,7 @@
   .reference-home-main { padding-bottom: 68px; }
 }
 
-/* Landscape: use the whole web viewport and NEVER lock the document's vertical scroll. */
+/* Landscape phone/tablet: hide browser-like app chrome and use the complete web viewport. */
 @media (pointer: coarse) and (orientation: landscape) {
   html, body, #root {
     width: 100%;
@@ -51,14 +51,17 @@
     min-height: 100%;
   }
 
-  body { background: #050711; }
+  body {
+    background: #050711;
+    overflow-x: hidden !important;
+  }
 
   .app-shell,
   .main-content,
   .reference-home-page,
   .reference-home-shell,
   .reference-home-main {
-    width: 100vw !important;
+    width: 100% !important;
     min-width: 0 !important;
     max-width: none !important;
     height: auto !important;
@@ -73,15 +76,24 @@
     display: none !important;
   }
 
-  .reference-home-main { padding: 0 !important; }
+  .reference-home-main {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
 
+  /* JS sets zoom from the real viewport dimensions so the 1380x610
+     desktop composition fits completely inside a short landscape phone. */
   .reference-home-hero {
-    width: 100vw !important;
-    min-width: 0 !important;
-    height: 100svh !important;
-    min-height: 0 !important;
+    width: 1380px !important;
+    height: 610px !important;
+    min-width: 1380px !important;
+    min-height: 610px !important;
+    max-width: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    transform: none !important;
+    transform-origin: top left !important;
+    margin: 0 !important;
   }
 
   .reference-hero-art {
@@ -90,27 +102,19 @@
   }
 }
 
-/* Compact landscape phones: fit the UI cards inside the short horizontal viewport. */
+/* Never force a clipped 100vh hero on short landscape screens. */
 @media (pointer: coarse) and (orientation: landscape) and (max-height: 700px) {
-  .reference-home-hero .reference-greeting {
-    transform: scale(.84);
-    transform-origin: left top;
-  }
-
-  .reference-home-hero .reference-goal-card,
-  .reference-home-hero .reference-continue-card {
-    transform: scale(.78);
-    transform-origin: left top;
-  }
-
-  .reference-home-hero .reference-parent-panel,
-  .reference-home-hero .reference-recommend-panel {
-    transform: scale(.78);
-    transform-origin: right top;
+  .reference-home-shell,
+  .reference-home-page,
+  .reference-home-main {
+    overflow: visible !important;
   }
 }
 
 /* Installed PWA modes can remove browser chrome completely. */
 @media (display-mode: fullscreen), (display-mode: standalone) {
-  html, body, #root { width: 100%; min-height: 100%; }
+  html, body, #root {
+    width: 100%;
+    min-height: 100%;
+  }
 }

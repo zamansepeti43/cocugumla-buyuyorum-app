@@ -1,206 +1,150 @@
-/* Mobile layout: one navigation system, responsive to orientation. */
+/* Mobile navigation: portrait = hidden, landscape = premium fixed navigation. */
 
 @media (pointer: coarse) and (max-width: 1100px) and (orientation: portrait) {
   .reference-nav,
-  .reference-topbar,
-  .topbar,
-  .reference-home-mobile,
+  .reference-bottom-nav,
   .bottom-nav {
     display: none !important;
   }
 
-  .reference-home-main,
-  .main-content {
-    width: 100% !important;
-    min-width: 0 !important;
-    padding-bottom: 68px !important;
-    box-sizing: border-box !important;
-  }
-
-  .reference-home-hero {
-    width: 100% !important;
-    max-width: none !important;
-    height: calc(100dvh - 68px) !important;
-    min-height: calc(100dvh - 68px) !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .reference-hero-art {
-    width: 100% !important;
-    height: 100% !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-
-  .reference-bottom-nav {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    height: 68px !important;
-    padding: 6px 8px max(6px, env(safe-area-inset-bottom, 0px)) !important;
-    box-sizing: border-box !important;
-    display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    gap: 4px !important;
-    align-items: stretch !important;
-    z-index: 10000 !important;
-    background: linear-gradient(180deg, rgba(12,14,31,.94), rgba(5,7,17,.99)) !important;
-    border-top: 1px solid rgba(150,137,255,.25) !important;
-    box-shadow: 0 -10px 30px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.05) !important;
-    backdrop-filter: blur(18px) saturate(130%) !important;
-  }
-
-  .reference-bottom-nav a {
-    min-width: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 3px !important;
-    color: rgba(235,241,255,.68) !important;
-    font-size: 9px !important;
-    font-weight: 800 !important;
-    text-decoration: none !important;
-    border-radius: 11px !important;
-  }
-
-  .reference-bottom-nav a svg { width: 21px !important; height: 21px !important; }
-  .reference-bottom-nav a.active {
-    color: #f5c43b !important;
-    background: linear-gradient(180deg, rgba(245,196,59,.14), rgba(245,196,59,.04)) !important;
+  .main-content,
+  .reference-home-main {
+    padding-bottom: 0 !important;
   }
 }
 
-@media (pointer: coarse) and (max-width: 1100px) and (orientation: landscape) {
-  html, body, #root {
-    width: 100% !important;
-    min-width: 0 !important;
-    min-height: 100% !important;
+@media (pointer: coarse) and (orientation: landscape) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
   }
 
-  body { margin: 0 !important; overflow-x: hidden !important; background: #050711 !important; }
+  body {
+    background: #050711;
+    overflow-x: hidden !important;
+  }
+
+  .app-shell,
+  .main-content,
+  .worlds-main-content,
+  .reference-home-page,
+  .reference-home-shell,
+  .reference-home-main {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 100svh !important;
+    overflow: visible !important;
+  }
 
   .reference-topbar,
   .topbar,
-  .reference-nav,
-  .reference-home-mobile,
-  .bottom-nav,
-  .journey-panel {
+  .reference-bottom-nav {
     display: none !important;
   }
 
-  .reference-home-page,
-  .reference-home-shell,
-  .reference-home-main,
-  .worlds-main-content,
-  .worlds-page {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  .reference-home-hero {
-    width: 100% !important;
-    max-width: none !important;
-    height: calc(100dvh - 68px) !important;
-    min-height: calc(100dvh - 68px) !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    overflow: hidden !important;
-    transform: none !important;
-    zoom: 1 !important;
-  }
-
-  .reference-hero-art {
-    width: 100% !important;
-    height: 100% !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-
-  .reference-bottom-nav {
+  .bottom-nav {
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    height: 68px !important;
-    padding: 6px 12px max(6px, env(safe-area-inset-bottom, 0px)) !important;
+    height: 72px !important;
+    padding: 7px max(18px, env(safe-area-inset-left, 0px)) max(7px, env(safe-area-inset-bottom, 0px)) !important;
     box-sizing: border-box !important;
     display: grid !important;
     grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    gap: 7px !important;
-    z-index: 10000 !important;
-    background: linear-gradient(180deg, rgba(12,14,31,.95), rgba(5,7,17,.99)) !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    z-index: 9999 !important;
+    background: linear-gradient(180deg, rgba(15,17,38,.96), rgba(7,9,22,.99)) !important;
     border-top: 1px solid rgba(150,137,255,.28) !important;
-    box-shadow: 0 -12px 35px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.05) !important;
-    backdrop-filter: blur(18px) saturate(135%) !important;
+    box-shadow: 0 -12px 35px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06) !important;
+    backdrop-filter: blur(18px) saturate(130%) !important;
   }
 
-  .reference-bottom-nav a {
+  .bottom-nav a {
     min-width: 0 !important;
-    min-height: 54px !important;
+    min-height: 56px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 3px !important;
-    color: rgba(235,241,255,.68) !important;
+    gap: 4px !important;
+    color: rgba(235,241,255,.58) !important;
     font-size: 9px !important;
     font-weight: 800 !important;
     text-decoration: none !important;
     border: 1px solid transparent !important;
     border-radius: 12px !important;
+    transition: .18s ease !important;
   }
 
-  .reference-bottom-nav a svg { width: 22px !important; height: 22px !important; }
-  .reference-bottom-nav a.active {
+  .bottom-nav a svg { width: 23px !important; height: 23px !important; }
+  .bottom-nav a.active {
     color: #f5c43b !important;
-    background: linear-gradient(180deg, rgba(245,196,59,.14), rgba(245,196,59,.04)) !important;
-    border-color: rgba(245,196,59,.22) !important;
+    background: linear-gradient(180deg, rgba(245,196,59,.13), rgba(245,196,59,.04)) !important;
+    border-color: rgba(245,196,59,.24) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 5px 18px rgba(0,0,0,.18) !important;
   }
 
-  .app-shell-worlds .worlds-main-content {
+  .main-content { padding-bottom: 72px !important; box-sizing: border-box !important; }
+  .reference-home-main { padding: 0 0 72px !important; box-sizing: border-box !important; }
+  .reference-home-hero {
     width: 100% !important;
-    min-height: calc(100dvh - 68px) !important;
-    padding: 0 0 68px !important;
-    box-sizing: border-box !important;
-  }
-
-  .app-shell-worlds .worlds-shell { width: 100% !important; max-width: none !important; }
-
-  .app-shell-worlds .worlds-map {
-    width: 100% !important;
-    height: calc(100dvh - 68px) !important;
-    min-height: calc(100dvh - 68px) !important;
-    margin: 0 !important;
+    min-width: 0 !important;
+    height: calc(100svh - 72px) !important;
+    min-height: calc(100svh - 72px) !important;
+    max-width: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    overflow: hidden !important;
+    margin: 0 !important;
+    transform: none !important;
   }
+  .reference-hero-art { background-position: center center !important; background-size: cover !important; }
 
+  .app-shell-worlds .worlds-main-content {
+    min-height: calc(100svh - 72px) !important;
+    padding-bottom: 72px !important;
+    box-sizing: border-box !important;
+  }
+  .app-shell-worlds .worlds-page { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+  .app-shell-worlds .worlds-shell { width: 100% !important; max-width: none !important; }
+  .app-shell-worlds .worlds-map {
+    width: 100% !important;
+    height: calc(100svh - 72px) !important;
+    min-height: calc(100svh - 72px) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
   .app-shell-worlds .worlds-map-background {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     object-position: center center !important;
+    content: url('/kesif-haritasi-5-dunya.svg?v=1') !important;
   }
+  .app-shell-worlds .journey-panel { display: none !important; }
 }
 
-@media (pointer: coarse) and (max-width: 1100px) and (orientation: landscape) and (max-height: 700px) {
-  .reference-home-hero { height: calc(100dvh - 62px) !important; min-height: calc(100dvh - 62px) !important; }
-  .reference-bottom-nav { height: 62px !important; }
-  .app-shell-worlds .worlds-main-content { min-height: calc(100dvh - 62px) !important; padding-bottom: 62px !important; }
-  .app-shell-worlds .worlds-map { height: calc(100dvh - 62px) !important; min-height: calc(100dvh - 62px) !important; }
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 700px) {
+  .bottom-nav {
+    height: 64px !important;
+    padding: 5px max(10px, env(safe-area-inset-left, 0px)) max(5px, env(safe-area-inset-bottom, 0px)) !important;
+    gap: 5px !important;
+  }
+  .bottom-nav a { min-height: 54px !important; font-size: 8px !important; gap: 3px !important; border-radius: 10px !important; }
+  .bottom-nav a svg { width: 20px !important; height: 20px !important; }
+  .main-content { padding-bottom: 64px !important; }
+  .reference-home-main { padding-bottom: 64px !important; }
+  .reference-home-hero { height: calc(100svh - 64px) !important; min-height: calc(100svh - 64px) !important; }
+  .app-shell-worlds .worlds-main-content { min-height: calc(100svh - 64px) !important; padding-bottom: 64px !important; }
+  .app-shell-worlds .worlds-map { height: calc(100svh - 64px) !important; min-height: calc(100svh - 64px) !important; }
 }
 
 @media (display-mode: fullscreen), (display-mode: standalone) {
-  html, body, #root { width: 100% !important; min-height: 100% !important; }
+  html, body, #root { width: 100%; min-height: 100%; }
 }

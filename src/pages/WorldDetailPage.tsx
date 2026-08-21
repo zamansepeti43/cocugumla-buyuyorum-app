@@ -46,7 +46,7 @@ function NatureWorldMap({ onBack }: { onBack: () => void }) {
         <div className="nature-map-hill hill-a" /><div className="nature-map-hill hill-b" />
         <div className="nature-map-river" />
         <div className="nature-map-path path-one" /><div className="nature-map-path path-two" />
-        <div className="nature-map-character">🦁</div>
+        <div className="nature-map-character"><img src="/illustrations/forest/leo-lion.svg" alt="Leo" /></div>
         <div className="nature-map-islands">
           {islands.map((island, index) => (
             <button key={island.title} type="button" className={`nature-map-island island-${index + 1}`} style={{ backgroundImage: `linear-gradient(180deg,rgba(255,255,255,.08),rgba(20,65,37,.58)),url(${island.art})` }}>

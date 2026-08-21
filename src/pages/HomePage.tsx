@@ -14,7 +14,7 @@ const navItems = [
 
 // Ana sayfa arka planı: public/assets/home/home-bg.png
 const heroImage = '/assets/home/home-bg.png'
-const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
+const storyImage = '/ChatGPT Image 20 Ağu 2026 02_31_03.png'
 const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 
 export function HomePage() {

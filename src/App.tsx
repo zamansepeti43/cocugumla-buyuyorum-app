@@ -20,8 +20,10 @@ export default function App() {
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/child/new" element={<CreateChildPage />} />
 
-      {/* World screens are app screens, not website pages: Nature World owns the full viewport. */}
-      <Route path="/worlds/forest" element={<ProtectedRoute><WorldDetailPage /></ProtectedRoute>} />
+      {/* Doğa Dünyası is a standalone full-screen app scene. It must not be wrapped by
+          AppLayout or ProtectedRoute, otherwise the shell/hydration redirect can prevent
+          the scene from opening correctly. The scene itself only reads app state. */}
+      <Route path="/worlds/forest" element={<WorldDetailPage />} />
 
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />

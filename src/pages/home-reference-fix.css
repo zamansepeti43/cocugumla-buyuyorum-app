@@ -1,40 +1,43 @@
-/* Final reference-match fixes for the home screen */
+/* Reference composition override: keep the hero and bottom navigation as one unified screen. */
 .reference-home-page { overflow-x: hidden; }
-.reference-home-shell { width: min(1180px, 100%); min-width: 0; margin: 0 auto; padding-bottom: 0; }
-.reference-topbar { height: 62px; grid-template-columns: 250px 1fr 44px; padding: 0 18px; }
-.reference-brand { gap: 7px; }
-.reference-brand .brand-mark { display: none; }
-.reference-brand::before { content: ''; width: 30px; height: 30px; flex: 0 0 30px; border-radius: 8px; background: url('/logo.png') center/contain no-repeat; }
-.brand-title { font-size: 17px; }
-.reference-nav-link { min-height: 34px; padding: 0 10px; font-size: 9px; }
-.reference-avatar { width: 34px; height: 34px; }
-.reference-home-main { padding: 0; }
-.reference-home-hero { height: 470px; border-radius: 0 0 16px 16px; }
-.reference-hero-art { background-position: center; background-size: cover; transform: none; }
-.reference-hero-shade { background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.48) 25%, rgba(0,0,0,.08) 58%, rgba(0,0,0,.34) 100%), linear-gradient(0deg, rgba(4,5,9,.72) 0%, transparent 32%); }
-.reference-greeting { left: 34px; top: 38px; }
-.reference-greeting h1 { font-size: 25px; }
-.reference-greeting p { font-size: 11px; }
-.reference-goal-card { left: 18px; top: 158px; width: 138px; min-height: 100px; }
-.reference-continue-card { left: 18px; top: 272px; width: 138px; min-height: 108px; }
-.reference-parent-panel { right: 18px; top: 20px; width: 148px; min-height: 150px; }
-.reference-recommend-panel { right: 18px; top: 182px; width: 148px; min-height: 158px; }
-.reference-bottom-nav { position: relative; left: auto; right: auto; bottom: auto; width: 100%; height: 72px; padding: 0 18%; margin: 0; }
-.reference-bottom-nav a { font-size: 8px; gap: 6px; }
+.reference-home-shell { width: min(1380px, calc(100vw - 4px)); min-width: 980px; margin: 0 auto; padding-bottom: 0; }
+.reference-topbar { height: 74px; grid-template-columns: 265px 1fr 54px; padding: 0 14px; }
+.reference-brand { gap: 8px; }
+.reference-brand .brand-mark { display: block; }
+.reference-brand::before { display: none; }
+.brand-title { font-size: 18px; }
+.reference-nav-link { min-height: 38px; padding: 0 11px; font-size: 10px; }
+.reference-nav-link span { display: inline; }
+.reference-avatar { width: 38px; height: 38px; }
+.reference-home-main { padding: 0 0 18px; }
+.reference-home-hero { height: 510px; border-radius: 0 0 18px 18px; }
+.reference-hero-art { background-position: center 43%; background-size: cover; transform: scale(1.015); }
+.reference-hero-shade { background: linear-gradient(90deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.45) 28%, rgba(0,0,0,.08) 54%, rgba(0,0,0,.3) 100%), linear-gradient(0deg, rgba(4,5,9,.86) 0%, transparent 25%, rgba(0,0,0,.18) 100%); }
+.reference-greeting { left: 34px; top: 54px; }
+.reference-greeting h1 { font-size: 24px; }
+.reference-greeting p { font-size: 12px; }
+.reference-goal-card { left: 18px; top: 174px; width: 145px; min-height: 103px; }
+.reference-continue-card { left: 18px; top: 292px; width: 145px; min-height: 111px; }
+.reference-parent-panel { right: 17px; top: 22px; width: 152px; min-height: 157px; }
+.reference-recommend-panel { right: 17px; top: 192px; width: 152px; min-height: 170px; }
+.reference-bottom-nav { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 69px; padding: 0 24%; margin: 0; }
+.reference-bottom-nav a { font-size: 7px; gap: 5px; }
 .reference-bottom-nav svg { width: 19px; height: 19px; }
 .reference-home-mobile { display: none; }
 
 @media (max-width: 1100px) {
-  .reference-home-shell { min-width: 0; width: 100%; }
+  .reference-home-shell { min-width: 900px; width: 100%; }
   .reference-nav-link { padding: 0 7px; }
   .reference-nav-link span { display: inline; }
   .reference-topbar { grid-template-columns: 220px 1fr 42px; }
 }
 
 @media (max-width: 760px) {
+  .reference-home-page { overflow-x: hidden; }
+  .reference-home-shell { width: 100%; min-width: 0; }
   .reference-topbar { height: 56px; grid-template-columns: 1fr 42px; }
   .reference-nav { display: none; }
-  .reference-home-hero { height: 620px; }
+  .reference-home-hero { height: 620px; border-radius: 0; }
   .reference-greeting { left: 18px; top: 28px; }
   .reference-goal-card { left: 14px; top: 142px; }
   .reference-continue-card { left: 14px; top: 258px; }

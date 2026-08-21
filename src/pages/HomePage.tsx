@@ -12,9 +12,8 @@ const navItems = [
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-// Ana sayfa arka planı: public/assets/home/home-bg.webp
-// Görsel artık harici bir kaynaktan değil, projenin kendi assets klasöründen yüklenir.
-const heroImage = '/assets/home/home-bg.webp'
+// Ana sayfa arka planı: public/assets/home/home-bg.png
+const heroImage = '/assets/home/home-bg.png'
 const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
 const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 

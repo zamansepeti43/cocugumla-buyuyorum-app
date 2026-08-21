@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useApp } from '../hooks/useApp'
 import './home-premium.css'
 import './home-reference-fix.css'
@@ -19,6 +20,58 @@ const forestAnimalsImage = 'https://images.unsplash.com/photo-1474511320723-9a56
 
 export function HomePage() {
   const { activeChild } = useApp()
+  const heroRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+
+    const landscape = window.matchMedia('(pointer: coarse) and (orientation: landscape)')
+
+    const fitLandscape = () => {
+      if (!landscape.matches) {
+        hero.style.zoom = ''
+        hero.style.width = ''
+        hero.style.height = ''
+        return
+      }
+
+      // The desktop composition is 1380x610. Fit it to BOTH dimensions so
+      // no card, button, or lower part of the hero gets clipped on phones.
+      const scale = Math.min(window.innerWidth / 1380, window.innerHeight / 610)
+      const safeScale = Math.max(0.45, Math.min(scale, 1))
+
+      hero.style.width = '1380px'
+      hero.style.height = '610px'
+      hero.style.zoom = String(safeScale)
+    }
+
+    const enterFullscreenFromGesture = () => {
+      if (!landscape.matches || document.fullscreenElement) return
+      const root = document.documentElement
+      const request = root.requestFullscreen?.({ navigationUI: 'hide' } as FullscreenOptions)
+      if (request) {
+        request.catch(() => {
+          // Browser may require another user gesture or may not support fullscreen.
+        })
+      }
+    }
+
+    fitLandscape()
+    window.addEventListener('resize', fitLandscape)
+    window.addEventListener('orientationchange', fitLandscape)
+    landscape.addEventListener('change', fitLandscape)
+    hero.addEventListener('pointerdown', enterFullscreenFromGesture, { passive: true })
+
+    return () => {
+      window.removeEventListener('resize', fitLandscape)
+      window.removeEventListener('orientationchange', fitLandscape)
+      landscape.removeEventListener('change', fitLandscape)
+      hero.removeEventListener('pointerdown', enterFullscreenFromGesture)
+      hero.style.zoom = ''
+    }
+  }, [])
+
   if (!activeChild) return null
 
   const childName = String((activeChild as { name?: string }).name ?? 'AKGÜN')
@@ -46,7 +99,7 @@ export function HomePage() {
         </header>
 
         <main className="reference-home-main">
-          <section className="reference-home-hero">
+          <section ref={heroRef} className="reference-home-hero">
             <div className="reference-hero-art" style={{ backgroundImage: `url("${heroImage}")` }} />
             <div className="reference-hero-shade" />
 

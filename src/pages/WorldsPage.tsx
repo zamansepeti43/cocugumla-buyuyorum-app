@@ -14,6 +14,7 @@ import { NavLink } from 'react-router-dom'
 import './worlds-premium.css'
 import './world-visuals.css'
 import './worlds-reference.css'
+import './worlds-mobile-fix.css'
 
 type World = {
   id: string

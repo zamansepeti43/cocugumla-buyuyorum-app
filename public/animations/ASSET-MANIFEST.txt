@@ -1,4 +1,5 @@
 public/animations/ASSET-MANIFEST.txt
+public/animations/LICENSES.txt
 public/animations/cc0/LICENSES.txt
 public/animations/cc0/MANIFEST.txt
 public/animations/cc0/duck/FOWL ANIMAL DUCKY/Animation PNG/DUCKY/NUDE/01-Idle/01-Idle/FA_DUCKY_Idle_000.png

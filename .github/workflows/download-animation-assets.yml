@@ -15,16 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download CC0 animated characters
+      - name: Download CC0 animation packs
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p public/animations/cc0/duck public/animations/cc0/teddy
+          mkdir -p public/animations/kenney/toon/female-adventurer
+          mkdir -p public/animations/kenney/backgrounds
 
           curl -fL --retry 4 --retry-delay 2 \
             'https://opengameart.org/sites/default/files/fowl_animal_ducky.zip' \
             -o /tmp/duck.zip
-
           curl -fL --retry 4 --retry-delay 2 \
             'https://opengameart.org/sites/default/files/fat_animal_teddy.zip' \
             -o /tmp/teddy.zip
@@ -32,14 +33,28 @@ jobs:
           unzip -o /tmp/duck.zip -d public/animations/cc0/duck
           unzip -o /tmp/teddy.zip -d public/animations/cc0/teddy
 
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/ETdoFresh/kenney.nl.git /tmp/kenney-assets
+          cd /tmp/kenney-assets
+          git sparse-checkout set \
+            'kenney_tooncharacters1/Female adventurer/PNG/Poses HD' \
+            'platformer-pack-redux-360-assets/PNG/Backgrounds'
+
+          cp -R 'kenney_tooncharacters1/Female adventurer/PNG/Poses HD/.' \
+            "$GITHUB_WORKSPACE/public/animations/kenney/toon/female-adventurer/"
+          cp 'platformer-pack-redux-360-assets/PNG/Backgrounds/blue_grass.png' \
+            "$GITHUB_WORKSPACE/public/animations/kenney/backgrounds/"
+
+          cd "$GITHUB_WORKSPACE"
           rm -f /tmp/duck.zip /tmp/teddy.zip
-          find public/animations/cc0 -type f | sort > public/animations/cc0/MANIFEST.txt
+          rm -rf /tmp/kenney-assets
+          find public/animations -type f | sort > public/animations/ASSET-MANIFEST.txt
 
       - name: Add license manifest
         shell: bash
         run: |
-          cat > public/animations/cc0/LICENSES.txt <<'EOF'
-          CC0 animated assets
+          cat > public/animations/LICENSES.txt <<'EOF'
+          ANIMATION / ART ASSET LICENSES
 
           Cute Ducky Duck Character
           Source: OpenGameArt.org / Segel
@@ -50,6 +65,16 @@ jobs:
           Source: OpenGameArt.org / Segel
           License: CC0 1.0 Universal
           https://opengameart.org/content/cute-teddy-bear-character
+
+          Kenney Toon Characters 1 / Female Adventurer
+          Source: Kenney
+          License: CC0 1.0 Universal
+          Official source: https://kenney.nl/assets/toon-characters
+
+          Kenney Platformer Pack Redux / Backgrounds
+          Source: Kenney
+          License: CC0 1.0 Universal
+          Official source: https://kenney.nl/assets/platformer-pack-redux
           EOF
 
       - name: Commit downloaded assets
@@ -57,10 +82,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/animations/cc0
+          git add public/animations
           if git diff --cached --quiet; then
             echo 'No new assets to commit.'
             exit 0
           fi
-          git commit -m 'assets: add CC0 animated duck and teddy characters [skip ci]'
+          git commit -m 'assets: add polished CC0 toon character and forest background [skip ci]'
           git push

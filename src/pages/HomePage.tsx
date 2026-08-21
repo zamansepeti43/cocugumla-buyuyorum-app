@@ -77,7 +77,7 @@ export function HomePage() {
             <aside className="reference-recommend-panel">
               <div className="panel-heading"><span>Önerilen İçerik</span><ChevronDown size={13} /></div>
               <NavLink to="/worlds" className="mini-content"><span className="mini-image animal" style={{ backgroundImage: `url("${forestAnimalsImage}")` }} /><span><strong>Ormandaki Hayvanlar</strong><small>Doğa Dünyası</small></span></NavLink>
-              <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url("${babyImage}")` }} /><span><strong>Renkleri Öğreniyorum</strong><small>Oyun Dünyası</small></span></NavLink>
+              <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url("${forestAnimalsImage}")` }} /><span><strong>Hayvan Sesleri</strong><small>Doğa Dünyası</small></span></NavLink>
             </aside>
 
             <nav className="reference-bottom-nav" aria-label="Ana menü">

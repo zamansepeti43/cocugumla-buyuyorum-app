@@ -28,47 +28,33 @@ export function HomePage() {
 
     const landscape = window.matchMedia('(pointer: coarse) and (orientation: landscape)')
 
-    const fitLandscape = () => {
-      if (!landscape.matches) {
-        hero.style.zoom = ''
-        hero.style.width = ''
-        hero.style.height = ''
-        return
-      }
-
-      // The desktop composition is 1380x610. Fit it to BOTH dimensions so
-      // no card, button, or lower part of the hero gets clipped on phones.
-      const scale = Math.min(window.innerWidth / 1380, window.innerHeight / 610)
-      const safeScale = Math.max(0.45, Math.min(scale, 1))
-
-      hero.style.width = '1380px'
-      hero.style.height = '610px'
-      hero.style.zoom = String(safeScale)
-    }
-
     const enterFullscreenFromGesture = () => {
       if (!landscape.matches || document.fullscreenElement) return
       const root = document.documentElement
       const request = root.requestFullscreen?.({ navigationUI: 'hide' } as FullscreenOptions)
-      if (request) {
-        request.catch(() => {
-          // Browser may require another user gesture or may not support fullscreen.
-        })
-      }
+      if (request) request.catch(() => undefined)
     }
 
-    fitLandscape()
-    window.addEventListener('resize', fitLandscape)
-    window.addEventListener('orientationchange', fitLandscape)
-    landscape.addEventListener('change', fitLandscape)
+    // Do not use CSS zoom or fixed desktop dimensions on mobile landscape.
+    // The responsive CSS now sizes the composition to the real viewport.
+    const resetInlineSizing = () => {
+      hero.style.zoom = ''
+      hero.style.width = ''
+      hero.style.height = ''
+    }
+
+    resetInlineSizing()
+    window.addEventListener('resize', resetInlineSizing)
+    window.addEventListener('orientationchange', resetInlineSizing)
+    landscape.addEventListener('change', resetInlineSizing)
     hero.addEventListener('pointerdown', enterFullscreenFromGesture, { passive: true })
 
     return () => {
-      window.removeEventListener('resize', fitLandscape)
-      window.removeEventListener('orientationchange', fitLandscape)
-      landscape.removeEventListener('change', fitLandscape)
+      window.removeEventListener('resize', resetInlineSizing)
+      window.removeEventListener('orientationchange', resetInlineSizing)
+      landscape.removeEventListener('change', resetInlineSizing)
       hero.removeEventListener('pointerdown', enterFullscreenFromGesture)
-      hero.style.zoom = ''
+      resetInlineSizing()
     }
   }, [])
 

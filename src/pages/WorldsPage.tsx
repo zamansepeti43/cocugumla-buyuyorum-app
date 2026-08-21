@@ -13,6 +13,7 @@ import {
 import { NavLink } from 'react-router-dom'
 import './worlds-premium.css'
 import './world-visuals.css'
+import './worlds-reference.css'
 
 type World = {
   id: string
@@ -49,9 +50,7 @@ function WorldButton({ world }: { world: World }) {
       <div className="world-island-visual" aria-hidden="true"><div className="world-island-glow" /></div>
       <div className={`world-label world-label-${world.tone}`}>
         <div className="world-label-top"><span className="world-emoji" aria-hidden="true">{world.emoji}</span><strong>{world.title}</strong></div>
-        <div className="world-subislands">
-          {world.islands.map((island) => <span key={island}>{island}</span>)}
-        </div>
+        <div className="world-subislands">{world.islands.map((island) => <span key={island}>{island}</span>)}</div>
         <span className="world-stars"><Star size={12} fill="currentColor" />{world.stars}</span>
       </div>
     </NavLink>
@@ -65,28 +64,23 @@ export function WorldsPage() {
         <section className="worlds-map" aria-label="Keşif dünyaları haritası">
           <img src="/kesif-haritasi-arkaplan.png" alt="" className="worlds-map-background" draggable={false} />
           <div className="map-atmosphere" aria-hidden="true" />
-
           <header className="map-title">
             <div className="worlds-eyebrow"><Compass size={14} /> KEŞİF HARİTASI</div>
             <h1>Dünyaları keşfet, yeni maceralara atıl!</h1>
             <p>Öğrenirken eğlen, yıldızlarını topla ve yeni dünyaların kilidini aç.</p>
           </header>
-
           <div className="map-progress-card">
             <div className="map-progress-title"><span>İlerlemen</span><Compass size={13} /></div>
             <div className="map-progress-ring"><strong>66%</strong></div>
             <strong className="map-progress-total">148 / 224 <Star size={11} fill="currentColor" /></strong>
           </div>
-
           <div className="worlds-map-buttons">{worlds.map((world) => <WorldButton key={world.id} world={world} />)}</div>
-
           <NavLink to="/worlds/random" className="random-world-button" aria-label="Rastgele dünya keşfet">
             <span className="random-icon">✦</span>
             <span className="random-copy"><strong>Rastgele Keşfet</strong><small>Beni şaşırt!</small></span>
             <span className="random-arrow">›</span>
           </NavLink>
         </section>
-
         <section className="journey-panel">
           <div className="journey-heading">
             <div className="journey-title"><Map size={18} /><strong>Keşif Yolculuğun</strong></div>
@@ -95,12 +89,7 @@ export function WorldsPage() {
           <div className="journey-track">
             {journey.map((step, index) => {
               const Icon = step.icon
-              return (
-                <div className="journey-step-wrapper" key={step.label}>
-                  <NavLink to={step.to} className="journey-step"><div className="journey-icon"><Icon size={20} /></div><span>{step.label}</span></NavLink>
-                  {index < journey.length - 1 && <div className="journey-arrow">→</div>}
-                </div>
-              )
+              return <div className="journey-step-wrapper" key={step.label}><NavLink to={step.to} className="journey-step"><div className="journey-icon"><Icon size={20} /></div><span>{step.label}</span></NavLink>{index < journey.length - 1 && <div className="journey-arrow">→</div>}</div>
             })}
             <div className="journey-message"><Medal size={24} /><div><strong>Her keşif seni yeni bilgilerle buluşturur!</strong><span>Dünyaları keşfet, dersleri tamamla ve ödüllerini topla.</span></div></div>
           </div>

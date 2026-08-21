@@ -14,8 +14,8 @@ const navItems = [
 
 // Ana sayfa arka planı: public/assets/home/home-bg.png
 const heroImage = '/assets/home/home-bg.png'
-const storyImage = '/ChatGPT Image 20 Ağu 2026 02_31_03.png'
-const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
+const babyImage = '/assets/home/baby.jpg'
+const forestAnimalsImage = 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=600&q=88'
 
 export function HomePage() {
   const { activeChild } = useApp()
@@ -61,23 +61,23 @@ export function HomePage() {
               <div className="goal-progress"><span /></div><b>3 / 5</b>
             </div>
 
-            <NavLink to="/activities" className="reference-continue-card">
-              <div className="continue-thumb" style={{ backgroundImage: `url("${animalImage}")` }} />
-              <div className="continue-copy"><strong>Devam Et</strong><span>Uzayda Gezegenler</span><small>Keşif Dünyası</small></div>
+            <NavLink to="/worlds" className="reference-continue-card">
+              <div className="continue-thumb" style={{ backgroundImage: `url("${forestAnimalsImage}")` }} />
+              <div className="continue-copy"><strong>Devam Et</strong><span>Ormandaki Hayvanlar</span><small>Doğa Dünyası</small></div>
               <span className="continue-button">Devam Et</span>
             </NavLink>
 
             <aside className="reference-parent-panel">
               <div className="panel-heading"><span>Ebeveyn Rehberi</span><ChevronDown size={13} /></div>
-              <div className="baby-photo" style={{ backgroundImage: `url("${storyImage}")` }} />
+              <div className="baby-photo" style={{ backgroundImage: `url("${babyImage}")` }} />
               <div className="baby-copy"><small>Bebeğiniz</small><strong>2 Aylık</strong><span>Bu dönemde neler<br />yapabilirsiniz?</span></div>
               <NavLink to="/parent" className="guide-button">Rehberi Gör</NavLink>
             </aside>
 
             <aside className="reference-recommend-panel">
               <div className="panel-heading"><span>Önerilen İçerik</span><ChevronDown size={13} /></div>
-              <NavLink to="/worlds" className="mini-content"><span className="mini-image animal" style={{ backgroundImage: `url("${animalImage}")` }} /><span><strong>Renkleri Öğreniyorum</strong><small>Oyun Dünyası</small></span></NavLink>
-              <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url("${storyImage}")` }} /><span><strong>Hayvan Sesleri</strong><small>Doğa Dünyası</small></span></NavLink>
+              <NavLink to="/worlds" className="mini-content"><span className="mini-image animal" style={{ backgroundImage: `url("${forestAnimalsImage}")` }} /><span><strong>Ormandaki Hayvanlar</strong><small>Doğa Dünyası</small></span></NavLink>
+              <NavLink to="/worlds" className="mini-content"><span className="mini-image story" style={{ backgroundImage: `url("${forestAnimalsImage}")` }} /><span><strong>Hayvan Sesleri</strong><small>Doğa Dünyası</small></span></NavLink>
             </aside>
 
             <nav className="reference-bottom-nav" aria-label="Ana menü">

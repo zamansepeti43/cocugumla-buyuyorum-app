@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import './ForestDiscoveryGame.css'
 
-type Props = { onNext: () => void }
+type Props = { onNext?: () => void }
 
-export function ForestDiscoveryGame({ onNext }: Props) {
+export function ForestDiscoveryGame({ onNext = () => undefined }: Props) {
   const [step, setStep] = useState<'enter' | 'talk'>('enter')
   const [message, setMessage] = useState('Merhaba küçük kaşif! Ben Leo.')
 

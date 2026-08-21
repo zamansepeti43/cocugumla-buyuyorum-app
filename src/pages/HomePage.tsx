@@ -1,17 +1,18 @@
 import { useApp } from '../hooks/useApp'
 import './home-premium.css'
-import { Home, Compass, Gamepad2, UsersRound, UserRound, Trophy, BookOpen, Sparkles, ArrowRight, ChevronDown } from 'lucide-react'
+import './home-reference-fix.css'
+import { Compass, Gamepad2, UsersRound, UserRound, Trophy, BookOpen, Sparkles, ArrowRight, ChevronDown } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const navItems = [
-  { label: 'Ana Sayfa', href: '/home', icon: Home },
+  { label: 'Ana Sayfa', href: '/home', icon: Compass },
   { label: 'Keşfet', href: '/worlds', icon: Compass },
   { label: 'Oyunlar', href: '/activities', icon: Gamepad2 },
   { label: 'Ebeveyn', href: '/parent', icon: UsersRound },
   { label: 'Profil', href: '/profile', icon: UserRound },
 ]
 
-const heroImage = 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1400&q=88'
+const heroImage = '/ChatGPT Image 20 Ağu 2026 02_31_03.png'
 const storyImage = 'https://images.unsplash.com/photo-1535572290543-960a8046f5e5?auto=format&fit=crop&w=600&q=88'
 const animalImage = 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=600&q=88'
 

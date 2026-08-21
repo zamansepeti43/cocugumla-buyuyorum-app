@@ -5,6 +5,7 @@ import { ActivitiesPage } from './pages/ActivitiesPage'
 import { ActivityDetailPage } from './pages/ActivityDetailPage'
 import { CreateChildPage } from './pages/CreateChildPage'
 import { EnglishPage } from './pages/EnglishPage'
+import { ForestWorldEntryPage } from './pages/ForestWorldEntryPage'
 import { HomePage } from './pages/HomePage'
 import { ProfilePage } from './pages/ProfilePage'
 import { ProgressPage } from './pages/ProgressPage'
@@ -20,10 +21,8 @@ export default function App() {
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/child/new" element={<CreateChildPage />} />
 
-      {/* Doğa Dünyası is a standalone full-screen app scene. It must not be wrapped by
-          AppLayout or ProtectedRoute, otherwise the shell/hydration redirect can prevent
-          the scene from opening correctly. The scene itself only reads app state. */}
-      <Route path="/worlds/forest" element={<WorldDetailPage />} />
+      {/* Doğa Dünyası is deliberately isolated from the normal application shell. */}
+      <Route path="/worlds/forest" element={<ForestWorldEntryPage />} />
 
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />

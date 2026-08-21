@@ -2,8 +2,7 @@ name: Download animation assets
 
 on:
   push:
-    paths:
-      - '.github/workflows/download-animation-assets.yml'
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -20,42 +19,38 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p public/animations/cc0
-
-          download_oga_zip() {
-            local page="$1"
-            local fallback="$2"
-            local output="$3"
-            local href
-            href=$(curl -fsSL "$page" | grep -oE 'href="[^"]+\.zip"' | grep -i "$fallback" | head -n 1 | sed -E 's/^href="//; s/"$//') || true
-            if [ -z "${href:-}" ]; then
-              href="/sites/default/files/$fallback"
-            fi
-            case "$href" in
-              http*) url="$href" ;;
-              /*) url="https://opengameart.org$href" ;;
-              *) url="https://opengameart.org/$href" ;;
-            esac
-            echo "Downloading $url"
-            curl -fL --retry 3 "$url" -o "$output"
-          }
-
-          download_oga_zip \
-            'https://opengameart.org/content/cute-ducky-duck-character' \
-            'fowl_animal_ducky.zip' \
-            'public/animations/cc0/fowl_animal_ducky.zip'
-
-          download_oga_zip \
-            'https://opengameart.org/content/cute-teddy-bear-character' \
-            'fat_animal_teddy.zip' \
-            'public/animations/cc0/fat_animal_teddy.zip'
-
           mkdir -p public/animations/cc0/duck public/animations/cc0/teddy
-          unzip -o 'public/animations/cc0/fowl_animal_ducky.zip' -d public/animations/cc0/duck
-          unzip -o 'public/animations/cc0/fat_animal_teddy.zip' -d public/animations/cc0/teddy
-          rm 'public/animations/cc0/fowl_animal_ducky.zip' 'public/animations/cc0/fat_animal_teddy.zip'
 
+          curl -fL --retry 4 --retry-delay 2 \
+            'https://opengameart.org/sites/default/files/fowl_animal_ducky.zip' \
+            -o /tmp/duck.zip
+
+          curl -fL --retry 4 --retry-delay 2 \
+            'https://opengameart.org/sites/default/files/fat_animal_teddy.zip' \
+            -o /tmp/teddy.zip
+
+          unzip -o /tmp/duck.zip -d public/animations/cc0/duck
+          unzip -o /tmp/teddy.zip -d public/animations/cc0/teddy
+
+          rm -f /tmp/duck.zip /tmp/teddy.zip
           find public/animations/cc0 -type f | sort > public/animations/cc0/MANIFEST.txt
+
+      - name: Add license manifest
+        shell: bash
+        run: |
+          cat > public/animations/cc0/LICENSES.txt <<'EOF'
+          CC0 animated assets
+
+          Cute Ducky Duck Character
+          Source: OpenGameArt.org / Segel
+          License: CC0 1.0 Universal
+          https://opengameart.org/content/cute-ducky-duck-character
+
+          Cute Teddy Bear Character
+          Source: OpenGameArt.org / Segel
+          License: CC0 1.0 Universal
+          https://opengameart.org/content/cute-teddy-bear-character
+          EOF
 
       - name: Commit downloaded assets
         shell: bash
@@ -67,5 +62,5 @@ jobs:
             echo 'No new assets to commit.'
             exit 0
           fi
-          git commit -m 'assets: add CC0 animated child-friendly characters [skip ci]'
+          git commit -m 'assets: add CC0 animated duck and teddy characters [skip ci]'
           git push

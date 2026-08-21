@@ -4,21 +4,25 @@ import './ForestDiscoveryGame.css'
 type Character = { id: string; name: string; image: string; fact: string; color: string }
 
 const characters: Character[] = [
-  { id: 'leo', name: 'Leo', image: '/illustrations/forest/leo-fox.svg', fact: 'Tilki çok iyi koku alır ve geceleri de çevresini dikkatle dinler.', color: '#ff9b5c' },
+  { id: 'leo', name: 'Leo', image: '/illustrations/forest/leo-lion.svg', fact: 'Ben Leo! Ormanda iz sürmeyi, hayvanları dinlemeyi ve yeni şeyler keşfetmeyi çok severim.', color: '#f2a746' },
   { id: 'luna', name: 'Luna', image: '/illustrations/forest/rabbit.svg', fact: 'Tavşanların uzun kulakları sesleri uzaktan duymalarına yardım eder.', color: '#e6a1d1' },
   { id: 'milo', name: 'Milo', image: '/illustrations/forest/bear.svg', fact: 'Ayılar güçlü koku alma duyularıyla yiyecekleri uzaktan bulabilir.', color: '#b9784f' },
 ]
 
 export function ForestDiscoveryGame() {
   const [selected, setSelected] = useState('leo')
-  const [action, setAction] = useState<'idle' | 'bounce' | 'walk'>('idle')
-  const [message, setMessage] = useState('Merhaba küçük kaşif! Bugün ormanda Leo ile bir maceraya çıkıyoruz.')
+  const [action, setAction] = useState<'intro' | 'idle' | 'bounce' | 'walk'>('intro')
+  const [message, setMessage] = useState('Merhaba küçük kaşif! Ben Leo. Hazırsan orman maceramız başlıyor!')
   const [stars, setStars] = useState(0)
   const character = characters.find((item) => item.id === selected) ?? characters[0]
 
   useEffect(() => {
-    const timer = window.setInterval(() => setAction((value) => value === 'idle' ? 'bounce' : 'idle'), 4200)
-    return () => window.clearInterval(timer)
+    const introTimer = window.setTimeout(() => setAction('idle'), 1500)
+    const loopTimer = window.setInterval(() => setAction((value) => value === 'idle' ? 'bounce' : 'idle'), 4200)
+    return () => {
+      window.clearTimeout(introTimer)
+      window.clearInterval(loopTimer)
+    }
   }, [])
 
   const discover = (item: Character) => {
@@ -40,14 +44,14 @@ export function ForestDiscoveryGame() {
         <div className="forest-hill hill-two" />
         <div className="forest-flower-bed" />
 
-        <div className={`forest-main-character ${action === 'bounce' ? 'is-bouncing' : ''} ${action === 'walk' ? 'is-walking' : ''}`}>
+        <div className={`forest-main-character ${action === 'intro' ? 'is-entering' : ''} ${action === 'bounce' ? 'is-bouncing' : ''} ${action === 'walk' ? 'is-walking' : ''}`}>
           <img src={character.image} alt={character.name} />
           <div className="character-glow" />
         </div>
 
         <div className="forest-story-card">
-          <div className="story-avatar"><img src="/illustrations/forest/leo-fox.svg" alt="Leo" /></div>
-          <div><strong>Leo</strong><p>{action === 'bounce' ? 'Vay! Bunu birlikte keşfettik!' : 'Sence ormanda başka neler var?'}</p></div>
+          <div className="story-avatar"><img src="/illustrations/forest/leo-lion.svg" alt="Leo" /></div>
+          <div><strong>Leo</strong><p>{action === 'intro' ? 'Merhaba küçük kaşif! 👋' : action === 'bounce' ? 'Vay! Bunu birlikte keşfettik!' : 'Sence ormanda başka neler var?'}</p></div>
         </div>
 
         <button className="forest-hotspot hotspot-flower" onClick={() => { setAction('bounce'); setMessage('Çiçeklerin arasında minik bir kelebek saklanıyor! 🦋'); setStars((value) => value + 1) }} aria-label="Çiçeği keşfet">✦</button>
@@ -55,7 +59,7 @@ export function ForestDiscoveryGame() {
       </div>
 
       <div className="forest-header">
-        <div><span className="forest-kicker">DOĞA DÜNYASI · HİKÂYELİ KEŞİF</span><h2>Leo ile Orman Macerası</h2><p>Dokun, keşfet ve küçük kaşifin hikâyesine devam et.</p></div>
+        <div><span className="forest-kicker">DOĞA DÜNYASI · HİKÂYELİ KEŞİF</span><h2>Leo ile Orman Macerası</h2><p>Leo seni karşılıyor; dokun, keşfet ve küçük kaşifin hikâyesine devam et.</p></div>
         <div className="forest-stars">⭐ {stars}</div>
       </div>
 

@@ -1,31 +1,61 @@
 /* Final reference pass: home screen composition */
 .reference-home-page { overflow-x: hidden; background: #050711; }
 .reference-home-shell { width: min(1380px, calc(100vw - 28px)); min-width: 980px; margin: 0 auto; padding-bottom: 18px; }
-.reference-topbar { height: 86px; grid-template-columns: 300px 1fr 58px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg,#070a18 0%,#060813 100%); }
+
+.reference-topbar {
+  height: 86px;
+  grid-template-columns: 300px 1fr 58px;
+  padding: 0 22px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg,#070a18 0%,#060813 100%);
+}
+
 .reference-brand { gap: 10px; align-items: center; }
-.reference-brand .brand-mark { width: 42px; height: 42px; flex: 0 0 42px; display: block; }
+.reference-brand .brand-mark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: block;
+}
 .reference-brand::before { display: none; }
 .brand-mark i { left: 2px; top: 8px; color: #ef476f; font-size: 31px; transform: rotate(-13deg); }
 .brand-mark b { right: 0; top: 1px; color: #ffd34d; font-size: 15px; }
 .brand-mark em { left: 18px; bottom: 2px; color: #5dd4a0; font-size: 10px; }
 .brand-title { font-family: Georgia,serif; font-size: 24px; line-height: 1; letter-spacing: -.5px; }
+
 .reference-nav { gap: 7px; }
 .reference-nav-link { min-height: 42px; padding: 0 13px; font-size: 11px; border-radius: 13px; }
 .reference-avatar { width: 44px; height: 44px; border-width: 2px; }
 .reference-avatar span { font-size: 25px; }
+
 .reference-home-main { padding: 0; }
-.reference-home-hero { height: 610px; border-radius: 0 0 22px 22px; border-color: rgba(255,255,255,.14); box-shadow: 0 26px 70px rgba(0,0,0,.4); }
-.reference-hero-art { background-position: center 47%; background-size: cover; transform: scale(1.01); filter: saturate(.96) contrast(1.03); }
-.reference-hero-shade { background: linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.45) 25%,rgba(0,0,0,.06) 55%,rgba(0,0,0,.38) 100%),linear-gradient(0deg,rgba(3,4,8,.88) 0%,transparent 26%,rgba(0,0,0,.14) 100%); }
+.reference-home-hero {
+  height: 610px;
+  border-radius: 0 0 22px 22px;
+  border-color: rgba(255,255,255,.14);
+  box-shadow: 0 26px 70px rgba(0,0,0,.4);
+}
+.reference-hero-art {
+  background-position: center 42%;
+  background-size: cover;
+  transform: scale(1.01);
+  filter: saturate(1.04) contrast(1.03) brightness(1.03);
+}
+.reference-hero-shade {
+  background: linear-gradient(90deg,rgba(0,0,0,.70) 0%,rgba(0,0,0,.32) 24%,rgba(0,0,0,.05) 55%,rgba(0,0,0,.30) 100%),linear-gradient(0deg,rgba(3,4,8,.78) 0%,transparent 30%,rgba(0,0,0,.08) 100%);
+}
+
 .reference-greeting { left: 38px; top: 46px; max-width: 360px; }
 .reference-greeting h1 { font-size: 31px; margin-bottom: 11px; letter-spacing: -.9px; }
 .reference-greeting p { font-size: 14px; line-height: 1.5; }
+
 .reference-goal-card { left: 24px; top: 172px; width: 190px; min-height: 128px; padding: 17px; border-radius: 17px; }
 .goal-icon { width: 36px; height: 36px; margin-bottom: 9px; border-radius: 10px; }
 .reference-goal-card strong { font-size: 13px; }
 .reference-goal-card small { margin-top: 5px; font-size: 9px; line-height: 1.4; }
 .goal-progress { height: 6px; margin-top: 15px; }
 .reference-goal-card > b { right: 15px; bottom: 13px; font-size: 10px; }
+
 .reference-continue-card { left: 24px; top: 318px; width: 190px; min-height: 142px; padding: 11px; border-radius: 17px; }
 .continue-thumb { height: 57px; border-radius: 11px; }
 .continue-copy { padding: 9px 3px 5px; }
@@ -33,6 +63,7 @@
 .continue-copy span { margin-top: 4px; font-size: 10px; }
 .continue-copy small { margin-top: 3px; font-size: 8px; }
 .continue-button { right: 11px; bottom: 11px; padding: 7px 11px; border-radius: 9px; font-size: 9px; }
+
 .reference-parent-panel { right: 24px; top: 24px; width: 225px; min-height: 184px; padding: 15px; border-radius: 18px; }
 .panel-heading { font-size: 11px; }
 .baby-photo { left: 15px; top: 51px; width: 68px; height: 82px; border-radius: 10px; }
@@ -40,14 +71,99 @@
 .baby-copy small,.baby-copy span { font-size: 8px; }
 .baby-copy strong { margin: 4px 0; font-size: 16px; }
 .guide-button { margin-top: 13px; padding: 9px 12px; border-radius: 10px; font-size: 10px; }
+
 .reference-recommend-panel { right: 24px; top: 225px; width: 225px; min-height: 205px; padding: 15px; border-radius: 18px; }
 .mini-content { gap: 10px; margin-top: 13px; }
 .mini-image { width: 52px; height: 52px; flex-basis: 52px; border-radius: 10px; }
 .mini-content strong { font-size: 9px; }
 .mini-content small { margin-top: 4px; font-size: 8px; }
+
 .reference-bottom-nav { height: 82px; padding: 0 20%; border-top: 1px solid rgba(255,255,255,.1); background: rgba(5,6,12,.94); }
 .reference-bottom-nav a { font-size: 9px; gap: 7px; }
 .reference-bottom-nav svg { width: 22px; height: 22px; }
 .reference-home-mobile { display: none; }
-@media (max-width: 1100px) { .reference-home-shell { width: 100%; min-width: 900px; } .reference-topbar { grid-template-columns: 245px 1fr 50px; padding: 0 14px; } .brand-title { font-size: 20px; } .reference-nav-link { padding: 0 8px; font-size: 10px; } .reference-home-hero { height: 560px; } .reference-parent-panel,.reference-recommend-panel { right: 18px; width: 190px; } .reference-goal-card,.reference-continue-card { left: 18px; } .reference-bottom-nav { padding: 0 16%; } }
-@media (max-width: 760px) { .reference-home-page { overflow-x: hidden; } .reference-home-shell { width: 100%; min-width: 0; } .reference-topbar { height: 64px; grid-template-columns: 1fr 44px; padding: 0 12px; } .reference-nav { display: none; } .brand-title { font-size: 18px; } .reference-brand .brand-mark { width: 34px; height: 34px; flex-basis: 34px; } .reference-home-hero { height: 620px; border-radius: 0; } .reference-greeting { left: 18px; top: 28px; } .reference-greeting h1 { font-size: 24px; } .reference-greeting p { font-size: 11px; } .reference-goal-card { left: 14px; top: 140px; width: 160px; } .reference-continue-card { left: 14px; top: 282px; width: 160px; } .reference-parent-panel { right: 12px; top: 16px; width: 150px; } .reference-recommend-panel { right: 12px; top: 190px; width: 150px; } .reference-bottom-nav { padding: 0 5px; } }
+
+/* Logo: make the compact mark visually closer to the supplied reference. */
+.reference-brand .brand-mark {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex-basis: 46px;
+  overflow: visible;
+}
+.reference-brand .brand-mark::before,
+.reference-brand .brand-mark::after {
+  content: '';
+  position: absolute;
+  display: block;
+  border-radius: 11px 15px 15px 11px;
+  transform: rotate(32deg);
+  box-shadow: 0 3px 8px rgba(0,0,0,.18);
+}
+.reference-brand .brand-mark::before {
+  width: 20px;
+  height: 27px;
+  left: 1px;
+  top: 10px;
+  background: linear-gradient(145deg,#8e6bd8,#d54d9a);
+  transform: rotate(-38deg);
+}
+.reference-brand .brand-mark::after {
+  width: 19px;
+  height: 24px;
+  left: 12px;
+  top: 4px;
+  background: linear-gradient(145deg,#f5a85b,#ef5f77);
+  transform: rotate(34deg);
+}
+.reference-brand .brand-mark i {
+  z-index: 3;
+  left: 12px;
+  top: 14px;
+  color: #ef476f;
+  font-size: 25px;
+  text-shadow: 0 2px 5px rgba(0,0,0,.22);
+}
+.reference-brand .brand-mark b {
+  z-index: 4;
+  right: 0;
+  top: 0;
+  color: #ffd34d;
+  font-size: 15px;
+}
+.reference-brand .brand-mark em {
+  z-index: 4;
+  left: 24px;
+  bottom: 2px;
+  color: #5dd4a0;
+  font-size: 9px;
+}
+
+@media (max-width: 1100px) {
+  .reference-home-shell { width: 100%; min-width: 900px; }
+  .reference-topbar { grid-template-columns: 245px 1fr 50px; padding: 0 14px; }
+  .brand-title { font-size: 20px; }
+  .reference-nav-link { padding: 0 8px; font-size: 10px; }
+  .reference-home-hero { height: 560px; }
+  .reference-parent-panel,.reference-recommend-panel { right: 18px; width: 190px; }
+  .reference-goal-card,.reference-continue-card { left: 18px; }
+  .reference-bottom-nav { padding: 0 16%; }
+}
+
+@media (max-width: 760px) {
+  .reference-home-page { overflow-x: hidden; }
+  .reference-home-shell { width: 100%; min-width: 0; }
+  .reference-topbar { height: 64px; grid-template-columns: 1fr 44px; padding: 0 12px; }
+  .reference-nav { display: none; }
+  .brand-title { font-size: 18px; }
+  .reference-brand .brand-mark { width: 34px; height: 34px; flex-basis: 34px; }
+  .reference-home-hero { height: 620px; border-radius: 0; }
+  .reference-greeting { left: 18px; top: 28px; }
+  .reference-greeting h1 { font-size: 24px; }
+  .reference-greeting p { font-size: 11px; }
+  .reference-goal-card { left: 14px; top: 140px; width: 160px; }
+  .reference-continue-card { left: 14px; top: 282px; width: 160px; }
+  .reference-parent-panel { right: 12px; top: 16px; width: 150px; }
+  .reference-recommend-panel { right: 12px; top: 190px; width: 150px; }
+  .reference-bottom-nav { padding: 0 5px; }
+}

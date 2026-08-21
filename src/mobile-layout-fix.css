@@ -1,63 +1,106 @@
-/* Mobile navigation and fullscreen orientation fix. */
+/* Mobile navigation + landscape fullscreen layout fix */
 
-@media (max-width: 760px) and (orientation: portrait) {
-  /* On phones the bottom navigation is the only primary navigation. */
-  .desktop-nav { display: none !important; }
-
-  .topbar {
-    height: 64px !important;
-    padding: 0 14px !important;
-    grid-template-columns: 1fr auto !important;
-    gap: 10px !important;
-  }
-
-  .brand-logo {
-    height: 50px !important;
-    max-width: 150px !important;
-  }
-
-  .child-chip {
-    justify-self: end !important;
-  }
-
-  .child-chip div,
-  .parent-access {
-    display: none !important;
-  }
-
-  .child-chip > span {
-    width: 38px !important;
-    height: 38px !important;
-  }
+/* Phones/tablets: keep exactly one navigation on the home screen. */
+@media (pointer: coarse) and (max-width: 1100px) {
+  .reference-nav { display: none !important; }
+  .reference-bottom-nav { display: none !important; }
 
   .bottom-nav {
-    display: grid !important;
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    z-index: 100 !important;
+    z-index: 1000 !important;
+    height: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 6px 8px env(safe-area-inset-bottom, 0px) !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    align-items: center;
+    background: rgba(13,13,20,.97);
+    border-top: 1px solid rgba(255,255,255,.10);
+    backdrop-filter: blur(16px);
   }
 
-  .main-content {
-    min-height: calc(100svh - 64px) !important;
-    padding-bottom: 76px !important;
+  .bottom-nav a {
+    min-width: 0;
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 10px;
   }
+
+  .bottom-nav a.active {
+    color: var(--gold);
+    background: rgba(244,185,63,.08);
+  }
+
+  .main-content { min-height: 100svh; padding-bottom: 68px; }
+  .reference-home-main { padding-bottom: 68px; }
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
-  /* Landscape phone = app-like fullscreen content. */
+/* Landscape phone: hide all navigation and fill the available viewport. */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 700px) {
+  html, body, #root {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  body { background: #050711; }
+
+  .app-shell,
+  .reference-home-page,
+  .reference-home-shell,
+  .reference-home-main,
+  .main-content {
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    overflow: hidden !important;
+  }
+
+  .reference-topbar,
   .topbar,
-  .bottom-nav {
+  .bottom-nav,
+  .reference-bottom-nav {
     display: none !important;
   }
 
-  .app-shell,
-  .main-content {
-    min-height: 100svh !important;
+  .reference-home-hero {
+    width: 100vw !important;
+    height: 100svh !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
 
-  .page {
-    min-height: 100svh !important;
+  .reference-hero-art { background-position: center center !important; }
+  .reference-home-main { padding: 0 !important; }
+}
+
+/* Larger landscape tablets/phones: same app-like composition. */
+@media (pointer: coarse) and (orientation: landscape) and (min-height: 701px) and (max-width: 1200px) {
+  .reference-topbar,
+  .topbar,
+  .bottom-nav,
+  .reference-bottom-nav { display: none !important; }
+
+  .reference-home-shell,
+  .reference-home-page,
+  .reference-home-main,
+  .reference-home-hero,
+  .main-content {
+    width: 100vw !important;
+    min-width: 0 !important;
   }
 }

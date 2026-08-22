@@ -5,7 +5,7 @@ import { ActivitiesPage } from './pages/ActivitiesPage'
 import { ActivityDetailPage } from './pages/ActivityDetailPage'
 import { CreateChildPage } from './pages/CreateChildPage'
 import { EnglishPage } from './pages/EnglishPage'
-import { ForestWorldEntryPage } from './pages/ForestWorldEntryPage'
+import { ForestWorldApp } from './pages/ForestWorldApp'
 import { HomePage } from './pages/HomePage'
 import { ProfilePage } from './pages/ProfilePage'
 import { ProgressPage } from './pages/ProgressPage'
@@ -20,10 +20,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/child/new" element={<CreateChildPage />} />
-
-      {/* Doğa Dünyası is deliberately isolated from the normal application shell. */}
-      <Route path="/worlds/forest" element={<ForestWorldEntryPage />} />
-
+      <Route path="/worlds/forest" element={<ForestWorldApp />} />
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/worlds" element={<WorldsPage />} />

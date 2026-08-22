@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 620">
+<style>
+  .leo{transform-origin:240px 590px;animation:breathe 2.8s ease-in-out infinite}
+  .wave{transform-origin:327px 366px;animation:wave 1.9s ease-in-out infinite}
+  .paw{transform-origin:404px 274px;animation:paw 1.9s ease-in-out infinite}
+  .tail{transform-origin:330px 440px;animation:tail 2.2s ease-in-out infinite}
+  .blink{animation:blink 4.5s infinite}
+  @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @keyframes wave{0%,35%,100%{transform:rotate(0)}45%{transform:rotate(-5deg)}55%{transform:rotate(6deg)}65%{transform:rotate(-4deg)}}
+  @keyframes paw{0%,35%,100%{transform:rotate(0)}45%{transform:rotate(-12deg)}55%{transform:rotate(10deg)}65%{transform:rotate(-7deg)}}
+  @keyframes tail{0%,100%{transform:rotate(0)}50%{transform:rotate(7deg)}}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1)}94%{transform:scaleY(.12)}}
+</style>
+<g class="leo">
+ <ellipse cx="240" cy="590" rx="108" ry="20" fill="#315d38" opacity=".25"/>
+ <path d="M109 190C66 133 91 65 145 71C154 18 214 30 240 61C276 23 331 39 334 83C392 74 415 139 373 182C409 229 380 288 334 294C328 349 278 374 240 344C201 375 148 351 144 300C92 295 67 240 109 190Z" fill="#7a361f"/>
+ <path d="M143 127C104 111 101 60 127 49C159 36 188 69 182 111Z" fill="#e9953c" stroke="#5b2d1b" stroke-width="8"/><path d="M337 127C376 111 379 60 353 49C321 36 292 69 298 111Z" fill="#e9953c" stroke="#5b2d1b" stroke-width="8"/>
+ <ellipse cx="240" cy="205" rx="112" ry="126" fill="#f3a642" stroke="#7c3b21" stroke-width="8"/>
+ <g class="blink" style="transform-origin:240px 183px">
+  <ellipse cx="196" cy="183" rx="23" ry="31" fill="#fff"/><ellipse cx="284" cy="183" rx="23" ry="31" fill="#fff"/>
+  <circle cx="201" cy="188" r="12" fill="#33251e"/><circle cx="279" cy="188" r="12" fill="#33251e"/>
+  <circle cx="204" cy="183" r="4" fill="#fff"/><circle cx="282" cy="183" r="4" fill="#fff"/>
+ </g>
+ <ellipse cx="240" cy="232" rx="18" ry="13" fill="#5a2c25"/><path d="M205 254Q240 287 275 254" fill="none" stroke="#632c25" stroke-width="9" stroke-linecap="round"/><path d="M217 261Q240 278 263 261" fill="#f27a70"/>
+ <path d="M151 329Q240 288 329 329L349 493Q240 530 131 493Z" fill="#3f8d50" stroke="#285d3a" stroke-width="8"/>
+ <path d="M167 345Q240 325 313 345" fill="none" stroke="#9bd879" stroke-width="7" opacity=".65"/>
+ <!-- backpack -->
+ <path d="M116 352Q88 370 95 463L139 482L153 352Z" fill="#744628" stroke="#4b2d1c" stroke-width="7"/>
+ <path d="M364 352Q392 370 385 463L341 482L327 352Z" fill="#744628" stroke="#4b2d1c" stroke-width="7"/>
+ <path d="M143 345Q240 318 337 345" fill="none" stroke="#9b6034" stroke-width="18" stroke-linecap="round"/>
+ <rect x="189" y="386" width="102" height="86" rx="24" fill="#8b542e" stroke="#5a341f" stroke-width="7"/>
+ <path d="M204 400Q240 385 276 400" fill="none" stroke="#b9773e" stroke-width="7"/>
+ <!-- left arm -->
+ <path d="M153 367Q95 400 106 456" fill="none" stroke="#f2a746" stroke-width="34" stroke-linecap="round"/>
+ <!-- waving right arm -->
+ <g class="wave"><path d="M327 366Q389 339 403 284" fill="none" stroke="#f2a746" stroke-width="34" stroke-linecap="round"/></g>
+ <g class="paw"><circle cx="404" cy="274" r="28" fill="#f2a746"/><path d="M389 253l-8-25M404 248l-1-28M418 251l8-25" stroke="#f2a746" stroke-width="12" stroke-linecap="round"/></g>
+ <!-- compass -->
+ <circle cx="240" cy="365" r="31" fill="#f4d37a" stroke="#714829" stroke-width="7"/><circle cx="240" cy="365" r="20" fill="#eaf3e6"/><path d="m240 345 7 20-7 20-7-20Z" fill="#e46a46"/>
+ <!-- shorts -->
+ <path d="M151 478L204 478L196 548L143 548Z" fill="#d9a95f" stroke="#865a32" stroke-width="7"/><path d="M276 478L329 478L337 548L284 548Z" fill="#d9a95f" stroke="#865a32" stroke-width="7"/>
+ <!-- boots -->
+ <path d="M140 532Q172 518 205 538L210 581Q171 597 129 579Z" fill="#704426" stroke="#4a2b1c" stroke-width="8"/><path d="M275 538Q308 518 340 532L351 579Q309 597 270 581Z" fill="#704426" stroke="#4a2b1c" stroke-width="8"/>
+ <!-- tail -->
+ <g class="tail"><path d="M330 440Q421 458 394 528Q378 559 349 538" fill="none" stroke="#ed8b35" stroke-width="24" stroke-linecap="round"/><circle cx="349" cy="538" r="24" fill="#6d301d"/></g>
+</g>
+</svg>

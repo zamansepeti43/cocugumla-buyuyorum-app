@@ -1,58 +1,34 @@
 import { useState } from 'react'
 
 type CSS = React.CSSProperties
+const BG = 'data:image/webp;base64,REPLACED_BG'
+const LEO = 'data:image/webp;base64,REPLACED_LEO'
 
-const scene: CSS = {
-  position:'fixed', inset:0, width:'100vw', height:'100dvh', overflow:'hidden',
-  background:'linear-gradient(180deg,#38bde8 0%,#b9efd7 45%,#6fc86b 100%)',
-  color:'#284c35', fontFamily:'system-ui,sans-serif', zIndex:99999
-}
-
+const scene: CSS = { position:'fixed', inset:0, width:'100vw', height:'100dvh', overflow:'hidden', backgroundImage:`url(${BG})`, backgroundSize:'cover', backgroundPosition:'center', color:'#3b2a20', fontFamily:'system-ui,sans-serif', zIndex:99999 }
 const keyframes = `
-@keyframes leoEntrance{0%{opacity:0;transform:translate(-50%,40px) scale(.88)}65%{opacity:1;transform:translate(-50%,-7px) scale(1.03)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
-@keyframes cloud{50%{transform:translateX(24px)}}
-@keyframes butterfly{50%{transform:translate(15px,-14px) rotate(7deg)}}
-@keyframes bird{50%{transform:translate(22px,-12px)}}
-@media (max-width:700px){
-  .forest-title{left:4%!important;top:5%!important;padding:10px 16px!important;border-width:3px!important;border-radius:16px!important;font-size:18px!important}
-  .forest-intro-card{left:5%!important;top:17%!important;width:90vw!important;max-width:none!important;padding:17px 19px!important;border-radius:24px!important;box-sizing:border-box!important}
-  .forest-intro-card h2{font-size:21px!important;line-height:1.15!important;margin:0!important}
-  .forest-intro-card p{font-size:16px!important;line-height:1.32!important;margin:8px 0 0!important}
-  .forest-leo{left:50%!important;bottom:15%!important;width:230px!important;height:310px!important;z-index:3!important}
-  .forest-start{right:5%!important;bottom:3%!important;width:58vw!important;max-width:360px!important;padding:14px 16px!important;border-radius:20px!important;font-size:18px!important;box-sizing:border-box!important;z-index:6!important}
-  .forest-river{right:20%!important;width:15%!important;opacity:.65!important}
-}
-@media (max-width:420px){
-  .forest-leo{width:205px!important;height:285px!important;bottom:15%!important}
-  .forest-intro-card{top:16%!important;padding:15px 17px!important}
-  .forest-intro-card p{font-size:15px!important;line-height:1.3!important}
-  .forest-start{font-size:17px!important;width:62vw!important}
+@keyframes leoIn{0%{opacity:0;transform:translate(-50%,35px) scale(.94)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
+@keyframes breathe{0%,100%{transform:translate(-50%,0) scale(1)}50%{transform:translate(-50%,-5px) scale(1.012)}}
+@keyframes cloud{50%{transform:translateX(18px)}}
+@media(max-width:700px){
+ .forest-title{left:4%!important;top:4%!important;font-size:17px!important;padding:9px 14px!important}
+ .forest-intro-card{left:4%!important;top:14%!important;width:92vw!important;max-width:none!important;padding:15px 18px!important}
+ .forest-intro-card h2{font-size:20px!important}
+ .forest-intro-card p{font-size:15px!important;line-height:1.35!important}
+ .forest-leo{width:210px!important;height:285px!important;bottom:16%!important}
+ .forest-start{right:5%!important;bottom:4%!important;width:58vw!important;font-size:17px!important;padding:14px 15px!important}
 }
 `
-
 export function ForestWorldApp(){
  const [intro,setIntro]=useState(true)
- return <main style={scene} aria-label="Doğa Dünyası"><style>{keyframes}</style><div style={{position:'absolute',inset:0,overflow:'hidden'}}>
-  <div style={{position:'absolute',inset:0,background:'radial-gradient(circle at 50% 0%,rgba(255,255,255,.3),transparent 30%)'}}/>
-  <div style={{position:'absolute',left:'-4%',top:'-4%',width:'34%',height:'38%',background:'#267c45',borderRadius:'0 0 55% 45%',boxShadow:'18px 28px 0 rgba(36,112,61,.5)'}}/>
-  <div style={{position:'absolute',right:'-5%',top:'-3%',width:'30%',height:'40%',background:'#328d4b',borderRadius:'0 0 45% 55%',boxShadow:'-20px 30px 0 rgba(40,120,62,.45)'}}/>
-  <div style={{position:'absolute',right:'11%',top:'8%',width:'clamp(58px,9vw,105px)',height:'clamp(58px,9vw,105px)',borderRadius:'50%',background:'#ffd45b',boxShadow:'0 0 0 18px rgba(255,212,91,.18),0 12px 35px rgba(239,169,54,.25)'}}/>
-  <div style={{position:'absolute',left:'9%',top:'16%',width:'18vw',height:'5vh',minWidth:100,minHeight:24,borderRadius:50,background:'rgba(255,255,255,.8)',animation:'cloud 9s ease-in-out infinite'}}/>
-  <div style={{position:'absolute',right:'13%',top:'28%',width:'15vw',height:'4vh',minWidth:90,minHeight:20,borderRadius:50,background:'rgba(255,255,255,.72)',animation:'cloud 12s ease-in-out infinite reverse'}}/>
-  <div style={{position:'absolute',left:'-10%',bottom:'-16%',width:'62%',height:'58%',borderRadius:'50%',background:'#91d47b'}}/>
-  <div style={{position:'absolute',right:'-10%',bottom:'-18%',width:'64%',height:'60%',borderRadius:'50%',background:'#6fbc68'}}/>
-  <div style={{position:'absolute',left:0,right:0,bottom:0,height:'22%',background:'linear-gradient(180deg,transparent,#54a455)'}}/>
-  <div className="forest-river" style={{position:'absolute',right:'16%',bottom:'15%',width:'18%',height:'32%',background:'linear-gradient(#fff,#7ddfe7 35%,#2bb6d2)',clipPath:'polygon(38% 0,65% 0,85% 100%,15% 100%)',opacity:.9}}/>
-  <div style={{position:'absolute',right:'7%',bottom:'14%',fontSize:'clamp(30px,5vw,65px)'}}>🌳🏠</div>
-  <div style={{position:'absolute',left:'10%',bottom:'12%',fontSize:'clamp(24px,4vw,50px)'}}>🍄🌼</div>
-  <div style={{position:'absolute',right:'23%',top:'34%',fontSize:'clamp(20px,3vw,40px)',animation:'butterfly 5s ease-in-out infinite'}}>🦋</div>
-  <div style={{position:'absolute',left:'18%',top:'31%',fontSize:'clamp(25px,3.5vw,48px)',animation:'bird 6s ease-in-out infinite'}}>🐦</div>
-  <div style={{position:'absolute',right:'7%',bottom:'13%',fontSize:'clamp(25px,4vw,48px)'}}>🐸</div>
-  <div className="forest-title" style={{position:'absolute',left:'5%',top:'7%',padding:'12px 20px',borderRadius:18,background:'linear-gradient(#a96435,#74401f)',border:'4px solid #5b321c',color:'#fff0a2',fontSize:'clamp(15px,2.1vw,28px)',fontWeight:900,boxShadow:'0 8px 18px rgba(48,70,35,.2)'}}>🌿 DOĞA DÜNYASI</div>
-  {intro?<>
-   <div className="forest-leo" style={{position:'absolute',left:'50%',bottom:'7%',transform:'translateX(-50%)',width:'min(35vw,440px)',height:'min(67vh,520px)',animation:'leoEntrance 1.2s cubic-bezier(.2,.8,.2,1) both'}}><img src="/illustrations/forest/leo-animated.svg" alt="Leo" style={{width:'100%',height:'100%',objectFit:'contain',filter:'drop-shadow(0 22px 12px rgba(42,75,40,.3))'}}/></div>
-   <section className="forest-intro-card" style={{position:'absolute',left:'5%',top:'25%',width:'min(42vw,540px)',padding:'22px 26px',borderRadius:28,background:'rgba(255,250,237,.95)',boxShadow:'0 18px 40px rgba(40,70,40,.2)',border:'3px solid rgba(255,255,255,.85)',zIndex:4}}><h2 style={{fontSize:'clamp(18px,2.2vw,30px)',fontWeight:900,color:'#6a341c'}}>Merhaba küçük kaşif! 🦁</h2><p style={{fontSize:'clamp(14px,1.5vw,20px)',lineHeight:1.45,fontWeight:700,margin:'8px 0 0'}}>Ben Leo. Burası Doğa Dünyası. Birlikte hayvanları, bitkileri ve doğanın güzel seslerini keşfedeceğiz!</p></section>
-   <button className="forest-start" type="button" onClick={()=>setIntro(false)} style={{position:'absolute',right:'5%',bottom:'8%',border:0,borderRadius:22,padding:'16px 28px',background:'linear-gradient(#ffd951,#f2a52f)',color:'#713313',fontSize:'clamp(17px,2vw,26px)',fontWeight:900,boxShadow:'0 8px 0 #c37a25,0 15px 25px rgba(90,60,20,.2)',cursor:'pointer'}}>Maceraya Başla! →</button>
-  </>:<><div style={{position:'absolute',left:'50%',top:'16%',transform:'translateX(-50%)',textAlign:'center'}}><div style={{fontSize:'clamp(20px,3vw,40px)',fontWeight:900,color:'#245b38'}}>Keşif Haritası</div><div style={{fontSize:'clamp(12px,1.4vw,18px)',fontWeight:700}}>Bir adaya dokun ve keşfet!</div></div><div style={{position:'absolute',left:'7%',right:'7%',top:'34%',bottom:'12%',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'clamp(12px,3vw,35px)',alignItems:'center'}}>{[['🦊','Hayvanlar'],['🌿','Doğa'],['🔊','Sesler']].map(([icon,title])=><button key={title} type="button" style={{height:'min(32vh,250px)',border:0,borderRadius:38,background:'rgba(255,255,255,.82)',boxShadow:'0 18px 35px rgba(43,85,50,.2)',fontSize:'clamp(18px,2.5vw,34px)',fontWeight:900,color:'#285b3a',cursor:'pointer'}}><div style={{fontSize:'clamp(40px,6vw,80px)'}}>{icon}</div>{title}<div style={{fontSize:'clamp(11px,1.2vw,16px)',marginTop:7}}>Keşfet →</div></button>)}</div><button type="button" onClick={()=>setIntro(true)} style={{position:'absolute',left:'4%',bottom:'5%',border:0,borderRadius:16,padding:'10px 16px',background:'rgba(255,255,255,.85)',color:'#3c6448',fontWeight:900,cursor:'pointer'}}>← Leo'ya dön</button></>}
- </div></main>
+ return <main style={scene} aria-label="Doğa Dünyası"><style>{keyframes}</style>
+   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(255,255,255,.04),rgba(33,87,35,.16))'}} />
+   <div className="forest-title" style={{position:'absolute',left:'4%',top:'5%',padding:'11px 18px',borderRadius:18,background:'linear-gradient(#9c5e31,#673a20)',border:'4px solid #54301c',color:'#fff0a2',fontSize:'clamp(16px,2vw,28px)',fontWeight:900,boxShadow:'0 7px 18px rgba(45,30,15,.25)',zIndex:8}}>🌿 DOĞA DÜNYASI</div>
+   <div style={{position:'absolute',left:'8%',top:'18%',width:'17vw',minWidth:90,height:30,borderRadius:30,background:'rgba(255,255,255,.58)',animation:'cloud 10s ease-in-out infinite'}} />
+   <div style={{position:'absolute',right:'11%',top:'30%',width:'13vw',minWidth:80,height:26,borderRadius:30,background:'rgba(255,255,255,.5)',animation:'cloud 12s ease-in-out infinite reverse'}} />
+   {intro ? <>
+    <div className="forest-leo" style={{position:'absolute',left:'50%',bottom:'7%',width:'min(34vw,430px)',height:'min(68vh,540px)',transform:'translateX(-50%)',zIndex:3,animation:'leoIn 1s ease-out both, breathe 4s ease-in-out 1.1s infinite'}}><img src={LEO} alt="Leo" style={{width:'100%',height:'100%',objectFit:'contain',filter:'drop-shadow(0 18px 10px rgba(45,55,25,.3))'}} /></div>
+    <section className="forest-intro-card" style={{position:'absolute',left:'5%',top:'23%',width:'min(42vw,520px)',padding:'20px 24px',borderRadius:28,background:'rgba(255,249,234,.94)',border:'3px solid rgba(255,255,255,.9)',boxShadow:'0 16px 35px rgba(55,45,25,.22)',zIndex:6}}><h2 style={{margin:0,color:'#63331d',fontSize:'clamp(19px,2.2vw,30px)',fontWeight:900}}>Merhaba küçük kaşif! 🦁</h2><p style={{margin:'9px 0 0',fontSize:'clamp(14px,1.45vw,20px)',lineHeight:1.45,fontWeight:700}}>Ben Leo. Burası Doğa Dünyası. Birlikte hayvanları, bitkileri ve doğanın güzel seslerini keşfedeceğiz!</p></section>
+    <button className="forest-start" type="button" onClick={()=>setIntro(false)} style={{position:'absolute',right:'5%',bottom:'7%',border:0,borderRadius:22,padding:'16px 28px',background:'linear-gradient(#ffd952,#f1a62f)',color:'#713313',fontSize:'clamp(17px,2vw,27px)',fontWeight:900,boxShadow:'0 8px 0 #c17a24,0 15px 28px rgba(70,45,15,.25)',zIndex:8,cursor:'pointer'}}>Maceraya Başla! →</button>
+   </> : <div style={{position:'absolute',inset:0,zIndex:5,background:'rgba(244,249,231,.12)'}}><div style={{position:'absolute',left:'50%',top:'15%',transform:'translateX(-50%)',textAlign:'center',color:'#285738'}}><strong style={{fontSize:'clamp(22px,3vw,40px)'}}>Keşif Haritası</strong><div>Bir adaya dokun ve keşfet!</div></div><div style={{position:'absolute',left:'7%',right:'7%',top:'34%',bottom:'12%',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'clamp(12px,3vw,35px)',alignItems:'center'}}>{[['🦊','Hayvanlar'],['🌿','Doğa'],['🔊','Sesler']].map(([icon,title])=><button key={title} type="button" style={{height:'min(30vh,240px)',border:0,borderRadius:32,background:'rgba(255,255,255,.88)',boxShadow:'0 15px 30px rgba(43,75,45,.2)',fontSize:'clamp(18px,2.4vw,32px)',fontWeight:900,color:'#285b3a'}}><div style={{fontSize:'clamp(40px,6vw,76px)'}}>{icon}</div>{title}<div style={{fontSize:14,marginTop:7}}>Keşfet →</div></button>)}</div><button type="button" onClick={()=>setIntro(true)} style={{position:'absolute',left:'4%',bottom:'5%',border:0,borderRadius:15,padding:'10px 15px',fontWeight:900}}>← Leo'ya dön</button></div>}
+ </main>
 }

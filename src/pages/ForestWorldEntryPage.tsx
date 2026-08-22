@@ -6,7 +6,8 @@ const shell: React.CSSProperties = {
   fontFamily: 'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
 }
 
-const leo = '/illustrations/forest/leo-quality.webp'
+// Use the actual illustrated Leo character, not the quality/banner asset.
+const leo = '/illustrations/forest/leo-lion.svg'
 const forest = '/illustrations/forest/file_0000000048b481f488920a1edaf0608f.png'
 
 type Island = { title: string; icon: string; art: string; text: string }
@@ -31,17 +32,22 @@ export function ForestWorldEntryPage() {
   return (
     <main style={shell} aria-label="Doğa Dünyası giriş">
       <img src={forest} alt="Doğa Dünyası ormanı" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',objectPosition:'center',zIndex:0}} />
-      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(25,91,69,.04),rgba(24,69,49,.16))',zIndex:1}} />
-      <div style={{position:'absolute',left:'4%',top:'5%',padding:'10px 17px',borderRadius:18,background:'rgba(102,62,32,.94)',border:'3px solid rgba(73,43,22,.95)',color:'#fff2a8',fontWeight:1000,fontSize:'clamp(15px,2vw,26px)',boxShadow:'0 7px 16px rgba(20,50,35,.22)',zIndex:4}}>🌿 DOĞA DÜNYASI</div>
-      <div style={{position:'absolute',left:'50%',bottom:'1%',transform:'translateX(-50%)',height:'67%',width:'min(40vw,500px)',display:'flex',alignItems:'flex-end',justifyContent:'center',zIndex:3,animation:'leoFloat 3.2s ease-in-out infinite'}}>
-        <img src={leo} alt="Leo" style={{width:'100%',height:'100%',objectFit:'contain',filter:'drop-shadow(0 18px 13px rgba(25,64,43,.28))'}} />
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(25,91,69,.03),rgba(24,69,49,.12))',zIndex:1}} />
+
+      <div style={{position:'absolute',left:'4%',top:'5%',padding:'10px 17px',borderRadius:18,background:'rgba(102,62,32,.94)',border:'3px solid rgba(73,43,22,.95)',color:'#fff2a8',fontWeight:1000,fontSize:'clamp(15px,2vw,26px)',boxShadow:'0 7px 16px rgba(20,50,35,.22)',zIndex:7}}>🌿 DOĞA DÜNYASI</div>
+
+      {/* Leo is deliberately kept separate from the speech card so the character is always visible. */}
+      <div style={{position:'absolute',right:'14%',bottom:'3%',width:'min(34vw,410px)',height:'67%',display:'flex',alignItems:'flex-end',justifyContent:'center',zIndex:4,animation:'leoFloat 3.2s ease-in-out infinite',pointerEvents:'none'}}>
+        <img src={leo} alt="Leo" style={{width:'100%',height:'100%',objectFit:'contain',filter:'drop-shadow(0 18px 13px rgba(25,64,43,.32))'}} />
       </div>
-      <div style={{position:'absolute',left:'50%',top:'8%',transform:'translateX(-50%)',width:'min(650px,78vw)',display:'flex',alignItems:'center',gap:14,padding:'15px 19px',borderRadius:25,background:'rgba(255,251,238,.96)',boxShadow:'0 12px 30px rgba(32,72,52,.22)',opacity:talking?1:0,transition:'opacity .4s ease',zIndex:5}}>
+
+      <div style={{position:'absolute',left:'5%',top:'17%',width:'min(640px,46vw)',display:'flex',alignItems:'center',gap:14,padding:'18px 22px',borderRadius:28,background:'rgba(255,251,238,.96)',boxShadow:'0 12px 30px rgba(32,72,52,.22)',opacity:talking?1:0,transition:'opacity .4s ease',zIndex:6}}>
         <img src={leo} alt="" style={{width:66,height:66,objectFit:'contain',flex:'0 0 auto'}} />
         <div><strong style={{fontSize:'clamp(17px,2vw,26px)',color:'#67371f'}}>Leo</strong><div style={{fontSize:'clamp(12px,1.5vw,18px)',fontWeight:750,lineHeight:1.35,marginTop:3}}>Merhaba küçük kaşif! Burası Doğa Dünyası. Hayvanları, bitkileri ve doğanın güzel seslerini birlikte keşfedelim!</div></div>
       </div>
-      <button type="button" onClick={() => setEntered(true)} disabled={!talking} style={{position:'absolute',right:'4%',bottom:'5%',border:0,borderRadius:20,padding:'15px 27px',background:talking?'linear-gradient(#ffd94f,#f2a72f)':'#8e9a8e',color:'#603214',fontWeight:1000,fontSize:'clamp(17px,2vw,25px)',boxShadow:talking?'0 7px 0 #bf7726':'none',cursor:talking?'pointer':'default',zIndex:6}}>İleri →</button>
-      <style>{`@keyframes leoFloat{50%{transform:translateX(-50%) translateY(-8px)}}`}</style>
+
+      <button type="button" onClick={() => setEntered(true)} disabled={!talking} style={{position:'absolute',right:'4%',bottom:'5%',border:0,borderRadius:20,padding:'15px 27px',background:talking?'linear-gradient(#ffd94f,#f2a72f)':'#8e9a8e',color:'#603214',fontWeight:1000,fontSize:'clamp(17px,2vw,25px)',boxShadow:talking?'0 7px 0 #bf7726':'none',cursor:talking?'pointer':'default',zIndex:8}}>Maceraya Başla! →</button>
+      <style>{`@keyframes leoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}} @media(max-width:760px){.nature-leo-mobile{right:4%!important;width:44%!important;height:55%!important}.nature-speech-mobile{left:4%!important;top:15%!important;width:68%!important}.nature-button-mobile{right:4%!important;bottom:4%!important}.nature-title-mobile{font-size:15px!important;padding:9px 13px!important}}`}</style>
     </main>
   )
 }

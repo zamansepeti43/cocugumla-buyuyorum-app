@@ -1,0 +1,511 @@
+/* =====================================================
+   PREMIUM SHARED HEADER — FINAL
+   ===================================================== */
+
+html body #root .app-shell,
+html body #root .app-shell-worlds {
+  position: relative !important;
+  background: transparent !important;
+}
+
+/* Header artýk sayfanýn ayrý bölümü deðil */
+html body #root .app-shell .topbar,
+html body #root .app-shell-worlds .topbar {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 76px !important;
+  min-height: 76px !important;
+  z-index: 99999 !important;
+
+  display: grid !important;
+  grid-template-columns: auto 1fr auto !important;
+  align-items: center !important;
+
+  padding: 0 clamp(18px, 3vw, 42px) !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Logo */
+html body #root .topbar .brand,
+html body #root .topbar .reference-brand {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Menü — kutu yok */
+html body #root .topbar .desktop-nav {
+  display: flex !important;
+  justify-self: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Premium yazýlar */
+html body #root .topbar .desktop-nav a {
+  min-height: 38px !important;
+  padding: 0 14px !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+
+  border-radius: 9px !important;
+  border: 1px solid transparent !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: rgba(255,255,255,.78) !important;
+
+  font-family:
+    Inter,
+    DM Sans,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif !important;
+
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  letter-spacing: .1px !important;
+
+  text-shadow: 0 1px 8px rgba(0,0,0,.65) !important;
+
+  transition:
+    color .18s ease,
+    background .18s ease,
+    border-color .18s ease !important;
+}
+
+/* Hover */
+html body #root .topbar .desktop-nav a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.055) !important;
+  border-color: rgba(255,255,255,.10) !important;
+}
+
+/* Aktif sayfa */
+html body #root .topbar .desktop-nav a.active {
+  color: #ffd45a !important;
+
+  background: rgba(255,196,64,.08) !important;
+
+  border: 1px solid rgba(255,205,80,.30) !important;
+
+  box-shadow:
+    inset 0 0 12px rgba(255,190,50,.045),
+    0 0 14px rgba(255,190,50,.05) !important;
+}
+
+/* Menü ikonlarý */
+html body #root .topbar .desktop-nav svg {
+  width: 14px !important;
+  height: 14px !important;
+  stroke-width: 1.8 !important;
+}
+
+/* Profil alaný */
+html body #root .topbar .child-chip {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Profil yazýlarý */
+html body #root .topbar .child-chip strong {
+  color: rgba(255,255,255,.92) !important;
+  font-size: 11px !important;
+}
+
+html body #root .topbar .child-chip small {
+  color: rgba(255,255,255,.55) !important;
+  font-size: 8px !important;
+}
+
+/* Profil yuvarlaðý */
+html body #root .topbar .child-chip > span {
+  width: 36px !important;
+  height: 36px !important;
+  border: 1px solid rgba(255,255,255,.35) !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,.35) !important;
+}
+
+/* Ana sayfanýn içeriði header'ýn altýndan baþlasýn */
+html body #root .app-shell .main-content {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Keþfet haritasý header'ýn arkasýndan baþlasýn */
+html body #root .app-shell-worlds .worlds-map {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Eski keþfet sol menüsü yok */
+html body #root .app-shell-worlds .side-nav,
+html body #root .app-shell-worlds .sidebar,
+html body #root .app-shell-worlds .left-nav,
+html body #root .app-shell-worlds .bottom-nav {
+  display: none !important;
+}
+
+/* Keþfet geri butonu */
+html body #root .app-shell-worlds .worlds-back {
+  z-index: 100000 !important;
+}
+
+/* Alt navigasyon yok */
+html body #root .bottom-nav {
+  display: none !important;
+}
+
+/* =====================================================
+   HOME — HEADER HERO ÝLE TEK PARÇA
+   ===================================================== */
+
+html body #root .home-page,
+html body #root .reference-home-page {
+  position: relative !important;
+  background: #050711 !important;
+}
+
+/* Hero header'ýn arkasýna kadar çýksýn */
+html body #root .reference-home-hero {
+  margin-top: 0 !important;
+}
+
+/* Mobil */
+@media (max-width: 760px) {
+  html body #root .app-shell .topbar,
+  html body #root .app-shell-worlds .topbar {
+    height: 64px !important;
+    min-height: 64px !important;
+    padding: 0 12px !important;
+  }
+
+  html body #root .topbar .desktop-nav {
+    gap: 0 !important;
+  }
+
+  html body #root .topbar .desktop-nav a {
+    padding: 0 8px !important;
+    font-size: 10px !important;
+  }
+
+  html body #root .topbar .desktop-nav svg {
+    display: none !important;
+  }
+
+  html body #root .topbar .child-chip strong,
+  html body #root .topbar .child-chip small {
+    display: none !important;
+  }
+}
+
+
+
+
+
+/* =====================================================
+   FINAL HOME OVERLAY — REMOVE OLD GREEN LAYER
+   ===================================================== */
+
+html,
+body,
+html body,
+html body #root {
+  background: transparent !important;
+}
+
+html body #root .app-shell {
+  position: relative !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  background: transparent !important;
+  isolation: isolate !important;
+}
+
+html body #root .app-shell .main-content {
+  position: relative !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+/* Home'un kendi yüzeyi — RENK YOK */
+html body #root .app-shell .reference-home-page {
+  position: relative !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+/* Ýç kapsayýcý da tamamen þeffaf */
+html body #root .app-shell .reference-home-shell {
+  position: relative !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Ana içerik */
+html body #root .app-shell .reference-home-main {
+  position: relative !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* HERO artýk ekranýn tamamýný kaplýyor */
+html body #root .app-shell .reference-home-hero {
+  position: relative !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* Gerçek ana sayfa görseli */
+html body #root .app-shell .reference-hero-art {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Hero gölgesi sadece görselin üstünde */
+html body #root .app-shell .reference-hero-shade {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+}
+
+/* Ýçerikler görselin üstünde */
+html body #root .app-shell .reference-greeting,
+html body #root .app-shell .reference-goal-card,
+html body #root .app-shell .reference-continue-card,
+html body #root .app-shell .reference-parent-panel,
+html body #root .app-shell .reference-recommend-panel {
+  z-index: 5 !important;
+}
+
+/* =====================================================
+   HEADER — GÖRSELÝN ÜSTÜNDE, TAM ÞEFFAF
+   ===================================================== */
+
+html body #root .app-shell .topbar {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  backdrop-filter: blur(7px) saturate(115%) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(115%) !important;
+}
+
+/* Menü yazýlarý premium */
+html body #root .app-shell .topbar .desktop-nav a {
+  background: transparent !important;
+  color: rgba(255,255,255,.88) !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,.75) !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a:hover {
+  background: rgba(255,255,255,.06) !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a.active {
+  background: rgba(255,196,64,.08) !important;
+  color: #ffd45a !important;
+  border: 1px solid rgba(255,205,80,.30) !important;
+  box-shadow: 0 0 18px rgba(255,190,50,.06) !important;
+}
+
+/* Profil tamamen þeffaf */
+html body #root .app-shell .topbar .child-chip {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* =====================================================
+   KEÞFET — PREMIUM GLASS FLOATING PANELS
+   ===================================================== */
+
+/* ÝLERLEME KARTI — SOL ALT */
+html body #root .app-shell-worlds .progress-card,
+html body #root .app-shell-worlds .world-progress,
+html body #root .app-shell-worlds .progress-panel {
+  position: fixed !important;
+  left: 22px !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 22px !important;
+
+  width: 145px !important;
+  min-width: 145px !important;
+  max-width: 145px !important;
+
+  padding: 12px !important;
+
+  background: rgba(8,12,25,.34) !important;
+  background-color: rgba(8,12,25,.34) !important;
+
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 16px !important;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+
+  backdrop-filter: blur(10px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(125%) !important;
+
+  z-index: 9990 !important;
+}
+
+/* Ýlerleme baþlýðý */
+html body #root .app-shell-worlds .progress-card h3,
+html body #root .app-shell-worlds .world-progress h3,
+html body #root .app-shell-worlds .progress-panel h3 {
+  font-size: 11px !important;
+  margin: 0 0 6px !important;
+  color: rgba(255,255,255,.82) !important;
+}
+
+/* Ýlerleme yüzdesi */
+html body #root .app-shell-worlds .progress-card strong,
+html body #root .app-shell-worlds .world-progress strong,
+html body #root .app-shell-worlds .progress-panel strong {
+  font-size: 20px !important;
+  color: #fff !important;
+}
+
+/* Progress çemberi/kart içi */
+html body #root .app-shell-worlds .progress-card *,
+html body #root .app-shell-worlds .world-progress *,
+html body #root .app-shell-worlds .progress-panel * {
+  text-shadow: 0 1px 7px rgba(0,0,0,.75) !important;
+}
+
+
+/* =====================================================
+   RASTGELE KEÞFET — SAÐ ALT GLASS
+   ===================================================== */
+
+html body #root .app-shell-worlds .random-explore,
+html body #root .app-shell-worlds .random-discover,
+html body #root .app-shell-worlds .random-world,
+html body #root .app-shell-worlds .random-discover-card {
+  position: fixed !important;
+  right: 22px !important;
+  left: auto !important;
+  bottom: 22px !important;
+
+  background: rgba(8,12,25,.34) !important;
+  background-color: rgba(8,12,25,.34) !important;
+
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+
+  backdrop-filter: blur(10px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(125%) !important;
+
+  border-radius: 18px !important;
+
+  z-index: 9990 !important;
+}
+
+/* Rastgele Keþfet yazýlarý */
+html body #root .app-shell-worlds .random-explore *,
+html body #root .app-shell-worlds .random-discover *,
+html body #root .app-shell-worlds .random-world *,
+html body #root .app-shell-worlds .random-discover-card * {
+  text-shadow: 0 1px 8px rgba(0,0,0,.7) !important;
+}
+
+
+/* =====================================================
+   MOBÝL
+   ===================================================== */
+
+@media (max-width: 760px) {
+
+  html body #root .app-shell-worlds .progress-card,
+  html body #root .app-shell-worlds .world-progress,
+  html body #root .app-shell-worlds .progress-panel {
+    left: 12px !important;
+    bottom: 12px !important;
+    width: 125px !important;
+    min-width: 125px !important;
+    max-width: 125px !important;
+    padding: 9px !important;
+  }
+
+  html body #root .app-shell-worlds .random-explore,
+  html body #root .app-shell-worlds .random-discover,
+  html body #root .app-shell-worlds .random-world,
+  html body #root .app-shell-worlds .random-discover-card {
+    right: 12px !important;
+    bottom: 12px !important;
+  }
+}
+

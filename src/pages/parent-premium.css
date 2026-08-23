@@ -39,3 +39,4 @@
 .parent-disclaimer { display:flex; align-items:center; justify-content:center; gap:6px; margin:14px 0 0; color:rgba(235,241,255,.35); font-size:8px; text-align:center; }
 @media (max-width:800px) { .parent-premium-page{padding:16px 12px 35px}.parent-hero{align-items:flex-start;flex-direction:column}.parent-age-badge{width:100%;box-sizing:border-box}.age-stage-grid,.parent-guide-grid{grid-template-columns:1fr 1fr}.parent-current-guide{align-items:flex-start;flex-wrap:wrap}.guide-button{margin-left:76px} }
 @media (max-width:520px) { .parent-stats{grid-template-columns:1fr}.age-stage-grid,.parent-guide-grid{grid-template-columns:1fr}.parent-section{padding:14px}.parent-hero{padding:18px}.parent-hero h1{font-size:25px}.parent-current-guide{padding:14px}.guide-button{margin-left:0} }
+

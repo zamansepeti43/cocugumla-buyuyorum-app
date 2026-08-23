@@ -178,4 +178,3 @@
   .app-shell-worlds .worlds-main-content{min-height:100dvh!important;padding-bottom:0!important}
   .app-shell-worlds .worlds-map{height:100dvh!important;min-height:100dvh!important}
 }
-

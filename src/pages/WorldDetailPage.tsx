@@ -10,6 +10,7 @@ import './world-islands.css'
 import './world-visuals.css'
 import './nature-world-screen.css'
 import './space-world-clean.css'
+import './world-unified.css'
 
 const worldPresentation: Record<string, {
   title: string
@@ -67,81 +68,107 @@ const islandArt = {
   ],
 }
 
-function SpaceWorldDetailPage() {
-  const navigate = useNavigate()
-
-  const cards = [
-    { icon: '🌍', title: 'Uzay', text: 'Gezegenleri keşfet ve yıldızları tanı.' },
-    { icon: '🌊', title: 'Deniz', text: 'Okyanusların derinliklerini keşfet ve canlıları tanı.' },
-    { icon: '🧪', title: 'Bilim', text: 'Deneyler yap, öğren ve keşfet.' },
-    { icon: '🚀', title: 'Keşif', text: 'Yeni maceralara atıl ve dünyayı keşfet.' },
-  ]
-
-  return (
-    <div className="space-world-page">
-      <button type="button" className="space-world-back" onClick={() => navigate('/worlds')} aria-label="Keşif Haritasına dön">
-        <ArrowLeft size={18} />
-      </button>
-
-      <main className="space-world-content">
-        <section className="space-world-heading">
-          <span className="space-world-kicker">KEŞİF DÜNYASI</span>
-          <h1>Bu dünyanın adalarını keşfetmeye başla.</h1>
-          <p>Uzay, deniz, bilim ve keşif dünyalarını keşfet!</p>
-        </section>
-
-        <section className="space-world-cards" aria-label="Keşif Dünyası bölümleri">
-          {cards.map((card) => (
-            <button type="button" className="space-world-card" key={card.title}>
-              <span className="space-world-card-icon" aria-hidden="true">{card.icon}</span>
-              <h2>{card.title}</h2>
-              <p>{card.text}</p>
-            </button>
-          ))}
-        </section>
-      </main>
-    </div>
-  )
+const islandContent: Record<string, Record<string, { icon: string; text: string }>> = {
+  forest: {
+    Hayvanlar: { icon: '🦊', text: 'Ormandaki sevimli hayvanları tanı.' },
+    Doğa: { icon: '🌿', text: 'Ağaçları, çiçekleri ve doğayı keşfet.' },
+    Sesler: { icon: '🔊', text: 'Kuşları ve ormanın güzel seslerini dinle.' },
+  },
+  space: {
+    Uzay: { icon: '🌍', text: 'Gezegenleri keşfet ve yıldızları tanı.' },
+    Deniz: { icon: '🌊', text: 'Okyanusların derinliklerini ve canlıları keşfet.' },
+    Bilim: { icon: '🧪', text: 'Deneyler yap, öğren ve merakını keşfe dönüştür.' },
+    Keşif: { icon: '🚀', text: 'Yeni maceralara atıl ve dünyayı keşfet.' },
+  },
+  english: {
+    İngilizce: { icon: '🔤', text: 'Yeni İngilizce kelimeler öğren ve eğlen.' },
+    Hikâyeler: { icon: '📖', text: 'Kısa hikâyelerle dinleme ve anlatma becerini geliştir.' },
+    Konuşma: { icon: '💬', text: 'Basit kelimeler ve cümlelerle konuşmayı dene.' },
+  },
+  games: {
+    Dikkat: { icon: '🎯', text: 'Dikkatini topla ve eğlenceli görevleri tamamla.' },
+    Hafıza: { icon: '🧠', text: 'Eşleştirme ve hafıza oyunlarıyla zihnini çalıştır.' },
+    'Mini Oyunlar': { icon: '🎮', text: 'Kısa, eğlenceli oyunlarla öğrenmeye devam et.' },
+  },
+  math: {
+    Sayılar: { icon: '🔢', text: 'Sayıları tanı, saymayı öğren ve eğlen.' },
+    Şekiller: { icon: '🔷', text: 'Şekilleri keşfet, karşılaştır ve eşleştir.' },
+  },
 }
 
-function NatureWorldMap({ onBack }: { onBack: () => void }) {
-  const [selected, setSelected] = useState<string | null>(null)
+function UnifiedWorldDetailPage({ worldId, onBack }: { worldId: string; onBack?: () => void }) {
+  const navigate = useNavigate()
+  const { getWorld, getSections, isSectionUnlocked } = useWorlds()
+  const { getTotalStars } = useProgress()
+  const world = getWorld(worldId)
+  const presentation = worldPresentation[worldId] ?? { title: world?.title ?? 'Dünya', description: world?.description ?? '', islands: [] }
+  const sectionsList = world ? getSections(worldId) : []
+  const totalStars = getTotalStars()
+  const content = islandContent[worldId] ?? {}
+  const art = islandArt[worldId as keyof typeof islandArt] ?? []
 
-  const islands = [
-    { title: 'Hayvanlar', text: 'Ormandaki sevimli hayvanlarla tanış.' },
-    { title: 'Doğa', text: 'Ağaçları, çiçekleri ve doğayı keşfet.' },
-    { title: 'Sesler', text: 'Kuşları ve ormanın güzel seslerini dinle.' },
-  ]
+  if (!world) {
+    return (
+      <main className="world-unified-page world-unified-missing">
+        <Link to="/worlds" className="world-unified-back"><ArrowLeft size={19} /> Geri</Link>
+        <div className="world-unified-empty"><span>🌍</span><h1>Dünya bulunamadı</h1><p>Bu dünya harita verilerinde kayıtlı değil.</p></div>
+      </main>
+    )
+  }
+
+  const handleBack = onBack ?? (() => navigate('/worlds'))
 
   return (
-    <main className="nature-world-screen" aria-label="Doğa Dünyası haritası">
-      <header className="nature-map-header">
-        <button type="button" className="nature-map-back" onClick={onBack}>
-          <ArrowLeft size={20} /> Geri
-        </button>
-        <div>
-          <span>🌿 DOĞA DÜNYASI</span>
-          <h1>Keşfetmeye hazır mısın?</h1>
-        </div>
-      </header>
+    <main className={`world-unified-page world-unified-${worldId}`}>
+      <button type="button" className="world-unified-back" onClick={handleBack} aria-label="Geri dön">
+        <ArrowLeft size={20} />
+        <span>Geri</span>
+      </button>
 
-      <div>
-        {islands.map((island) => (
-          <button type="button" key={island.title} onClick={() => setSelected(island.title)}>
-            {island.title}
-          </button>
-        ))}
-      </div>
+      <div className="world-unified-inner">
+        <section className="world-unified-hero">
+          <span className="world-unified-kicker">{presentation.title.toUpperCase()}</span>
+          <h1>Bu dünyanın adalarını keşfetmeye başla.</h1>
+          <p>{presentation.description}</p>
+        </section>
 
-      {selected && (
-        <div role="dialog" aria-modal="true" onClick={() => setSelected(null)}>
-          <div onClick={(event) => event.stopPropagation()}>
-            <h2>{selected}</h2>
-            <p>{islands.find((item) => item.title === selected)?.text}</p>
-            <button type="button" onClick={() => setSelected(null)}>Başlayalım!</button>
+        <section className={`world-unified-islands world-unified-islands-${presentation.islands.length}`} aria-label={`${presentation.title} bölümleri`}>
+          {presentation.islands.map((island, index) => {
+            const item = content[island] ?? { icon: '✨', text: 'Yeni şeyler öğren ve keşfet.' }
+            return (
+              <button
+                type="button"
+                className="world-unified-card"
+                key={island}
+                style={art.length > 0 ? { backgroundImage: `linear-gradient(180deg, rgba(20,8,54,.72), rgba(5,7,31,.97)), url(${art[index % art.length]})` } : undefined}
+              >
+                <span className="world-unified-card-icon" aria-hidden="true">{item.icon}</span>
+                <h2>{island}</h2>
+                <p>{item.text}</p>
+              </button>
+            )
+          })}
+        </section>
+
+        <section className="world-unified-sections">
+          <div className="world-unified-section-heading">
+            <div>
+              <span>BÖLÜMLER</span>
+              <h2>Bu dünyada neler öğreneceğiz?</h2>
+            </div>
+            <strong>{sectionsList.length} bölüm · {totalStars} yıldız</strong>
           </div>
-        </div>
-      )}
+          {sectionsList.length > 0 ? (
+            <div className="world-unified-section-grid">
+              {sectionsList.map((section) => (
+                <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />
+              ))}
+            </div>
+          ) : (
+            <div className="world-unified-section-empty">Bu dünyaya henüz bölüm eklenmemiş.</div>
+          )}
+        </section>
+      </div>
     </main>
   )
 }
@@ -154,7 +181,7 @@ export function NatureWorldPage() {
       {!natureEntered ? (
         <ForestDiscoveryGame onNext={() => setNatureEntered(true)} />
       ) : (
-        <NatureWorldMap onBack={() => setNatureEntered(false)} />
+        <UnifiedWorldDetailPage worldId="forest" onBack={() => setNatureEntered(false)} />
       )}
     </div>
   )
@@ -163,82 +190,5 @@ export function NatureWorldPage() {
 export function WorldDetailPage() {
   const { worldId } = useParams()
   if (!worldId) return null
-  if (worldId === 'space') return <SpaceWorldDetailPage />
-  if (worldId === 'forest') return <NatureWorldPage />
-  return <RegularWorldDetailPage worldId={worldId} />
-}
-
-function RegularWorldDetailPage({ worldId }: { worldId: string }) {
-  const { getWorld, getSections, isSectionUnlocked } = useWorlds()
-  const { getTotalStars } = useProgress()
-  const world = getWorld(worldId)
-
-  if (!world) {
-    return (
-      <div className="page world-detail-page">
-        <div className="empty-state">
-          <span aria-hidden="true">🌍</span>
-          <h2>Dünya bulunamadı</h2>
-          <p>Bu dünya harita verilerinde kayıtlı değil.</p>
-          <Link to="/worlds">Keşif Haritasına dön</Link>
-        </div>
-      </div>
-    )
-  }
-
-  const presentation = worldPresentation[worldId] ?? { title: world.title, description: world.description, islands: [] }
-  const sectionsList = getSections(worldId)
-  const totalStars = getTotalStars()
-  const art = islandArt[worldId as keyof typeof islandArt] ?? islandArt.forest
-
-  return (
-    <div className={`page world-detail-page world-${worldId}`}>
-      <Link to="/worlds" className="back-link">
-        <ArrowLeft size={18} />
-        Keşif Haritası
-      </Link>
-
-      <section className="world-hero" data-world={worldId} style={{ ['--world-color' as string]: `var(--${world.color})` }}>
-        <div className="world-hero-visual">
-          <span className="world-hero-icon">{world.icon}</span>
-          <div className="world-hero-deco" aria-hidden="true">
-            <span>✨</span>
-            <span>GELECEK ADACIKLAR</span>
-            <strong>Bu dünyanın adalarına çık, keşfetmeye başla.</strong>
-          </div>
-          <div className="world-islands-list">
-            {presentation.islands.map((island, index) => (
-              <div className="world-island-chip" key={island} style={{ backgroundImage: art.length > 0 ? `url(${art[index % art.length]})` : undefined }}>
-                <span aria-hidden="true">🌿</span>
-                {island}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-block">
-        <div className="section-heading">
-          <div>
-            <span className="kicker">BÖLÜMLER</span>
-            <h2>Bu dünyada neler öğreneceğiz?</h2>
-          </div>
-          <span className="section-count">{sectionsList.length} bölüm · {totalStars} yıldız</span>
-        </div>
-
-        {sectionsList.length > 0 ? (
-          <div className="sections-list">
-            {sectionsList.map((section) => (
-              <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />
-            ))}
-          </div>
-        ) : (
-          <div className="section-empty">
-            <span>📚</span>
-            <strong>Bu dünyaya henüz bölüm eklenmemiş.</strong>
-          </div>
-        )}
-      </section>
-    </div>
-  )
+  return <UnifiedWorldDetailPage worldId={worldId} />
 }

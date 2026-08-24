@@ -78,6 +78,73 @@ export function AppLayout() {
           </NavLink>
         ))}
       </nav>
+
+      {/* Final cascade: WorldsPage has an older inline icon-only rule. This is deliberately
+          rendered after <Outlet /> so the shared navigation is identical on every page. */}
+      <style>{`
+        html body #root .app-shell-worlds .topbar .desktop-nav a {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          flex: 0 1 auto !important;
+          min-width: max-content !important;
+          min-height: 42px !important;
+          height: 42px !important;
+          padding: 0 14px !important;
+          gap: 7px !important;
+          font-size: 13px !important;
+          line-height: 1 !important;
+          font-weight: 800 !important;
+          white-space: nowrap !important;
+          color: rgba(255,255,255,.92) !important;
+          background: transparent !important;
+          border: 1px solid transparent !important;
+          border-radius: 10px !important;
+          box-shadow: none !important;
+        }
+
+        html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+          display: block !important;
+          width: 18px !important;
+          height: 18px !important;
+          flex: 0 0 auto !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+
+        html body #root .app-shell-worlds .topbar .desktop-nav a.active {
+          color: #ffd45a !important;
+          background: rgba(255,196,64,.09) !important;
+          border-color: rgba(255,205,80,.30) !important;
+        }
+
+        @media (max-width: 900px) {
+          html body #root .app-shell-worlds .topbar .desktop-nav a {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+            min-height: 40px !important;
+            height: 40px !important;
+            padding: 0 4px !important;
+            gap: 4px !important;
+            font-size: clamp(8px, 2.2vw, 11px) !important;
+          }
+
+          html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+        }
+
+        @media (max-width: 900px) and (orientation: landscape) {
+          html body #root .app-shell-worlds .topbar .desktop-nav a {
+            min-height: 34px !important;
+            height: 34px !important;
+            padding: 0 2px !important;
+            gap: 3px !important;
+            font-size: clamp(7px, 1.7vw, 10px) !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }

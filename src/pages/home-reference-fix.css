@@ -1,4 +1,4 @@
-/* Final home layout — 2 cards left, 2 cards right */
+/* Final home layout — 2 smaller cards left, 2 smaller cards right */
 .reference-home-page { overflow-x:hidden; overflow-y:auto; min-height:100vh; background:#050711; }
 .reference-home-shell { width:min(1380px,calc(100vw - 28px)); min-width:980px; margin:0 auto; padding-bottom:30px; }
 .reference-topbar { position:relative; z-index:20; height:112px; grid-template-columns:300px 1fr 58px; padding:0 22px; border-bottom:0; background:transparent !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; box-shadow:none !important; filter:none !important; }
@@ -6,42 +6,42 @@
 .reference-brand-logo { display:block; width:190px; height:82px; object-fit:contain; object-position:left center; overflow:visible; }
 .reference-brand::before,.reference-brand .brand-mark { display:none; }
 .reference-nav { gap:7px; align-items:center; filter:none !important; }
-.reference-nav-link { min-height:42px; padding:0 13px; font-size:11px; border-radius:13px; background:rgba(8,9,15,.30) !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; filter:none !important; white-space:nowrap; }
+.reference-nav-link { min-height:42px; padding:0 13px; font-size:11px; border-radius:13px; background:transparent !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; box-shadow:none !important; filter:none !important; white-space:nowrap; }
 .reference-avatar { width:44px; height:44px; border-width:2px; }
 .reference-avatar span { font-size:25px; }
 .reference-home-main { padding:0; }
 .reference-home-hero { position:relative; z-index:1; min-height:720px; height:720px; border-radius:0 0 22px 22px; border-color:rgba(255,255,255,.14); box-shadow:0 26px 70px rgba(0,0,0,.4); overflow:hidden; }
 .reference-hero-art { background-position:center 42%; background-size:cover; transform:scale(1.01); filter:saturate(1.04) contrast(1.03) brightness(1.03); }
 .reference-hero-shade { background:linear-gradient(90deg,rgba(0,0,0,.70) 0%,rgba(0,0,0,.32) 24%,rgba(0,0,0,.05) 55%,rgba(0,0,0,.30) 100%),linear-gradient(0deg,rgba(3,4,8,.84) 0%,transparent 34%,rgba(0,0,0,.08) 100%); }
-.reference-greeting { left:38px; top:42px; max-width:360px; z-index:4; }
+.reference-greeting { left:38px; top:78px; max-width:360px; z-index:4; }
 .reference-greeting h1 { font-size:31px; margin-bottom:11px; letter-spacing:-.9px; }
 .reference-greeting p { font-size:14px; line-height:1.5; }
-.reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { top:auto !important; bottom:auto !important; width:42% !important; height:205px !important; min-height:205px !important; box-sizing:border-box; padding:17px; border-radius:18px; z-index:5; }
-.reference-goal-card { left:2% !important; right:auto !important; top:210px !important; }
-.reference-continue-card { left:2% !important; right:auto !important; top:430px !important; }
-.reference-parent-panel { left:56% !important; right:auto !important; top:210px !important; }
-.reference-recommend-panel { left:56% !important; right:auto !important; top:430px !important; }
-.goal-icon { width:38px; height:38px; margin-bottom:10px; border-radius:10px; }
-.reference-goal-card strong { font-size:14px; }
-.reference-goal-card small { margin-top:5px; font-size:10px; line-height:1.45; }
-.goal-progress { height:6px; margin-top:18px; }
-.reference-goal-card > b { right:17px; bottom:15px; font-size:11px; }
-.continue-thumb { height:68px; border-radius:11px; }
-.continue-copy { padding:10px 3px 5px; }
-.continue-copy strong { font-size:14px; }
-.continue-copy span { margin-top:4px; font-size:10px; }
-.continue-copy small { margin-top:3px; font-size:9px; }
-.continue-button { right:13px; bottom:13px; padding:8px 13px; border-radius:9px; font-size:10px; }
-.panel-heading { font-size:12px; }
-.baby-photo { left:17px; top:54px; width:76px; height:92px; border-radius:10px; }
-.baby-copy { margin:40px 0 0 92px; }
-.baby-copy small,.baby-copy span { font-size:9px; }
-.baby-copy strong { margin:5px 0; font-size:17px; }
-.guide-button { margin-top:14px; padding:9px 13px; border-radius:10px; font-size:10px; }
-.mini-content { gap:11px; margin-top:14px; }
-.mini-image { width:58px; height:58px; flex-basis:58px; border-radius:10px; }
-.mini-content strong { font-size:10px; }
-.mini-content small { margin-top:4px; font-size:9px; }
+.reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { top:auto !important; bottom:auto !important; width:38% !important; height:175px !important; min-height:175px !important; box-sizing:border-box; padding:15px; border-radius:17px; z-index:5; }
+.reference-goal-card { left:3% !important; right:auto !important; top:255px !important; }
+.reference-continue-card { left:3% !important; right:auto !important; top:445px !important; }
+.reference-parent-panel { left:59% !important; right:auto !important; top:255px !important; }
+.reference-recommend-panel { left:59% !important; right:auto !important; top:445px !important; }
+.goal-icon { width:34px; height:34px; margin-bottom:8px; border-radius:9px; }
+.reference-goal-card strong { font-size:13px; }
+.reference-goal-card small { margin-top:4px; font-size:9px; line-height:1.4; }
+.goal-progress { height:5px; margin-top:15px; }
+.reference-goal-card > b { right:15px; bottom:13px; font-size:10px; }
+.continue-thumb { height:58px; border-radius:10px; }
+.continue-copy { padding:8px 3px 4px; }
+.continue-copy strong { font-size:13px; }
+.continue-copy span { margin-top:3px; font-size:9px; }
+.continue-copy small { margin-top:2px; font-size:8px; }
+.continue-button { right:12px; bottom:12px; padding:7px 12px; border-radius:8px; font-size:9px; }
+.panel-heading { font-size:11px; }
+.baby-photo { left:15px; top:48px; width:68px; height:82px; border-radius:9px; }
+.baby-copy { margin:35px 0 0 82px; }
+.baby-copy small,.baby-copy span { font-size:8px; }
+.baby-copy strong { margin:4px 0; font-size:16px; }
+.guide-button { margin-top:11px; padding:8px 12px; border-radius:9px; font-size:9px; }
+.mini-content { gap:9px; margin-top:11px; }
+.mini-image { width:52px; height:52px; flex-basis:52px; border-radius:9px; }
+.mini-content strong { font-size:9px; }
+.mini-content small { margin-top:3px; font-size:8px; }
 .reference-bottom-nav { height:82px; padding:0 20%; border-top:1px solid rgba(255,255,255,.1); background:rgba(5,6,12,.94); }
 .reference-bottom-nav a { font-size:9px; gap:7px; }
 .reference-bottom-nav svg { width:22px; height:22px; }
@@ -52,14 +52,14 @@
 .reference-brand-logo { width:165px; height:74px; }
 .reference-nav-link { padding:0 8px; font-size:10px; }
 .reference-home-hero { height:680px; min-height:680px; }
-.reference-greeting { left:18px; top:36px; }
+.reference-greeting { left:18px; top:62px; }
 .reference-greeting h1 { font-size:28px; }
 .reference-greeting p { font-size:13px; }
-.reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { width:44% !important; height:190px !important; min-height:190px !important; }
-.reference-goal-card { left:2% !important; top:195px !important; }
-.reference-continue-card { left:2% !important; top:400px !important; }
-.reference-parent-panel { left:54% !important; top:195px !important; }
-.reference-recommend-panel { left:54% !important; top:400px !important; }
+.reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { width:40% !important; height:165px !important; min-height:165px !important; }
+.reference-goal-card { left:3% !important; top:225px !important; }
+.reference-continue-card { left:3% !important; top:405px !important; }
+.reference-parent-panel { left:57% !important; top:225px !important; }
+.reference-recommend-panel { left:57% !important; top:405px !important; }
 }
 @media (max-width:760px) {
 .reference-home-shell { width:100%; min-width:0; }
@@ -67,13 +67,13 @@
 .reference-nav { display:none; }
 .reference-brand-logo { width:145px; height:62px; }
 .reference-home-hero { height:760px; min-height:760px; border-radius:0; }
-.reference-greeting { left:18px; top:34px; }
+.reference-greeting { left:18px; top:54px; }
 .reference-greeting h1 { font-size:24px; }
 .reference-greeting p { font-size:11px; }
-.reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { width:94% !important; height:145px !important; min-height:145px !important; }
-.reference-goal-card { left:3% !important; top:170px !important; }
-.reference-continue-card { left:3% !important; top:325px !important; }
-.reference-parent-panel { left:3% !important; top:480px !important; }
-.reference-recommend-panel { left:3% !important; top:635px !important; }
+.reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { width:94% !important; height:135px !important; min-height:135px !important; }
+.reference-goal-card { left:3% !important; top:185px !important; }
+.reference-continue-card { left:3% !important; top:330px !important; }
+.reference-parent-panel { left:3% !important; top:475px !important; }
+.reference-recommend-panel { left:3% !important; top:620px !important; }
 .reference-bottom-nav { padding:0 5px; }
 }

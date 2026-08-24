@@ -8,6 +8,7 @@ import './worlds-clean.css'
 import './world-visuals.css'
 import './worlds-reference.css'
 import './worlds-mobile-fix.css'
+import './worlds-fullscreen.css'
 
 type World = {
   id: string

@@ -1,0 +1,142 @@
+/* =====================================================
+   SHARED NAVIGATION — FINAL CONSISTENCY OVERRIDE
+   Tek ortak navigasyon: ikon + yazı, her sayfada aynı.
+   ===================================================== */
+
+html body #root .app-shell .topbar .desktop-nav,
+html body #root .app-shell-worlds .topbar .desktop-nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a,
+html body #root .app-shell-worlds .topbar .desktop-nav a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 1 auto !important;
+  min-width: max-content !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 0 14px !important;
+  gap: 7px !important;
+  border-radius: 10px !important;
+  color: rgba(255,255,255,.88) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  text-indent: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a svg,
+html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 auto !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a.active,
+html body #root .app-shell-worlds .topbar .desktop-nav a.active {
+  color: #ffd45a !important;
+  background: rgba(255,196,64,.09) !important;
+  border-color: rgba(255,205,80,.30) !important;
+  box-shadow: none !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a:hover,
+html body #root .app-shell-worlds .topbar .desktop-nav a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.10) !important;
+}
+
+/* Worlds özel CSS'lerinin ikon-only kurallarını kesin olarak geçersiz kıl. */
+html body #root .app-shell-worlds .topbar .desktop-nav a,
+html body #root .app-shell-worlds .topbar .desktop-nav a span {
+  font-size: 13px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+  display: block !important;
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  html body #root .app-shell .topbar .desktop-nav a,
+  html body #root .app-shell-worlds .topbar .desktop-nav a {
+    min-width: 0 !important;
+    padding: 0 9px !important;
+    gap: 5px !important;
+    font-size: 11px !important;
+  }
+
+  html body #root .app-shell .topbar .desktop-nav a svg,
+  html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* Telefon: yine ikon + yazı; yalnızca daha kompakt. */
+@media (max-width: 760px) {
+  html body #root .app-shell .topbar .desktop-nav,
+  html body #root .app-shell-worlds .topbar .desktop-nav {
+    width: 100% !important;
+    max-width: none !important;
+    gap: 1px !important;
+  }
+
+  html body #root .app-shell .topbar .desktop-nav a,
+  html body #root .app-shell-worlds .topbar .desktop-nav a {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    padding: 0 3px !important;
+    gap: 3px !important;
+    font-size: clamp(8px, 2.5vw, 11px) !important;
+    font-weight: 800 !important;
+  }
+
+  html body #root .app-shell .topbar .desktop-nav a svg,
+  html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* Kısa yatay telefonlarda yazıları tekrar gizleme. */
+@media (orientation: landscape) and (max-height: 700px) {
+  html body #root .app-shell-worlds .topbar .desktop-nav a {
+    min-width: 0 !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 0 2px !important;
+    gap: 3px !important;
+    font-size: clamp(7px, 1.65vw, 10px) !important;
+  }
+
+  html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}

@@ -1,84 +1,65 @@
-/* Final reference pass: home screen composition */
+/* Home screen composition */
 .reference-home-page { overflow-x: hidden; background: #050711; }
 .reference-home-shell { width: min(1380px, calc(100vw - 28px)); min-width: 980px; margin: 0 auto; padding-bottom: 18px; }
-
-.reference-topbar {
-  height: 86px;
-  grid-template-columns: 300px 1fr 58px;
-  padding: 0 22px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  background: linear-gradient(180deg,#070a18 0%,#060813 100%);
-}
-
+.reference-topbar { height: 86px; grid-template-columns: 300px 1fr 58px; padding: 0 22px; border-bottom: 0; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }
 .reference-brand { gap: 10px; align-items: center; }
-.reference-brand-logo {
-  display: block;
-  width: 185px;
-  height: 58px;
-  object-fit: contain;
-  object-position: left center;
-}
+.reference-brand-logo { display: block; width: 185px; height: 58px; object-fit: contain; object-position: left center; }
 .reference-brand::before { display: none; }
 .reference-brand .brand-mark { display: none; }
-.brand-title { font-family: Georgia,serif; font-size: 24px; line-height: 1; letter-spacing: -.5px; }
-
 .reference-nav { gap: 7px; }
-.reference-nav-link { min-height: 42px; padding: 0 13px; font-size: 11px; border-radius: 13px; }
+.reference-nav-link { min-height: 42px; padding: 0 13px; font-size: 11px; border-radius: 13px; background: transparent; }
 .reference-avatar { width: 44px; height: 44px; border-width: 2px; }
 .reference-avatar span { font-size: 25px; }
-
 .reference-home-main { padding: 0; }
-.reference-home-hero {
-  height: 610px;
-  border-radius: 0 0 22px 22px;
-  border-color: rgba(255,255,255,.14);
-  box-shadow: 0 26px 70px rgba(0,0,0,.4);
-}
-.reference-hero-art {
-  background-position: center 42%;
-  background-size: cover;
-  transform: scale(1.01);
-  filter: saturate(1.04) contrast(1.03) brightness(1.03);
-}
-.reference-hero-shade {
-  background: linear-gradient(90deg,rgba(0,0,0,.70) 0%,rgba(0,0,0,.32) 24%,rgba(0,0,0,.05) 55%,rgba(0,0,0,.30) 100%),linear-gradient(0deg,rgba(3,4,8,.78) 0%,transparent 30%,rgba(0,0,0,.08) 100%);
-}
+.reference-home-hero { height: 610px; border-radius: 0 0 22px 22px; border-color: rgba(255,255,255,.14); box-shadow: 0 26px 70px rgba(0,0,0,.4); }
+.reference-hero-art { background-position: center 42%; background-size: cover; transform: scale(1.01); filter: saturate(1.04) contrast(1.03) brightness(1.03); }
+.reference-hero-shade { background: linear-gradient(90deg,rgba(0,0,0,.70) 0%,rgba(0,0,0,.32) 24%,rgba(0,0,0,.05) 55%,rgba(0,0,0,.30) 100%),linear-gradient(0deg,rgba(3,4,8,.78) 0%,transparent 30%,rgba(0,0,0,.08) 100%); }
 
-.reference-greeting { left: 38px; top: 46px; max-width: 360px; }
+/* Main text is lower so it does not collide with the navigation. */
+.reference-greeting { left: 38px; top: 112px; max-width: 360px; }
 .reference-greeting h1 { font-size: 31px; margin-bottom: 11px; letter-spacing: -.9px; }
 .reference-greeting p { font-size: 14px; line-height: 1.5; }
 
-/* Left cards: fixed vertical slots so they never overlap. */
-.reference-goal-card { left: 24px; top: 172px; width: 190px; height: 128px; min-height: 128px; padding: 17px; border-radius: 17px; box-sizing: border-box; }
+/* Four home cards: one horizontal row, same top edge and same height. */
+.reference-goal-card,
+.reference-continue-card,
+.reference-parent-panel,
+.reference-recommend-panel {
+  top: 250px !important;
+  bottom: auto !important;
+  width: 22% !important;
+  height: 190px !important;
+  min-height: 190px !important;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 18px;
+}
+.reference-goal-card { left: 2% !important; right: auto !important; }
+.reference-continue-card { left: 26% !important; right: auto !important; }
+.reference-parent-panel { left: 50% !important; right: auto !important; }
+.reference-recommend-panel { left: 74% !important; right: auto !important; }
+
 .goal-icon { width: 36px; height: 36px; margin-bottom: 9px; border-radius: 10px; }
 .reference-goal-card strong { font-size: 13px; }
 .reference-goal-card small { margin-top: 5px; font-size: 9px; line-height: 1.4; }
 .goal-progress { height: 6px; margin-top: 15px; }
 .reference-goal-card > b { right: 15px; bottom: 13px; font-size: 10px; }
-
-.reference-continue-card { left: 24px; top: 318px; width: 190px; height: 142px; min-height: 142px; padding: 11px; border-radius: 17px; box-sizing: border-box; }
 .continue-thumb { height: 57px; border-radius: 11px; }
 .continue-copy { padding: 9px 3px 5px; }
 .continue-copy strong { font-size: 13px; }
 .continue-copy span { margin-top: 4px; font-size: 10px; }
 .continue-copy small { margin-top: 3px; font-size: 8px; }
 .continue-button { right: 11px; bottom: 11px; padding: 7px 11px; border-radius: 9px; font-size: 9px; }
-
-/* Right cards: fixed slots with a deliberate gap. */
-.reference-parent-panel { right: 24px; top: 24px; width: 225px; height: 190px; min-height: 190px; padding: 15px; border-radius: 18px; box-sizing: border-box; }
 .panel-heading { font-size: 11px; }
 .baby-photo { left: 15px; top: 51px; width: 68px; height: 82px; border-radius: 10px; }
 .baby-copy { margin: 36px 0 0 82px; }
 .baby-copy small,.baby-copy span { font-size: 8px; }
 .baby-copy strong { margin: 4px 0; font-size: 16px; }
 .guide-button { margin-top: 13px; padding: 9px 12px; border-radius: 10px; font-size: 10px; }
-
-.reference-recommend-panel { right: 24px; top: 232px; width: 225px; height: 198px; min-height: 198px; padding: 15px; border-radius: 18px; box-sizing: border-box; }
 .mini-content { gap: 10px; margin-top: 13px; }
 .mini-image { width: 52px; height: 52px; flex-basis: 52px; border-radius: 10px; }
 .mini-content strong { font-size: 9px; }
 .mini-content small { margin-top: 4px; font-size: 8px; }
-
 .reference-bottom-nav { height: 82px; padding: 0 20%; border-top: 1px solid rgba(255,255,255,.1); background: rgba(5,6,12,.94); }
 .reference-bottom-nav a { font-size: 9px; gap: 7px; }
 .reference-bottom-nav svg { width: 22px; height: 22px; }
@@ -90,25 +71,29 @@
   .reference-brand-logo { width: 165px; height: 52px; }
   .reference-nav-link { padding: 0 8px; font-size: 10px; }
   .reference-home-hero { height: 560px; }
-  .reference-parent-panel,.reference-recommend-panel { right: 18px; width: 190px; }
-  .reference-goal-card,.reference-continue-card { left: 18px; }
-  .reference-bottom-nav { padding: 0 16%; }
+  .reference-greeting { left: 18px; top: 100px; }
+  .reference-greeting h1 { font-size: 28px; }
+  .reference-greeting p { font-size: 13px; }
+  .reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { top: 225px !important; width: 22% !important; height: 180px !important; min-height: 180px !important; }
+  .reference-goal-card { left: 2% !important; }
+  .reference-continue-card { left: 26% !important; }
+  .reference-parent-panel { left: 50% !important; }
+  .reference-recommend-panel { left: 74% !important; }
 }
 
 @media (max-width: 760px) {
-  .reference-home-page { overflow-x: hidden; }
   .reference-home-shell { width: 100%; min-width: 0; }
   .reference-topbar { height: 64px; grid-template-columns: 1fr 44px; padding: 0 12px; }
   .reference-nav { display: none; }
   .reference-brand-logo { width: 145px; height: 46px; }
   .reference-home-hero { height: 620px; border-radius: 0; }
-  .reference-greeting { left: 18px; top: 28px; }
+  .reference-greeting { left: 18px; top: 82px; }
   .reference-greeting h1 { font-size: 24px; }
   .reference-greeting p { font-size: 11px; }
-  .reference-goal-card { left: 14px; top: 140px; width: 160px; height: 128px; }
-  .reference-continue-card { left: 14px; top: 282px; width: 160px; height: 142px; }
-  .reference-parent-panel { right: 12px; top: 16px; width: 150px; height: 190px; }
-  .reference-recommend-panel { right: 12px; top: 224px; width: 150px; height: 198px; }
+  .reference-goal-card,.reference-continue-card,.reference-parent-panel,.reference-recommend-panel { width: 46% !important; height: 150px !important; min-height: 150px !important; }
+  .reference-goal-card { left: 3% !important; top: 205px !important; }
+  .reference-continue-card { left: 51% !important; top: 205px !important; }
+  .reference-parent-panel { left: 3% !important; top: 365px !important; }
+  .reference-recommend-panel { left: 51% !important; top: 365px !important; }
   .reference-bottom-nav { padding: 0 5px; }
 }
-

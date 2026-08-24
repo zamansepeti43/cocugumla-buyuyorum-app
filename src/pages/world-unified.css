@@ -22,7 +22,7 @@
   background:
     linear-gradient(180deg, rgba(2,7,27,.06) 0%, rgba(2,7,27,.14) 48%, rgba(2,7,27,.58) 100%),
     var(--world-background);
-  background-position: center;
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -47,17 +47,17 @@
 }
 
 .world-unified-english {
-  --world-background: linear-gradient(135deg, #142d5b 0%, #274b82 48%, #6a4c92 100%);
+  --world-background: url('/worlds/dil-hikaye-dunyasi-arkaplan.png');
   --world-accent: #7fb8ff;
 }
 
 .world-unified-games {
-  --world-background: linear-gradient(135deg, #351452 0%, #5a287c 48%, #172b62 100%);
+  --world-background: url('/worlds/oyun-dunyasi-arkaplan.png');
   --world-accent: #d47cff;
 }
 
 .world-unified-math {
-  --world-background: linear-gradient(135deg, #073e59 0%, #166b78 48%, #243d70 100%);
+  --world-background: url('/worlds/zihin-dunyasi-arkaplan.png');
   --world-accent: #67d8ff;
 }
 

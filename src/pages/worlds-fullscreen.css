@@ -1,0 +1,128 @@
+/* Discovery map full-screen layout. Scoped only to /worlds. */
+.app-shell-worlds {
+  grid-template-rows: minmax(0, 1fr) !important;
+}
+
+.app-shell-worlds .topbar {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 82px !important;
+  min-height: 82px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  z-index: 10000 !important;
+}
+
+.app-shell-worlds .desktop-nav {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.app-shell-worlds .main-content,
+.app-shell-worlds .worlds-main-content {
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.app-shell-worlds .main-content > .worlds-page,
+.app-shell-worlds .worlds-page {
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.app-shell-worlds .worlds-shell {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.app-shell-worlds .worlds-map {
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+.app-shell-worlds .worlds-map-background {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+/* Controls stay fixed to the map corners instead of participating in page flow. */
+.app-shell-worlds .map-progress-card {
+  position: absolute !important;
+  left: 24px !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 24px !important;
+  z-index: 100 !important;
+}
+
+.app-shell-worlds .random-world-button {
+  position: absolute !important;
+  left: auto !important;
+  right: 24px !important;
+  top: auto !important;
+  bottom: 24px !important;
+  z-index: 100 !important;
+}
+
+.app-shell-worlds .worlds-back {
+  position: fixed !important;
+  top: 18px !important;
+  left: 18px !important;
+  z-index: 10001 !important;
+}
+
+@media (max-width: 1100px) {
+  .app-shell-worlds .topbar {
+    height: 72px !important;
+    min-height: 72px !important;
+  }
+}
+
+@media (max-width: 760px) and (orientation: portrait) {
+  .app-shell-worlds .topbar {
+    height: 68px !important;
+    min-height: 68px !important;
+  }
+
+  /* Keep both map controls clear of the mobile bottom navigation. */
+  .app-shell-worlds .map-progress-card {
+    left: 14px !important;
+    bottom: 86px !important;
+  }
+
+  .app-shell-worlds .random-world-button {
+    right: 14px !important;
+    bottom: 86px !important;
+  }
+}

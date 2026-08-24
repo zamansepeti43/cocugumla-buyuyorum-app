@@ -10,13 +10,17 @@ html body #root .app-shell-worlds .topbar {
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
+  width: 100% !important;
   background: transparent !important;
   background-color: transparent !important;
+  background-image: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   filter: none !important;
   box-shadow: none !important;
   border: 0 !important;
+  border-bottom: 0 !important;
+  isolation: isolate !important;
 }
 
 html body #root .app-shell .topbar::before,
@@ -25,16 +29,22 @@ html body #root .app-shell-worlds .topbar::before,
 html body #root .app-shell-worlds .topbar::after {
   content: none !important;
   display: none !important;
+  width: 0 !important;
+  height: 0 !important;
   background: transparent !important;
+  background-image: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   filter: none !important;
+  box-shadow: none !important;
 }
 
 html body #root .app-shell .topbar .desktop-nav,
 html body #root .app-shell-worlds .topbar .desktop-nav,
 html body #root .app-shell .topbar .child-chip,
-html body #root .app-shell-worlds .topbar .child-chip {
+html body #root .app-shell-worlds .topbar .child-chip,
+html body #root .app-shell .topbar .brand,
+html body #root .app-shell-worlds .topbar .brand {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   filter: none !important;
@@ -47,44 +57,247 @@ html body #root .app-shell-worlds .worlds-shell {
   background: transparent !important;
 }
 
+html body #root .app-shell-worlds .worlds-main-content {
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+}
+
 html body #root .app-shell-worlds .worlds-page {
   position: relative !important;
   z-index: 0 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+html body #root .app-shell-worlds .worlds-shell {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 html body #root .app-shell-worlds .worlds-map {
   position: relative !important;
   z-index: 1 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+html body #root .app-shell-worlds .worlds-map-background {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
 }
 
 @media (min-width: 761px) {
-  html body #root .app-shell-worlds .worlds-main-content {
+  html body #root .app-shell-worlds .worlds-main-content,
+  html body #root .app-shell-worlds .worlds-page,
+  html body #root .app-shell-worlds .worlds-shell,
+  html body #root .app-shell-worlds .worlds-map {
     height: 100dvh !important;
     min-height: 100dvh !important;
     max-height: 100dvh !important;
+  }
+}
+
+/* =====================================================
+   LANDSCAPE PHONE — tek ekrana sığan Keşfet haritası
+   Yalnızca dokunmatik, kısa ekranlı yatay telefonları etkiler.
+   ===================================================== */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 600px) {
+  html body #root .app-shell-worlds {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
     overflow: hidden !important;
-    padding: 0 !important;
+    display: block !important;
   }
 
-  html body #root .app-shell-worlds .worlds-page {
+  html body #root .app-shell-worlds .topbar {
+    position: absolute !important;
+    inset: 0 0 auto 0 !important;
+    width: 100vw !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
+    padding: 4px 8px !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    gap: 6px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    z-index: 10000 !important;
+  }
+
+  html body #root .app-shell-worlds .brand-logo {
+    height: 38px !important;
+    max-width: 105px !important;
+  }
+
+  html body #root .app-shell-worlds .desktop-nav {
     width: 100% !important;
-    height: 100dvh !important;
-    padding: 0 !important;
-    min-height: 100dvh !important;
+    max-width: 390px !important;
+    justify-self: center !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    padding: 2px !important;
+    margin: 0 auto !important;
+    gap: 1px !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
-  html body #root .app-shell-worlds .worlds-shell {
-    width: 100% !important;
-    max-width: none !important;
-    height: 100dvh !important;
-    margin: 0 !important;
+  html body #root .app-shell-worlds .desktop-nav a {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    padding: 0 3px !important;
+    gap: 0 !important;
+    justify-content: center !important;
+    border-radius: 8px !important;
+    font-size: 0 !important;
+    white-space: nowrap !important;
+    background: transparent !important;
   }
 
+  html body #root .app-shell-worlds .desktop-nav a svg {
+    width: 18px !important;
+    height: 18px !important;
+    flex: 0 0 auto !important;
+  }
+
+  html body #root .app-shell-worlds .desktop-nav a.active {
+    background: rgba(244,196,79,.16) !important;
+    border: 1px solid rgba(244,196,79,.42) !important;
+    box-shadow: none !important;
+  }
+
+  html body #root .app-shell-worlds .child-chip,
+  html body #root .app-shell-worlds .parent-access {
+    display: none !important;
+  }
+
+  html body #root .app-shell-worlds .worlds-back {
+    display: none !important;
+  }
+
+  html body #root .app-shell-worlds .main-content.worlds-main-content,
+  html body #root .app-shell-worlds .worlds-page,
+  html body #root .app-shell-worlds .worlds-shell,
   html body #root .app-shell-worlds .worlds-map {
-    width: 100% !important;
+    width: 100vw !important;
     height: 100dvh !important;
-    min-height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
     margin: 0 !important;
-    border-radius: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html body #root .app-shell-worlds .worlds-map-background {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  html body #root .app-shell-worlds .worlds-map-buttons {
+    inset: 0 !important;
+  }
+
+  html body #root .app-shell-worlds .world-button {
+    transform: translate(-50%, -50%) scale(.78) !important;
+    transform-origin: center center !important;
+  }
+
+  html body #root .app-shell-worlds .world-label {
+    min-width: 112px !important;
+    max-width: 165px !important;
+    gap: 3px !important;
+  }
+
+  html body #root .app-shell-worlds .world-label-top {
+    padding: 5px 9px !important;
+    border-width: 1px !important;
+    border-radius: 8px !important;
+  }
+
+  html body #root .app-shell-worlds .world-label strong {
+    font-size: 10px !important;
+  }
+
+  html body #root .app-shell-worlds .world-emoji {
+    font-size: 14px !important;
+  }
+
+  html body #root .app-shell-worlds .world-subislands {
+    gap: 2px !important;
+  }
+
+  html body #root .app-shell-worlds .world-subislands span {
+    padding: 3px 4px !important;
+    font-size: 6px !important;
+  }
+
+  html body #root .app-shell-worlds .world-stars {
+    padding: 3px 6px !important;
+    font-size: 7px !important;
+  }
+
+  html body #root .app-shell-worlds .map-progress-card {
+    left: 8px !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 8px !important;
+    transform: scale(.78) !important;
+    transform-origin: left bottom !important;
+    z-index: 100 !important;
+  }
+
+  html body #root .app-shell-worlds .random-world-button {
+    left: auto !important;
+    right: 8px !important;
+    top: auto !important;
+    bottom: 8px !important;
+    transform: scale(.78) !important;
+    transform-origin: right bottom !important;
+    z-index: 100 !important;
+  }
+
+  html body #root .app-shell-worlds .bottom-nav {
+    display: none !important;
   }
 }

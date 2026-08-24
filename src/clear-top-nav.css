@@ -1,16 +1,11 @@
 /* =====================================================
-   CLEAR TOP NAVIGATION
-   Yalnızca üst navigasyonun arka plan efektini kaldırır.
-   Ana sayfa, hero, kartlar ve diğer içeriklere dokunmaz.
+   CLEAR TOP NAVIGATION — GLOBAL FINAL OVERRIDE
+   Şeffaf üst navigasyon + ikon VE yazı birlikte görünür.
+   Keşfet, ana ekran ve tüm uygulama bölümlerinde ortaktır.
    ===================================================== */
 
 html body #root .app-shell .topbar,
 html body #root .app-shell-worlds .topbar {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -20,7 +15,6 @@ html body #root .app-shell-worlds .topbar {
   box-shadow: none !important;
   border: 0 !important;
   border-bottom: 0 !important;
-  isolation: isolate !important;
 }
 
 html body #root .app-shell .topbar::before,
@@ -29,275 +23,161 @@ html body #root .app-shell-worlds .topbar::before,
 html body #root .app-shell-worlds .topbar::after {
   content: none !important;
   display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+}
+
+/* Navigasyon kutusu şeffaf; metinler kesinlikle görünür. */
+html body #root .app-shell .topbar .desktop-nav,
+html body #root .app-shell-worlds .topbar .desktop-nav {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   background: transparent !important;
   background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  filter: none !important;
+  gap: 4px !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a,
+html body #root .app-shell-worlds .topbar .desktop-nav a {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 1 auto !important;
+  min-width: max-content !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 0 13px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  color: rgba(255,255,255,.92) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  text-indent: 0 !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a svg,
+html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 0 auto !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+html body #root .app-shell .topbar .desktop-nav a.active,
+html body #root .app-shell-worlds .topbar .desktop-nav a.active {
+  color: #f4c44f !important;
+  background: rgba(244,196,79,.10) !important;
+  border-color: rgba(244,196,79,.30) !important;
   box-shadow: none !important;
 }
 
-html body #root .app-shell .topbar .desktop-nav,
-html body #root .app-shell-worlds .topbar .desktop-nav,
-html body #root .app-shell .topbar .child-chip,
-html body #root .app-shell-worlds .topbar .child-chip,
+html body #root .app-shell .topbar .desktop-nav a:hover,
+html body #root .app-shell-worlds .topbar .desktop-nav a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.07) !important;
+}
+
+/* Üst navigasyon içindeki diğer alanlar da şeffaf kalır. */
 html body #root .app-shell .topbar .brand,
-html body #root .app-shell-worlds .topbar .brand {
+html body #root .app-shell .topbar .child-chip,
+html body #root .app-shell .topbar .parent-access,
+html body #root .app-shell-worlds .topbar .brand,
+html body #root .app-shell-worlds .topbar .child-chip,
+html body #root .app-shell-worlds .topbar .parent-access {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   filter: none !important;
 }
 
-/* Keşfet haritası navigasyonun arkasına kadar uzanır. */
-html body #root .app-shell-worlds .main-content.worlds-main-content,
-html body #root .app-shell-worlds .worlds-page,
-html body #root .app-shell-worlds .worlds-shell {
-  background: transparent !important;
-}
-
-html body #root .app-shell-worlds .worlds-main-content {
-  width: 100% !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  max-height: 100dvh !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  position: relative !important;
-}
-
-html body #root .app-shell-worlds .worlds-page {
-  position: relative !important;
-  z-index: 0 !important;
-  width: 100% !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  max-height: 100dvh !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: hidden !important;
-}
-
-html body #root .app-shell-worlds .worlds-shell {
-  width: 100% !important;
-  max-width: none !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-html body #root .app-shell-worlds .worlds-map {
-  position: relative !important;
-  z-index: 1 !important;
-  width: 100% !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  max-height: 100dvh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
-}
-
-html body #root .app-shell-worlds .worlds-map-background {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-}
-
-@media (min-width: 761px) {
-  html body #root .app-shell-worlds .worlds-main-content,
-  html body #root .app-shell-worlds .worlds-page,
-  html body #root .app-shell-worlds .worlds-shell,
-  html body #root .app-shell-worlds .worlds-map {
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: 100dvh !important;
-  }
-}
-
-/* =====================================================
-   LANDSCAPE PHONE — tek ekrana sığan Keşfet haritası
-   Yalnızca dokunmatik, kısa ekranlı yatay telefonları etkiler.
-   ===================================================== */
-@media (pointer: coarse) and (orientation: landscape) and (max-height: 600px) {
-  html body #root .app-shell-worlds {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100dvh !important;
-    min-height: 0 !important;
-    max-height: 100dvh !important;
-    overflow: hidden !important;
-    display: block !important;
-  }
-
+/* Mobilde de yazıları gizleme: ikon + yazı birlikte kalacak. */
+@media (max-width: 760px) {
+  html body #root .app-shell .topbar,
   html body #root .app-shell-worlds .topbar {
-    position: absolute !important;
-    inset: 0 0 auto 0 !important;
-    width: 100vw !important;
-    height: 54px !important;
-    min-height: 54px !important;
-    max-height: 54px !important;
-    padding: 4px 8px !important;
-    display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr) auto !important;
-    gap: 6px !important;
     background: transparent !important;
     background-color: transparent !important;
-    background-image: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
-    border: 0 !important;
-    z-index: 10000 !important;
   }
 
-  html body #root .app-shell-worlds .brand-logo {
-    height: 38px !important;
-    max-width: 105px !important;
-  }
-
-  html body #root .app-shell-worlds .desktop-nav {
+  html body #root .app-shell .topbar .desktop-nav,
+  html body #root .app-shell-worlds .topbar .desktop-nav {
+    display: flex !important;
     width: 100% !important;
-    max-width: 390px !important;
-    justify-self: center !important;
-    height: 46px !important;
-    min-height: 46px !important;
-    padding: 2px !important;
-    margin: 0 auto !important;
+    max-width: none !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 !important;
+    margin: 0 !important;
     gap: 1px !important;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
   }
 
-  html body #root .app-shell-worlds .desktop-nav a {
+  html body #root .app-shell .topbar .desktop-nav a,
+  html body #root .app-shell-worlds .topbar .desktop-nav a {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     min-height: 40px !important;
     height: 40px !important;
     padding: 0 3px !important;
-    gap: 0 !important;
-    justify-content: center !important;
+    gap: 4px !important;
+    font-size: clamp(8px, 2.35vw, 11px) !important;
+    font-weight: 800 !important;
     border-radius: 8px !important;
-    font-size: 0 !important;
-    white-space: nowrap !important;
-    background: transparent !important;
   }
 
-  html body #root .app-shell-worlds .desktop-nav a svg {
-    width: 18px !important;
-    height: 18px !important;
-    flex: 0 0 auto !important;
+  html body #root .app-shell .topbar .desktop-nav a svg,
+  html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+    width: 16px !important;
+    height: 16px !important;
   }
+}
 
-  html body #root .app-shell-worlds .desktop-nav a.active {
-    background: rgba(244,196,79,.16) !important;
-    border: 1px solid rgba(244,196,79,.42) !important;
-    box-shadow: none !important;
-  }
-
-  html body #root .app-shell-worlds .child-chip,
-  html body #root .app-shell-worlds .parent-access {
-    display: none !important;
-  }
-
-  html body #root .app-shell-worlds .worlds-back {
-    display: none !important;
-  }
-
-  html body #root .app-shell-worlds .main-content.worlds-main-content,
-  html body #root .app-shell-worlds .worlds-page,
-  html body #root .app-shell-worlds .worlds-shell,
-  html body #root .app-shell-worlds .worlds-map {
-    width: 100vw !important;
-    height: 100dvh !important;
-    min-height: 0 !important;
-    max-height: 100dvh !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-  }
-
-  html body #root .app-shell-worlds .worlds-map-background {
-    object-fit: cover !important;
-    object-position: center center !important;
-  }
-
-  html body #root .app-shell-worlds .worlds-map-buttons {
-    inset: 0 !important;
-  }
-
-  html body #root .app-shell-worlds .world-button {
-    transform: translate(-50%, -50%) scale(.78) !important;
-    transform-origin: center center !important;
-  }
-
-  html body #root .app-shell-worlds .world-label {
-    min-width: 112px !important;
-    max-width: 165px !important;
+/* Çok kısa yatay telefon: yazılar yine kalır, sadece daha kompakt olur. */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 600px) {
+  html body #root .app-shell .topbar .desktop-nav a,
+  html body #root .app-shell-worlds .topbar .desktop-nav a {
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 0 2px !important;
     gap: 3px !important;
+    font-size: clamp(7px, 1.7vw, 10px) !important;
   }
 
-  html body #root .app-shell-worlds .world-label-top {
-    padding: 5px 9px !important;
-    border-width: 1px !important;
-    border-radius: 8px !important;
+  html body #root .app-shell .topbar .desktop-nav a svg,
+  html body #root .app-shell-worlds .topbar .desktop-nav a svg {
+    width: 14px !important;
+    height: 14px !important;
   }
+}
 
-  html body #root .app-shell-worlds .world-label strong {
-    font-size: 10px !important;
-  }
+/* Alt alan kesinlikle şeffaf; mevcut alt navigasyon gizli kalır. */
+html body #root .app-shell .bottom-nav,
+html body #root .app-shell-worlds .bottom-nav {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
 
-  html body #root .app-shell-worlds .world-emoji {
-    font-size: 14px !important;
-  }
-
-  html body #root .app-shell-worlds .world-subislands {
-    gap: 2px !important;
-  }
-
-  html body #root .app-shell-worlds .world-subislands span {
-    padding: 3px 4px !important;
-    font-size: 6px !important;
-  }
-
-  html body #root .app-shell-worlds .world-stars {
-    padding: 3px 6px !important;
-    font-size: 7px !important;
-  }
-
-  html body #root .app-shell-worlds .map-progress-card {
-    left: 8px !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: 8px !important;
-    transform: scale(.78) !important;
-    transform-origin: left bottom !important;
-    z-index: 100 !important;
-  }
-
-  html body #root .app-shell-worlds .random-world-button {
-    left: auto !important;
-    right: 8px !important;
-    top: auto !important;
-    bottom: 8px !important;
-    transform: scale(.78) !important;
-    transform-origin: right bottom !important;
-    z-index: 100 !important;
-  }
-
-  html body #root .app-shell-worlds .bottom-nav {
-    display: none !important;
-  }
+/* Keşfet haritası için arka plan doğrudan ekranın altına kadar uzanır. */
+html body #root .app-shell-worlds .worlds-main-content,
+html body #root .app-shell-worlds .worlds-page,
+html body #root .app-shell-worlds .worlds-shell,
+html body #root .app-shell-worlds .worlds-map {
+  background: transparent !important;
 }

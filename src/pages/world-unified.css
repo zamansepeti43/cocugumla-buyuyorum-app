@@ -1,0 +1,324 @@
+/* =========================================================
+   ÇOCUĞUMLA BÜYÜYORUM — ORTAK DÜNYA DETAY DÜZENİ
+   Keşif Dünyası referans düzeni bütün dünyalarda aynıdır.
+   ========================================================= */
+
+.world-unified-page {
+  --world-accent: #9d5dff;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  color: #fff;
+  isolation: isolate;
+  background: #030719;
+}
+
+.world-unified-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(2,7,27,.06) 0%, rgba(2,7,27,.14) 48%, rgba(2,7,27,.58) 100%),
+    var(--world-background);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.world-unified-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 28%, rgba(255,255,255,.05), transparent 48%);
+}
+
+.world-unified-space {
+  --world-background: url('/worlds/space-world-bg.png');
+  --world-accent: #9d5dff;
+}
+
+.world-unified-forest {
+  --world-background: url('/worlds/forest-map-bg.png');
+  --world-accent: #66d58b;
+}
+
+.world-unified-english {
+  --world-background: linear-gradient(135deg, #142d5b 0%, #274b82 48%, #6a4c92 100%);
+  --world-accent: #7fb8ff;
+}
+
+.world-unified-games {
+  --world-background: linear-gradient(135deg, #351452 0%, #5a287c 48%, #172b62 100%);
+  --world-accent: #d47cff;
+}
+
+.world-unified-math {
+  --world-background: linear-gradient(135deg, #073e59 0%, #166b78 48%, #243d70 100%);
+  --world-accent: #67d8ff;
+}
+
+.world-unified-inner {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 138px clamp(28px, 5vw, 58px) 64px;
+}
+
+.world-unified-back {
+  position: absolute;
+  top: 82px;
+  left: clamp(18px, 3vw, 38px);
+  z-index: 20;
+  width: 86px;
+  height: 44px;
+  padding: 0 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 14px;
+  background: rgba(4,8,30,.68);
+  color: #fff;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.1);
+  transition: transform .18s ease, background .18s ease;
+}
+
+.world-unified-back:hover {
+  transform: translateX(-3px);
+  background: rgba(28,16,66,.88);
+}
+
+.world-unified-hero {
+  width: min(720px, 100%);
+  margin: 0 0 58px;
+}
+
+.world-unified-kicker {
+  display: block;
+  margin: 0 0 14px;
+  color: #d9bfff;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-shadow: 0 2px 12px rgba(0,0,0,.58);
+}
+
+.world-unified-hero h1 {
+  margin: 0;
+  max-width: 700px;
+  color: #fff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(42px, 5.2vw, 70px);
+  line-height: 1.03;
+  font-weight: 900;
+  letter-spacing: -.035em;
+  text-shadow: 0 5px 24px rgba(0,0,0,.52);
+}
+
+.world-unified-hero p {
+  margin: 22px 0 0;
+  max-width: 620px;
+  color: rgba(255,255,255,.94);
+  font-size: clamp(17px, 1.7vw, 22px);
+  line-height: 1.45;
+  font-weight: 700;
+  text-shadow: 0 3px 12px rgba(0,0,0,.58);
+}
+
+.world-unified-islands {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 22px);
+  align-items: stretch;
+}
+
+.world-unified-islands-2 {
+  grid-template-columns: repeat(2, minmax(220px, 330px));
+  justify-content: center;
+}
+
+.world-unified-islands-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.world-unified-card {
+  position: relative;
+  min-width: 0;
+  min-height: 260px;
+  box-sizing: border-box;
+  padding: 22px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  border: 2px solid color-mix(in srgb, var(--world-accent) 85%, white 15%);
+  border-radius: 26px;
+  background-color: rgba(12,7,39,.92);
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  box-shadow: 0 20px 45px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.12), 0 0 25px color-mix(in srgb, var(--world-accent) 20%, transparent);
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.world-unified-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), transparent 32%, rgba(0,0,0,.16));
+}
+
+.world-unified-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 28px 52px rgba(0,0,0,.46), inset 0 1px 0 rgba(255,255,255,.15), 0 0 35px color-mix(in srgb, var(--world-accent) 28%, transparent);
+}
+
+.world-unified-card-icon,
+.world-unified-card h2,
+.world-unified-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.world-unified-card-icon {
+  width: 82px;
+  height: 82px;
+  flex: 0 0 82px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  border: 2px solid rgba(205,170,255,.66);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--world-accent) 70%, white 10%), rgba(28,11,68,.98));
+  box-shadow: 0 0 30px color-mix(in srgb, var(--world-accent) 30%, transparent), inset 0 0 18px rgba(255,255,255,.08);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.world-unified-card h2 {
+  margin: 0 0 9px;
+  color: #fff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.world-unified-card p {
+  margin: 0;
+  max-width: 235px;
+  color: rgba(235,230,255,.92);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 650;
+}
+
+.world-unified-sections {
+  margin-top: 58px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 24px;
+  background: rgba(4,8,28,.52);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.world-unified-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.world-unified-section-heading span {
+  color: #d9bfff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.world-unified-section-heading h2 {
+  margin: 7px 0 0;
+  color: #fff;
+  font-size: clamp(22px, 2.5vw, 30px);
+  line-height: 1.15;
+}
+
+.world-unified-section-heading strong {
+  color: rgba(255,255,255,.82);
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.world-unified-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.world-unified-section-empty {
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.8);
+  text-align: center;
+  font-weight: 700;
+}
+
+.world-unified-empty {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.world-unified-empty span { font-size: 56px; }
+.world-unified-empty h1 { margin: 12px 0 6px; }
+.world-unified-empty p { margin: 0; color: rgba(255,255,255,.75); }
+
+@media (max-width: 900px) {
+  .world-unified-inner { padding-left: 28px; padding-right: 28px; }
+  .world-unified-islands-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .world-unified-card { min-height: 235px; padding: 19px 12px; }
+  .world-unified-card-icon { width: 66px; height: 66px; flex-basis: 66px; font-size: 33px; }
+  .world-unified-card h2 { font-size: 18px; }
+  .world-unified-card p { font-size: 12px; }
+}
+
+@media (max-width: 680px) {
+  .world-unified-inner { padding: 124px 18px 48px; }
+  .world-unified-back { top: 74px; left: 18px; }
+  .world-unified-hero { margin-bottom: 42px; }
+  .world-unified-kicker { font-size: 13px; }
+  .world-unified-hero h1 { font-size: clamp(36px, 10vw, 50px); }
+  .world-unified-hero p { margin-top: 15px; font-size: 16px; }
+  .world-unified-islands,
+  .world-unified-islands-3,
+  .world-unified-islands-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .world-unified-card { min-height: 205px; padding: 18px 10px; border-radius: 21px; }
+  .world-unified-card-icon { width: 60px; height: 60px; flex-basis: 60px; margin-bottom: 12px; font-size: 30px; }
+  .world-unified-card h2 { font-size: 17px; }
+  .world-unified-card p { font-size: 11px; }
+  .world-unified-sections { margin-top: 42px; padding: 20px; }
+  .world-unified-section-heading { align-items: flex-start; flex-direction: column; }
+  .world-unified-section-heading strong { white-space: normal; }
+}

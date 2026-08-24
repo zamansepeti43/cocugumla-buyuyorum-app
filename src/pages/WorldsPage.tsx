@@ -1,11 +1,7 @@
 import {
   ArrowLeft,
   Compass,
-  Gamepad2,
-  Home,
-  Play,
   Star,
-  Trophy,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import './worlds-clean.css'

@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useWorlds } from '../hooks/useWorlds'
-import { useProgress } from '../hooks/useProgress'
-import { SectionCard } from '../components/SectionCard'
 import { ForestDiscoveryGame } from '../components/games/ForestDiscoveryGame'
 import { ArrowLeft } from 'lucide-react'
 import './world-detail.css'
@@ -98,12 +96,13 @@ const islandContent: Record<string, Record<string, { icon: string; text: string 
 
 function UnifiedWorldDetailPage({ worldId, onBack }: { worldId: string; onBack?: () => void }) {
   const navigate = useNavigate()
-  const { getWorld, getSections, isSectionUnlocked } = useWorlds()
-  const { getTotalStars } = useProgress()
+  const { getWorld } = useWorlds()
   const world = getWorld(worldId)
-  const presentation = worldPresentation[worldId] ?? { title: world?.title ?? 'Dünya', description: world?.description ?? '', islands: [] }
-  const sectionsList = world ? getSections(worldId) : []
-  const totalStars = getTotalStars()
+  const presentation = worldPresentation[worldId] ?? {
+    title: world?.title ?? 'Dünya',
+    description: world?.description ?? '',
+    islands: [],
+  }
   const content = islandContent[worldId] ?? {}
   const art = islandArt[worldId as keyof typeof islandArt] ?? []
 
@@ -148,25 +147,6 @@ function UnifiedWorldDetailPage({ worldId, onBack }: { worldId: string; onBack?:
               </button>
             )
           })}
-        </section>
-
-        <section className="world-unified-sections">
-          <div className="world-unified-section-heading">
-            <div>
-              <span>BÖLÜMLER</span>
-              <h2>Bu dünyada neler öğreneceğiz?</h2>
-            </div>
-            <strong>{sectionsList.length} bölüm · {totalStars} yıldız</strong>
-          </div>
-          {sectionsList.length > 0 ? (
-            <div className="world-unified-section-grid">
-              {sectionsList.map((section) => (
-                <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />
-              ))}
-            </div>
-          ) : (
-            <div className="world-unified-section-empty">Bu dünyaya henüz bölüm eklenmemiş.</div>
-          )}
         </section>
       </div>
     </main>

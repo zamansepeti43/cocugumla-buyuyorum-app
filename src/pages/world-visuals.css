@@ -40,7 +40,7 @@
   filter:saturate(1.08) contrast(1.02);
 }
 .world-island-visual::after {
-  content:'';
+  content:'KeÅŸfet â†’';
   position:absolute;
   inset:0;
   background:linear-gradient(180deg, rgba(255,255,255,.18), transparent 34%, rgba(0,0,0,.18));
@@ -130,7 +130,7 @@
 }
 .world-detail-page .world-island-chip:hover { transform:translateY(-6px) scale(1.025); filter:brightness(1.08); }
 .world-detail-page .world-island-chip::before {
-  content:'';
+  content:'KeÅŸfet â†’';
   position:absolute;
   inset:0;
   background:linear-gradient(180deg, transparent 42%, rgba(0,0,0,.72));
@@ -161,7 +161,7 @@
   overflow:hidden;
 }
 .premium-home-page .premium-illustration::after {
-  content:'';
+  content:'KeÅŸfet â†’';
   position:absolute;
   inset:0;
   background:linear-gradient(180deg,rgba(255,255,255,.14),transparent 38%,rgba(0,0,0,.18));
@@ -262,3 +262,246 @@
   font-size:9px !important;
 }
 
+
+.world-detail-page {
+  position: relative;
+}
+
+.world-detail-page .world-hero {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.world-detail-page .world-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.08) 0%,
+      rgba(0,0,0,.18) 55%,
+      rgba(0,0,0,.38) 100%
+    );
+  pointer-events: none;
+}
+
+.world-detail-page .world-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ?? DoÃƒâ€Ã…Â¸a / KeÃƒâ€¦Ã…Â¸if DÃƒÆ’Ã‚Â¼nyasÃƒâ€Ã‚Â± */
+.world-detail-page[data-world="forest"] .world-hero {
+  background-image: url("/worlds/forest-map-bg.png");
+}
+
+/* ?? Uzay DÃƒÆ’Ã‚Â¼nyasÃƒâ€Ã‚Â± */
+.world-detail-page[data-world="space"] .world-hero {
+  background-image: url("/worlds/space-world-bg.png");
+}
+
+/* =========================================================
+   FINAL WORLD MAP ARTWORK
+   ========================================================= */
+
+html body #root .world-detail-page.world-space .world-islands-strip {
+  background:
+    linear-gradient(rgba(3, 8, 28, .10), rgba(3, 8, 28, .22)),
+    url("/worlds/space-world-bg.png") center / cover no-repeat !important;
+}
+
+html body #root .world-detail-page.world-forest .world-islands-strip {
+  background:
+    linear-gradient(rgba(12, 55, 24, .06), rgba(12, 55, 24, .16)),
+    url("/worlds/forest-map-bg.png") center / cover no-repeat !important;
+}
+
+/* Eski ada fotoÃƒâ€Ã…Â¸raflarÃƒâ€Ã‚Â±nÃƒâ€Ã‚Â± kaldÃƒâ€Ã‚Â±r; dÃƒÆ’Ã‚Â¼nya gÃƒÆ’Ã‚Â¶rseli tek atmosfer olsun */
+html body #root .world-detail-page.world-space .world-island-chip,
+html body #root .world-detail-page.world-forest .world-island-chip {
+  background-image: none !important;
+}
+
+/* =========================================================
+   FINAL SPACE WORLD CARDS
+   ========================================================= */
+
+html body #root .world-detail-page.world-space .world-islands-list {
+  position: absolute !important;
+  left: 5% !important;
+  right: 5% !important;
+  bottom: 34px !important;
+  top: auto !important;
+  height: 235px !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 22px !important;
+  align-items: stretch !important;
+  z-index: 8 !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-chip {
+  position: relative !important;
+  inset: auto !important;
+  width: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  padding: 22px 16px 18px !important;
+
+  border: 2px solid rgba(167, 112, 255, .72) !important;
+  border-radius: 24px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 10, 48, .94),
+      rgba(5, 7, 28, .90)
+    ) !important;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+
+  color: #fff !important;
+  text-align: center !important;
+  text-shadow: none !important;
+
+  overflow: hidden !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-chip::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(142, 92, 255, .24),
+      transparent 55%
+    ) !important;
+
+  pointer-events: none !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-chip::after {
+  display: none !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-chip:hover {
+  transform: translateY(-8px) !important;
+  filter: brightness(1.12) !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-icon {
+  position: relative !important;
+  z-index: 2 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  width: 76px !important;
+  height: 76px !important;
+  margin-bottom: 14px !important;
+
+  border-radius: 50% !important;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(150, 100, 255, .42),
+      rgba(35, 16, 76, .95)
+    ) !important;
+
+  border: 2px solid rgba(190, 145, 255, .52) !important;
+
+  box-shadow:
+    0 0 28px rgba(132, 82, 255, .32),
+    inset 0 0 18px rgba(255,255,255,.08) !important;
+
+  font-size: 39px !important;
+  line-height: 1 !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-copy {
+  position: relative !important;
+  z-index: 2 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-copy strong {
+  display: block !important;
+
+  margin-bottom: 7px !important;
+
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  letter-spacing: .2px !important;
+}
+
+html body #root .world-detail-page.world-space .world-island-copy small {
+  display: block !important;
+
+  max-width: 210px !important;
+
+  color: rgba(225,220,255,.82) !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 900px) {
+  html body #root .world-detail-page.world-space .world-islands-list {
+    left: 3% !important;
+    right: 3% !important;
+    gap: 12px !important;
+  }
+
+  html body #root .world-detail-page.world-space .world-island-chip {
+    padding: 16px 10px !important;
+  }
+
+  html body #root .world-detail-page.world-space .world-island-icon {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 30px !important;
+  }
+
+  html body #root .world-detail-page.world-space .world-island-copy strong {
+    font-size: 16px !important;
+  }
+
+  html body #root .world-detail-page.world-space .world-island-copy small {
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  html body #root .world-detail-page.world-space .world-islands-list {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    height: auto !important;
+
+    margin: 30px 16px 20px !important;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

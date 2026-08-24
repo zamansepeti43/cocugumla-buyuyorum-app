@@ -1,0 +1,48 @@
+import { Link } from 'react-router-dom'
+import { useApp } from '../hooks/useApp'
+import { useWorlds } from '../hooks/useWorlds'
+
+interface Hotspot {
+  id: string
+  href: string
+  style: React.CSSProperties
+}
+
+export function HomePage() {
+  const { activeChild, data } = useApp()
+  const { getSection, getContent, isSectionUnlocked } = useWorlds()
+  if (!activeChild) return null
+
+  const completedIds = new Set(data.completions.filter((item) => item.childId === activeChild.id).map((item) => item.activityId))
+  const firstForestSection = getSection('forest-animals-intro')
+  const forestContent = firstForestSection ? getContent('forest-animals-intro') : []
+  const firstUnlocked = forestContent.find((item) => !completedIds.has(item.id))
+  const forestUnlocked = firstForestSection ? isSectionUnlocked('forest-animals-intro') : false
+  const discoveryHref = forestUnlocked && firstUnlocked ? `/worlds/content/${firstUnlocked.id}` : '/worlds'
+
+  const hotspots: Hotspot[] = [
+    { id: 'test-discovery', href: discoveryHref, style: { left: '5%', top: '32%', width: '90%', height: '23%' } },
+  ]
+
+  return (
+    <div className={`page home-page home-reference-page${import.meta.env.DEV ? ' home-reference--debug' : ''}`}>
+      <div className="home-reference">
+        <img
+          src="/çocuğumla büyüyorum ana ekran referans.png"
+          alt="Ana ekran referans"
+          className="home-reference-image"
+        />
+        <div className="home-reference-hotspots">
+          {hotspots.map((spot) => (
+            <Link
+              key={spot.id}
+              to={spot.href}
+              className="hotspot"
+              style={spot.style}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}

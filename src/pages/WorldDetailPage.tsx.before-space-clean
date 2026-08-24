@@ -1,0 +1,117 @@
+import { useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { useWorlds } from '../hooks/useWorlds'
+import { useProgress } from '../hooks/useProgress'
+import { SectionCard } from '../components/SectionCard'
+import { ForestDiscoveryGame } from '../components/games/ForestDiscoveryGame'
+import { ArrowLeft, Lock, Star } from 'lucide-react'
+import './world-detail.css'
+import './world-islands.css'
+import './world-visuals.css'
+import './nature-world-screen.css'
+
+const worldPresentation: Record<string, { title: string; description: string; islands: string[] }> = {
+  forest: { title: 'DoÄŸa DÃ¼nyasÄ±', description: 'Hayvanlar, doÄŸa ve sesler', islands: ['Hayvanlar', 'DoÄŸa', 'Sesler'] },
+  space: { title: 'KeÅŸif DÃ¼nyasÄ±', description: 'Uzay, deniz, bilim ve keÅŸif', islands: ['Uzay', 'Deniz', 'Bilim'] },
+  english: { title: 'Dil & HikÃ¢ye DÃ¼nyasÄ±', description: 'Ä°ngilizce, konuÅŸma ve hikÃ¢yeler', islands: ['Ä°ngilizce', 'HikÃ¢yeler', 'KonuÅŸma'] },
+  games: { title: 'Oyun DÃ¼nyasÄ±', description: 'Dikkat, hafÄ±za ve eÄŸlenceli oyunlar', islands: ['Dikkat', 'HafÄ±za', 'Mini Oyunlar'] },
+  math: { title: 'Zihin DÃ¼nyasÄ±', description: 'SayÄ±lar, ÅŸekiller ve mantÄ±k', islands: ['SayÄ±lar', 'Åekiller', 'MantÄ±k'] },
+}
+
+const islandArt = {
+  forest: ['https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=88'],
+  space: ['https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=900&q=88'],
+  english: ['https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=88'],
+  games: ['https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=88'],
+  math: ['https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=88', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=88'],
+}
+
+function NatureWorldMap({ onBack }: { onBack: () => void }) {
+  const islands = [
+    { title: 'Hayvanlar', icon: 'ğŸ¦Š', art: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=900&q=88' },
+    { title: 'DoÄŸa', icon: 'ğŸŒ¿', art: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=88' },
+    { title: 'Sesler', icon: 'ğŸ”Š', art: 'https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=900&q=88' },
+  ]
+
+  return (
+    <main className="nature-world-screen" aria-label="DoÄŸa DÃ¼nyasÄ± haritasÄ±">
+      <header className="nature-map-header">
+        <button type="button" className="nature-map-back" onClick={onBack}><ArrowLeft size={20} /> Geri</button>
+        <div><span>ğŸŒ¿ DOÄA DÃœNYASI</span><h1>KeÅŸfetmeye hazÄ±r mÄ±sÄ±n?</h1></div>
+        <div className="nature-map-stars">â­ 0</div>
+      </header>
+      <div className="nature-map-scene">
+        <div className="nature-map-cloud cloud-a" /><div className="nature-map-cloud cloud-b" />
+        <div className="nature-map-sun" />
+        <div className="nature-map-hill hill-a" /><div className="nature-map-hill hill-b" />
+        <div className="nature-map-river" />
+        <div className="nature-map-path path-one" /><div className="nature-map-path path-two" />
+        <div className="nature-map-character"><img src="/illustrations/forest/leo-lion.svg" alt="Leo" /></div>
+        <div className="nature-map-islands">
+          {islands.map((island, index) => (
+            <button key={island.title} type="button" className={`nature-map-island island-${index + 1}`} style={{ backgroundImage: `linear-gradient(180deg,rgba(255,255,255,.08),rgba(20,65,37,.58)),url(${island.art})` }}>
+              <span className="island-icon">{island.icon}</span><strong>{island.title}</strong><small>KeÅŸfet â†’</small>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="nature-map-tip">Leo ile birlikte bir adaya dokun ve keÅŸfe baÅŸla! ğŸ¾</div>
+    </main>
+  )
+}
+
+export function NatureWorldPage() {
+  const [natureEntered, setNatureEntered] = useState(false)
+
+  return (
+    <div className="nature-world-route">
+      {!natureEntered ? (
+        <ForestDiscoveryGame onNext={() => setNatureEntered(true)} />
+      ) : (
+        <NatureWorldMap onBack={() => setNatureEntered(false)} />
+      )}
+    </div>
+  )
+}
+
+export function WorldDetailPage() {
+  const { worldId } = useParams()
+  if (!worldId) return null
+
+  if (worldId === 'forest') {
+    return <NatureWorldPage />
+  }
+
+  return <RegularWorldDetailPage worldId={worldId} />
+}
+
+function RegularWorldDetailPage({ worldId }: { worldId: string }) {
+  const { getWorld, getSections, isWorldUnlocked, isSectionUnlocked } = useWorlds()
+  const { getTotalStars } = useProgress()
+  const world = getWorld(worldId)
+
+  if (!world) {
+    return <div className={`page world-detail-page world-${worldId}`}><div className="empty-state"><span aria-hidden="true">ğŸŒ</span><h2>DÃ¼nya bulunamadÄ±</h2><p>Bu dÃ¼nya harita verilerinde kayÄ±tlÄ± deÄŸil.</p><Link to="/worlds">KeÅŸif HaritasÄ±'na dÃ¶n</Link></div></div>
+  }
+
+  const presentation = worldPresentation[worldId] ?? { title: world.title, description: world.description, islands: [] }
+  const unlocked = isWorldUnlocked(worldId)
+  const sectionsList = getSections(worldId)
+  const totalStars = getTotalStars()
+  const art = islandArt[worldId as keyof typeof islandArt] ?? islandArt.forest
+
+  return (
+    <div className={`page world-detail-page world-${worldId}`}>
+      <Link to="/worlds" className="back-link"><ArrowLeft size={18} />KeÅŸif HaritasÄ±</Link>
+      <section className="world-hero" data-world={worldId} style={{ ['--world-color' as string]: `var(--${world.color})` }}>
+        <div className="world-hero-visual"><span className="world-hero-icon">{world.icon}</span><div className="world-hero-deco" aria-hidden="true"><span>âœ¨</span><span>â­</span><span>âœ¨</span></div></div>
+        <div><span className="kicker">DÃœNYA</span><h1>{presentation.title}</h1><p>{presentation.description}</p></div>
+        <div className="world-hero-stats"><span><Star size={16} />{totalStars} yÄ±ldÄ±z</span></div>
+      </section>
+      {!unlocked && <div className="locked-notice"><Lock size={18} /><div><strong>Bu dÃ¼nya ÅŸu anda kilitli.</strong><p>Ä°Ã§eriÄŸi gÃ¶rebilir, kilitli bÃ¶lÃ¼mleri ilerleme koÅŸullarÄ± karÅŸÄ±landÄ±ÄŸÄ±nda aÃ§abilirsin.</p></div></div>}
+      {presentation.islands.length > 0 && <section className="world-islands-strip" aria-label="DÃ¼nyanÄ±n alt adalarÄ±"><div><span className="kicker">KEÅFEDÄ°LECEK ADACIKLAR</span><strong>Bu dÃ¼nyanÄ±n adalarÄ±na Ã§Ä±k, keÅŸfetmeye baÅŸla.</strong></div><div className="world-islands-list">{presentation.islands.map((island, index) => <div className="world-island-chip" key={island} style={{ backgroundImage: `url(${art[index % art.length]})` }}><span aria-hidden="true">ğŸŒ´</span>{island}</div>)}</div></section>}
+      <section className="section-block"><div className="section-heading"><div><span className="kicker">BÃ–LÃœMLER</span><h2>Bu dÃ¼nyada neler Ã¶ÄŸreneceÄŸiz?</h2></div><span className="section-count">{sectionsList.length} bÃ¶lÃ¼m</span></div>{sectionsList.length > 0 ? <div className="sections-list">{sectionsList.map((section) => <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />)}</div> : <div className="section-empty"><span>ğŸ“š</span><strong>Bu dÃ¼nyaya henÃ¼z bÃ¶lÃ¼m eklenmemiÅŸ.</strong></div>}</section>
+    </div>
+  )
+}
+

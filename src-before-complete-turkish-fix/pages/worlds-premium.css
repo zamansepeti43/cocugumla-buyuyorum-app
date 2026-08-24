@@ -1,0 +1,1263 @@
+/* Ãƒâ€¡OCUÃ„ÂUMLA BÃƒÅ“YÃƒÅ“YORUM Ã¢â‚¬â€ KEÃ…ÂÃ„Â°F HARÃ„Â°TASI */
+
+.worlds-page {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 18px 22px 42px;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 50% 0%, rgba(83,76,190,.14), transparent 48%), #080a13;
+  color: #fff;
+}
+
+.worlds-shell {
+  width: min(1420px, 100%);
+  margin: 0 auto;
+}
+
+.worlds-heading {
+  min-height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(139,137,255,.24);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(27,35,77,.98), rgba(17,22,49,.98) 58%, rgba(42,29,72,.98));
+  box-shadow: 0 18px 38px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.worlds-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 5px;
+  color: #8d7cff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.worlds-heading h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(25px, 2.7vw, 36px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.worlds-heading p {
+  max-width: 650px;
+  margin: 7px 0 0;
+  color: rgba(235,241,255,.68);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.worlds-heading-stats {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.heading-stat {
+  min-width: 108px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 21px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 7px;
+  border-radius: 13px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.heading-stat svg { grid-row: 1 / span 2; align-self: center; color: #f5c43b; }
+.heading-stat:nth-child(2) svg { color: #a88cff; }
+.heading-stat strong { font-size: 15px; line-height: 1; }
+.heading-stat span { margin-top: 3px; color: rgba(235,241,255,.54); font-size: 8px; }
+
+.worlds-map {
+  position: relative;
+  width: 100%;
+  height: clamp(520px, 57vw, 700px);
+  min-height: 520px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  background: #5ec9df url('/keÃ…Å¸if-haritasÃ„Â±-arkaplan.png') center / cover no-repeat;
+  box-shadow: 0 24px 55px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.worlds-map-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.worlds-map-buttons { position: absolute; inset: 0; z-index: 10; }
+
+.world-button {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform .18s ease, filter .18s ease;
+  z-index: 20;
+}
+
+.world-button:hover { transform: translate(-50%, -50%) scale(1.055); filter: brightness(1.08) drop-shadow(0 8px 15px rgba(0,0,0,.28)); }
+.world-button:active { transform: translate(-50%, -50%) scale(.97); }
+
+.world-button-forest { left: 23%; top: 36%; }
+.world-button-space { left: 49%; top: 30%; }
+.world-button-english { left: 78%; top: 40%; }
+.world-button-games { left: 49%; top: 72%; }
+.world-button-math { left: 72%; top: 73%; }
+
+.world-label {
+  width: max-content;
+  min-width: 150px;
+  max-width: 210px;
+  padding: 8px 12px 9px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.28);
+  transform: translate(-50%, -50%);
+}
+
+.world-label-top { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.world-emoji { font-size: 17px; line-height: 1; }
+.world-label strong { font-size: 12px; line-height: 1.1; font-weight: 900; white-space: nowrap; }
+.world-stars { display: flex; align-items: center; gap: 3px; margin-top: 4px; font-size: 9px; font-weight: 800; }
+.world-subislands { display: flex; gap: 4px; margin-top: 6px; }
+.world-subislands span { padding: 3px 5px; border-radius: 7px; background: rgba(0,0,0,.18); font-size: 7px; line-height: 1; white-space: nowrap; }
+
+.world-label-green { background: linear-gradient(180deg,#54ca35,#27942b); }
+.world-label-purple { background: linear-gradient(180deg,#8b50f0,#5720b6); }
+.world-label-blue { background: linear-gradient(180deg,#269fe4,#1768b4); }
+.world-label-orange { background: linear-gradient(180deg,#ff9d29,#e96700); }
+.world-label-lime { background: linear-gradient(180deg,#7bce38,#4a9f1f); }
+
+/* The background artwork contains decorative islands. The five clickable labels above are the main worlds. */
+.world-island-art { display: none !important; }
+
+.map-progress-card {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 158px;
+  padding: 10px 11px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  background: rgba(255,255,255,.95);
+  border: 1px solid rgba(255,255,255,.8);
+  color: #253158;
+  box-shadow: 0 12px 24px rgba(0,0,0,.22);
+  z-index: 40;
+}
+
+.map-progress-title { display: flex; align-items: center; justify-content: space-between; color: #5b6480; font-size: 9px; font-weight: 800; }
+.map-progress-body { display: flex; align-items: center; gap: 9px; margin-top: 8px; }
+.map-progress-body > div:last-child { display: flex; flex-direction: column; min-width: 0; }
+.map-progress-body strong { font-size: 13px; }
+.map-progress-body span { margin-top: 2px; color: #707992; font-size: 8px; }
+.map-progress-body small { margin-top: 5px; color: #e2a900; font-size: 8px; font-weight: 800; }
+.map-progress-ring { position: relative; width: 48px; height: 48px; flex: 0 0 48px; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(#48b42f 0 66%, #dce4e7 66% 100%); }
+.map-progress-ring::before { content: ''; position: absolute; width: 35px; height: 35px; border-radius: 50%; background: #fff; }
+.map-progress-ring strong { position: relative; z-index: 1; color: #21345a; font-size: 12px; }
+
+.random-world-button {
+  position: absolute;
+  right: 18px;
+  bottom: 20px;
+  width: 158px;
+  min-height: 53px;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(255,255,255,.85);
+  color: #273052;
+  text-decoration: none;
+  box-shadow: 0 12px 25px rgba(0,0,0,.22);
+  z-index: 45;
+  transition: transform .18s ease, filter .18s ease;
+}
+.random-world-button:hover { transform: translateY(-3px); filter: brightness(1.03); }
+.random-icon { width: 31px; height: 31px; flex: 0 0 31px; display: grid; place-items: center; border-radius: 9px; background: linear-gradient(135deg,#7254dc,#9a7cf4); font-size: 16px; }
+.random-copy { display: flex; flex-direction: column; min-width: 0; }
+.random-copy strong { font-size: 10px; }
+.random-copy small { margin-top: 2px; color: #777f97; font-size: 8px; }
+.random-arrow { margin-left: auto; color: #7254dc; font-size: 21px; font-weight: 900; }
+
+.journey-panel {
+  margin-top: 14px;
+  padding: 16px 18px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  background: radial-gradient(circle at 0 0, rgba(112,83,220,.15), transparent 34%), linear-gradient(135deg,#171b38,#0d1022);
+  border: 1px solid rgba(137,145,219,.23);
+  box-shadow: 0 18px 38px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.journey-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 13px; }
+.journey-title { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 12px; }
+.journey-title svg { color: #9d88ff; }
+.journey-heading > span { color: rgba(235,241,255,.5); font-size: 8px; }
+.journey-track { display: flex; align-items: center; gap: 5px; }
+.journey-step-wrapper { display: flex; align-items: center; min-width: 0; flex: 1 1 0; }
+.journey-step { min-width: 58px; display: flex; flex-direction: column; align-items: center; gap: 5px; color: rgba(235,241,255,.75); text-decoration: none; font-size: 8px; font-weight: 800; transition: transform .16s ease, color .16s ease; }
+.journey-step:hover { transform: translateY(-2px); color: #fff; }
+.journey-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; color: #aa95ff; background: rgba(114,84,220,.14); border: 1px solid rgba(142,126,245,.3); }
+.journey-arrow { color: rgba(166,151,240,.45); font-size: 14px; }
+.journey-message { flex: 0 0 250px; min-height: 54px; padding: 8px 11px; display: flex; align-items: center; gap: 8px; box-sizing: border-box; border-radius: 12px; background: rgba(115,88,224,.12); border: 1px solid rgba(140,120,240,.16); color: #b9aaff; }
+.journey-message strong { display: block; color: #fff; font-size: 9px; }
+.journey-message span { display: block; margin-top: 3px; color: rgba(235,241,255,.55); font-size: 7px; line-height: 1.25; }
+.worlds-bottom-hint { padding: 9px 0 0; text-align: center; color: rgba(235,241,255,.42); font-size: 8px; }
+
+/* The old duplicate footer navigation is intentionally not used. */
+.worlds-footer-actions { display: none !important; }
+
+@media (max-width: 1050px) {
+  .worlds-page { padding: 14px 14px 30px; }
+  .worlds-heading { padding: 17px 18px; }
+  .worlds-map { height: 570px; min-height: 570px; }
+  .world-label { min-width: 132px; padding: 7px 9px; }
+  .world-label strong { font-size: 10px; }
+  .world-subislands span { font-size: 6px; }
+  .journey-message { flex-basis: 190px; }
+}
+
+@media (max-width: 760px) {
+  .worlds-heading { flex-direction: column; align-items: flex-start; }
+  .worlds-heading-stats { width: 100%; }
+  .heading-stat { flex: 1; }
+  .worlds-map { height: 500px; min-height: 500px; }
+  .map-progress-card { top: 12px; left: 12px; width: 142px; }
+  .random-world-button { right: 12px; bottom: 12px; width: 142px; }
+  .world-label { min-width: 112px; }
+  .world-label-top { gap: 4px; }
+  .world-emoji { font-size: 14px; }
+  .world-label strong { font-size: 9px; }
+  .world-stars { font-size: 7px; }
+  .world-subislands { display: none; }
+  .journey-heading > span { display: none; }
+  .journey-track { overflow-x: auto; padding-bottom: 3px; }
+  .journey-step-wrapper { flex: 0 0 auto; }
+  .journey-message { display: none; }
+}
+
+@media (max-width: 520px) {
+  .worlds-page { padding: 10px 9px 24px; }
+  .worlds-heading { margin-bottom: 10px; border-radius: 15px; padding: 14px; }
+  .worlds-heading h1 { font-size: 23px; }
+  .worlds-heading p { font-size: 9px; }
+  .worlds-map { height: 430px; min-height: 430px; border-radius: 15px; }
+  .map-progress-card { transform: scale(.88); transform-origin: top left; }
+  .random-world-button { transform: scale(.88); transform-origin: bottom right; }
+  .world-button-forest { left: 22%; top: 35%; }
+  .world-button-space { left: 49%; top: 29%; }
+  .world-button-english { left: 78%; top: 39%; }
+  .world-button-games { left: 49%; top: 71%; }
+  .world-button-math { left: 72%; top: 72%; }
+  .world-label { min-width: 98px; padding: 6px 7px; }
+  .world-label strong { font-size: 8px; }
+  .world-emoji { font-size: 12px; }
+  .journey-panel { padding: 13px; border-radius: 15px; }
+}
+
+
+
+/* FINAL DESKTOP WORLD MAP - SINGLE SCREEN */
+@media (min-width: 761px) {
+  .journey-panel,
+  .worlds-map + .journey-panel {
+    display: none !important;
+  }
+
+  .worlds-shell {
+    height: calc(100vh - 96px) !important;
+    min-height: 0 !important;
+  }
+
+  .worlds-map {
+    height: 100% !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .worlds-map .world-button-english {
+    left: 32.5% !important;
+    top: 80% !important;
+  }
+
+  .worlds-map .world-button-math {
+    left: 65% !important;
+    top: 80% !important;
+  }
+}
+
+/* === FINAL WORLD MAP LAYOUT === */
+html, body, #root {
+  width: 100%;
+  min-width: 0;
+}
+
+.app-shell-worlds {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+}
+
+.app-shell-worlds .worlds-map {
+  width: 100% !important;
+  height: calc(100vh - 80px) !important;
+  min-height: 620px !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Ä°lerleme paneli */
+.app-shell-worlds .progress-panel {
+  background: rgba(8,18,35,.48) !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.16) !important;
+  backdrop-filter: blur(12px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(130%) !important;
+  border-radius: 18px !important;
+}
+
+/* DÃ¼nya kutularÄ±nÄ± tam merkezle */
+.app-shell-worlds .worlds-map .world-label {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: max-content !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  text-align: center !important;
+  align-items: center !important;
+}
+
+/* DÃ¼nya baÅŸlÄ±ÄŸÄ± */
+.app-shell-worlds .worlds-map .world-label-top {
+  width: max-content !important;
+  margin: 0 auto !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+/* Alt kÃ¼Ã§Ã¼k etiketler */
+.app-shell-worlds .worlds-map .world-subislands {
+  width: max-content !important;
+  margin: 5px auto 0 !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* YÄ±ldÄ±z/progress */
+.app-shell-worlds .worlds-map .world-stars {
+  width: max-content !important;
+  margin: 5px auto 0 !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Alt dÃ¼nyalar adalarÄ±n merkezine */
+.app-shell-worlds .worlds-map .world-button-english {
+  left: 32.5% !important;
+  top: 80% !important;
+}
+
+.app-shell-worlds .worlds-map .world-button-math {
+  left: 65% !important;
+  top: 80% !important;
+}
+
+/* Ãœst dÃ¼nyalar */
+.app-shell-worlds .worlds-map .world-button-forest {
+  left: 23.5% !important;
+  top: 40% !important;
+}
+
+.app-shell-worlds .worlds-map .world-button-space {
+  left: 50% !important;
+  top: 40% !important;
+}
+
+.app-shell-worlds .worlds-map .world-button-games {
+  left: 77.5% !important;
+  top: 40% !important;
+}
+
+/* Yolculuk bÃ¶lÃ¼mÃ¼ tamamen yok */
+.app-shell-worlds .journey-panel {
+  display: none !important;
+}
+
+/* Harita dÄ±ÅŸÄ±ndaki ekstra alt alanÄ± kaldÄ±r */
+.app-shell-worlds .worlds-map + * {
+  margin-top: 0 !important;
+}
+
+/* MasaÃ¼stÃ¼nde tek ekran */
+@media (min-width: 761px) {
+  .app-shell-worlds {
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  .app-shell-worlds .worlds-map {
+    height: calc(100vh - 80px) !important;
+  }
+}
+
+/* FINAL TOP NAVIGATION */
+@media (min-width: 761px) {
+  .app-shell-worlds .topbar {
+    display: flex !important;
+    position: relative !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+  }
+
+  .app-shell-worlds .bottom-nav {
+    display: none !important;
+  }
+
+  .app-shell-worlds .main-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .app-shell-worlds .worlds-main-content {
+    width: 100% !important;
+  }
+}
+
+.worlds-back {
+  position: fixed;
+  top: 108px;
+  left: 18px;
+  z-index: 1200;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 12px;
+  background: rgba(8,15,30,.72);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,.3);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.worlds-back:hover {
+  transform: translateY(-1px);
+  background: rgba(20,30,55,.88);
+}
+
+/* === WORLD PAGE TOP NAV FINAL === */
+@media (min-width: 761px) {
+  /* Soldaki dikey navigasyonu kaldÄ±r */
+  .app-shell-worlds .side-nav,
+  .app-shell-worlds .sidebar,
+  .app-shell-worlds .left-nav {
+    display: none !important;
+  }
+
+  /* UygulamanÄ±n Ã¼st navigasyonunu gÃ¶ster */
+  .app-shell-worlds header,
+  .app-shell-worlds .topbar,
+  .app-shell-worlds .top-nav,
+  .app-shell-worlds .navbar {
+    display: flex !important;
+    visibility: visible !important;
+  }
+
+  /* Geri tuÅŸunu Ã¼st sol tarafa al */
+  .app-shell-worlds .worlds-back {
+    position: fixed !important;
+    top: 18px !important;
+    left: 18px !important;
+    z-index: 9999 !important;
+  }
+
+  /* HaritayÄ± navigasyonun altÄ±na yerleÅŸtir */
+  .app-shell-worlds .worlds-map {
+    margin-top: 0 !important;
+  }
+}
+
+/* === WORLDS: TOP NAVIGATION === */
+@media (min-width: 761px) {
+  .app-shell-worlds > .topbar {
+    display: grid !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 82px !important;
+    min-height: 82px !important;
+    z-index: 9999 !important;
+  }
+
+  .app-shell-worlds > .topbar .desktop-nav {
+    display: flex !important;
+    visibility: visible !important;
+  }
+
+  .app-shell-worlds > .bottom-nav {
+    display: none !important;
+  }
+
+  .app-shell-worlds .worlds-back {
+    position: fixed !important;
+    top: 100px !important;
+    left: 18px !important;
+    z-index: 99999 !important;
+  }
+}
+
+/* FINAL: ortak Ã¼st navigasyon */
+@media (min-width: 761px) {
+  .app-shell-worlds .topbar,
+  .app-shell-worlds > .topbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 100 !important;
+    background: rgba(255,255,255,.08) !important;
+    border-bottom: 1px solid rgba(255,255,255,.12) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.12) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+  }
+
+  .app-shell-worlds .desktop-nav {
+    display: flex !important;
+    visibility: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .app-shell-worlds .side-nav,
+  .app-shell-worlds .sidebar,
+  .app-shell-worlds .left-nav,
+  .app-shell-worlds .bottom-nav {
+    display: none !important;
+  }
+
+  .app-shell-worlds .worlds-back {
+    position: fixed !important;
+    top: 92px !important;
+    left: 20px !important;
+    z-index: 200 !important;
+  }
+}
+
+.topbar {
+  background: rgba(255,255,255,.08) !important;
+  border-bottom: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,.10) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.desktop-nav {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   KEÅÄ°F HARÄ°TASI â€” Ä°LERLEME + RASTGELE KEÅFET
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  /* Ä°LERLEMEN â€” kÃ¼Ã§Ã¼k, sol alt, ÅŸeffaf/cam */
+  html body #root .app-shell-worlds .worlds-map .map-progress-card {
+    position: absolute !important;
+    left: 24px !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 24px !important;
+
+    width: 142px !important;
+    min-width: 142px !important;
+    height: 72px !important;
+    min-height: 72px !important;
+
+    padding: 9px 12px !important;
+    box-sizing: border-box !important;
+
+    background: rgba(255,255,255,.045) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 14px !important;
+
+    box-shadow:
+      0 8px 24px rgba(0,0,0,.18),
+      inset 0 1px 0 rgba(255,255,255,.08) !important;
+
+    backdrop-filter: blur(8px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
+
+    z-index: 50 !important;
+  }
+
+  /* BaÅŸlÄ±k */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title {
+    font-size: 9px !important;
+    line-height: 1 !important;
+    margin-bottom: 3px !important;
+    color: rgba(255,255,255,.72) !important;
+  }
+
+  /* YÃ¼zde halkasÄ± */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-ring {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    font-size: 10px !important;
+  }
+
+  /* 148 / 224 */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total {
+    font-size: 12px !important;
+    margin-left: 4px !important;
+  }
+
+  /* RASTGELE KEÅFET â€” saÄŸ alt, ÅŸeffaf/cam */
+  html body #root .app-shell-worlds .worlds-map .random-world-button {
+    position: absolute !important;
+    right: 24px !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: 24px !important;
+
+    width: 170px !important;
+    min-width: 170px !important;
+    height: 58px !important;
+
+    padding: 8px 12px !important;
+    box-sizing: border-box !important;
+
+    background: rgba(255,255,255,.045) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 15px !important;
+
+    box-shadow:
+      0 8px 24px rgba(0,0,0,.18),
+      inset 0 1px 0 rgba(255,255,255,.08) !important;
+
+    backdrop-filter: blur(8px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(120%) !important;
+
+    z-index: 50 !important;
+  }
+
+  html body #root .app-shell-worlds .random-world-button .random-icon {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    background: rgba(139,92,246,.72) !important;
+    border-radius: 10px !important;
+  }
+
+  html body #root .app-shell-worlds .random-world-button .random-copy strong {
+    font-size: 11px !important;
+    color: rgba(255,255,255,.92) !important;
+  }
+
+  html body #root .app-shell-worlds .random-world-button .random-copy small {
+    font-size: 8px !important;
+    color: rgba(255,255,255,.55) !important;
+  }
+}
+
+
+/* =========================================================
+   PROGRESS CARD â€” FINAL PREMIUM GLASS
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  html body #root .app-shell-worlds .worlds-map .map-progress-card {
+    position: absolute !important;
+
+    left: 24px !important;
+    bottom: 24px !important;
+    top: auto !important;
+    right: auto !important;
+
+    width: 170px !important;
+    min-width: 170px !important;
+    height: 62px !important;
+    min-height: 62px !important;
+
+    padding: 7px 10px !important;
+
+    display: grid !important;
+    grid-template-columns: 38px 1fr !important;
+    grid-template-rows: 17px 1fr !important;
+    column-gap: 9px !important;
+    align-items: center !important;
+
+    background: rgba(5, 12, 25, .18) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 14px !important;
+
+    box-shadow:
+      0 8px 22px rgba(0,0,0,.16),
+      inset 0 1px 0 rgba(255,255,255,.07) !important;
+
+    backdrop-filter: blur(5px) saturate(110%) !important;
+    -webkit-backdrop-filter: blur(5px) saturate(110%) !important;
+
+    overflow: hidden !important;
+    z-index: 50 !important;
+  }
+
+  /* BaÅŸlÄ±k */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    letter-spacing: .2px !important;
+
+    color: rgba(255,255,255,.72) !important;
+  }
+
+  /* Compass ikonunu kÃ¼Ã§Ã¼lt */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title svg {
+    width: 11px !important;
+    height: 11px !important;
+    opacity: .65 !important;
+  }
+
+  /* Dairesel ilerleme */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-ring {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 9px !important;
+    font-weight: 800 !important;
+
+    background: transparent !important;
+  }
+
+  /* YÄ±ldÄ±z ilerlemesi */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+
+    align-self: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    white-space: nowrap !important;
+
+    font-size: 14px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+
+    color: rgba(255,255,255,.94) !important;
+
+    text-shadow: 0 1px 5px rgba(0,0,0,.65) !important;
+  }
+
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total svg {
+    width: 12px !important;
+    height: 12px !important;
+    margin-left: 2px !important;
+    vertical-align: -1px !important;
+  }
+}
+
+
+/* =========================================================
+   PROGRESS â€” COMPACT REFERENCE STYLE
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  html body #root .app-shell-worlds .worlds-map .map-progress-card {
+    left: 24px !important;
+    bottom: 22px !important;
+    top: auto !important;
+    right: auto !important;
+
+    width: 132px !important;
+    min-width: 132px !important;
+    height: 70px !important;
+    min-height: 70px !important;
+
+    padding: 7px 9px !important;
+    box-sizing: border-box !important;
+
+    display: block !important;
+
+    background: rgba(7, 13, 28, .32) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    border-radius: 13px !important;
+
+    box-shadow:
+      0 5px 18px rgba(0,0,0,.20),
+      inset 0 1px 0 rgba(255,255,255,.06) !important;
+
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+
+    overflow: hidden !important;
+    z-index: 50 !important;
+  }
+
+  /* Ä°lerlemen baÅŸlÄ±ÄŸÄ± */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    height: 13px !important;
+    margin: 0 0 2px !important;
+    padding: 0 !important;
+
+    font-size: 8px !important;
+    line-height: 1 !important;
+    font-weight: 700 !important;
+
+    color: rgba(255,255,255,.72) !important;
+  }
+
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title svg {
+    width: 9px !important;
+    height: 9px !important;
+    opacity: .65 !important;
+  }
+
+  /* Alt bÃ¶lÃ¼m */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-ring {
+    display: inline-flex !important;
+    vertical-align: middle !important;
+
+    width: 39px !important;
+    height: 39px !important;
+    min-width: 39px !important;
+    min-height: 39px !important;
+
+    margin: 0 5px 0 0 !important;
+
+    font-size: 9px !important;
+    font-weight: 800 !important;
+
+    background: transparent !important;
+  }
+
+  /* 148 / 224 yÄ±ldÄ±z */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total {
+    display: inline-block !important;
+    vertical-align: middle !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 10px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+
+    white-space: nowrap !important;
+    color: rgba(255,255,255,.94) !important;
+
+    text-shadow: 0 1px 5px rgba(0,0,0,.65) !important;
+  }
+
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total svg {
+    width: 9px !important;
+    height: 9px !important;
+    margin-left: 1px !important;
+    vertical-align: -1px !important;
+  }
+}
+
+
+/* =========================================================
+   PROGRESS CARD â€” PREMIUM REFERENCE
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  html body #root .app-shell-worlds .worlds-map .map-progress-card {
+    position: absolute !important;
+    left: 28px !important;
+    bottom: 24px !important;
+    top: auto !important;
+    right: auto !important;
+
+    width: 142px !important;
+    height: 76px !important;
+    min-width: 142px !important;
+    min-height: 76px !important;
+
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: 42px 1fr !important;
+    grid-template-rows: 15px 1fr !important;
+    column-gap: 8px !important;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(8,18,35,.52),
+        rgba(5,12,26,.25)
+      ) !important;
+
+    border: 1px solid rgba(255,255,255,.13) !important;
+    border-radius: 15px !important;
+
+    box-shadow:
+      0 10px 28px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.09),
+      inset 0 0 20px rgba(50,100,180,.04) !important;
+
+    backdrop-filter: blur(10px) saturate(135%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(135%) !important;
+
+    overflow: hidden !important;
+    z-index: 80 !important;
+  }
+
+  /* Hafif cam Ä±ÅŸÄ±ÄŸÄ± */
+  html body #root .app-shell-worlds .worlds-map .map-progress-card::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,.075),
+        transparent 38%,
+        transparent 70%,
+        rgba(255,255,255,.025)
+      ) !important;
+
+    border-radius: inherit !important;
+  }
+
+  /* BAÅLIK */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title {
+    position: relative !important;
+    z-index: 2 !important;
+
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    height: 15px !important;
+
+    color: rgba(255,255,255,.70) !important;
+
+    font-size: 8px !important;
+    font-weight: 700 !important;
+    letter-spacing: .15px !important;
+  }
+
+  html body #root .app-shell-worlds .map-progress-card .map-progress-title svg {
+    width: 10px !important;
+    height: 10px !important;
+
+    color: rgba(255,255,255,.60) !important;
+    opacity: .8 !important;
+  }
+
+  /* RING */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-ring {
+    position: relative !important;
+    z-index: 2 !important;
+
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+
+    margin: 3px 0 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 50% !important;
+
+    /* premium yeÅŸil ilerleme halkasÄ± */
+    background:
+      conic-gradient(
+        #57c84d 0deg 238deg,
+        rgba(255,255,255,.12) 238deg 360deg
+      ) !important;
+
+    box-shadow:
+      0 0 10px rgba(87,200,77,.16),
+      inset 0 0 5px rgba(255,255,255,.08) !important;
+
+    color: #fff !important;
+
+    font-size: 9px !important;
+    font-weight: 800 !important;
+  }
+
+  /* Ring'in ortasÄ± */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-ring::before {
+    content: "" !important;
+
+    position: absolute !important;
+    inset: 4px !important;
+
+    border-radius: 50% !important;
+
+    background: rgba(8,18,35,.92) !important;
+
+    box-shadow:
+      inset 0 1px 3px rgba(0,0,0,.35),
+      0 1px 2px rgba(255,255,255,.04) !important;
+  }
+
+  /* 66% yazÄ±sÄ± ring'in Ã¼zerinde */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-ring strong {
+    position: relative !important;
+    z-index: 2 !important;
+
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    color: rgba(255,255,255,.94) !important;
+  }
+
+  /* YILDIZ Ä°LERLEMESÄ° */
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total {
+    position: relative !important;
+    z-index: 2 !important;
+
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+
+    align-self: center !important;
+
+    margin: 7px 0 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    white-space: nowrap !important;
+
+    color: rgba(255,255,255,.94) !important;
+
+    font-size: 12px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+
+    letter-spacing: .1px !important;
+
+    text-shadow:
+      0 1px 5px rgba(0,0,0,.7) !important;
+  }
+
+  html body #root .app-shell-worlds .map-progress-card .map-progress-total svg {
+    width: 10px !important;
+    height: 10px !important;
+
+    margin-left: 3px !important;
+
+    color: #fff !important;
+    fill: currentColor !important;
+  }
+
+}
+
+
+/* =========================================================
+   TOP NAV â€” SHORT GLASS FADE
+   Navigasyon ÅŸeffaf kalÄ±r, altÄ±ndaki blur kÄ±salÄ±r
+   ========================================================= */
+
+html body #root .app-shell .topbar,
+html body #root .app-shell-worlds .topbar {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3,7,18,.48) 0%,
+      rgba(3,7,18,.16) 72%,
+      rgba(3,7,18,0) 100%
+    ) !important;
+
+  backdrop-filter: blur(3px) saturate(108%) !important;
+  -webkit-backdrop-filter: blur(3px) saturate(108%) !important;
+}
+
+
+/* =========================================================
+   TOP NAV â€” CRYSTAL CLEAR
+   Arka planÄ± blur etme, sayfanÄ±n altÄ±ndaki iÃ§erik net kalsÄ±n
+   ========================================================= */
+
+html body #root .app-shell .topbar,
+html body #root .app-shell-worlds .topbar {
+  background: transparent !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  filter: none !important;
+
+  box-shadow: none !important;
+}
+
+/* Navigasyonun kendi yazÄ±larÄ± kesinlikle net */
+html body #root .topbar .desktop-nav,
+html body #root .topbar .desktop-nav a,
+html body #root .topbar .desktop-nav span,
+html body #root .topbar .brand,
+html body #root .topbar .reference-brand,
+html body #root .topbar .child-chip {
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Logo da net */
+html body #root .topbar img {
+  filter: none !important;
+}
+
+/* SayfanÄ±n header altÄ±nda kalan iÃ§eriÄŸini blur etme */
+html body #root .reference-home-hero,
+html body #root .reference-home-hero *,
+html body #root .reference-parent-panel,
+html body #root .reference-recommend-panel {
+  filter: none !important;
+}
+
+/* Navigasyon alanÄ±nda sadece Ã§ok hafif okunabilirlik gÃ¶lgesi */
+html body #root .app-shell .topbar::before,
+html body #root .app-shell-worlds .topbar::before {
+  display: none !important;
+}
+
+
+/* =========================================================
+   HOME â€” Ä°Ã‡ERÄ°K DÄ°KEY HÄ°ZALAMA
+   Navigasyona dokunmaz.
+   ========================================================= */
+
+
+/* =========================================================
+   HOME â€” FINAL 2x2 PANEL ALIGNMENT
+   ========================================================= */
+
+/* ÃœST SATIR â€” GÃ¼nlÃ¼k Hedef / Ebeveyn Rehberi */
+html body #root .reference-home-hero .reference-goal-card {
+  position: absolute !important;
+  top: 105px !important;
+  left: 22px !important;
+  z-index: 20 !important;
+}
+
+html body #root .reference-home-hero .reference-parent-panel {
+  position: absolute !important;
+  top: 105px !important;
+  right: 24px !important;
+  z-index: 20 !important;
+}
+
+/* ALT SATIR â€” Devam Et / Ã–nerilen Ä°Ã§erik */
+html body #root .reference-home-hero .reference-continue-card {
+  position: absolute !important;
+  top: 370px !important;
+  left: 22px !important;
+  z-index: 20 !important;
+}
+
+html body #root .reference-home-hero .reference-recommend-panel {
+  position: absolute !important;
+  top: 370px !important;
+  right: 24px !important;
+  z-index: 20 !important;
+}
+
+/* Merhaba metni */
+html body #root .reference-home-hero .reference-greeting {
+  position: absolute !important;
+  top: 105px !important;
+  left: 46px !important;
+  z-index: 20 !important;
+}
+
+
+/* Ãœst iki paneli aÅŸaÄŸÄ± al */
+html body #root .reference-home-hero .reference-goal-card,
+html body #root .reference-home-hero .reference-parent-panel {
+  top: 170px !important;
+}
+
+
+/* GÃ¼nlÃ¼k Hedef â€” biraz daha aÅŸaÄŸÄ± */
+html body #root .reference-home-hero .reference-goal-card {
+  top: 205px !important;
+}
+

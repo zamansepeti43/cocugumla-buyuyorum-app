@@ -1,0 +1,18 @@
+/* Reference map layout overrides. */
+
+.app-shell-worlds .worlds-map-background{
+  display:block!important;
+}
+
+@media(max-width:760px) and (orientation:portrait){
+  .app-shell-worlds .worlds-map-background{
+    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
+  }
+}
+
+@media(max-width:900px) and (orientation:landscape){
+  .app-shell-worlds .worlds-map-background{
+    content:url('/ChatGPT%20Image%2020%20Ağu%202026%2002_31_03.png?v=5world-final')!important;
+  }
+}
+

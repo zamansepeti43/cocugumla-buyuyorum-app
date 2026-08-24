@@ -1,0 +1,425 @@
+/* =========================================================
+   ÇOCUĞUMLA BÜYÜYORUM
+   KEŞİF DÜNYASI — TEMİZ SAYFA
+   ========================================================= */
+
+.space-world-page {
+  position: relative;
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
+  box-sizing: border-box;
+  color: #fff;
+  isolation: isolate;
+  background: #030719;
+}
+
+/* Arka plan bütün sayfayı/scroll alanını görsel olarak kaplar */
+.space-world-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 27, .02) 0%,
+      rgba(2, 7, 27, .08) 45%,
+      rgba(2, 7, 27, .38) 100%
+    ),
+    url("/worlds/space-world-bg.png");
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Sayfanın ana içeriği */
+.space-world-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+
+  box-sizing: border-box;
+
+  padding:
+    28px
+    clamp(24px, 6vw, 90px)
+    70px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Geri butonu artık normal akışta ve başlığın üstünde */
+.space-world-back {
+  position: relative;
+  align-self: flex-start;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 82px;
+  height: 42px;
+
+  margin: 0 0 48px;
+
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 13px;
+
+  background: rgba(4, 8, 30, .64);
+  color: #fff;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.10);
+
+  transition:
+    transform .18s ease,
+    background .18s ease;
+}
+
+.space-world-back:hover {
+  transform: translateX(-3px);
+  background: rgba(30, 17, 66, .82);
+}
+
+/* Başlık */
+.space-world-heading {
+  width: min(650px, 100%);
+  margin: 0;
+}
+
+.space-world-kicker {
+  display: block;
+
+  margin: 0 0 14px;
+
+  color: #d7baff;
+
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 900;
+
+  letter-spacing: .12em;
+
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.55);
+}
+
+.space-world-heading h1 {
+  margin: 0;
+
+  max-width: 650px;
+
+  color: #fff;
+
+  font-size: clamp(40px, 5vw, 70px);
+  line-height: 1.05;
+
+  font-weight: 950;
+  letter-spacing: -.035em;
+
+  text-shadow:
+    0 5px 24px rgba(0,0,0,.48);
+}
+
+.space-world-heading p {
+  margin: 22px 0 0;
+
+  max-width: 520px;
+
+  color: rgba(255,255,255,.92);
+
+  font-size: clamp(17px, 1.7vw, 22px);
+  line-height: 1.45;
+
+  font-weight: 650;
+
+  text-shadow:
+    0 3px 12px rgba(0,0,0,.55);
+}
+
+/* Kartların bölümü */
+.space-world-cards {
+  width: 100%;
+
+  margin-top: 90px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: clamp(14px, 2vw, 24px);
+
+  align-items: stretch;
+}
+
+/* Kart */
+.space-world-card {
+  width: 100%;
+  min-width: 0;
+  min-height: 245px;
+
+  box-sizing: border-box;
+
+  padding: 24px 18px 22px;
+
+  border:
+    2px solid rgba(157, 93, 255, .82);
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 10, 59, .95),
+      rgba(5, 7, 31, .94)
+    );
+
+  color: #fff;
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 0 25px rgba(115, 65, 255, .13);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.space-world-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 28px 52px rgba(0,0,0,.46),
+    inset 0 1px 0 rgba(255,255,255,.15),
+    0 0 35px rgba(130, 76, 255, .24);
+}
+
+/* Kart ikonu */
+.space-world-card-icon {
+  width: 82px;
+  height: 82px;
+
+  flex: 0 0 82px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 16px;
+
+  border:
+    2px solid rgba(195, 151, 255, .62);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 28%,
+      rgba(143, 94, 255, .62),
+      rgba(28, 11, 68, .98)
+    );
+
+  box-shadow:
+    0 0 30px rgba(125, 75, 255, .30),
+    inset 0 0 18px rgba(255,255,255,.08);
+
+  font-size: 42px;
+  line-height: 1;
+}
+
+/* Kart başlığı */
+.space-world-card h2 {
+  margin: 0 0 9px;
+
+  color: #fff;
+
+  font-size: 22px;
+  line-height: 1.2;
+
+  font-weight: 900;
+}
+
+/* Kart açıklaması */
+.space-world-card p {
+  margin: 0;
+
+  max-width: 225px;
+
+  color: rgba(230,224,255,.88);
+
+  font-size: 14px;
+  line-height: 1.45;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .space-world-content {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .space-world-cards {
+    gap: 14px;
+  }
+
+  .space-world-card {
+    min-height: 220px;
+    padding: 19px 11px;
+  }
+
+  .space-world-card-icon {
+    width: 66px;
+    height: 66px;
+    flex-basis: 66px;
+
+    font-size: 33px;
+  }
+
+  .space-world-card h2 {
+    font-size: 18px;
+  }
+
+  .space-world-card p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   TELEFON
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .space-world-content {
+    min-height: 100vh;
+
+    padding:
+      22px
+      18px
+      50px;
+  }
+
+  .space-world-back {
+    margin-bottom: 34px;
+  }
+
+  .space-world-kicker {
+    font-size: 13px;
+  }
+
+  .space-world-heading h1 {
+    font-size: clamp(36px, 10vw, 50px);
+  }
+
+  .space-world-heading p {
+    margin-top: 15px;
+    font-size: 16px;
+  }
+
+  .space-world-cards {
+    margin-top: 48px;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .space-world-card {
+    min-height: 205px;
+
+    padding:
+      18px
+      10px
+      18px;
+
+    border-radius: 21px;
+  }
+
+  .space-world-card-icon {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+
+    margin-bottom: 12px;
+
+    font-size: 30px;
+  }
+
+  .space-world-card h2 {
+    font-size: 17px;
+  }
+
+  .space-world-card p {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   SPACE WORLD - BACK BUTTON FINAL POSITION
+   ========================================================= */
+
+.space-world-page .space-world-back {
+  position: absolute !important;
+
+  top: 82px !important;
+  left: 38px !important;
+
+  z-index: 100 !important;
+
+  width: 86px !important;
+  height: 44px !important;
+
+  margin: 0 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.space-world-page .space-world-content {
+  padding-top: 145px !important;
+}
+
+@media (max-width: 680px) {
+  .space-world-page .space-world-back {
+    top: 74px !important;
+    left: 18px !important;
+  }
+
+  .space-world-page .space-world-content {
+    padding-top: 125px !important;
+  }
+}

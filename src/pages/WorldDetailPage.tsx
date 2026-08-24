@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useWorlds } from '../hooks/useWorlds'
 import { useProgress } from '../hooks/useProgress'
@@ -71,56 +71,29 @@ function SpaceWorldDetailPage() {
   const navigate = useNavigate()
 
   const cards = [
-    {
-      icon: '🌍',
-      title: 'Uzay',
-      text: 'Gezegenleri keşfet ve yıldızları tanı.',
-    },
-    {
-      icon: '🌊',
-      title: 'Deniz',
-      text: 'Okyanusların derinliklerini keşfet ve canlıları tanı.',
-    },
-    {
-      icon: '🧪',
-      title: 'Bilim',
-      text: 'Deneyler yap, öğren ve keşfet.',
-    },
-    {
-      icon: '🚀',
-      title: 'Keşif',
-      text: 'Yeni maceralara atıl ve dünyayı keşfet.',
-    },
+    { icon: '🌍', title: 'Uzay', text: 'Gezegenleri keşfet ve yıldızları tanı.' },
+    { icon: '🌊', title: 'Deniz', text: 'Okyanusların derinliklerini keşfet ve canlıları tanı.' },
+    { icon: '🧪', title: 'Bilim', text: 'Deneyler yap, öğren ve keşfet.' },
+    { icon: '🚀', title: 'Keşif', text: 'Yeni maceralara atıl ve dünyayı keşfet.' },
   ]
 
   return (
     <div className="space-world-page">
-      <button
-        type="button"
-        className="space-world-back"
-        onClick={() => navigate('/worlds')}
-        aria-label="Keşif Haritasına dön"
-      >
+      <button type="button" className="space-world-back" onClick={() => navigate('/worlds')} aria-label="Keşif Haritasına dön">
         <ArrowLeft size={18} />
       </button>
 
       <main className="space-world-content">
         <section className="space-world-heading">
           <span className="space-world-kicker">KEŞİF DÜNYASI</span>
-          <h1>Bu dünyanın adalarına keşfetmeye başla.</h1>
+          <h1>Bu dünyanın adalarını keşfetmeye başla.</h1>
           <p>Uzay, deniz, bilim ve keşif dünyalarını keşfet!</p>
         </section>
 
         <section className="space-world-cards" aria-label="Keşif Dünyası bölümleri">
           {cards.map((card) => (
-            <button
-              type="button"
-              className="space-world-card"
-              key={card.title}
-            >
-              <span className="space-world-card-icon" aria-hidden="true">
-                {card.icon}
-              </span>
+            <button type="button" className="space-world-card" key={card.title}>
+              <span className="space-world-card-icon" aria-hidden="true">{card.icon}</span>
               <h2>{card.title}</h2>
               <p>{card.text}</p>
             </button>
@@ -154,30 +127,18 @@ function NatureWorldMap({ onBack }: { onBack: () => void }) {
 
       <div>
         {islands.map((island) => (
-          <button
-            type="button"
-            key={island.title}
-            onClick={() => setSelected(island.title)}
-          >
+          <button type="button" key={island.title} onClick={() => setSelected(island.title)}>
             {island.title}
           </button>
         ))}
       </div>
 
       {selected && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setSelected(null)}
-        >
+        <div role="dialog" aria-modal="true" onClick={() => setSelected(null)}>
           <div onClick={(event) => event.stopPropagation()}>
             <h2>{selected}</h2>
-            <p>
-              {islands.find((item) => item.title === selected)?.text}
-            </p>
-            <button type="button" onClick={() => setSelected(null)}>
-              Başlayalım!
-            </button>
+            <p>{islands.find((item) => item.title === selected)?.text}</p>
+            <button type="button" onClick={() => setSelected(null)}>Başlayalım!</button>
           </div>
         </div>
       )}
@@ -201,24 +162,15 @@ export function NatureWorldPage() {
 
 export function WorldDetailPage() {
   const { worldId } = useParams()
-
   if (!worldId) return null
-
-  if (worldId === 'space') {
-    return <SpaceWorldDetailPage />
-  }
-
-  if (worldId === 'forest') {
-    return <NatureWorldPage />
-  }
-
+  if (worldId === 'space') return <SpaceWorldDetailPage />
+  if (worldId === 'forest') return <NatureWorldPage />
   return <RegularWorldDetailPage worldId={worldId} />
 }
 
 function RegularWorldDetailPage({ worldId }: { worldId: string }) {
   const { getWorld, getSections, isSectionUnlocked } = useWorlds()
   const { getTotalStars } = useProgress()
-
   const world = getWorld(worldId)
 
   if (!world) {
@@ -234,13 +186,7 @@ function RegularWorldDetailPage({ worldId }: { worldId: string }) {
     )
   }
 
-  const presentation =
-    worldPresentation[worldId] ?? {
-      title: world.title,
-      description: world.description,
-      islands: [],
-    }
-
+  const presentation = worldPresentation[worldId] ?? { title: world.title, description: world.description, islands: [] }
   const sectionsList = getSections(worldId)
   const totalStars = getTotalStars()
   const art = islandArt[worldId as keyof typeof islandArt] ?? islandArt.forest
@@ -252,34 +198,17 @@ function RegularWorldDetailPage({ worldId }: { worldId: string }) {
         Keşif Haritası
       </Link>
 
-      <section
-        className="world-hero"
-        data-world={worldId}
-        style={{ ['--world-color' as string]: `var(--${world.color})` }}
-      >
+      <section className="world-hero" data-world={worldId} style={{ ['--world-color' as string]: `var(--${world.color})` }}>
         <div className="world-hero-visual">
           <span className="world-hero-icon">{world.icon}</span>
-
           <div className="world-hero-deco" aria-hidden="true">
             <span>✨</span>
             <span>GELECEK ADACIKLAR</span>
-            <strong>
-              Bu dünyanın adalarına çık, keşfetmeye başla.
-            </strong>
+            <strong>Bu dünyanın adalarına çık, keşfetmeye başla.</strong>
           </div>
-
           <div className="world-islands-list">
             {presentation.islands.map((island, index) => (
-              <div
-                className="world-island-chip"
-                key={island}
-                style={{
-                  backgroundImage:
-                    art.length > 0
-                      ? `url(${art[index % art.length]})`
-                      : undefined,
-                }}
-              >
+              <div className="world-island-chip" key={island} style={{ backgroundImage: art.length > 0 ? `url(${art[index % art.length]})` : undefined }}>
                 <span aria-hidden="true">🌿</span>
                 {island}
               </div>
@@ -294,19 +223,13 @@ function RegularWorldDetailPage({ worldId }: { worldId: string }) {
             <span className="kicker">BÖLÜMLER</span>
             <h2>Bu dünyada neler öğreneceğiz?</h2>
           </div>
-          <span className="section-count">
-            {sectionsList.length} bölüm · {totalStars} yıldız
-          </span>
+          <span className="section-count">{sectionsList.length} bölüm · {totalStars} yıldız</span>
         </div>
 
         {sectionsList.length > 0 ? (
           <div className="sections-list">
             {sectionsList.map((section) => (
-              <SectionCard
-                key={section.id}
-                section={section}
-                unlocked={isSectionUnlocked(section.id)}
-              />
+              <SectionCard key={section.id} section={section} unlocked={isSectionUnlocked(section.id)} />
             ))}
           </div>
         ) : (

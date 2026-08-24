@@ -27,7 +27,16 @@ export function AppLayout() {
 
   return (
     <div className={`app-shell ${isWorldsPage ? 'app-shell-worlds' : ''} ${isWorldDetailPage ? 'app-shell-world-detail' : ''}`}>
-      <header className="topbar">
+      <header
+        className="topbar"
+        style={{
+          background: 'transparent',
+          backgroundColor: 'transparent',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
+          boxShadow: 'none',
+        }}
+      >
         <NavLink to="/home" className="brand" aria-label="Çocuğumla Büyüyorum">
           <img src="/logo.png" alt="Çocuğumla Büyüyorum logo" className="brand-logo" />
         </NavLink>

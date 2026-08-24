@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import './mobile-layout-fix.css'
 import './final-nav.css'
+import './clear-top-nav.css'
 import App from './App.tsx'
 import { AppProvider } from './store/AppProvider.tsx'
 
@@ -37,4 +38,3 @@ createRoot(document.getElementById('root')!).render(
     </BrowserRouter>
   </StrictMode>,
 )
-

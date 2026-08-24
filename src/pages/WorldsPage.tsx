@@ -12,7 +12,7 @@ import {
   Trophy,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import './worlds-premium.css'
+import './worlds-clean.css'
 import './world-visuals.css'
 import './worlds-reference.css'
 import './worlds-mobile-fix.css'
@@ -62,7 +62,8 @@ function WorldButton({ world }: { world: World }) {
 export function WorldsPage() {
   return (
     <div className="page worlds-page">
-      <section className="worlds-shell"><button className="worlds-back" onClick={() => window.history.back()} aria-label="Geri d�n"><ArrowLeft size={20} /></button>
+      <section className="worlds-shell">
+        <button className="worlds-back" onClick={() => window.history.back()} aria-label="Geri dön"><ArrowLeft size={20} /></button>
         <section className="worlds-map" aria-label="Keşif dünyaları haritası">
           <img src="/kesif-haritasi-arkaplan.png" alt="Keşif Dünyası - beş dünya haritası" className="worlds-map-background" draggable={false} />
           <div className="map-atmosphere" aria-hidden="true" />
@@ -95,9 +96,3 @@ export function WorldsPage() {
     </div>
   )
 }
-
-
-
-
-
-

@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { BookOpen, ChevronRight, HeartHandshake, ShieldAlert, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../hooks/useApp'
@@ -18,14 +19,21 @@ const ageStages = [
 export function ParentPage() {
   const { activeChild } = useApp()
   const { progressRecords } = useProgress()
+  const [manualStageIndexByChild, setManualStageIndexByChild] = useState<Record<string, number | null>>({})
+
+  const age = activeChild ? calculateAge(activeChild.birthDate) : { totalMonths: 0, label: '' }
+  const defaultStageIndex = useMemo(
+    () => age.totalMonths < 3 ? 0 : age.totalMonths < 7 ? 1 : age.totalMonths < 13 ? 2 : age.totalMonths < 25 ? 3 : age.totalMonths < 37 ? 4 : 5,
+    [age.totalMonths],
+  )
 
   if (!activeChild) return null
 
-  const age = calculateAge(activeChild.birthDate)
   const completedCount = progressRecords.filter((r) => r.completed).length
   const totalStars = progressRecords.reduce((sum, r) => sum + r.stars, 0)
-  const currentStageIndex = age.totalMonths < 3 ? 0 : age.totalMonths < 7 ? 1 : age.totalMonths < 13 ? 2 : age.totalMonths < 25 ? 3 : age.totalMonths < 37 ? 4 : 5
-  const currentStage = ageStages[currentStageIndex]
+  const activeManualStageIndex = manualStageIndexByChild[activeChild.id] ?? null
+  const selectedStageIndex = activeManualStageIndex ?? defaultStageIndex
+  const currentStage = ageStages[Math.min(selectedStageIndex, ageStages.length - 1)] ?? ageStages[0]
 
   return (
     <div className="page parent-page parent-premium-page">
@@ -51,7 +59,7 @@ export function ParentPage() {
           <h2>{currentStage.title}</h2>
           <p>{currentStage.text}</p>
         </div>
-        <button type="button" className="guide-button">Rehberi aç <ChevronRight size={17} /></button>
+        <Link to="/activities" className="guide-button">Rehberi aç <ChevronRight size={17} /></Link>
       </section>
 
       <section className="parent-section">
@@ -61,7 +69,12 @@ export function ParentPage() {
         </div>
         <div className="age-stage-grid">
           {ageStages.map((stage, index) => (
-            <button type="button" className={`age-stage-card ${index === currentStageIndex ? 'active' : ''}`} key={stage.range}>
+            <button
+              type="button"
+              className={`age-stage-card ${index === selectedStageIndex ? 'active' : ''}`}
+              key={stage.range}
+              onClick={() => setManualStageIndexByChild((current) => ({ ...current, [activeChild.id]: index }))}
+            >
               <span className="age-stage-icon">{stage.icon}</span>
               <div><strong>{stage.range}</strong><h3>{stage.title}</h3><p>{stage.text}</p></div>
             </button>

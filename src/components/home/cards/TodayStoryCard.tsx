@@ -3,13 +3,12 @@ import { NavLink } from 'react-router-dom'
 export function TodayStoryCard() {
   return (
     <NavLink
-      to="/stories"
+      to="/worlds/stories"
       className="today-story-card"
       aria-label="Bugünün Hikâyesi"
     >
       <div className="card-content">
-        <div className="card-icon">
-          {/* Bear emoji as placeholder; replace with actual bear image if available */}
+        <div className="card-icon" aria-hidden="true">
           🐻
         </div>
         <div className="card-text">

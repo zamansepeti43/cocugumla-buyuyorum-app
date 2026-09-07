@@ -9,7 +9,7 @@ const navItems = [
   { to: '/worlds', label: 'Keşfet', shortLabel: 'Keşfet', icon: Compass },
   { to: '/activities', label: 'Oyunlar', shortLabel: 'Oyunlar', icon: Shapes },
   { to: '/english', label: 'İngilizce', shortLabel: 'İngilizce', icon: BookOpen },
-  { to: '/stories', label: 'Hikâyeler', shortLabel: 'Hikâyeler', icon: Shapes }, // Using Shapes as placeholder
+  { to: '/worlds/stories', label: 'Hikâyeler', shortLabel: 'Hikâyeler', icon: Shapes },
   { to: '/profile', label: 'Profil', shortLabel: 'Profil', icon: UserRound },
 ]
 

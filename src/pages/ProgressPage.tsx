@@ -1,19 +1,32 @@
 import { CheckCircle2, Flame, Trophy, Award } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useApp } from '../hooks/useApp'
 import { useProgress } from '../hooks/useProgress'
+import { allActivities } from '../data/allActivities'
 import { formatChildName } from '../utils/childName'
-import { Link } from 'react-router-dom'
 
 export function ProgressPage() {
-  const { activeChild } = useApp()
+  const { activeChild, data } = useApp()
   const { progressRecords, getTotalStars } = useProgress()
   const totalStars = getTotalStars()
-  const completedCount = progressRecords.filter((r) => r.completed).length
 
-  const recentCompletions = progressRecords
-    .filter((r) => r.completed)
-    .sort((a, b) => new Date(b.completedAt ?? '').getTime() - new Date(a.completedAt ?? '').getTime())
+  const completedActivities = activeChild
+    ? data.completions.filter((item) => item.childId === activeChild.id)
+    : []
+
+  const completedCount = completedActivities.length
+
+  const recentCompletions = [...completedActivities]
+    .sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime())
     .slice(0, 8)
+    .map((item) => {
+      const activity = allActivities.find((entry) => entry.id === item.activityId)
+      return {
+        id: item.activityId,
+        title: activity?.title ?? 'Etkinlik',
+        stars: progressRecords.find((record) => record.contentId === item.activityId)?.stars ?? 1,
+      }
+    })
 
   return (
     <div className="page">
@@ -37,9 +50,9 @@ export function ProgressPage() {
               <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>Henüz keşif yok. İlk içeriği tamamlamaya ne dersin?</p>
             )}
             {recentCompletions.map((record) => (
-              <div key={record.contentId} className="recent-item">
+              <div key={record.id} className="recent-item">
                 <span className="recent-icon">✅</span>
-                <span>{record.contentId.replace(/-/g, ' ')}</span>
+                <span>{record.title}</span>
                 <span className="recent-stars">{'⭐'.repeat(record.stars)}</span>
               </div>
             ))}

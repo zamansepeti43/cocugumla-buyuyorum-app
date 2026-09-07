@@ -95,7 +95,7 @@ export function ActivitiesPage() {
   }, [filter, deferredSearch, activeAgeGroup])
 
   const isAgeSuitable = (activity: Activity): boolean =>
-    !age || (age.totalMonths >= activity.ageMin && activity.ageMax <= age.totalMonths)
+    !age || (activity.ageMin <= age.totalMonths && age.totalMonths <= activity.ageMax)
 
   return (
     <div className="activities-page">

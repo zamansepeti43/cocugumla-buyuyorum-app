@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BG = '/illustrations/forest/file_0000000048b481f488920a1edaf0608f.png'
 const LEO = '/illustrations/forest/leo-quality.webp'
@@ -32,9 +33,10 @@ const sections = [
 
 export function ForestWorldApp() {
   const [intro, setIntro] = useState(true)
+  const navigate = useNavigate()
 
   const openSection = (id: string) => {
-    window.location.href = `/worlds/forest/section/${id}`
+    navigate(`/worlds/forest/section/${id}`)
   }
 
   return (

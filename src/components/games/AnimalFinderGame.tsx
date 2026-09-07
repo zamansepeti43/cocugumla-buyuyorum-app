@@ -32,7 +32,7 @@ export function AnimalFinderGame() {
   const [playingTarget, setPlayingTarget] = useState(false)
   const particles = useMemo(() => ['✨', '⭐', '🌟', '💫', '🎉'], [])
   const playAnimalSound = (animal: AnimalCard) => { unlockAudio(); setPlayingTarget(true); void playRealSound(animal.sound).finally(() => window.setTimeout(() => setPlayingTarget(false), 700)) }
-  useEffect(() => { unlockAudio(); const timer = window.setTimeout(() => playAnimalSound(round.target), 350); return () => window.clearTimeout(timer) }, [session.round])
+  useEffect(() => { unlockAudio(); const timer = window.setTimeout(() => playAnimalSound(round.target), 350); return () => window.clearTimeout(timer) }, [session.round, round.target])
   const selectAnimal = (animal: AnimalCard) => {
     if (session.done || foundCard) return
     if (animal.id === round.target.id) {

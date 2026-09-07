@@ -49,13 +49,4 @@ export function AnimatedSprite({ frames, fps = 10, width = 180, height = 180, cl
   )
 }
 
-export function duckFrames(animation: 'idle' | 'walk' | 'jump') {
-  const base = '/animations/cc0/duck/FOWL ANIMAL DUCKY/Animation PNG/DUCKY/NUDE'
-  const configs = {
-    idle: ['01-Idle/01-Idle/FA_DUCKY_Idle_', 12],
-    walk: ['03-Walk/FA_DUCKY_Walk_', 12],
-    jump: ['06-Jump/01-Jump_Up/FA_DUCKY_Jump_UP_', 5],
-  } as const
-  const [folder, count] = configs[animation]
-  return Array.from({ length: count }, (_, index) => `${base}/${folder}${String(index).padStart(3, '0')}.png`)
-}
+

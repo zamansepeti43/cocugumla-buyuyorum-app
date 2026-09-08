@@ -6,7 +6,6 @@ export interface AppContextValue {
   activeChild: ChildProfile | null
   completeOnboarding: () => void
   addChild: (name: string, birthDate: string) => ChildProfile
-  updateChild: (childId: string, name: string, birthDate: string) => void
   setActiveChild: (childId: string) => void
   removeChild: (childId: string) => void
   toggleActivity: (activityId: string) => void

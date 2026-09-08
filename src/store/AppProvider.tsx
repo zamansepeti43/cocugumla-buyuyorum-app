@@ -43,17 +43,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return child
   }
 
-  function updateChild(childId: string, name: string, birthDate: string) {
-    setData((current) => ({
-      ...current,
-      children: current.children.map((child) =>
-        child.id === childId
-          ? { ...child, name: name.trim(), birthDate }
-          : child,
-      ),
-    }))
-  }
-
   function setActiveChild(childId: string) {
     setData((current) => ({ ...current, activeChildId: childId }))
   }
@@ -178,7 +167,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
  return (
     <AppContext.Provider value={{
-      data, activeChild, completeOnboarding, addChild, updateChild, setActiveChild, removeChild, toggleActivity, resetData,
+      data, activeChild, completeOnboarding, addChild, setActiveChild, removeChild, toggleActivity, resetData,
       completeContent, getContentProgress, getSectionProgress, getWorldProgress, isContentCompleted, getTotalStars,
     }}>
       {children}

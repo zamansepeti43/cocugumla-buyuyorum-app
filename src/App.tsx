@@ -4,7 +4,6 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { ActivitiesPage } from './pages/ActivitiesPage'
 import { ActivityDetailPage } from './pages/ActivityDetailPage'
 import { CreateChildPage } from './pages/CreateChildPage'
-import { EditChildPage } from './pages/EditChildPage'
 import { EnglishPage } from './pages/EnglishPage'
 import { ForestWorldEntryPage } from './pages/ForestWorldEntryPage'
 import { HomePage } from './pages/HomePage'
@@ -21,13 +20,12 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/child/new" element={<CreateChildPage />} />
-      <Route path="/child/:childId/edit" element={<EditChildPage />} />
       <Route path="/worlds/forest" element={<ForestWorldEntryPage />} />
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/worlds" element={<WorldsPage />} />
         <Route path="/worlds/:worldId" element={<WorldDetailPage />} />
-        <Route path="/worlds/:worldId/map" element={<WorldDetailPage />} />
+          <Route path="/worlds/:worldId/map" element={<WorldDetailPage />} />
         <Route path="/worlds/:worldId/section/:sectionId" element={<SectionPage />} />
         <Route path="/worlds/content/:contentId" element={<ContentPlayerPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />
